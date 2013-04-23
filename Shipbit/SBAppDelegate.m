@@ -27,7 +27,7 @@
     SBGameTableViewController *gtvc = [[SBGameTableViewController alloc] init];
     SBSearchTableViewController *stvc = [[SBSearchTableViewController alloc] init];
     SBFavoritesTableViewController *ftvc = [[SBFavoritesTableViewController alloc] init];
-    
+        
     gtvc.entityName = @"Game";
     
     UINavigationController *gameNav = [[UINavigationController alloc] initWithRootViewController:gtvc];

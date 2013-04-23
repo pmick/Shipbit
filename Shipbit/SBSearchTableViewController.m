@@ -109,7 +109,14 @@
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
     
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
+    Game *game;
+    
+    if (tableView == self.tableView) {
+        game = [_fetchedResultsController objectAtIndexPath:indexPath];
+    } else {
+        game = [_searchFetchedResultsController objectAtIndexPath:indexPath];
+    }
+    
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];

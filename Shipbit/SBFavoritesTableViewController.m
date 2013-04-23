@@ -42,6 +42,7 @@
     self = [super init];
     if(self) {
         self.title = NSLocalizedString(@"Favorites", @"");
+        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }

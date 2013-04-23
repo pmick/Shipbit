@@ -49,16 +49,31 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
 - (NSMutableURLRequest *)GETRequestForAllRecordsOfClass:(NSString *)className updateAfterDate:(NSDate *)updatedDate {
     NSMutableURLRequest *request = nil;
     NSDictionary *parameters = nil;
+    NSString *jsonString = @"";
     if (updatedDate) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ss.'999Z'"];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.'999Z'"];
         [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
         
-        NSString *jsonString = [NSString stringWithFormat:@"{\"updatedAt\":{\"$gte\":{\"__type\":\"Date\",\"iso\":\"%@\"}}}",[dateFormatter stringFromDate:updatedDate]];
-        parameters = [NSDictionary dictionaryWithObject:jsonString forKey:@"where"];
+        jsonString = [NSString stringWithFormat:@"{\"updatedAt\":{\"$gte\":{\"__type\":\"Date\",\"iso\":\"%@\"}}}",
+                      [dateFormatter stringFromDate:updatedDate]];
+        
     }
-    request = [self GETRequestForClass:className parameters:parameters];
     
+    // Parse added a default limit value of 100, takes values between 1-1000
+    NSString *jsonLimit = @"1000";
+    
+    if (jsonString.length > 0) {
+        parameters = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects: jsonString, jsonLimit, nil]
+                                                 forKeys:[NSArray arrayWithObjects: @"where", @"limit", nil]];
+        
+    } else {
+        parameters = [NSDictionary dictionaryWithObject:jsonLimit
+                                                 forKey:@"limit"];
+        
+    }
+    
+    request = [self GETRequestForClass:className parameters:parameters];
     return request;
 }
 @end
