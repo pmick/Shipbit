@@ -16,6 +16,7 @@
 
 - (void)registerNSManagedObjectClassToSync:(Class)aClass;
 - (void)startSync;
+- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId;
 
 typedef enum {
     SBObjectSynced = 0,

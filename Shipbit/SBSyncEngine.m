@@ -77,7 +77,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)downloadDataForRegisteredObjects:(BOOL)useUpdatedAtDate toDeleteLocalRecords:(BOOL)toDelete {
-    NSMutableArray *operations = [NSMutableArray array];
+    NSMutableArray *requestOperations = [NSMutableArray array];
     
     for (NSString *className in self.registeredClassesToSync) {
         NSDate *mostRecentUpdatedDate = nil;
@@ -86,7 +86,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         }
         NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] GETRequestForAllRecordsOfClass:className updateAfterDate:mostRecentUpdatedDate];
         
-        AFHTTPRequestOperation *operation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 [self writeJSONReponse:responseObject toDiskForClassWithName:className];
                 NSLog(@"JSON RESPONSE: %@", responseObject);
@@ -95,10 +95,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             NSLog(@"Request for class %@ failed with error: %@", className, error);
         }];
         
-        [operations addObject:operation];
+        [requestOperations addObject:requestOperation];
     }
         
-    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:operations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
         
     } completionBlock:^(NSArray *operations) {
         if (!toDelete) {
@@ -122,8 +122,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 #pragma mark - File Management
-- (NSURL *)applicationCacheDirectory
-{
+- (NSURL *)applicationCacheDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
@@ -142,7 +141,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     NSURL *fileURL = [NSURL URLWithString:className relativeToURL:[self JSONDataRecordsDirectory]];
     if (![(NSDictionary *)response writeToFile:[fileURL path] atomically:YES]) {
         NSLog(@"Error attempting to save response to disk, will attempt to remove NSNull vals and try again.");
-        NSArray *records = [response objectForKey:@"results"];
+        NSArray *records = [(NSDictionary *)response objectForKey:@"results"];
         NSMutableArray *nullFreeRecords = [NSMutableArray array];
         for (NSDictionary *record in records) {
             NSMutableDictionary *nullFreeRecord = [NSMutableDictionary dictionaryWithDictionary:record];
@@ -275,14 +274,14 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         NSDate *date = [self dateUsingReleaseDateStringFromAPI:value];
         [managedObject setValue:date forKey:key];
     } else if ([value isKindOfClass:[NSDictionary class]]) {
-        if ([value objectForKey:@"__type"]) {
-            NSString *dataType = [value objectForKey:@"__type"];
+        if ([(NSDictionary *)value objectForKey:@"__type"]) {
+            NSString *dataType = [(NSDictionary *)value objectForKey:@"__type"];
             if ([dataType isEqualToString:@"Date"]) {
-                NSString *dateString = [value objectForKey:@"iso"];
+                NSString *dateString = [(NSDictionary *)value objectForKey:@"iso"];
                 NSDate *date = [self dateUsingStringFromAPI:dateString];
                 [managedObject setValue:date forKey:key];
             } else if ([dataType isEqualToString:@"File"]) {
-                NSString *urlString = [value objectForKey:@"url"];
+                NSString *urlString = [(NSDictionary *)value objectForKey:@"url"];
                 NSURL *url = [NSURL URLWithString:urlString];
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
                 NSURLResponse *response = nil;
@@ -354,7 +353,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                 
                 for (NSDictionary *record in downloadedRecords) {
                     NSManagedObject *storedManagedObject = nil;
-                    if ([storedRecords count] > currentIndex) {
+                    if ([storedRecords count] > (unsigned)currentIndex) {
                         storedManagedObject = [storedRecords objectAtIndex:currentIndex];
                     }
                     
@@ -411,4 +410,9 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     // Execute the sync completion operations as this is now the final step of the sync process
     [self executeSyncCompletedOperations];
 }
+
+- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId {
+    
+}
+
 @end

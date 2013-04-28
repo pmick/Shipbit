@@ -66,14 +66,21 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     if (jsonString.length > 0) {
         parameters = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects: jsonString, jsonLimit, nil]
                                                  forKeys:[NSArray arrayWithObjects: @"where", @"limit", nil]];
-        
     } else {
         parameters = [NSDictionary dictionaryWithObject:jsonLimit
                                                  forKey:@"limit"];
-        
     }
     
     request = [self GETRequestForClass:className parameters:parameters];
     return request;
 }
+
+- (NSMutableURLRequest *)PUTRequestForClass:(NSString *)className forObjectWithId:(NSString *)objectId parameters:(NSDictionary *)parameters {
+    NSMutableURLRequest *request = [self requestWithMethod:@"PUT"
+                                                      path:[NSString stringWithFormat:@"classes/%@/%@", className, objectId]
+                                                parameters:parameters];
+    
+    return request;
+}
+
 @end

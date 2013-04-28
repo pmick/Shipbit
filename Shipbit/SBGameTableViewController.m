@@ -6,12 +6,15 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "SBGameTableViewController.h"
 #import "SBCoreDataController.h"
 #import "SBGameCell.h"
 #import "Game.h"
 #import "SBGameDetailViewController.h"
 #import "SBPlatformsTableViewController.h"
+#import "SBSyncEngine.h"
 
 #define UPCOMING_VIEW_CONTROLLER 1
 #define YEAR_MULTIPLIER 1000
@@ -31,6 +34,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize dateFormatter = _dateFormatter;
 @synthesize gdvc = _gdvc;
+@synthesize ptvc = _ptvc;
 
 @synthesize entityName = _entityName;
 @synthesize games = _games;
@@ -76,6 +80,10 @@
     
     UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
     [self.navigationItem setLeftBarButtonItem:platformsButton];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refreshControl];
     
     _fetchedResultsController = self.upcomingFetchedResultsController;
     
@@ -123,6 +131,8 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [[NSKeyedUnarchiver unarchiveObjectWithData:game.platforms] componentsJoinedByString:@", "];
+    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,6 +164,8 @@
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
+                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     [_gdvc.tableView reloadData];
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }
@@ -352,6 +364,11 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_ptvc];
     
     [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)refresh:(id)sender {
+    [[SBSyncEngine sharedEngine] startSync];
+    [(UIRefreshControl *)sender endRefreshing];
 }
 
 @end

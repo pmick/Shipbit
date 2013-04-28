@@ -6,7 +6,10 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "SBFavoritesTableViewController.h"
+#import "SBGameDetailViewController.h"
 #import "SBGameCell.h"
 #import "Game.h"
 
@@ -15,12 +18,15 @@
 @interface SBFavoritesTableViewController ()
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) SBGameDetailViewController *gdvc;
 
 @end
 
 @implementation SBFavoritesTableViewController
 
 @synthesize dateFormatter = _dateFormatter;
+@synthesize gdvc = _gdvc;
+
 @synthesize favorites = _favorites;
 
 #pragma mark -
@@ -79,6 +85,8 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [[NSKeyedUnarchiver unarchiveObjectWithData:game.platforms] componentsJoinedByString:@", "];
+    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     
     return cell;
 }
@@ -91,7 +99,20 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO implement selection functionality
+    if(!_gdvc)
+    {
+        _gdvc = [[SBGameDetailViewController alloc] init];
+    }
+    Game *game = [_favorites objectAtIndex:indexPath.row];
+
+    [_gdvc setGame:game];
+    _gdvc.titleLabel.text = game.title;
+    _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
+                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [_gdvc.tableView reloadData];
+    [self.navigationController pushViewController:self.gdvc animated:YES];
+
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

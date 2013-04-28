@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
+
 #import "SBSearchTableViewController.h"
 #import "SBGameCell.h"
 #import "SBCoreDataController.h"
@@ -82,6 +84,8 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [[NSKeyedUnarchiver unarchiveObjectWithData:game.platforms] componentsJoinedByString:@", "];
+    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,6 +124,8 @@
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
+                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     [_gdvc.tableView reloadData];
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }
