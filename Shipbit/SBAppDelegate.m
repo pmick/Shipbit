@@ -13,31 +13,51 @@
 #import "SBSyncEngine.h"
 #import "SBCoreDataController.h"
 #import "Game.h"
+#import "SBLeftSideNavViewController.h"
+#import "DDASLLogger.h"
+#import "DDTTYLogger.h"
+#import "DDFileLogger.h"
+#import "XCodeConsoleLogFormatter.h"
 
 @implementation SBAppDelegate
 
+@synthesize viewController = _viewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
+    XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
+    [xcodeConsoleLogger setLogFormatter:logFormatter];
+    [DDLog addLogger:xcodeConsoleLogger];
+    
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Game class]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
-    UITabBarController *tbc = [[UITabBarController alloc] init];
+    SBLeftSideNavViewController *lsnvc = [[SBLeftSideNavViewController alloc] init];
+    
+//    UITabBarController *tbc = [[UITabBarController alloc] init];
     SBGameTableViewController *gtvc = [[SBGameTableViewController alloc] init];
     SBSearchTableViewController *stvc = [[SBSearchTableViewController alloc] init];
     SBFavoritesTableViewController *ftvc = [[SBFavoritesTableViewController alloc] init];
-        
+
     gtvc.entityName = @"Game";
-    
+
     UINavigationController *gameNav = [[UINavigationController alloc] initWithRootViewController:gtvc];
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     
-    NSArray *viewControllers = [NSArray arrayWithObjects:gameNav, searchNav, favoritesNav, nil];
-    [tbc setViewControllers:viewControllers];
+    lsnvc.gtvc = gameNav;
+    lsnvc.stvc = searchNav;
+    lsnvc.ftvc = favoritesNav;
     
-    self.window.rootViewController = tbc;
+    
+    self.viewController = [[JASidePanelController alloc] init];
+    self.viewController.leftPanel = lsnvc;
+    self.viewController.centerPanel = gameNav;
+    
+    self.window.rootViewController = _viewController;
     
     return YES;
 }

@@ -20,12 +20,15 @@
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 100
 
+NSString * const kSBSelectedKey = @"selected";
+
 @interface SBGameTableViewController ()
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
 @property (nonatomic, strong) SBPlatformsTableViewController *ptvc;
+@property (nonatomic, strong) NSArray *selected;
 
 @end
 
@@ -44,6 +47,10 @@
 
 #pragma mark -
 #pragma mark Memory Management
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     // TODO implement shared logger to log memory warnings and deallocs
@@ -79,7 +86,7 @@
 	self.navigationItem.titleView = segmentedControl;
     
     UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
-    [self.navigationItem setLeftBarButtonItem:platformsButton];
+    [self.navigationItem setRightBarButtonItem:platformsButton];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -87,9 +94,10 @@
     
     _fetchedResultsController = self.upcomingFetchedResultsController;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
+    
 }
 
-#pragma mark -
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -151,7 +159,6 @@
     return CELL_HEIGHT;
 }
 
-#pragma mark -
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -170,8 +177,7 @@
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }
 
-#pragma mark -
-#pragma mark Fetched Results Controller Configuration
+#pragma mark - Fetched Results Controller Configuration
 
 /*
  Returns the fetched results controller. Creates and configures the controller if necessary.
@@ -200,7 +206,17 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.year = 2;
     NSDate *twoYearsFromNow = [calendar dateByAddingComponents:components toDate:now options:0];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", now, twoYearsFromNow];
+    
+    NSPredicate *predicate;
+    
+    if ([_selected count] > 0) {
+        // TODO: filter based off of platforms
+        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@))", now, twoYearsFromNow];
+    } else {
+        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", now, twoYearsFromNow];
+    }
+    
+    
     [fetchRequest setPredicate:predicate];
     
     // Create and initialize the fetch results controller.
@@ -369,6 +385,13 @@
 - (void)refresh:(id)sender {
     [[SBSyncEngine sharedEngine] startSync];
     [(UIRefreshControl *)sender endRefreshing];
+}
+
+- (void)platformsUpdated:(NSNotification *)note {
+    _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey];
+    _releasedFetchedResultsController = nil;
+    _upcomingFetchedResultsController = nil;
+    [self.tableView reloadData]; //fetched results controller will be lazily recreated
 }
 
 @end

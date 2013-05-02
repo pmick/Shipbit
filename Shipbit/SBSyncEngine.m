@@ -89,7 +89,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 [self writeJSONReponse:responseObject toDiskForClassWithName:className];
-                NSLog(@"JSON RESPONSE: %@", responseObject);
+                //NSLog(@"JSON RESPONSE: %@", responseObject);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Request for class %@ failed with error: %@", className, error);
@@ -111,7 +111,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 
 - (void)startSync {
     if (!self.syncInProgress) {
-        NSLog(@"Sync started...");
+        DDLogInfo(@"Sync started...");
         [self willChangeValueForKey:@"syncInProgress"];
         _syncInProgress = YES;
         [self didChangeValueForKey:@"syncInProgress"];
@@ -140,7 +140,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 - (void)writeJSONReponse:(id)response toDiskForClassWithName:(NSString *)className {
     NSURL *fileURL = [NSURL URLWithString:className relativeToURL:[self JSONDataRecordsDirectory]];
     if (![(NSDictionary *)response writeToFile:[fileURL path] atomically:YES]) {
-        NSLog(@"Error attempting to save response to disk, will attempt to remove NSNull vals and try again.");
+        DDLogError(@"Error saving response to disk, removing nulls.");
         NSArray *records = [(NSDictionary *)response objectForKey:@"results"];
         NSMutableArray *nullFreeRecords = [NSMutableArray array];
         for (NSDictionary *record in records) {
@@ -178,6 +178,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         [self willChangeValueForKey:@"syncInProgress"];
         _syncInProgress = NO;
         [self didChangeValueForKey:@"syncInProgress"];
+        DDLogInfo(@"Sync completed.");
     });
 }
 

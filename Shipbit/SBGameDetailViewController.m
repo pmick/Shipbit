@@ -127,7 +127,13 @@
             if (_ratingCell == nil) {
                 _ratingCell = [[SBRatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RatingCell"];
             }
-            _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
+            
+            if (_game.criticScore > 0) {
+                _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
+            } else {
+                _ratingCell.metacriticRatingLabel.text = @"Not yet rated.";
+            }
+            
             cell = _ratingCell;
             break;
         case 1:

@@ -14,8 +14,6 @@
 
 @implementation SBPlatformsTableViewController
 
-@synthesize platforms = _platforms;
-
 #pragma mark -
 #pragma mark Memory Management
 
@@ -37,13 +35,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];    
-    _platforms = [[NSArray alloc] initWithObjects:@"All", @"PC", @"Xbox 360", @"PS3", @"PSP", @"PS Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
+    _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PS Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
+    _selected = [[NSMutableArray alloc] initWithArray:_platforms];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(donePressed)];
     self.navigationItem.rightBarButtonItem = doneButton;
 }
 
-#pragma mark -
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -61,6 +59,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
     cell.textLabel.text = [_platforms objectAtIndex:indexPath.row];
@@ -68,7 +67,6 @@
     return cell;
 }
 
-#pragma mark -
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,17 +74,33 @@
     
     if (cell.accessoryType) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+        int objectToRemove = 0;
+        for (int i = 0; (unsigned)i < [_selected count]; i++) {
+            if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
+                objectToRemove = i;
+                break;
+            }
+        }
+        [_selected removeObjectAtIndex:objectToRemove];
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [_selected addObject:cell.textLabel.text];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -
 #pragma mark Action Methods
+
 - (void)donePressed {
     // TODO Update fetched results controller from previous view with filter
+    NSArray *cells = [self.tableView visibleCells];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:_selected forKey:@"selected"];
+    
+    NSNotification *note = [NSNotification notificationWithName:@"PlatformsUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:note];
     
     // Dismiss platforms view
     [self dismissViewControllerAnimated:YES completion:nil];

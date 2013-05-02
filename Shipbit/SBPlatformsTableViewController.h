@@ -11,5 +11,6 @@
 @interface SBPlatformsTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *platforms;
+@property (nonatomic, strong) NSMutableArray *selected;
 
 @end
