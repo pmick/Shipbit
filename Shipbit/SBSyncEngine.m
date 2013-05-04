@@ -46,10 +46,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         if (![self.registeredClassesToSync containsObject:NSStringFromClass(aClass)]) {
             [self.registeredClassesToSync addObject:NSStringFromClass(aClass)];
         } else {
-            NSLog(@"Unable to register %@ as it is already registered", NSStringFromClass(aClass));
+            DDLogError(@"Unable to register %@ as it is already registered", NSStringFromClass(aClass));
         }
     } else {
-        NSLog(@"Unable to register %@ as it is not a subclass of NSManageObject", NSStringFromClass(aClass));
+        DDLogError(@"Unable to register %@ as it is not a subclass of NSManageObject", NSStringFromClass(aClass));
     }
 }
 
@@ -89,10 +89,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 [self writeJSONReponse:responseObject toDiskForClassWithName:className];
-                //NSLog(@"JSON RESPONSE: %@", responseObject);
+                //DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Request for class %@ failed with error: %@", className, error);
+            DDLogError(@"Request for class %@ failed with error: %@", className, error);
         }];
         
         [requestOperations addObject:requestOperation];
@@ -138,9 +138,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)writeJSONReponse:(id)response toDiskForClassWithName:(NSString *)className {
+    DDLogInfo(@"Writing JSON response to disk.");
     NSURL *fileURL = [NSURL URLWithString:className relativeToURL:[self JSONDataRecordsDirectory]];
     if (![(NSDictionary *)response writeToFile:[fileURL path] atomically:YES]) {
-        DDLogError(@"Error saving response to disk, removing nulls.");
+        DDLogWarn(@"Error saving response to disk, removing nulls.");
         NSArray *records = [(NSDictionary *)response objectForKey:@"results"];
         NSMutableArray *nullFreeRecords = [NSMutableArray array];
         for (NSDictionary *record in records) {
@@ -155,7 +156,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         
         NSDictionary *nullFreeDictionary = [NSDictionary dictionaryWithObject:nullFreeRecords forKey:@"results"];
         if (![nullFreeDictionary writeToFile:[fileURL path] atomically:YES]) {
-            NSLog(@"Failed all attempts to save response to disk: %@", response);
+            DDLogError(@"Failed all attempts to save response to disk: %@", response);
         }
     }
 }
@@ -202,7 +203,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     NSError *error;
     BOOL deleted = [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
     if (!deleted) {
-        NSLog(@"Unable to delete JSON Records at %@, reason: %@", url, error);
+        DDLogError(@"Unable to delete JSON Records at %@, reason: %@", url, error);
     }
 }
 

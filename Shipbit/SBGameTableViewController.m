@@ -138,7 +138,7 @@ NSString * const kSBSelectedKey = @"selected";
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    cell.platformsLabel.text = [[NSKeyedUnarchiver unarchiveObjectWithData:game.platforms] componentsJoinedByString:@", "];
+    cell.platformsLabel.text = game.platforms;
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }

@@ -156,7 +156,7 @@
             _infoCell.publisherLabel.text = _game.publisher;
             _infoCell.developerLabel.text = _game.developer;
             _infoCell.esrbLabel.text = _game.esrb;
-            _infoCell.platformsLabel.text = [[NSKeyedUnarchiver unarchiveObjectWithData:_game.platforms] componentsJoinedByString:@", "];
+            _infoCell.platformsLabel.text = _game.platforms;
             cell = _infoCell;
             break;
         default:

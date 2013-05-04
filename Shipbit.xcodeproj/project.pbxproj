@@ -14,6 +14,7 @@
 		0F9395AD1727310800ED7D76 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AC1727310800ED7D76 /* SDWebImage.framework */; };
 		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
 		0FA028A3172DCB830018CB42 /* SBLeftSideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA028A2172DCB830018CB42 /* SBLeftSideNavViewController.m */; };
+		0FB45EDC17358B8200C5BFE0 /* Platform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB45EDB17358B8200C5BFE0 /* Platform.m */; };
 		0FC167C71726075F0019304D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B51726075F0019304D /* AFHTTPClient.m */; };
 		0FC167C81726075F0019304D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B71726075F0019304D /* AFHTTPRequestOperation.m */; };
 		0FC167C91726075F0019304D /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B91726075F0019304D /* AFImageRequestOperation.m */; };
@@ -72,6 +73,8 @@
 		0F9395AE1727315700ED7D76 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0FA028A1172DCB830018CB42 /* SBLeftSideNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLeftSideNavViewController.h; sourceTree = "<group>"; };
 		0FA028A2172DCB830018CB42 /* SBLeftSideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLeftSideNavViewController.m; sourceTree = "<group>"; };
+		0FB45EDA17358B8200C5BFE0 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		0FB45EDB17358B8200C5BFE0 /* Platform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Platform.m; sourceTree = "<group>"; };
 		0FC167B41726075F0019304D /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		0FC167B51726075F0019304D /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		0FC167B61726075F0019304D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -328,6 +331,8 @@
 			children = (
 				B9D3E7C716D821A600C84F30 /* SBSearchTableViewController.xib */,
 				B9B7E4DD16AC5C9B00FFC031 /* Shipbit.xcdatamodeld */,
+				0FB45EDA17358B8200C5BFE0 /* Platform.h */,
+				0FB45EDB17358B8200C5BFE0 /* Platform.m */,
 				B9B7E3FD16AB15E800FFC031 /* Shipbit-Info.plist */,
 				B9B7E3FE16AB15E800FFC031 /* InfoPlist.strings */,
 				B9B7E40116AB15E800FFC031 /* main.m */,
@@ -443,6 +448,7 @@
 				0FF6EC741732531F00ABE4B8 /* ContextFilterLogFormatter.m in Sources */,
 				0FF6EC751732531F00ABE4B8 /* DispatchQueueLogFormatter.m in Sources */,
 				0F4EFFD317330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m in Sources */,
+				0FB45EDC17358B8200C5BFE0 /* Platform.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

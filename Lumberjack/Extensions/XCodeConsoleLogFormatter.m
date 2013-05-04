@@ -27,8 +27,8 @@
     //Also display the file the logging occurred in to ease later debugging
     NSString *file = [[[NSString stringWithUTF8String:logMessage->file] lastPathComponent] stringByDeletingPathExtension];
     
-    //Format the message for the server-side log file parser
-    return [NSString stringWithFormat:@"%@ %x %@ \"%@\" | [%@@%s@%i]", logMessage->timestamp, logMessage->machThreadID, logLevel, msg, file, logMessage->function, logMessage->lineNumber];
+    //Format the message
+    return [NSString stringWithFormat:@"%@ %x %@ \"%@\" || [%@@%s@%i]", logMessage->timestamp, logMessage->machThreadID, logLevel, msg, file, logMessage->function, logMessage->lineNumber];
 }
 
 @end
