@@ -25,12 +25,6 @@
 
 @implementation SBSearchTableViewController
 
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize searchFetchedResultsController = _searchFetchedResultsController;
-@synthesize dateFormatter = _dateFormatter;
-
-@synthesize gdvc = _gdvc;
-
 #pragma mark -
 #pragma mark Memory Management
 
@@ -83,7 +77,7 @@
     Game *game = [fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    cell.platformsLabel.text = game.platforms;
+    //cell.platformsLabel.text = game.platforms;
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }

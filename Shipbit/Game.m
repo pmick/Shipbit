@@ -1,33 +1,15 @@
-//
-//  Game.m
-//  Shipbit
-//
-//  Created by Patrick Mick on 1/31/13.
-//  Copyright (c) 2013 PatrickMick. All rights reserved.
-//
-
 #import "Game.h"
+
+
+@interface Game ()
+
+// Private interface goes here.
+
+@end
 
 
 @implementation Game
 
-@dynamic art;
-@dynamic createdAt;
-@dynamic criticScore;
-@dynamic developer;
-@dynamic esrb;
-@dynamic genre;
-@dynamic link;
-@dynamic objectId;
-@dynamic platforms;
-@dynamic publisher;
-@dynamic releaseDate;
-@dynamic primitiveReleaseDate;
-@dynamic summary;
-@dynamic title;
-@dynamic updatedAt;
-@dynamic sectionIdentifier;
-@dynamic primitiveSectionIdentifier;
 
 - (NSString *)sectionIdentifier {
     
@@ -59,7 +41,5 @@
     
     [self setPrimitiveSectionIdentifier:nil];
 }
-
-
 
 @end

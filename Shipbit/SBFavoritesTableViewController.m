@@ -29,8 +29,7 @@
 
 @synthesize favorites = _favorites;
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -41,8 +40,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 - (id)init {
     self = [super init];
@@ -62,7 +60,6 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-#pragma mark -
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -84,19 +81,18 @@
     Game *game = [_favorites objectAtIndex:indexPath.row];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    cell.platformsLabel.text = game.platforms;
+    //cell.platformsLabel.text = game.platforms;
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     
     return cell;
 }
 
+#pragma mark - Table view delegate
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CELL_HEIGHT;
 }
-
-#pragma mark -
-#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(!_gdvc)
@@ -124,8 +120,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Action Methods
+#pragma mark - Action Methods
 
 - (void)favoriteAdded:(NSNotification *)note {
     BOOL exists = NO;

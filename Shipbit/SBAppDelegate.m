@@ -8,10 +8,12 @@
 
 #import "SBAppDelegate.h"
 #import "SBGameTableViewController.h"
+#import "SBReleasedViewController.h"
 #import "SBSearchTableViewController.h"
 #import "SBFavoritesTableViewController.h"
 #import "SBSyncEngine.h"
 #import "SBCoreDataController.h"
+#import "Platform.h"
 #import "Game.h"
 #import "SBLeftSideNavViewController.h"
 #import "DDASLLogger.h"
@@ -21,14 +23,13 @@
 
 @implementation SBAppDelegate
 
-@synthesize viewController = _viewController;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
     [xcodeConsoleLogger setLogFormatter:logFormatter];
     [DDLog addLogger:xcodeConsoleLogger];
     
+    [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Platform class]];
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Game class]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -37,18 +38,20 @@
     
     SBLeftSideNavViewController *lsnvc = [[SBLeftSideNavViewController alloc] init];
     
-//    UITabBarController *tbc = [[UITabBarController alloc] init];
     SBGameTableViewController *gtvc = [[SBGameTableViewController alloc] init];
+    SBReleasedViewController *rtvc = [[SBReleasedViewController alloc] init];
     SBSearchTableViewController *stvc = [[SBSearchTableViewController alloc] init];
     SBFavoritesTableViewController *ftvc = [[SBFavoritesTableViewController alloc] init];
 
     gtvc.entityName = @"Game";
 
     UINavigationController *gameNav = [[UINavigationController alloc] initWithRootViewController:gtvc];
+    UINavigationController *releasedNav = [[UINavigationController alloc] initWithRootViewController:rtvc];
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     
     lsnvc.gtvc = gameNav;
+    lsnvc.rtvc = releasedNav;
     lsnvc.stvc = searchNav;
     lsnvc.ftvc = favoritesNav;
     

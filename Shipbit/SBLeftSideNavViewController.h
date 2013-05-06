@@ -10,12 +10,14 @@
 #import "SBGameTableViewController.h"
 #import "SBSearchTableViewController.h"
 #import "SBFavoritesTableViewController.h"
+#import "SBReleasedViewController.h"
 
 
 @interface SBLeftSideNavViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *views;
 @property (nonatomic, strong) UINavigationController *gtvc;
+@property (nonatomic, strong) UINavigationController *rtvc;
 @property (nonatomic, strong) UINavigationController *stvc;
 @property (nonatomic, strong) UINavigationController *ftvc;
 

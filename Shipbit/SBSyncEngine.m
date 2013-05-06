@@ -9,6 +9,8 @@
 #import "SBSyncEngine.h"
 #import "SBCoreDataController.h"
 #import "SBAFParseAPIClient.h"
+#import "Platform.h"
+#import "Game.h"
 
 #import <CoreData/CoreData.h>
 
@@ -275,6 +277,29 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     } else if ([key isEqualToString:@"releaseDate"]) {
         NSDate *date = [self dateUsingReleaseDateStringFromAPI:value];
         [managedObject setValue:date forKey:key];
+    } else if ([key isEqualToString:@"platforms"]) {
+        // query sql for each platform
+        NSManagedObjectContext *context = [[SBCoreDataController sharedInstance] backgroundManagedObjectContext];
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"Platform"
+                                                  inManagedObjectContext:context];
+        [fetchRequest setEntity:entity];
+        
+        NSError *error;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            DDLogError(@"Failed to fetch platforms from manageObjectContext");
+        } else {
+            for (NSString *platform in value) {
+                for (Platform *existingPlatform in fetchedObjects) {
+                    if ([existingPlatform.title isEqualToString:platform]) {
+                        [(Game *)managedObject addPlatformsObject:existingPlatform];
+                    }
+                }
+            }
+        }
+        
     } else if ([value isKindOfClass:[NSDictionary class]]) {
         if ([(NSDictionary *)value objectForKey:@"__type"]) {
             NSString *dataType = [(NSDictionary *)value objectForKey:@"__type"];

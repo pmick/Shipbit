@@ -16,11 +16,6 @@
 
 @implementation SBLeftSideNavViewController
 
-@synthesize views = _views;
-@synthesize gtvc = _gtvc;
-@synthesize stvc = _stvc;
-@synthesize ftvc = _ftvc;
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -34,7 +29,7 @@
 {
     [super viewDidLoad];
     _views = [[NSArray alloc] init];
-    _views = [NSArray arrayWithObjects:@"Upcoming", @"Search", @"Favorites", nil];
+    _views = [NSArray arrayWithObjects:@"Upcoming", @"Released", @"Search", @"Favorites", nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -124,9 +119,12 @@
             [self.sidePanelController setCenterPanel:_gtvc];
             break;
         case 1:
-            [self.sidePanelController setCenterPanel:_stvc];
+            [self.sidePanelController setCenterPanel:_rtvc];
             break;
         case 2:
+            [self.sidePanelController setCenterPanel:_stvc];
+            break;
+        case 3:
             [self.sidePanelController setCenterPanel:_ftvc];
             break;
         default:
