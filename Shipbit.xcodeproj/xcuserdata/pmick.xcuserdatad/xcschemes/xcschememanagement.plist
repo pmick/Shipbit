@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Mogenerator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Shipbit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0FEC40DD173596CE0092E5DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B9B7E3F016AB15E800FFC031</key>
 		<dict>
 			<key>primary</key>

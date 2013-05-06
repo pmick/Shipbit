@@ -7,7 +7,7 @@
 //
 
 #import "SBAppDelegate.h"
-#import "SBGameTableViewController.h"
+#import "SBUpcomingViewController.h"
 #import "SBReleasedViewController.h"
 #import "SBSearchTableViewController.h"
 #import "SBFavoritesTableViewController.h"
@@ -38,19 +38,27 @@
     
     SBLeftSideNavViewController *lsnvc = [[SBLeftSideNavViewController alloc] init];
     
-    SBGameTableViewController *gtvc = [[SBGameTableViewController alloc] init];
+    // Create all of the view controllers for the sidenav.
+    SBUpcomingViewController *utvc = [[SBUpcomingViewController alloc] init];
     SBReleasedViewController *rtvc = [[SBReleasedViewController alloc] init];
     SBSearchTableViewController *stvc = [[SBSearchTableViewController alloc] init];
     SBFavoritesTableViewController *ftvc = [[SBFavoritesTableViewController alloc] init];
-
-    gtvc.entityName = @"Game";
-
-    UINavigationController *gameNav = [[UINavigationController alloc] initWithRootViewController:gtvc];
+    
+    // Create new platforms view controller.
+    SBPlatformsTableViewController *ptvc = [[SBPlatformsTableViewController alloc] init];
+    
+    // Assign new platforms view controller to both views that use it.
+    [utvc setPtvc:ptvc];
+    [rtvc setPtvc:ptvc];
+    
+    // Create a navigation controller for each view controller listed in the sidenav.
+    UINavigationController *upcomingNav = [[UINavigationController alloc] initWithRootViewController:utvc];
     UINavigationController *releasedNav = [[UINavigationController alloc] initWithRootViewController:rtvc];
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     
-    lsnvc.gtvc = gameNav;
+    // Set side nav views to the newly created views
+    lsnvc.utvc = upcomingNav;
     lsnvc.rtvc = releasedNav;
     lsnvc.stvc = searchNav;
     lsnvc.ftvc = favoritesNav;
@@ -58,7 +66,7 @@
     
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.leftPanel = lsnvc;
-    self.viewController.centerPanel = gameNav;
+    self.viewController.centerPanel = upcomingNav;
     
     self.window.rootViewController = _viewController;
     

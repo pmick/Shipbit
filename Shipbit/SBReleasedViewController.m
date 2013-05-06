@@ -18,11 +18,14 @@
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 100
 
+NSString * const kSBSelectedKey = @"selected";
+
 @interface SBReleasedViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
+@property (nonatomic, strong) NSArray *selected;
 
 @end
 
@@ -31,6 +34,7 @@
 #pragma mark - Memory Management
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +55,11 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
+    [self.navigationItem setRightBarButtonItem:platformsButton];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
 }
 
 #pragma mark - Table View Data Source
@@ -170,7 +179,15 @@
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.month = -3;
     NSDate *threeMonthsAgo = [calendar dateByAddingComponents:components toDate:now options:0];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", threeMonthsAgo, now];
+    NSPredicate *predicate;
+    
+    if ([_selected count] > 0) {
+        // Filter using platforms.
+        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", threeMonthsAgo, now, _selected];
+    } else {
+        // Don't filter.
+        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", threeMonthsAgo, now];
+    }
     
     [fetchRequest setPredicate:predicate];
     
@@ -250,6 +267,21 @@
     if (controller == _fetchedResultsController) {
         [self.tableView endUpdates];
     }
+}
+
+#pragma mark - Custom Methods
+
+- (void)platformsButtonPressed {
+    if (_ptvc) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_ptvc];
+        [self.navigationController presentViewController:nav animated:YES completion:nil];
+    }
+}
+
+- (void)platformsUpdated:(NSNotification *)note {
+    _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey];
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData]; //fetched results controller will be lazily recreated
 }
 
 @end

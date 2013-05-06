@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];    
     _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PS Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
+    // TODO: _selected is from userdefaults unless the value in userdefaults is nil
     _selected = [[NSMutableArray alloc] initWithArray:_platforms];
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(donePressed)];
@@ -93,8 +94,6 @@
 #pragma mark Action Methods
 
 - (void)donePressed {
-    // TODO Update fetched results controller from previous view with filter
-    NSArray *cells = [self.tableView visibleCells];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setValue:_selected forKey:@"selected"];

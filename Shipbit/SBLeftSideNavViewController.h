@@ -16,7 +16,7 @@
 @interface SBLeftSideNavViewController : UITableViewController
 
 @property (nonatomic, strong) NSArray *views;
-@property (nonatomic, strong) UINavigationController *gtvc;
+@property (nonatomic, strong) UINavigationController *utvc;
 @property (nonatomic, strong) UINavigationController *rtvc;
 @property (nonatomic, strong) UINavigationController *stvc;
 @property (nonatomic, strong) UINavigationController *ftvc;

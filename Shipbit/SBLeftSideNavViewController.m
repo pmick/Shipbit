@@ -16,6 +16,16 @@
 
 @implementation SBLeftSideNavViewController
 
+#pragma mark - Memory Management
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    DDLogWarn(@"Did receive memory warning");
+}
+
+#pragma mark - View Lifecycle
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -36,12 +46,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -116,7 +120,7 @@
 {
     switch (indexPath.row) {
         case 0:
-            [self.sidePanelController setCenterPanel:_gtvc];
+            [self.sidePanelController setCenterPanel:_utvc];
             break;
         case 1:
             [self.sidePanelController setCenterPanel:_rtvc];
