@@ -10,6 +10,4 @@
 
 @interface SBFavoritesTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *favorites;
-
 @end

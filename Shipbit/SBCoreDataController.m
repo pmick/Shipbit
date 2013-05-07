@@ -89,8 +89,8 @@
         NSError *error = nil;
         BOOL saved = [self.masterManagedObjectContext save:&error];
         if (!saved) {
-            // do some real error handling 
-            NSLog(@"Could not save master context due to %@", error);
+            // TODO: some real error handling 
+            DDLogError(@"Could not save master context due to %@", error);
         }
     }];
 }
@@ -100,8 +100,8 @@
         NSError *error = nil;
         BOOL saved = [self.backgroundManagedObjectContext save:&error];
         if (!saved) {
-            // do some real error handling 
-            NSLog(@"Could not save background context due to %@", error);
+            // TODO: some real error handling 
+            DDLogError(@"Could not save background context due to %@", error);
         }
     }];
 }
@@ -127,10 +127,9 @@
         return _persistentStoreCoordinator;
     }
     
-    //CHANGE MADE
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Shipbit.sqlite"];
-    
     NSError *error = nil;
+    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
@@ -156,7 +155,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     

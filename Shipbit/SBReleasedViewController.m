@@ -14,6 +14,7 @@
 #import "SBGameCell.h"
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
+#import "SBSyncEngine.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 100
@@ -56,10 +57,21 @@ NSString * const kSBSelectedKey = @"selected";
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     
+    // Load selected from userdefaults if they exist
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey]) {
+        _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey];
+    }
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refreshControl];
+    
     UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
     [self.navigationItem setRightBarButtonItem:platformsButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
+
 }
 
 #pragma mark - Table View Data Source
@@ -271,6 +283,10 @@ NSString * const kSBSelectedKey = @"selected";
 
 #pragma mark - Custom Methods
 
+- (void)refresh:(id)sender {
+    [[SBSyncEngine sharedEngine] startSync];
+}
+
 - (void)platformsButtonPressed {
     if (_ptvc) {
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_ptvc];
@@ -282,6 +298,10 @@ NSString * const kSBSelectedKey = @"selected";
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey];
     self.fetchedResultsController = nil;
     [self.tableView reloadData]; //fetched results controller will be lazily recreated
+}
+
+- (void)syncCompleted:(NSNotification *)note {
+    [self.refreshControl endRefreshing];
 }
 
 @end

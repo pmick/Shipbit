@@ -11,7 +11,9 @@
 #import "SBFavoritesTableViewController.h"
 #import "SBGameDetailViewController.h"
 #import "SBGameCell.h"
+#import "SBCoreDataController.h"
 #import "Game.h"
+#import "Platform.h"
 
 #define CELL_HEIGHT 100
 
@@ -19,6 +21,8 @@
 
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
 
 @end
 
@@ -26,8 +30,6 @@
 
 @synthesize dateFormatter = _dateFormatter;
 @synthesize gdvc = _gdvc;
-
-@synthesize favorites = _favorites;
 
 #pragma mark - Memory Management
 
@@ -53,23 +55,48 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteAdded:) name:@"FavoritesUpdated" object:nil];
-    _favorites = [[NSMutableArray alloc] init];
-    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // TODO: Save favorites to user defaults
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [_favorites count];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
+    cell.titleLabel.text = game.title;
+    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+    DDLogError(@"Release Date: %@", [self.dateFormatter stringFromDate:game.releaseDate]);
+    
+    // Building platform string from platform set
+    NSMutableString *platformsString = [[NSMutableString alloc] init];
+    int count = 0;
+    for (Platform *platform in game.platforms) {
+        count++;
+        if ((unsigned)count >= [game.platforms count]) {
+            [platformsString appendString:platform.title];
+        } else {
+            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
+            [platformsString appendString:platformWithComma];
+        }
+    }
+    
+    cell.platformsLabel.text = platformsString;
+    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,19 +105,14 @@
     if (cell == nil) {
         cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    Game *game = [_favorites objectAtIndex:indexPath.row];
-    cell.titleLabel.text = game.title;
-    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    //cell.platformsLabel.text = game.platforms;
-    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
 #pragma mark - Table view delegate
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CELL_HEIGHT;
 }
 
@@ -99,7 +121,7 @@
     {
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
-    Game *game = [_favorites objectAtIndex:indexPath.row];
+    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
 
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
@@ -114,25 +136,125 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_favorites removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
+        game.isFavorite = @NO;
+        NSError *error;
+        if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+            // Handle the error.
+            DDLogError(@"Saving changes failed: %@", error);
+            
+        }        
+    }
+}
+
+#pragma mark - Fetched Results Controller Configuration
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    // Create and configure a fetch request with the Game entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    // Create the sort descriptors array.
+    NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: releaseDateDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.month = -3;
+    NSDate *threeMonthsAgo = [calendar dateByAddingComponents:components toDate:now options:0];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == %@", @YES];
+    
+    // TODO: update predicate
+    
+    [fetchRequest setPredicate:predicate];
+    
+    // Create and initialize the fetch results controller.
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"sectionIdentifier" cacheName:@"GameCache"];
+    aFetchedResultsController.delegate = self;
+    _fetchedResultsController = aFetchedResultsController;
+    
+    NSError *error = nil;
+    [NSFetchedResultsController deleteCacheWithName:@"GameCache"];
+    if (![_fetchedResultsController performFetch:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _fetchedResultsController;
+}
+
+#pragma mark - Fetched Results Controller Delegates
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    if (controller == _fetchedResultsController) {
+        [self.tableView beginUpdates];
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    if (controller == _fetchedResultsController) {
+        UITableView *tableView = self.tableView;
         
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [self configureCell:(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if (controller == _fetchedResultsController) {
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    if (controller == _fetchedResultsController) {
+        [self.tableView endUpdates];
     }
 }
 
 #pragma mark - Action Methods
-
-- (void)favoriteAdded:(NSNotification *)note {
-    BOOL exists = NO;
-    for (Game *game in _favorites) {
-        if (game.objectId == [[note object] objectId]) {
-            exists = YES;
-        }
-    }
-    if (!exists) {
-        [_favorites addObject:[note object]];
-    }
-    [self.tableView reloadData];
-}
 
 @end

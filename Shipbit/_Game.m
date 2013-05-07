@@ -10,6 +10,8 @@ const struct GameAttributes GameAttributes = {
 	.developer = @"developer",
 	.esrb = @"esrb",
 	.genre = @"genre",
+	.hasLiked = @"hasLiked",
+	.isFavorite = @"isFavorite",
 	.link = @"link",
 	.objectId = @"objectId",
 	.publisher = @"publisher",
@@ -55,6 +57,16 @@ const struct GameFetchedProperties GameFetchedProperties = {
 	
 	if ([key isEqualToString:@"criticScoreValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"criticScore"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"hasLikedValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"hasLiked"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"isFavoriteValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"isFavorite"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -121,6 +133,58 @@ const struct GameFetchedProperties GameFetchedProperties = {
 
 @dynamic genre;
 
+
+
+
+
+
+@dynamic hasLiked;
+
+
+
+- (BOOL)hasLikedValue {
+	NSNumber *result = [self hasLiked];
+	return [result boolValue];
+}
+
+- (void)setHasLikedValue:(BOOL)value_ {
+	[self setHasLiked:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveHasLikedValue {
+	NSNumber *result = [self primitiveHasLiked];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveHasLikedValue:(BOOL)value_ {
+	[self setPrimitiveHasLiked:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic isFavorite;
+
+
+
+- (BOOL)isFavoriteValue {
+	NSNumber *result = [self isFavorite];
+	return [result boolValue];
+}
+
+- (void)setIsFavoriteValue:(BOOL)value_ {
+	[self setIsFavorite:[NSNumber numberWithBool:value_]];
+}
+
+- (BOOL)primitiveIsFavoriteValue {
+	NSNumber *result = [self primitiveIsFavorite];
+	return [result boolValue];
+}
+
+- (void)setPrimitiveIsFavoriteValue:(BOOL)value_ {
+	[self setPrimitiveIsFavorite:[NSNumber numberWithBool:value_]];
+}
 
 
 

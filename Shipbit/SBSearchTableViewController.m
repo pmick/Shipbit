@@ -25,16 +25,14 @@
 
 @implementation SBSearchTableViewController
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     // TODO implement shared logger to log memory warnings and deallocs
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 - (id)init {
     self = [super init];
@@ -52,7 +50,6 @@
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 }
 
-#pragma mark -
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -98,7 +95,6 @@
     return CELL_HEIGHT;
 }
 
-#pragma mark -
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -128,8 +124,7 @@
     return tableView == self.tableView ? self.fetchedResultsController : self.searchFetchedResultsController;
 }
 
-#pragma mark -
-#pragma mark Content Filtering
+#pragma mark - Content Filtering
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSInteger)scope {
     // update the filter, in this case just blow away the FRC and let lazy evaluation create another with the relevant search info
@@ -139,8 +134,7 @@
     //self.savedScopeButtonIndex = scope;
 }
 
-#pragma mark -
-#pragma mark Search Bar
+#pragma mark - Search Bar
 
 - (void)searchDisplayController:(UISearchDisplayController *)controller willUnloadSearchResultsTableView:(UITableView *)tableView {
     // search is done so get rid of the search FRC and reclaim memory
@@ -163,8 +157,7 @@
     return YES;
 }
 
-#pragma mark -
-#pragma mark Fetched Results Controller Configuration
+#pragma mark - Fetched Results Controller Configuration
 
 - (NSFetchedResultsController *)newFetchedResultsControllerWithSearch:(NSString *)searchString {
     // Create and configure a fetch request with the Game entity.
@@ -233,8 +226,7 @@
     return _searchFetchedResultsController;
 }
 
-#pragma mark -
-#pragma mark Fetched Results Controller Delegates
+#pragma mark - Fetched Results Controller Delegates
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     UITableView *tableView = controller == self.fetchedResultsController ? self.tableView : self.searchDisplayController.searchResultsTableView;
@@ -275,7 +267,7 @@
             
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:theIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }

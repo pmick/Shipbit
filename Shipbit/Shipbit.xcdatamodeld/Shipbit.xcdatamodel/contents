@@ -7,6 +7,8 @@
         <attribute name="developer" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="esrb" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasLiked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="publisher" attributeType="String" minValueString="1" defaultValueString="Publisher" syncable="YES"/>
@@ -25,7 +27,7 @@
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="platforms" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="160" positionY="192" width="128" height="268"/>
+        <element name="Game" positionX="160" positionY="192" width="128" height="298"/>
         <element name="Platform" positionX="-126" positionY="243" width="128" height="118"/>
     </elements>
 </model>

@@ -31,7 +31,7 @@
         [self.contentView addSubview:_releaseDateLabel];
         
         _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(90.0, 70.0, 220.0, 25.0)];
-        _platformsLabel.font = [UIFont systemFontOfSize:12.0];
+        _platformsLabel.font = [UIFont boldSystemFontOfSize:12.0];
         _platformsLabel.textAlignment = NSTextAlignmentLeft;
         _platformsLabel.textColor = [UIColor darkGrayColor];
         [self.contentView addSubview:_platformsLabel];

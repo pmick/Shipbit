@@ -14,6 +14,7 @@
 #import "SBGameCell.h"
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
+#import "SBSyncEngine.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 100
@@ -56,10 +57,21 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     
+    // Load selected in from userdefaults if it was saved
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey]) {
+        _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
+    }
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refreshControl];
+    
     UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
     [self.navigationItem setRightBarButtonItem:platformsButton];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
+
 }
 
 #pragma mark - Table View Data Source
@@ -148,6 +160,21 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    
+    NSMutableString *platformsString = [[NSMutableString alloc] init];
+    int count = 0;
+    for (Platform *platform in game.platforms) {
+        count++;
+        if ((unsigned)count >= [game.platforms count]) {
+            [platformsString appendString:platform.title];
+        } else {
+            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
+            [platformsString appendString:platformWithComma];
+        }
+    }
+    
+    _gdvc.platformsLabel.text = platformsString;
+    
     [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
                     placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     [_gdvc.tableView reloadData];
@@ -271,6 +298,10 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 #pragma mark - Custom Methods
 
+- (void)refresh:(id)sender {
+    [[SBSyncEngine sharedEngine] startSync];
+}
+
 - (void)platformsButtonPressed {
     if (_ptvc) {
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_ptvc];
@@ -282,6 +313,10 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
     self.fetchedResultsController = nil;
     [self.tableView reloadData]; //fetched results controller will be lazily recreated
+}
+
+- (void)syncCompleted:(NSNotification *)note {
+    [self.refreshControl endRefreshing];
 }
 
 @end

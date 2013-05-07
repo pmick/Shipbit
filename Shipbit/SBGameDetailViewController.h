@@ -15,5 +15,6 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *releaseDateLabel;
+@property (nonatomic, strong) UILabel *platformsLabel;
 
 @end

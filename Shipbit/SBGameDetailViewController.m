@@ -10,6 +10,7 @@
 #import "SBRatingCell.h"
 #import "SBSummaryCell.h"
 #import "SBInfoCell.h"
+#import "SBCoreDataController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -21,19 +22,12 @@
 @property (nonatomic, strong) SBRatingCell *ratingCell;
 @property (nonatomic, strong) SBSummaryCell *summaryCell;
 @property (nonatomic, strong) SBInfoCell *infoCell;
+@property (nonatomic, strong) UIButton *likeButton;
+@property (nonatomic, strong) UIButton *favoriteButton;
 
 @end
 
 @implementation SBGameDetailViewController
-
-@synthesize ratingCell = _ratingCell;
-@synthesize summaryCell = _summaryCell;
-@synthesize infoCell = _infoCell;
-
-@synthesize game = _game;
-@synthesize imageView = _imageView;
-@synthesize titleLabel = _titleLabel;
-@synthesize releaseDateLabel = _releaseDateLabel;
 
 #pragma mark -
 #pragma mark Memory Management
@@ -72,11 +66,19 @@
         [_releaseDateLabel setBackgroundColor:[UIColor clearColor]];
         [headerView addSubview:_releaseDateLabel];
         
-        UIButton *likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
-        [likeButton setTitle:@"Like" forState:UIControlStateNormal];
-        [likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:likeButton];
+        _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 100.0, 200.0, 50.0)];
+        [_platformsLabel setNumberOfLines:0];
+        [_platformsLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [_platformsLabel setFont:[UIFont systemFontOfSize:14]];
+        [_platformsLabel setTextAlignment:NSTextAlignmentLeft];
+        [_platformsLabel setBackgroundColor:[UIColor clearColor]];
+        [headerView addSubview:_platformsLabel];
+        
+        _likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [_likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
+        [_likeButton setTitle:@"Like" forState:UIControlStateNormal];
+        [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [headerView addSubview:_likeButton];
         
         UIButton *favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [favoriteButton setFrame:CGRectMake(165.0, 160.0, 145.0, 45.0)];
@@ -92,6 +94,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -102,6 +105,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (_game.hasLiked) {
+        [_likeButton setEnabled:NO];
+    } else {
+        [_likeButton setEnabled:YES];
+    }
+    
+    if (_game.isFavorite) {
+        [_favoriteButton setEnabled:NO];
+    } else {
+        [_favoriteButton setEnabled:YES];
+    }
+    
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
@@ -198,14 +214,26 @@
 #pragma mark Action Methods
 
 - (IBAction)likeButtonPressed:(id)sender {
-    NSLog(@"Like Button Pressed!");
+    _game.hasLiked = @YES;
+    
+    NSError *error;
+    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+        // Handle the error.
+        NSLog(@"Saving changes failed: %@", error);
+    }
+    
+    [_likeButton setEnabled:NO];
 }
 
 - (IBAction)favoriteButtonPressed:(id)sender {
-    NSLog(@"Favorite Button Pressed!");
-    NSNotification *note = [NSNotification notificationWithName:@"FavoritesUpdated" object:self.game];
-    [[NSNotificationCenter defaultCenter] postNotification:note];
+    _game.isFavorite = @YES;
     
+    NSError *error;
+    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+        // Handle the error.
+        NSLog(@"Saving changes failed: %@", error);
+        
+    }
 }
 
 @end

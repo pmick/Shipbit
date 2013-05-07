@@ -94,6 +94,7 @@
     _fetchedResultsController = self.upcomingFetchedResultsController;
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
     self.tableView.dataSource = self;
 }
 

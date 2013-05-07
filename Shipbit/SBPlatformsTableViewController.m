@@ -37,7 +37,11 @@
     [super viewDidLoad];    
     _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PS Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
     // TODO: _selected is from userdefaults unless the value in userdefaults is nil
-    _selected = [[NSMutableArray alloc] initWithArray:_platforms];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"selected"]) {
+        _selected = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected"];
+    } else {
+        _selected = [[NSMutableArray alloc] initWithArray:_platforms];
+    }
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(donePressed)];
     self.navigationItem.rightBarButtonItem = doneButton;
@@ -60,7 +64,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        if ([_selected containsObject:[_platforms objectAtIndex:indexPath.row]]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+        }
     }
     
     cell.textLabel.text = [_platforms objectAtIndex:indexPath.row];
