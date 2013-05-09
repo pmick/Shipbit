@@ -23,11 +23,10 @@
 
 @implementation SBSyncEngine
 
-@synthesize registeredClassesToSync = _registeredClassesToSync;
-@synthesize syncInProgress = _syncInProgress;
-
 NSString * const kSDSyncEngineInitialCompleteKey = @"SBSyncEngineInitialSyncCompleted";
 NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSyncCompleted";
+
+#pragma mark - Engine Creation and Object Registration
 
 + (SBSyncEngine *)sharedEngine {
     static SBSyncEngine *sharedEngine = nil;
@@ -54,6 +53,8 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         DDLogError(@"Unable to register %@ as it is not a subclass of NSManageObject", NSStringFromClass(aClass));
     }
 }
+
+#pragma mark - Sync Execution
 
 - (NSDate *)mostRecentUpdatedAtDateForEntityWithName:(NSString *)entityName {
     __block NSDate *date = nil;
@@ -438,8 +439,37 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     [self executeSyncCompletedOperations];
 }
 
+#pragma mark - Update Execution
+
 - (void)incrementLikesByOneForObjectWithId:(NSString *)objectId {
+    NSMutableArray *requestOperations = [NSMutableArray array];
     
+    // create parameter array based off object id and increment like count
+    NSDictionary *params = @{
+                             @"likes":
+                                 @{@"__op":@"Increment",
+                                   @"amount":@"1"}};
+    NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
+                                                                          forObjectWithId:objectId
+                                                                               parameters:params];
+    NSLog(@"%@", params);
+    NSLog(@"%@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
+    AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
+            DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DDLogError(@"PUTRequest for class Game failed with error: %@", error);
+    }];
+    
+    [requestOperations addObject:requestOperation];
+    
+    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+        
+    } completionBlock:^(NSArray *operations) {
+        
+    }];
 }
 
 @end

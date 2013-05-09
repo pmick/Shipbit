@@ -13,6 +13,7 @@ extern const struct GameAttributes {
 	__unsafe_unretained NSString *genre;
 	__unsafe_unretained NSString *hasLiked;
 	__unsafe_unretained NSString *isFavorite;
+	__unsafe_unretained NSString *likes;
 	__unsafe_unretained NSString *link;
 	__unsafe_unretained NSString *objectId;
 	__unsafe_unretained NSString *publisher;
@@ -31,6 +32,7 @@ extern const struct GameFetchedProperties {
 } GameFetchedProperties;
 
 @class Platform;
+
 
 
 
@@ -149,6 +151,20 @@ extern const struct GameFetchedProperties {
 - (void)setIsFavoriteValue:(BOOL)value_;
 
 //- (BOOL)validateIsFavorite:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* likes;
+
+
+
+@property int32_t likesValue;
+- (int32_t)likesValue;
+- (void)setLikesValue:(int32_t)value_;
+
+//- (BOOL)validateLikes:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -309,6 +325,15 @@ extern const struct GameFetchedProperties {
 
 - (BOOL)primitiveIsFavoriteValue;
 - (void)setPrimitiveIsFavoriteValue:(BOOL)value_;
+
+
+
+
+- (NSNumber*)primitiveLikes;
+- (void)setPrimitiveLikes:(NSNumber*)value;
+
+- (int32_t)primitiveLikesValue;
+- (void)setPrimitiveLikesValue:(int32_t)value_;
 
 
 

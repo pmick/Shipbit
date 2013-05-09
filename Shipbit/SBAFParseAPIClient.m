@@ -41,7 +41,9 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
 
 - (NSMutableURLRequest *)GETRequestForClass:(NSString *)className parameters:(NSDictionary *)parameters {
     NSMutableURLRequest *request = nil;
-    request = [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"classes/%@", className] parameters:parameters];
+    request = [self requestWithMethod:@"GET"
+                                 path:[NSString stringWithFormat:@"classes/%@", className]
+                           parameters:parameters];
     
     return request;
 }
@@ -75,7 +77,9 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     return request;
 }
 
-- (NSMutableURLRequest *)PUTRequestForClass:(NSString *)className forObjectWithId:(NSString *)objectId parameters:(NSDictionary *)parameters {
+- (NSMutableURLRequest *)PUTRequestForClass:(NSString *)className
+                            forObjectWithId:(NSString *)objectId
+                                 parameters:(NSDictionary *)parameters {
     NSMutableURLRequest *request = [self requestWithMethod:@"PUT"
                                                       path:[NSString stringWithFormat:@"classes/%@/%@", className, objectId]
                                                 parameters:parameters];

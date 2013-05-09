@@ -62,11 +62,13 @@
     lsnvc.rtvc = releasedNav;
     lsnvc.stvc = searchNav;
     lsnvc.ftvc = favoritesNav;
-    
-    
+        
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.leftPanel = lsnvc;
     self.viewController.centerPanel = upcomingNav;
+    
+    // Disable swiping so you can delete games from favorites with a right to left swipe
+    self.viewController.allowLeftSwipe = NO;
     
     self.window.rootViewController = _viewController;
     

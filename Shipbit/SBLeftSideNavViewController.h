@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SBGameTableViewController.h"
 #import "SBSearchTableViewController.h"
 #import "SBFavoritesTableViewController.h"
 #import "SBReleasedViewController.h"

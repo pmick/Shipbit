@@ -53,7 +53,6 @@
 		B9B7E40C16AB15E800FFC031 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B7E40B16AB15E800FFC031 /* Default-568h@2x.png */; };
 		B9B7E4C316AC55D700FFC031 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
 		B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
-		B9B7E4C816AC567600FFC031 /* SBGameTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B7E4C716AC567600FFC031 /* SBGameTableViewController.m */; };
 		B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
 		B9B7E4DA16AC5C7A00FFC031 /* SBAFParseAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B7E4D516AC5C7A00FFC031 /* SBAFParseAPIClient.m */; };
 		B9B7E4DB16AC5C7A00FFC031 /* SBCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B7E4D716AC5C7A00FFC031 /* SBCoreDataController.m */; };
@@ -148,8 +147,6 @@
 		B9B7E40B16AB15E800FFC031 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		B9B7E4C616AC567600FFC031 /* SBGameTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameTableViewController.h; sourceTree = "<group>"; };
-		B9B7E4C716AC567600FFC031 /* SBGameTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameTableViewController.m; sourceTree = "<group>"; };
 		B9B7E4D216AC5B5100FFC031 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B9B7E4D416AC5C7A00FFC031 /* SBAFParseAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAFParseAPIClient.h; sourceTree = "<group>"; };
 		B9B7E4D516AC5C7A00FFC031 /* SBAFParseAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAFParseAPIClient.m; sourceTree = "<group>"; };
@@ -335,8 +332,6 @@
 				0FA028A2172DCB830018CB42 /* SBLeftSideNavViewController.m */,
 				B9B7E40416AB15E800FFC031 /* SBAppDelegate.h */,
 				B9B7E40516AB15E800FFC031 /* SBAppDelegate.m */,
-				B9B7E4C616AC567600FFC031 /* SBGameTableViewController.h */,
-				B9B7E4C716AC567600FFC031 /* SBGameTableViewController.m */,
 				0FB5323A1738250F006F91FD /* SBUpcomingViewController.h */,
 				0FB5323B1738250F006F91FD /* SBUpcomingViewController.m */,
 				0F9FFD9817372CB70030DB95 /* SBReleasedViewController.h */,
@@ -458,7 +453,6 @@
 			files = (
 				B9B7E40216AB15E800FFC031 /* main.m in Sources */,
 				B9B7E40616AB15E800FFC031 /* SBAppDelegate.m in Sources */,
-				B9B7E4C816AC567600FFC031 /* SBGameTableViewController.m in Sources */,
 				B9B7E4DA16AC5C7A00FFC031 /* SBAFParseAPIClient.m in Sources */,
 				B9B7E4DB16AC5C7A00FFC031 /* SBCoreDataController.m in Sources */,
 				B9B7E4DC16AC5C7A00FFC031 /* SBSyncEngine.m in Sources */,

@@ -11,6 +11,7 @@
 #import "SBSummaryCell.h"
 #import "SBInfoCell.h"
 #import "SBCoreDataController.h"
+#import "SBSyncEngine.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -214,6 +215,8 @@
 #pragma mark Action Methods
 
 - (IBAction)likeButtonPressed:(id)sender {
+    [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId];
+    
     _game.hasLiked = @YES;
     
     NSError *error;

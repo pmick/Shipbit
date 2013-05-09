@@ -12,6 +12,7 @@ const struct GameAttributes GameAttributes = {
 	.genre = @"genre",
 	.hasLiked = @"hasLiked",
 	.isFavorite = @"isFavorite",
+	.likes = @"likes",
 	.link = @"link",
 	.objectId = @"objectId",
 	.publisher = @"publisher",
@@ -67,6 +68,11 @@ const struct GameFetchedProperties GameFetchedProperties = {
 	}
 	if ([key isEqualToString:@"isFavoriteValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"isFavorite"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"likesValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"likes"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -184,6 +190,32 @@ const struct GameFetchedProperties GameFetchedProperties = {
 
 - (void)setPrimitiveIsFavoriteValue:(BOOL)value_ {
 	[self setPrimitiveIsFavorite:[NSNumber numberWithBool:value_]];
+}
+
+
+
+
+
+@dynamic likes;
+
+
+
+- (int32_t)likesValue {
+	NSNumber *result = [self likes];
+	return [result intValue];
+}
+
+- (void)setLikesValue:(int32_t)value_ {
+	[self setLikes:[NSNumber numberWithInt:value_]];
+}
+
+- (int32_t)primitiveLikesValue {
+	NSNumber *result = [self primitiveLikes];
+	return [result intValue];
+}
+
+- (void)setPrimitiveLikesValue:(int32_t)value_ {
+	[self setPrimitiveLikes:[NSNumber numberWithInt:value_]];
 }
 
 
