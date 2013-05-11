@@ -153,8 +153,7 @@
                 _ratingCell.likeLabel.text = [NSString stringWithFormat:@"%d", 0];
             }
             
-            if (_game.criticScore > 0) {
-                DDLogVerbose(@"%@", _game.criticScore);
+            if ([_game.criticScore integerValue] > 0) {
                 _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
             } else {
                 _ratingCell.metacriticRatingLabel.text = @"Not yet rated.";
@@ -186,14 +185,15 @@
             _infoCell.genreLabel.text = _game.genre;
             _infoCell.publisherLabel.text = _game.publisher;
             _infoCell.developerLabel.text = _game.developer;
-            _infoCell.esrbLabel.text = _game.esrb;
+            _infoCell.esrbLabel.text = _game.esrb ? _game.esrb : @"RP";
             _infoCell.platformsLabel.text = _game.platformsString;
             cell = _infoCell;
             break;
         default:
             break;
     }
-        
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
     return cell;
 }
 

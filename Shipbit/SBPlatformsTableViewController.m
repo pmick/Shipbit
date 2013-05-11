@@ -81,15 +81,19 @@
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     if (cell.accessoryType) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        int objectToRemove = 0;
-        for (int i = 0; (unsigned)i < [_selected count]; i++) {
-            if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
-                objectToRemove = i;
-                break;
+        int numberOfSelectedPlatforms = [_selected count];
+        // Prevent less than 1 selection
+        if (numberOfSelectedPlatforms > 1) {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            int objectToRemove = 0;
+            for (int i = 0; i < numberOfSelectedPlatforms; i++) {
+                if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
+                    objectToRemove = i;
+                    break;
+                }
             }
+            [_selected removeObjectAtIndex:objectToRemove];
         }
-        [_selected removeObjectAtIndex:objectToRemove];
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [_selected addObject:cell.textLabel.text];
