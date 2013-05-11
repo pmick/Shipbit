@@ -53,6 +53,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];

@@ -450,8 +450,6 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
                                                                           forObjectWithId:objectId
                                                                                parameters:params];
-    NSLog(@"%@", params);
-    NSLog(@"%@", [[NSString alloc] initWithData:[request HTTPBody] encoding:NSUTF8StringEncoding]);
     AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             //[self writeJSONReponse:responseObject toDiskForClassWithName:className];

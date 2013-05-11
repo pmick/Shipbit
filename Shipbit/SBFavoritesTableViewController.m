@@ -47,7 +47,7 @@
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Favorites", @"");
+        self.title = NSLocalizedString(@"Watch List", @"");
         self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
@@ -56,10 +56,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    // TODO: Save favorites to user defaults
 }
 
 #pragma mark - Table view data source
@@ -79,7 +82,6 @@
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    DDLogError(@"Release Date: %@", [self.dateFormatter stringFromDate:game.releaseDate]);
     
     // Building platform string from platform set
     NSMutableString *platformsString = [[NSMutableString alloc] init];

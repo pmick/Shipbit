@@ -39,7 +39,7 @@
 {
     [super viewDidLoad];
     _views = [[NSArray alloc] init];
-    _views = [NSArray arrayWithObjects:@"Upcoming", @"Released", @"Search", @"Favorites", nil];
+    _views = [NSArray arrayWithObjects:@"Upcoming", @"Released", @"Search", @"Watch List", nil];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

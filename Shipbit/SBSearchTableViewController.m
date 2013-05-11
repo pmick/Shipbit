@@ -116,6 +116,7 @@
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    _gdvc.platformsLabel.text = game.platformsString;
     [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
                     placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     [_gdvc.tableView reloadData];

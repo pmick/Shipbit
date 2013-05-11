@@ -21,6 +21,10 @@
 #import "DDFileLogger.h"
 #import "XCodeConsoleLogFormatter.h"
 
+@interface SBAppDelegate ()
+
+@end
+
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

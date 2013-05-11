@@ -107,17 +107,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-//    if (_game.hasLiked) {
-//        [_likeButton setEnabled:NO];
-//    } else {
-//        [_likeButton setEnabled:YES];
-//    }
-//    
-//    if (_game.isFavorite) {
-//        [_favoriteButton setEnabled:NO];
-//    } else {
-//        [_favoriteButton setEnabled:YES];
-//    }
+    if (_game.hasLiked) {
+        [_likeButton setEnabled:NO];
+    } else {
+        [_likeButton setEnabled:YES];
+    }
     
     NSString *favoriteButtonText = _game.isFavorite ? @"Unwatch" : @"Add to Watchlist";
     [_favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];

@@ -19,14 +19,20 @@
     [self willAccessValueForKey:@"sectionIdentifier"];
     NSString *tmp = [self primitiveSectionIdentifier];
     [self didAccessValueForKey:@"sectionIdentifier"];
-    
+        
+    // No calculations if the sectionIdentifier was cached on demand.
     if (!tmp) {
         /*
          Sections are organized by month and year. Create the section identifier as a string representing the number (year * 1000) + month; this way they will be correctly ordered chronologically regardless of the actual name of the month.
          */
         NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit) fromDate:[self releaseDate]];
+        NSDateComponents *modificationComponents = [[NSDateComponents alloc] init];
+        [modificationComponents setWeek:1];
+        // Calculate end of current week
+
+        // End of current week + 1 week
         
-        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit) fromDate:[self releaseDate]];
         tmp = [NSString stringWithFormat:@"%d", ([components year] * 1000) + [components month]];
         [self setPrimitiveSectionIdentifier:tmp];
     }

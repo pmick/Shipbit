@@ -36,7 +36,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];    
     _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PS Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
-    // TODO: _selected is from userdefaults unless the value in userdefaults is nil
+
+    // Selections are based off of userdefaults if they exist
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"selected"]) {
         _selected = [[NSUserDefaults standardUserDefaults] objectForKey:@"selected"];
     } else {
