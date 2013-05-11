@@ -12,6 +12,7 @@
 #import "SBGameCell.h"
 #import "SBCoreDataController.h"
 #import "Game.h"
+#import "Platform.h"
 
 #define CELL_HEIGHT 100
 
@@ -72,9 +73,10 @@
 
 - (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Game *game = [fetchedResultsController objectAtIndexPath:indexPath];
+    
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    //cell.platformsLabel.text = game.platforms;
+    cell.platformsLabel.text = [game platformsString];    
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }

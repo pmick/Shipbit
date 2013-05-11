@@ -160,20 +160,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [_gdvc setGame:game];
     _gdvc.titleLabel.text = game.title;
     _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
-    
-    NSMutableString *platformsString = [[NSMutableString alloc] init];
-    int count = 0;
-    for (Platform *platform in game.platforms) {
-        count++;
-        if ((unsigned)count >= [game.platforms count]) {
-            [platformsString appendString:platform.title];
-        } else {
-            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
-            [platformsString appendString:platformWithComma];
-        }
-    }
-    
-    _gdvc.platformsLabel.text = platformsString;
+    _gdvc.platformsLabel.text = [game platformsString];
     
     [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
                     placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];

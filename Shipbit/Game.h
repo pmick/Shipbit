@@ -2,4 +2,6 @@
 
 @interface Game : _Game {}
 
+- (NSString *)platformsString;
+
 @end

@@ -137,7 +137,7 @@
     // If row is deleted, remove it from the list.
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
-        game.isFavorite = @NO;
+        game.isFavorite = NO;
         NSError *error;
         if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
             // Handle the error.

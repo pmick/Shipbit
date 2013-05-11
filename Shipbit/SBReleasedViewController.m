@@ -112,23 +112,10 @@ NSString * const kSBSelectedKey = @"selected";
 
 - (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    
-    // Building platform string from platform set
-    NSMutableString *platformsString = [[NSMutableString alloc] init];
-    int count = 0;
-    for (Platform *platform in game.platforms) {
-        count++;
-        if ((unsigned)count >= [game.platforms count]) {
-            [platformsString appendString:platform.title];
-        } else {
-            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
-            [platformsString appendString:platformWithComma];
-        }
-    }
-    
-    cell.platformsLabel.text = platformsString;
+    cell.platformsLabel.text = [game platformsString];
     [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }

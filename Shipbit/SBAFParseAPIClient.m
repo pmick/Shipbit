@@ -30,10 +30,11 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     self = [super initWithBaseURL:url];
     if (self) {
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-        [self setParameterEncoding:AFFormURLParameterEncoding];
+        [self setParameterEncoding:AFJSONParameterEncoding];
         [self setDefaultHeader:@"X-Parse-Application-Id" value:kSBFParseAPIApplicationId];
         [self setDefaultHeader:@"X-Parse-REST-API-Key" value:kSBFParseAPIKey];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
+        [self setDefaultHeader:@"content-type" value:@"application/json"];
     }
     
     return self;
@@ -83,7 +84,6 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     NSMutableURLRequest *request = [self requestWithMethod:@"PUT"
                                                       path:[NSString stringWithFormat:@"classes/%@/%@", className, objectId]
                                                 parameters:parameters];
-    
     return request;
 }
 

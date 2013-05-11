@@ -11,6 +11,7 @@
 #import "SBAFParseAPIClient.h"
 #import "Platform.h"
 #import "Game.h"
+#import "AFJSONRequestOperation.h"
 
 #import <CoreData/CoreData.h>
 
@@ -445,10 +446,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     NSMutableArray *requestOperations = [NSMutableArray array];
     
     // create parameter array based off object id and increment like count
-    NSDictionary *params = @{
-                             @"likes":
-                                 @{@"__op":@"Increment",
-                                   @"amount":@"1"}};
+    NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(1)}};
     NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
                                                                           forObjectWithId:objectId
                                                                                parameters:params];
@@ -464,7 +462,6 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     }];
     
     [requestOperations addObject:requestOperation];
-    
     [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
         
     } completionBlock:^(NSArray *operations) {

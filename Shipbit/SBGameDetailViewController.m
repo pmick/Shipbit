@@ -25,6 +25,7 @@
 @property (nonatomic, strong) SBInfoCell *infoCell;
 @property (nonatomic, strong) UIButton *likeButton;
 @property (nonatomic, strong) UIButton *favoriteButton;
+@property (nonatomic, strong) UIView *headerView;
 
 @end
 
@@ -46,48 +47,10 @@
     if (self) {
         self.title = @"Info";
         
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 215.0)];
-        [headerView setBackgroundColor:[UIColor lightGrayColor]];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 215.0)];
+        [_headerView setBackgroundColor:[UIColor lightGrayColor]];
         
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 98.0, 136.0)];
-        [_imageView setContentMode:UIViewContentModeCenter];
-        [_imageView setBackgroundColor:[UIColor darkGrayColor]];
-        [headerView addSubview:_imageView];
-        
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 10.0, 200.0, 46.0)];
-        [_titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
-        [_titleLabel setNumberOfLines:2];
-        [_titleLabel setTextAlignment:NSTextAlignmentLeft];
-        [_titleLabel setBackgroundColor:[UIColor clearColor]];
-        [headerView addSubview:_titleLabel];
-        
-        _releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 60.0, 200.0, 16.0)];
-        [_releaseDateLabel setFont:[UIFont systemFontOfSize:14]];
-        [_releaseDateLabel setTextAlignment:NSTextAlignmentLeft];
-        [_releaseDateLabel setBackgroundColor:[UIColor clearColor]];
-        [headerView addSubview:_releaseDateLabel];
-        
-        _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 100.0, 200.0, 50.0)];
-        [_platformsLabel setNumberOfLines:0];
-        [_platformsLabel setLineBreakMode:NSLineBreakByWordWrapping];
-        [_platformsLabel setFont:[UIFont systemFontOfSize:14]];
-        [_platformsLabel setTextAlignment:NSTextAlignmentLeft];
-        [_platformsLabel setBackgroundColor:[UIColor clearColor]];
-        [headerView addSubview:_platformsLabel];
-        
-        _likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
-        [_likeButton setTitle:@"Like" forState:UIControlStateNormal];
-        [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:_likeButton];
-        
-        UIButton *favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [favoriteButton setFrame:CGRectMake(165.0, 160.0, 145.0, 45.0)];
-        [favoriteButton setTitle:@"Add to Favorites" forState:UIControlStateNormal];
-        [favoriteButton addTarget:self action:@selector(favoriteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [headerView addSubview:favoriteButton];
-        
-        [self.tableView setTableHeaderView:headerView];
+        [self.tableView setTableHeaderView:_headerView];
     }
     return self;
 }
@@ -95,6 +58,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 98.0, 136.0)];
+    [_imageView setContentMode:UIViewContentModeCenter];
+    [_imageView setBackgroundColor:[UIColor darkGrayColor]];
+    [_headerView addSubview:_imageView];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 10.0, 200.0, 46.0)];
+    [_titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
+    [_titleLabel setNumberOfLines:2];
+    [_titleLabel setTextAlignment:NSTextAlignmentLeft];
+    [_titleLabel setBackgroundColor:[UIColor clearColor]];
+    [_headerView addSubview:_titleLabel];
+    
+    _releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 60.0, 200.0, 16.0)];
+    [_releaseDateLabel setFont:[UIFont systemFontOfSize:14]];
+    [_releaseDateLabel setTextAlignment:NSTextAlignmentLeft];
+    [_releaseDateLabel setBackgroundColor:[UIColor clearColor]];
+    [_headerView addSubview:_releaseDateLabel];
+    
+    _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 100.0, 200.0, 50.0)];
+    [_platformsLabel setNumberOfLines:0];
+    [_platformsLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [_platformsLabel setFont:[UIFont systemFontOfSize:14]];
+    [_platformsLabel setTextAlignment:NSTextAlignmentLeft];
+    [_platformsLabel setBackgroundColor:[UIColor clearColor]];
+    [_headerView addSubview:_platformsLabel];
+    
+    _likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
+    [_likeButton setTitle:@"Like" forState:UIControlStateNormal];
+    [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView addSubview:_likeButton];
+    
+    _favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_favoriteButton setFrame:CGRectMake(165.0, 160.0, 145.0, 45.0)];
+
+    [_favoriteButton addTarget:self action:@selector(favoriteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView addSubview:_favoriteButton];
     
 }
 
@@ -107,23 +107,25 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (_game.hasLiked) {
-        [_likeButton setEnabled:NO];
-    } else {
-        [_likeButton setEnabled:YES];
-    }
+//    if (_game.hasLiked) {
+//        [_likeButton setEnabled:NO];
+//    } else {
+//        [_likeButton setEnabled:YES];
+//    }
+//    
+//    if (_game.isFavorite) {
+//        [_favoriteButton setEnabled:NO];
+//    } else {
+//        [_favoriteButton setEnabled:YES];
+//    }
     
-    if (_game.isFavorite) {
-        [_favoriteButton setEnabled:NO];
-    } else {
-        [_favoriteButton setEnabled:YES];
-    }
+    NSString *favoriteButtonText = _game.isFavorite ? @"Unwatch" : @"Add to Watchlist";
+    [_favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
     
     [self.tableView beginUpdates];
     [self.tableView endUpdates];
 }
 
-#pragma mark -
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -145,7 +147,14 @@
                 _ratingCell = [[SBRatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RatingCell"];
             }
             
+            if (_game.likes) {
+                _ratingCell.likeLabel.text = [NSString stringWithFormat:@"%@", _game.likes];
+            } else {
+                _ratingCell.likeLabel.text = [NSString stringWithFormat:@"%d", 0];
+            }
+            
             if (_game.criticScore > 0) {
+                DDLogVerbose(@"%@", _game.criticScore);
                 _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
             } else {
                 _ratingCell.metacriticRatingLabel.text = @"Not yet rated.";
@@ -157,9 +166,14 @@
             if (_summaryCell == nil) {
                 _summaryCell = [[SBSummaryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SummaryCell"];
             }
-            _summaryCell.summaryLabel.text = _game.summary;
+            
+            if (_game.summary) {
+                _summaryCell.summaryLabel.text = _game.summary;
+            } else {
+                _summaryCell.summaryLabel.text = @"No summary just yet...";
+            }
             CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH, 20000.0f);
-            CGSize size = [_game.summary sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
+            CGSize size = [_summaryCell.summaryLabel.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
             CGRect newFrame = _summaryCell.summaryLabel.frame;
             newFrame.size.height = size.height;
             _summaryCell.summaryLabel.frame = newFrame;
@@ -173,7 +187,7 @@
             _infoCell.publisherLabel.text = _game.publisher;
             _infoCell.developerLabel.text = _game.developer;
             _infoCell.esrbLabel.text = _game.esrb;
-            //_infoCell.platformsLabel.text = _game.platforms;
+            _infoCell.platformsLabel.text = _game.platformsString;
             cell = _infoCell;
             break;
         default:
@@ -204,21 +218,30 @@
     }
 }
 
-#pragma mark -
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // TODO implement selection functionality for metacritic links and other web links
 }
 
-#pragma mark -
-#pragma mark Action Methods
+#pragma mark - Action Methods
 
 - (IBAction)likeButtonPressed:(id)sender {
+    // TODO: keep from liking when you are not connected
+    
+    // Increment likes on server
     [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId];
     
+    // Increment likes locally
+    _game.likes = @(_game.likes.integerValue + 1);
+    
+    // Update label to reflect increment on likes
+    [self.tableView reloadData];
+    
+    // Set game as liked
     _game.hasLiked = @YES;
     
+    // Update coredata
     NSError *error;
     if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
         // Handle the error.
@@ -229,14 +252,27 @@
 }
 
 - (IBAction)favoriteButtonPressed:(id)sender {
-    _game.isFavorite = @YES;
+    if (_game.isFavorite) {
+        // Set isFavorite to NO
+        _game.isFavorite = NO;
+
+    } else {
+        // Update local coredata store
+        _game.isFavorite = @YES;
+        
+    }
     
+    // Save data store
     NSError *error;
     if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
         // Handle the error.
-        NSLog(@"Saving changes failed: %@", error);
-        
+        DDLogError(@"Saving changes failed: %@", error);
     }
+    
+    NSString *favoriteButtonText = _game.isFavorite ? @"Unwatch" : @"Add to Watchlist";
+    // Update button appearance
+    [self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
+    
 }
 
 @end

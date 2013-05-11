@@ -1,4 +1,5 @@
 #import "Game.h"
+#import "Platform.h"
 
 
 @interface Game ()
@@ -40,6 +41,22 @@
     [self didChangeValueForKey:@"releaseDate"];
     
     [self setPrimitiveSectionIdentifier:nil];
+}
+
+- (NSString *)platformsString {
+    NSMutableString *platformsString = [[NSMutableString alloc] init];
+    int count = 0;
+    for (Platform *platform in self.platforms) {
+        count++;
+        if ((unsigned)count >= [self.platforms count]) {
+            [platformsString appendString:platform.title];
+        } else {
+            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
+            [platformsString appendString:platformWithComma];
+        }
+    }
+    
+    return platformsString;
 }
 
 @end
