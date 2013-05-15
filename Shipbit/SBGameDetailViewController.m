@@ -32,21 +32,19 @@
 
 @implementation SBGameDetailViewController
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark -
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 - (id)init {
     self = [super init];
     if (self) {
-        self.title = @"Info";
+        self.title = NSLocalizedString(@"Info", nil);
         
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 215.0)];
         [_headerView setBackgroundColor:[UIColor lightGrayColor]];
@@ -87,7 +85,7 @@
     
     _likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [_likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
-    [_likeButton setTitle:@"Like" forState:UIControlStateNormal];
+    [_likeButton setTitle:NSLocalizedString(@"Like", nil) forState:UIControlStateNormal];
     [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [_headerView addSubview:_likeButton];
     
@@ -114,7 +112,7 @@
         [_likeButton setEnabled:YES];
     }
     
-    NSString *favoriteButtonText = _game.isFavorite ? @"Unwatch" : @"Add to Watchlist";
+    NSString *favoriteButtonText = _game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
     [_favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
     
     [self.tableView beginUpdates];
@@ -151,7 +149,7 @@
             if ([_game.criticScore integerValue] > 0) {
                 _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
             } else {
-                _ratingCell.metacriticRatingLabel.text = @"Not yet rated.";
+                _ratingCell.metacriticRatingLabel.text = NSLocalizedString(@"Not yet rated.", nil);
             }
             
             cell = _ratingCell;
@@ -164,7 +162,7 @@
             if (_game.summary) {
                 _summaryCell.summaryLabel.text = _game.summary;
             } else {
-                _summaryCell.summaryLabel.text = @"No summary just yet...";
+                _summaryCell.summaryLabel.text = NSLocalizedString(@"No summary just yet...", nil);
             }
             CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH, 20000.0f);
             CGSize size = [_summaryCell.summaryLabel.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
@@ -180,7 +178,7 @@
             _infoCell.genreLabel.text = _game.genre;
             _infoCell.publisherLabel.text = _game.publisher;
             _infoCell.developerLabel.text = _game.developer;
-            _infoCell.esrbLabel.text = _game.esrb ? _game.esrb : @"RP";
+            _infoCell.esrbLabel.text = _game.esrb ? _game.esrb : NSLocalizedString(@"RP", nil);
             _infoCell.platformsLabel.text = _game.platformsString;
             cell = _infoCell;
             break;
@@ -240,7 +238,7 @@
     NSError *error;
     if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
         // Handle the error.
-        NSLog(@"Saving changes failed: %@", error);
+        DDLogError(@"Saving changes failed: %@", error);
     }
     
     [_likeButton setEnabled:NO];
@@ -264,7 +262,7 @@
         DDLogError(@"Saving changes failed: %@", error);
     }
     
-    NSString *favoriteButtonText = _game.isFavorite ? @"Unwatch" : @"Add to Watchlist";
+    NSString *favoriteButtonText = _game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
     // Update button appearance
     [self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
     

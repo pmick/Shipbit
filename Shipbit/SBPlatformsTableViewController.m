@@ -14,16 +14,14 @@
 
 @implementation SBPlatformsTableViewController
 
-#pragma mark -
-#pragma mark Memory Management
+#pragma mark - Memory Management
 
 - (void)didReceiveMemoryWarning {
     // TODO implement shared logger to log memory warnings and deallocs
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark View Lifecycle
+#pragma mark - View Lifecycle
 
 - (id)init {
     self = [super init];
@@ -35,7 +33,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];    
-    _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PlayStation Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
+    _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
+                  NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
+                  NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
+                  NSLocalizedString(@"Wii", nil), NSLocalizedString(@"Wii U", nil),
+                  NSLocalizedString(@"DS", nil), NSLocalizedString(@"3DS", nil), nil];
 
     // Selections are based off of userdefaults if they exist
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"selected"]) {
@@ -44,7 +46,10 @@
         _selected = [[NSMutableArray alloc] initWithArray:_platforms];
     }
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(donePressed)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil)
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(donePressed)];
     self.navigationItem.rightBarButtonItem = doneButton;
 }
 

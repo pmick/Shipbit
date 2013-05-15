@@ -93,6 +93,7 @@
             DDLogError(@"Could not save master context due to %@", error);
         }
     }];
+    DDLogInfo(@"Saving master managed object context.");
 }
 
 - (void)saveBackgroundContext {
@@ -104,6 +105,8 @@
             DDLogError(@"Could not save background context due to %@", error);
         }
     }];
+    DDLogInfo(@"Saving background managed object context.");
+
 }
 
 // Returns the managed object model for the application.
@@ -129,7 +132,7 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Shipbit.sqlite"];
     NSError *error = nil;
-    
+    // TODO: implement data migration and store deletion for incompatibility errors.
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*

@@ -224,13 +224,14 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 - (NSDate *)dateUsingStringFromAPI:(NSString *)dateString {
     [self initializeDateFormatter];
     
-    // Parse provides dates in the following format:
-    // {
-    //      "__type": "Date",
-    //      "iso": "2011-08-21T18:02:52.249Z"
-    // }
-    //
-    // NSDateFormatter does not like ISO 8601 (well defined method for respesenting dates between countries) so stripping to milliseconds and timezone
+    /* 
+     * Parse provides dates in the following format:
+     * {
+     *      "__type": "Date",
+     *      "iso": "2011-08-21T18:02:52.249Z"
+     * }
+     * NSDateFormatter does not like ISO 8601 (well defined method for respesenting dates between countries) so stripping to milliseconds and timezone
+     */
     
     dateString = [dateString substringWithRange:NSMakeRange(0, [dateString length]-5)];
     return [self.dateFormatter dateFromString:dateString];

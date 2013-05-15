@@ -49,6 +49,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     self = [super init];
     if(self) {
         self.title = NSLocalizedString(@"Upcoming", @"");
+        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }
@@ -214,7 +215,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     NSPredicate *predicate;
     
     if ([_selected count] > 0) {
-        // TODO: filter based off of platforms
         predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", now, twoYearsFromNow, _selected];
     } else {
         predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", now, twoYearsFromNow];

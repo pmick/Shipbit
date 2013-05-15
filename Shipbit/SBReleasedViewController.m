@@ -48,7 +48,8 @@ NSString * const kSBSelectedKey = @"selected";
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Released", @"");
+        self.title = NSLocalizedString(@"Released", nil);
+        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }

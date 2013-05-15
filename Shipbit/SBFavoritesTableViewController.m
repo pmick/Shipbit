@@ -48,7 +48,7 @@
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Watch List", @"");
+        self.title = NSLocalizedString(@"Watch List", nil);
         self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;

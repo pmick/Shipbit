@@ -40,7 +40,8 @@
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Search", @"");
+        self.title = NSLocalizedString(@"Search", nil);
+        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }
@@ -48,7 +49,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PlayStation Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
+    _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
+                  NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
+                  NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
+                  NSLocalizedString(@"Wii", nil), NSLocalizedString(@"Wii U", nil),
+                  NSLocalizedString(@"DS", nil), NSLocalizedString(@"3DS", nil), nil];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];

@@ -19,7 +19,7 @@
         cellTitleLabel.font = [UIFont boldSystemFontOfSize:14.0];
         cellTitleLabel.textAlignment = NSTextAlignmentLeft;
         cellTitleLabel.textColor = [UIColor blackColor];
-        cellTitleLabel.text = @"Summary";
+        cellTitleLabel.text = NSLocalizedString(@"Summary", nil);
         [self.contentView addSubview:cellTitleLabel];
         
         _summaryLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 30.0, 280.0, 14.0)];

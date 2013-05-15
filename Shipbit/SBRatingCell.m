@@ -17,21 +17,21 @@
         cellTitleLabel.font = [UIFont boldSystemFontOfSize:14.0];
         cellTitleLabel.textAlignment = NSTextAlignmentLeft;
         cellTitleLabel.textColor = [UIColor blackColor];
-        cellTitleLabel.text = @"Ratings";
+        cellTitleLabel.text = NSLocalizedString(@"Ratings", nil);
         [self.contentView addSubview:cellTitleLabel];
         
         UILabel *likesLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 30.0, 70.0, 16.0)];
         likesLeftLabel.font = [UIFont systemFontOfSize:14.0];
         likesLeftLabel.textAlignment = NSTextAlignmentRight;
         likesLeftLabel.textColor = [UIColor darkGrayColor];
-        likesLeftLabel.text = @"Likes";
+        likesLeftLabel.text = NSLocalizedString(@"Likes", nil);
         [self.contentView addSubview:likesLeftLabel];
         
         UILabel *metacriticLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 50.0, 70.0, 16.0)];
         metacriticLeftLabel.font = [UIFont systemFontOfSize:14.0];
         metacriticLeftLabel.textAlignment = NSTextAlignmentRight;
         metacriticLeftLabel.textColor = [UIColor darkGrayColor];
-        metacriticLeftLabel.text = @"Metacritic";
+        metacriticLeftLabel.text = NSLocalizedString(@"Metacritic", nil);
         [self.contentView addSubview:metacriticLeftLabel];
         
         _likeLabel = [[UILabel alloc] initWithFrame:CGRectMake(90.0, 30.0, 230.0, 16.0)];

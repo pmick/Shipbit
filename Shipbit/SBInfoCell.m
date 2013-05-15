@@ -24,42 +24,42 @@
         cellTitleLabel.font = [UIFont boldSystemFontOfSize:14.0];
         cellTitleLabel.textAlignment = NSTextAlignmentLeft;
         cellTitleLabel.textColor = [UIColor blackColor];
-        cellTitleLabel.text = @"Information";
+        cellTitleLabel.text = NSLocalizedString(@"Information", nil);
         [self.contentView addSubview:cellTitleLabel];
         
         UILabel *genreLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 30.0, 70.0, 16.0)];
         genreLeftLabel.font = [UIFont systemFontOfSize:14.0];
         genreLeftLabel.textAlignment = NSTextAlignmentRight;
         genreLeftLabel.textColor = [UIColor darkGrayColor];
-        genreLeftLabel.text = @"Genre";
+        genreLeftLabel.text = NSLocalizedString(@"Genre", nil);
         [self.contentView addSubview:genreLeftLabel];
         
         UILabel *developerLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 50.0, 70.0, 16.0)];
         developerLeftLabel.font = [UIFont systemFontOfSize:14.0];
         developerLeftLabel.textAlignment = NSTextAlignmentRight;
         developerLeftLabel.textColor = [UIColor darkGrayColor];
-        developerLeftLabel.text = @"Developer";
+        developerLeftLabel.text = NSLocalizedString(@"Developer", nil);
         [self.contentView addSubview:developerLeftLabel];
         
         UILabel *publisherLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 70.0, 70.0, 16.0)];
         publisherLeftLabel.font = [UIFont systemFontOfSize:14.0];
         publisherLeftLabel.textAlignment = NSTextAlignmentRight;
         publisherLeftLabel.textColor = [UIColor darkGrayColor];
-        publisherLeftLabel.text = @"Publisher";
+        publisherLeftLabel.text = NSLocalizedString(@"Publisher", nil);
         [self.contentView addSubview:publisherLeftLabel];
         
         UILabel *esrbLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 90.0, 70.0, 16.0)];
         esrbLeftLabel.font = [UIFont systemFontOfSize:14.0];
         esrbLeftLabel.textAlignment = NSTextAlignmentRight;
         esrbLeftLabel.textColor = [UIColor darkGrayColor];
-        esrbLeftLabel.text = @"ESRB";
+        esrbLeftLabel.text = NSLocalizedString(@"ESRB", nil);
         [self.contentView addSubview:esrbLeftLabel];
         
         UILabel *platformsLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 110.0, 70.0, 16.0)];
         platformsLeftLabel.font = [UIFont systemFontOfSize:14.0];
         platformsLeftLabel.textAlignment = NSTextAlignmentRight;
         platformsLeftLabel.textColor = [UIColor darkGrayColor];
-        platformsLeftLabel.text = @"Platforms";
+        platformsLeftLabel.text = NSLocalizedString(@"Platforms", nil);
         [self.contentView addSubview:platformsLeftLabel];
         
         _genreLabel = [[UILabel alloc] initWithFrame:CGRectMake(95.0, 30.0, 230.0, 16.0)];
