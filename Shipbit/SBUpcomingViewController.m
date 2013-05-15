@@ -15,6 +15,7 @@
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
+#import "UIImage+Extras.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 100
@@ -130,8 +131,23 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     }
     
     cell.platformsLabel.text = platformsString;
-    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    
+    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    manager.delegate = self;
+    
+    [manager downloadWithURL:[NSURL URLWithString:game.art]
+                     options:0
+                    progress:nil
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+    }];
+    
+//    [manager downloadWithURL:game.art delegate:self options:0 success:^(UIImage *image)
+//    {
+//        cell.thumbnailView.image = [self imageByScalingAndCroppingForSize:CGSizeMake(cell.thumbnailView.frame.size.width, cell.thumbnailView.frame.size.height) image:image];
+//    } failure:nil];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

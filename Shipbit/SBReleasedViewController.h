@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SBPlatformsTableViewController.h"
 
-@interface SBReleasedViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface SBReleasedViewController : UITableViewController <NSFetchedResultsControllerDelegate, SDWebImageManagerDelegate>
 
 @property (nonatomic, strong) SBPlatformsTableViewController *ptvc;
 

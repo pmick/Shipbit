@@ -14,6 +14,7 @@
 #import "SBCoreDataController.h"
 #import "Game.h"
 #import "Platform.h"
+#import "UIImage+Extras.h"
 
 #define CELL_HEIGHT 100
 
@@ -82,23 +83,18 @@
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+    cell.platformsLabel.text = game.platformsString;
+    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    manager.delegate = self;
     
-    // Building platform string from platform set
-    NSMutableString *platformsString = [[NSMutableString alloc] init];
-    int count = 0;
-    for (Platform *platform in game.platforms) {
-        count++;
-        if ((unsigned)count >= [game.platforms count]) {
-            [platformsString appendString:platform.title];
-        } else {
-            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
-            [platformsString appendString:platformWithComma];
-        }
-    }
-    
-    cell.platformsLabel.text = platformsString;
-    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    [manager downloadWithURL:[NSURL URLWithString:game.art]
+                     options:0
+                    progress:nil
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+                   }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

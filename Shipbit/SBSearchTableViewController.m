@@ -13,6 +13,7 @@
 #import "SBCoreDataController.h"
 #import "Game.h"
 #import "Platform.h"
+#import "UIImage+Extras.h"
 
 #define CELL_HEIGHT 100
 
@@ -21,6 +22,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSFetchedResultsController *searchFetchedResultsController;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) NSArray *platforms;
 
 @end
 
@@ -45,6 +47,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _platforms = [[NSArray alloc] initWithObjects: @"PC", @"Xbox 360", @"PlayStation 3", @"PSP", @"PlayStation Vita", @"Wii", @"Wii U", @"DS", @"3DS", nil];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
@@ -77,8 +81,18 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [game platformsString];    
-    [cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-                       placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    manager.delegate = self;
+    
+    [manager downloadWithURL:[NSURL URLWithString:game.art]
+                     options:0
+                    progress:nil
+                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+                   }];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -179,13 +193,15 @@
     NSMutableArray *predicateArray = [NSMutableArray array];
     if(searchString.length) {
         // your search predicate(s) are added to this array
-        [predicateArray addObject:[NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", searchString]];
+        [predicateArray addObject:[NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@ AND (ANY platforms.title IN %@)", searchString, _platforms]];
         // finally add the filter predicate for this view
         if(filterPredicate) {
             filterPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:[NSArray arrayWithObjects:filterPredicate, [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray], nil]];
         } else {
             filterPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:predicateArray];
         }
+    } else {
+        [predicateArray addObject:[NSPredicate predicateWithFormat: @"ANY platforms.title IN %@", _platforms]];
     }
     [fetchRequest setPredicate:filterPredicate];
     

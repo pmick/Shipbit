@@ -28,7 +28,7 @@
         <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Game" inverseName="platforms" inverseEntity="Game" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Game" positionX="160" positionY="192" width="128" height="315"/>
+        <element name="Game" positionX="160" positionY="192" width="128" height="313"/>
         <element name="Platform" positionX="-126" positionY="243" width="128" height="118"/>
     </elements>
 </model>

@@ -11,6 +11,8 @@
 		0F011037172DA19D003BAFF6 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01102D172DA19D003BAFF6 /* UIViewController+JASidePanel.m */; };
 		0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F011038172DA668003BAFF6 /* QuartzCore.framework */; };
 		0F4EFFD317330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4EFFD217330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m */; };
+		0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
+		0F51F3FE1741A867003BE3F9 /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F51F3FD1741A867003BE3F9 /* UIImage+Extras.m */; };
 		0F9395AD1727310800ED7D76 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AC1727310800ED7D76 /* SDWebImage.framework */; };
 		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
 		0F9FFD9A17372CB70030DB95 /* SBReleasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9FFD9917372CB70030DB95 /* SBReleasedViewController.m */; };
@@ -51,7 +53,6 @@
 		B9B7E40816AB15E800FFC031 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B7E40716AB15E800FFC031 /* Default.png */; };
 		B9B7E40A16AB15E800FFC031 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B7E40916AB15E800FFC031 /* Default@2x.png */; };
 		B9B7E40C16AB15E800FFC031 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9B7E40B16AB15E800FFC031 /* Default-568h@2x.png */; };
-		B9B7E4C316AC55D700FFC031 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
 		B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
 		B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
 		B9B7E4DA16AC5C7A00FFC031 /* SBAFParseAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B7E4D516AC5C7A00FFC031 /* SBAFParseAPIClient.m */; };
@@ -76,6 +77,11 @@
 		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0F4EFFD117330AFD00B3B0F0 /* XCodeConsoleLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeConsoleLogFormatter.h; sourceTree = "<group>"; };
 		0F4EFFD217330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCodeConsoleLogFormatter.m; sourceTree = "<group>"; };
+		0F51F3FC1741A867003BE3F9 /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
+		0F51F3FD1741A867003BE3F9 /* UIImage+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extras.m"; sourceTree = "<group>"; };
+		0F51F40A1741EF16003BE3F9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		0F51F40B1741EF16003BE3F9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0F51F40C1741EF16003BE3F9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0F9395AC1727310800ED7D76 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		0F9395AE1727315700ED7D76 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F9FFD9817372CB70030DB95 /* SBReleasedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReleasedViewController.h; sourceTree = "<group>"; };
@@ -177,11 +183,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */,
 				0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */,
 				0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */,
 				B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */,
 				B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */,
-				B9B7E4C316AC55D700FFC031 /* SystemConfiguration.framework in Frameworks */,
 				B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */,
 				B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */,
 				B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */,
@@ -209,6 +215,16 @@
 				0F01102D172DA19D003BAFF6 /* UIViewController+JASidePanel.m */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		0F51F4091741EF16003BE3F9 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0F51F40A1741EF16003BE3F9 /* AppKit.framework */,
+				0F51F40B1741EF16003BE3F9 /* CoreData.framework */,
+				0F51F40C1741EF16003BE3F9 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		0FC167B31726075F0019304D /* AFNetworking */ = {
@@ -311,6 +327,7 @@
 				B9B7E3F516AB15E800FFC031 /* UIKit.framework */,
 				B9B7E3F716AB15E800FFC031 /* Foundation.framework */,
 				B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */,
+				0F51F4091741EF16003BE3F9 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -326,6 +343,8 @@
 				0FF0BCF31735B5D200B8FD68 /* Game.m */,
 				0FF0BCF41735B5D200B8FD68 /* Platform.h */,
 				0FF0BCF51735B5D200B8FD68 /* Platform.m */,
+				0F51F3FC1741A867003BE3F9 /* UIImage+Extras.h */,
+				0F51F3FD1741A867003BE3F9 /* UIImage+Extras.m */,
 				0FF87CFA17359BDC00DD7814 /* en.lproj */,
 				0FF87CFD17359BDC00DD7814 /* Localizable.strings */,
 				0FA028A1172DCB830018CB42 /* SBLeftSideNavViewController.h */,
@@ -491,6 +510,7 @@
 				0FF0BCFD1735B5E600B8FD68 /* _Platform.m in Sources */,
 				0F9FFD9A17372CB70030DB95 /* SBReleasedViewController.m in Sources */,
 				0FB5323C1738250F006F91FD /* SBUpcomingViewController.m in Sources */,
+				0F51F3FE1741A867003BE3F9 /* UIImage+Extras.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

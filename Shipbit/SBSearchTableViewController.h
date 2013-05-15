@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SBGameDetailViewController.h"
 
-@interface SBSearchTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface SBSearchTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, SDWebImageManagerDelegate>
 
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
 

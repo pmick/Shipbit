@@ -30,6 +30,7 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     self = [super initWithBaseURL:url];
     if (self) {
         [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+        // Previously AFFormURLParameterEncoding
         [self setParameterEncoding:AFJSONParameterEncoding];
         [self setDefaultHeader:@"X-Parse-Application-Id" value:kSBFParseAPIApplicationId];
         [self setDefaultHeader:@"X-Parse-REST-API-Key" value:kSBFParseAPIKey];

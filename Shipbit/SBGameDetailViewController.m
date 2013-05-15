@@ -12,6 +12,7 @@
 #import "SBInfoCell.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 280.0f
@@ -268,5 +269,8 @@
     [self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
     
 }
+
+#pragma mark - Testing internet connection
+
 
 @end
