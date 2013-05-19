@@ -18,7 +18,7 @@
 #import "UIImage+Extras.h"
 
 #define YEAR_MULTIPLIER 1000
-#define CELL_HEIGHT 100
+#define CELL_HEIGHT 110
 
 NSString * const kSBSelectedKey = @"selected";
 

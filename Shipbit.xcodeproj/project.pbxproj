@@ -10,6 +10,7 @@
 		0F011036172DA19D003BAFF6 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01102B172DA19D003BAFF6 /* JASidePanelController.m */; };
 		0F011037172DA19D003BAFF6 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F01102D172DA19D003BAFF6 /* UIViewController+JASidePanel.m */; };
 		0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F011038172DA668003BAFF6 /* QuartzCore.framework */; };
+		0F4D14EA1745F6B40061DE4E /* sb_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F4D14E91745F6B40061DE4E /* sb_57.png */; };
 		0F4EFFD317330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4EFFD217330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m */; };
 		0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
 		0F51F3FE1741A867003BE3F9 /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F51F3FD1741A867003BE3F9 /* UIImage+Extras.m */; };
@@ -18,6 +19,12 @@
 		0F9FFD9A17372CB70030DB95 /* SBReleasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9FFD9917372CB70030DB95 /* SBReleasedViewController.m */; };
 		0FA028A3172DCB830018CB42 /* SBLeftSideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA028A2172DCB830018CB42 /* SBLeftSideNavViewController.m */; };
 		0FB5323C1738250F006F91FD /* SBUpcomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB5323B1738250F006F91FD /* SBUpcomingViewController.m */; };
+		0FB823BC17486AB50033C597 /* navbar-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823BB17486AB50033C597 /* navbar-background@2x.png */; };
+		0FB823BE174877A70033C597 /* tablviewSectionHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823BD174877A70033C597 /* tablviewSectionHeader@2x.png */; };
+		0FB823C417488BC10033C597 /* navBarLeftButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823C317488BC10033C597 /* navBarLeftButton@2x.png */; };
+		0FB823C617488D7A0033C597 /* navBarRightButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823C517488D7A0033C597 /* navBarRightButton@2x.png */; };
+		0FB823C81748948F0033C597 /* navBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823C71748948F0033C597 /* navBarBackground@2x.png */; };
+		0FB823CA1748ADF60033C597 /* calenderIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FB823C91748ADF60033C597 /* calenderIcon@2x.png */; };
 		0FC167C71726075F0019304D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B51726075F0019304D /* AFHTTPClient.m */; };
 		0FC167C81726075F0019304D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B71726075F0019304D /* AFHTTPRequestOperation.m */; };
 		0FC167C91726075F0019304D /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC167B91726075F0019304D /* AFImageRequestOperation.m */; };
@@ -75,6 +82,7 @@
 		0F01102C172DA19D003BAFF6 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
 		0F01102D172DA19D003BAFF6 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		0F4D14E91745F6B40061DE4E /* sb_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sb_57.png; sourceTree = "<group>"; };
 		0F4EFFD117330AFD00B3B0F0 /* XCodeConsoleLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeConsoleLogFormatter.h; sourceTree = "<group>"; };
 		0F4EFFD217330AFD00B3B0F0 /* XCodeConsoleLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCodeConsoleLogFormatter.m; sourceTree = "<group>"; };
 		0F51F3FC1741A867003BE3F9 /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
@@ -90,6 +98,12 @@
 		0FA028A2172DCB830018CB42 /* SBLeftSideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLeftSideNavViewController.m; sourceTree = "<group>"; };
 		0FB5323A1738250F006F91FD /* SBUpcomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUpcomingViewController.h; sourceTree = "<group>"; };
 		0FB5323B1738250F006F91FD /* SBUpcomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUpcomingViewController.m; sourceTree = "<group>"; };
+		0FB823BB17486AB50033C597 /* navbar-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-background@2x.png"; sourceTree = "<group>"; };
+		0FB823BD174877A70033C597 /* tablviewSectionHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablviewSectionHeader@2x.png"; sourceTree = "<group>"; };
+		0FB823C317488BC10033C597 /* navBarLeftButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarLeftButton@2x.png"; sourceTree = "<group>"; };
+		0FB823C517488D7A0033C597 /* navBarRightButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarRightButton@2x.png"; sourceTree = "<group>"; };
+		0FB823C71748948F0033C597 /* navBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarBackground@2x.png"; sourceTree = "<group>"; };
+		0FB823C91748ADF60033C597 /* calenderIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calenderIcon@2x.png"; sourceTree = "<group>"; };
 		0FC167B41726075F0019304D /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		0FC167B51726075F0019304D /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		0FC167B61726075F0019304D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -296,6 +310,7 @@
 		B9B7E3E616AB15E800FFC031 = {
 			isa = PBXGroup;
 			children = (
+				0F4D14E91745F6B40061DE4E /* sb_57.png */,
 				0FD1F0E81738E3C00053C61A /* 57.png */,
 				0FD1F0E61738E3650053C61A /* 114.png */,
 				0FF6EC5E1732531F00ABE4B8 /* Lumberjack */,
@@ -385,6 +400,12 @@
 		B9B7E3FC16AB15E800FFC031 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FB823C91748ADF60033C597 /* calenderIcon@2x.png */,
+				0FB823C71748948F0033C597 /* navBarBackground@2x.png */,
+				0FB823C517488D7A0033C597 /* navBarRightButton@2x.png */,
+				0FB823C317488BC10033C597 /* navBarLeftButton@2x.png */,
+				0FB823BD174877A70033C597 /* tablviewSectionHeader@2x.png */,
+				0FB823BB17486AB50033C597 /* navbar-background@2x.png */,
 				B9D3E7C716D821A600C84F30 /* SBSearchTableViewController.xib */,
 				B9B7E4DD16AC5C9B00FFC031 /* Shipbit.xcdatamodeld */,
 				B9B7E3FD16AB15E800FFC031 /* Shipbit-Info.plist */,
@@ -460,6 +481,13 @@
 				0FF87D0517359BDC00DD7814 /* Localizable.strings in Resources */,
 				0FD1F0E71738E3650053C61A /* 114.png in Resources */,
 				0FD1F0E91738E3C00053C61A /* 57.png in Resources */,
+				0F4D14EA1745F6B40061DE4E /* sb_57.png in Resources */,
+				0FB823BC17486AB50033C597 /* navbar-background@2x.png in Resources */,
+				0FB823BE174877A70033C597 /* tablviewSectionHeader@2x.png in Resources */,
+				0FB823C417488BC10033C597 /* navBarLeftButton@2x.png in Resources */,
+				0FB823C617488D7A0033C597 /* navBarRightButton@2x.png in Resources */,
+				0FB823C81748948F0033C597 /* navBarBackground@2x.png in Resources */,
+				0FB823CA1748ADF60033C597 /* calenderIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

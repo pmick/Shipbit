@@ -7,6 +7,7 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "SBUpcomingViewController.h"
 #import "Game.h"
@@ -18,7 +19,7 @@
 #import "UIImage+Extras.h"
 
 #define YEAR_MULTIPLIER 1000
-#define CELL_HEIGHT 100
+#define CELL_HEIGHT 110
 
 NSString * const kSBUpcomingSelectedKey = @"selected";
 
@@ -48,6 +49,24 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (id)init {
     self = [super init];
     if(self) {
+        
+        UILabel* label = [[UILabel alloc] init] ;
+        label.text = NSLocalizedString(@"Upcoming", @"");
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
+        label.shadowColor = [UIColor clearColor];
+        //label.shadowOffset = CGSizeMake(0, -1);
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        
+        label.layer.shadowColor = [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = .5;
+        label.layer.shadowOffset = CGSizeMake(0, 1);
+        label.layer.shadowRadius = .8;
+        
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
         self.title = NSLocalizedString(@"Upcoming", @"");
         self.tableView.rowHeight = CELL_HEIGHT;
     }
@@ -58,7 +77,8 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [super viewDidLoad];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    //[self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateFormat:@"MMM dd"];
     
     // Load selected in from userdefaults if it was saved
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey]) {
@@ -66,11 +86,17 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     }
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor colorWithRed:(177.0/255.0) green:(171.0/255.0) blue:(167.0/255.0) alpha:0.97];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
-    UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
-    [self.navigationItem setRightBarButtonItem:platformsButton];
+    UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setFrame:CGRectMake(10.0, 2.0, 45.0, 40.0)];
+    [button1 addTarget:self action:@selector(platformsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button1 setImage:[UIImage imageNamed:@"navBarRightButton"] forState:UIControlStateNormal];
+    UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
+    [self.navigationItem setRightBarButtonItem:button];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
@@ -88,53 +114,12 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     return [sectionInfo numberOfObjects];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    
-    /*
-     Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
-     To display the section title, convert the year and month components to a string representation.
-     */
-    static NSArray *monthSymbols = nil;
-    
-    if (!monthSymbols) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setCalendar:[NSCalendar currentCalendar]];
-        monthSymbols = [formatter monthSymbols];
-    }
-    
-    NSInteger numericSection = [[sectionInfo name] integerValue];
-    
-	NSInteger year = numericSection / YEAR_MULTIPLIER;
-	NSInteger month = numericSection - (year * YEAR_MULTIPLIER);
-    
-	NSString *titleString = [NSString stringWithFormat:@"%@ %d", [monthSymbols objectAtIndex:month-1], year];
-    
-	return titleString;
-}
-
 - (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+    cell.platformsLabel.text = game.platformsString;
     
-    // Building platform string from platform set
-    NSMutableString *platformsString = [[NSMutableString alloc] init];
-    int count = 0;
-    for (Platform *platform in game.platforms) {
-        count++;
-        if ((unsigned)count >= [game.platforms count]) {
-            [platformsString appendString:platform.title];
-        } else {
-            NSString *platformWithComma = [NSString stringWithFormat:@"%@, ", platform.title];
-            [platformsString appendString:platformWithComma];
-        }
-    }
-    
-    cell.platformsLabel.text = platformsString;
-    
-    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     manager.delegate = self;
     
@@ -144,11 +129,8 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
                        cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
     }];
-    
-//    [manager downloadWithURL:game.art delegate:self options:0 success:^(UIImage *image)
-//    {
-//        cell.thumbnailView.image = [self imageByScalingAndCroppingForSize:CGSizeMake(cell.thumbnailView.frame.size.width, cell.thumbnailView.frame.size.height) image:image];
-//    } failure:nil];
+
+    [cell resizeSubviews];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -163,6 +145,43 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 }
 
 #pragma mark - Table View Delegate
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
+    [headerView setBackgroundColor:[UIColor colorWithRed:(177.0/255.0) green:(171.0/255.0) blue:(167.0/255.0) alpha:0.97]];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
+    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(11,-12, 320.0, 44.0);
+    headerLabel.textAlignment = NSTextAlignmentLeft;
+    headerLabel.shadowColor = [UIColor clearColor];
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    static NSArray *monthSymbols = nil;
+    
+    if (!monthSymbols) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setCalendar:[NSCalendar currentCalendar]];
+        monthSymbols = [formatter monthSymbols];
+    }
+    
+    NSInteger numericSection = [[sectionInfo name] integerValue];
+    
+	NSInteger year = numericSection / YEAR_MULTIPLIER;
+	NSInteger month = numericSection - (year * YEAR_MULTIPLIER);
+    
+	NSString *titleString = [NSString stringWithFormat:@"%@ %d", [monthSymbols objectAtIndex:month-1], year];
+        
+    headerLabel.text = titleString;
+    [headerView addSubview:headerLabel];
+    
+    return headerView;
+}
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CELL_HEIGHT;

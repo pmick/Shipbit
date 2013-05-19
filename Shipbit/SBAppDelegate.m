@@ -61,6 +61,8 @@
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     
+    [upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
+    
     // Set side nav views to the newly created views
     lsnvc.utvc = upcomingNav;
     lsnvc.rtvc = releasedNav;
@@ -75,6 +77,9 @@
     self.viewController.allowLeftSwipe = NO;
     
     self.window.rootViewController = _viewController;
+    
+    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
+
     
     return YES;
 }

@@ -16,7 +16,7 @@
 #import "Platform.h"
 #import "UIImage+Extras.h"
 
-#define CELL_HEIGHT 100
+#define CELL_HEIGHT 110
 
 @interface SBFavoritesTableViewController ()
 
@@ -136,6 +136,24 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
         game.isFavorite = NO;
+        
+        // Remove local notification if it exists
+        UIApplication *app = [UIApplication sharedApplication];
+        NSArray *eventArray = [app scheduledLocalNotifications];
+        for (int i=0; i<(int)[eventArray count]; i++)
+        {
+            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+            NSDictionary *userInfoCurrent = oneEvent.userInfo;
+            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+            if ([uid isEqualToString:game.objectId])
+            {
+                //Cancelling local notification
+                [app cancelLocalNotification:oneEvent];
+                DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
+                break;
+            }
+        }
+
         NSError *error;
         if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
             // Handle the error.

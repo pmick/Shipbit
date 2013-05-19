@@ -248,10 +248,41 @@
     if (_game.isFavorite) {
         // Set isFavorite to NO
         _game.isFavorite = NO;
-
+        
+        // Remove local notification
+        UIApplication *app = [UIApplication sharedApplication];
+        NSArray *eventArray = [app scheduledLocalNotifications];
+        for (int i=0; i<(int)[eventArray count]; i++)
+        {
+            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+            NSDictionary *userInfoCurrent = oneEvent.userInfo;
+            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+            if ([uid isEqualToString:_game.objectId])
+            {
+                //Cancelling local notification
+                [app cancelLocalNotification:oneEvent];
+                DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
+                break;
+            }
+        }
+        
     } else {
         // Update local coredata store
         _game.isFavorite = @YES;
+        
+        // Create a local notification
+        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+        if (notifyAlarm) {
+            notifyAlarm.fireDate = [_game.releaseDate dateByAddingTimeInterval:-3600*9];
+            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
+            notifyAlarm.repeatInterval = 0;
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"%@ is released tomorrow!", _game.title];
+            NSDictionary *userInfo = @{@"uid": [NSString stringWithFormat:@"%@", _game.objectId]};
+            notifyAlarm.userInfo = userInfo;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
+        }
+        
+        DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-3600*9]);
         
     }
     

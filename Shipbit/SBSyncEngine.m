@@ -319,7 +319,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                 NSData *dataReponse = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 [managedObject setValue:dataReponse forKey:key];
             } else {
-                NSLog(@"Unknown Data Type Received");
+                DDLogError(@"Unknown Data Type Received");
                 [managedObject setValue:nil forKey:key];
             }
         }
@@ -400,7 +400,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         [managedObjectContext performBlockAndWait:^{
             NSError *error = nil;
             if (![managedObjectContext save:&error]) {
-                NSLog(@"Unable to save context for class %@", className);
+                DDLogError(@"Unable to save context for class %@", className);
             }
         }];
         
@@ -429,7 +429,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                 NSError *error = nil;
                 BOOL saved = [managedObjectContext save:&error];
                 if (!saved) {
-                    NSLog(@"Unable to save context after deleting records for class %@ because %@", className, error);
+                    DDLogError(@"Unable to save context after deleting records for class %@ because %@", className, error);
                 }
             }];
         }
