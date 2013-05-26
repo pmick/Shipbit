@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *platformsLabel;
 @property (nonatomic, strong) UIImageView *releaseDateImage;
 @property (nonatomic, strong) UIImageView *thumbnailView;
+@property (nonatomic, strong) UIImageView *borderImageView;
 
 - (void)resizeSubviews;
 

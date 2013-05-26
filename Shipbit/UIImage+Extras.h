@@ -11,5 +11,6 @@
 @interface UIImage (Extras)
 
 - (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize;
+- (UIImage *)circleImage;
 
 @end

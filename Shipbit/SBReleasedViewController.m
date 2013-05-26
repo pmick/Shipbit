@@ -7,15 +7,16 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "SBReleasedViewController.h"
 #import "Game.h"
 #import "Platform.h"
 #import "SBGameCell.h"
-#import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "UIImage+Extras.h"
+#import "SBGameDetailViewController.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -48,7 +49,22 @@ NSString * const kSBSelectedKey = @"selected";
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Released", nil);
+        UILabel* label = [[UILabel alloc] init] ;
+        label.text = NSLocalizedString(@"Shipped", @"");
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
+        label.shadowColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.layer.shadowColor = [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = .5;
+        label.layer.shadowOffset = CGSizeMake(0, 1);
+        label.layer.shadowRadius = .8;
+        
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
+        self.title = NSLocalizedString(@"Shipped", nil);
         self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
@@ -68,8 +84,12 @@ NSString * const kSBSelectedKey = @"selected";
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
-    UIBarButtonItem *platformsButton = [[UIBarButtonItem alloc] initWithTitle:@"Platforms" style:UIBarButtonItemStylePlain target:self action:@selector(platformsButtonPressed)];
-    [self.navigationItem setRightBarButtonItem:platformsButton];
+    UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+    [button1 setFrame:CGRectMake(0.0, 0.0, 45.0, 40.0)];
+    [button1 addTarget:self action:@selector(platformsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button1 setImage:[UIImage imageNamed:@"navBarRightButton"] forState:UIControlStateNormal];
+    UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
+    [self.navigationItem setRightBarButtonItem:button];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
@@ -118,8 +138,7 @@ NSString * const kSBSelectedKey = @"selected";
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [game platformsString];
-    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+    cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     manager.delegate = self;
@@ -128,8 +147,13 @@ NSString * const kSBSelectedKey = @"selected";
                      options:0
                     progress:nil
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+                       if (image) {
+                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
+                       } else {
+                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
+                       }
                    }];
+    [cell resizeSubviews];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,6 +169,43 @@ NSString * const kSBSelectedKey = @"selected";
 
 #pragma mark - Table View Delegate
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
+    [headerView setBackgroundColor:[UIColor colorWithRed:(177.0f/255.0f) green:(171.0f/255.0f) blue:(167.0f/255.0f) alpha:0.97f]];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(11,-11, 320.0, 44.0);
+    headerLabel.textAlignment = NSTextAlignmentLeft;
+    headerLabel.shadowColor = [UIColor clearColor];
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    static NSArray *monthSymbols = nil;
+    
+    if (!monthSymbols) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setCalendar:[NSCalendar currentCalendar]];
+        monthSymbols = [formatter monthSymbols];
+    }
+    
+    NSInteger numericSection = [[sectionInfo name] integerValue];
+    
+	NSInteger year = numericSection / YEAR_MULTIPLIER;
+	NSInteger month = numericSection - (year * YEAR_MULTIPLIER);
+    
+	NSString *titleString = [NSString stringWithFormat:@"%@ %d", [monthSymbols objectAtIndex:month-1], year];
+    
+    headerLabel.text = titleString;
+    [headerView addSubview:headerLabel];
+    
+    return headerView;
+}
+
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return CELL_HEIGHT;
 }
@@ -154,14 +215,10 @@ NSString * const kSBSelectedKey = @"selected";
     {
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
+
+    [_gdvc prepareForReuse];
+    [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
-    [_gdvc setGame:game];
-    _gdvc.titleLabel.text = game.title;
-    _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
-    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    [_gdvc.tableView reloadData];
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }
 
@@ -180,7 +237,9 @@ NSString * const kSBSelectedKey = @"selected";
     // Create the sort descriptors array.
     NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sectionIdentifier" ascending:NO];
     NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: sectionDescriptor, releaseDateDescriptor, nil];
+    NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: sectionDescriptor, releaseDateDescriptor, alphabeticDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     [fetchRequest setFetchBatchSize:20];

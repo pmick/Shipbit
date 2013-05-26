@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SBFavoritesTableViewController : UITableViewController <SDWebImageManagerDelegate>
+@interface SBFavoritesTableViewController : UITableViewController <SDWebImageManagerDelegate, NSFetchedResultsControllerDelegate>
 
 @end

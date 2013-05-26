@@ -20,4 +20,6 @@
 @property (nonatomic, strong) UINavigationController *stvc;
 @property (nonatomic, strong) UINavigationController *ftvc;
 
+@property (nonatomic, strong) UIView *footer;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "SBFavoritesTableViewController.h"
 #import "SBGameDetailViewController.h"
@@ -29,9 +30,6 @@
 
 @implementation SBFavoritesTableViewController
 
-@synthesize dateFormatter = _dateFormatter;
-@synthesize gdvc = _gdvc;
-
 #pragma mark - Memory Management
 
 - (void)dealloc {
@@ -48,7 +46,22 @@
 - (id)init {
     self = [super init];
     if(self) {
-        self.title = NSLocalizedString(@"Watch List", nil);
+        UILabel* label = [[UILabel alloc] init] ;
+        label.text = NSLocalizedString(@"Watchlist", @"");
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
+        label.shadowColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.layer.shadowColor = [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = .5;
+        label.layer.shadowOffset = CGSizeMake(0, 1);
+        label.layer.shadowRadius = .8;
+        
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
+        self.title = NSLocalizedString(@"Watchlist", nil);
         self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
@@ -84,8 +97,7 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = game.platformsString;
-    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
+
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     manager.delegate = self;
     
@@ -93,8 +105,13 @@
                      options:0
                     progress:nil
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+                       if (image) {
+                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
+                       } else {
+                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
+                       }
                    }];
+    [cell resizeSubviews];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,14 +136,10 @@
     {
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [_gdvc prepareForReuse];
+    [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
 
-    [_gdvc setGame:game];
-    _gdvc.titleLabel.text = game.title;
-    _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
-    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    [_gdvc.tableView reloadData];
     [self.navigationController pushViewController:self.gdvc animated:YES];
 
 }
@@ -143,6 +156,7 @@
         for (int i=0; i<(int)[eventArray count]; i++)
         {
             UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+            DDLogVerbose(@"Event Description: %@ Firetime: %@", oneEvent.alertBody, oneEvent.fireDate); 
             NSDictionary *userInfoCurrent = oneEvent.userInfo;
             NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
             if ([uid isEqualToString:game.objectId])
@@ -176,21 +190,14 @@
     [fetchRequest setEntity:entity];
     
     // Create the sort descriptors array.
-    NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: releaseDateDescriptor, nil];
+    NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:YES];
+    NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: releaseDateDescriptor, alphabeticDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     [fetchRequest setFetchBatchSize:20];
-    
-    NSDate *now = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.month = -3;
-    NSDate *threeMonthsAgo = [calendar dateByAddingComponents:components toDate:now options:0];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isFavorite == %@", @YES];
-    
-    // TODO: update predicate
-    
+        
     [fetchRequest setPredicate:predicate];
     
     // Create and initialize the fetch results controller.

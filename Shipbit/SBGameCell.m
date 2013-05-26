@@ -7,53 +7,68 @@
 //
 
 #import "SBGameCell.h"
+#import "UIColor+Extras.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SBGameCell
-
-@synthesize titleLabel = _titleLabel;
-@synthesize releaseDateLabel = _releaseDateLabel;
-@synthesize platformsLabel = _platformsLabel;
-@synthesize thumbnailView = _thumbnailView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
+        background.backgroundColor = [UIColor whiteColor];
+        self.backgroundView = background;
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.BackgroundColor = [UIColor colorWithHexValue:@"3e434d"];
+        self.selectedBackgroundView = bgColorView;
+        
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 3.0, 180.0, 40.0)];
         _titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
-        _titleLabel.textColor = [UIColor colorWithRed:(81.0/255.0) green:(77.0/255.0) blue:(74.0/255.0) alpha:1];
+        _titleLabel.textColor = [UIColor colorWithHexValue:@"3e434d"];
+        _titleLabel.highlightedTextColor = [UIColor whiteColor];
+        _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.numberOfLines = 2;
         [self.contentView addSubview:_titleLabel];
-
         
-        _releaseDateImage = [[UIImageView alloc] initWithFrame:CGRectMake(108.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 3, 20, 20)];
-        _releaseDateImage.image = [UIImage imageNamed:@"calenderIcon"];
+        _releaseDateImage = [[UIImageView alloc] initWithFrame:CGRectMake(110.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 4, 20, 20)];
+        _releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
+        _releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
+        _releaseDateImage.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_releaseDateImage];
         
-        _releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(131.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 3, 220.0, 20.0)];
-        _releaseDateLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        _releaseDateLabel = [[UILabel alloc] init];
+        _releaseDateLabel.font = [UIFont boldSystemFontOfSize:13.0];
         _releaseDateLabel.textAlignment = NSTextAlignmentLeft;
-        _releaseDateLabel.textColor = [UIColor colorWithRed:(141.0/255.0) green:(136.0/255.0) blue:(133.0/255.0) alpha:1];
+        _releaseDateLabel.textColor = [UIColor colorWithHexValue:@"8d8885"];
+        _releaseDateLabel.highlightedTextColor = [UIColor whiteColor];
+        _releaseDateLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_releaseDateLabel];
         
         _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 88.0, 190.0, 16.0)];
-        _platformsLabel.font = [UIFont boldSystemFontOfSize:12.0];
+        _platformsLabel.font = [UIFont boldSystemFontOfSize:11.0];
         _platformsLabel.textAlignment = NSTextAlignmentLeft;
-        _platformsLabel.textColor = [UIColor colorWithRed:(141.0/255.0) green:(136.0/255.0) blue:(133.0/255.0) alpha:1];
+        _platformsLabel.textColor = [UIColor colorWithHexValue:@"8d8885"];
+        _platformsLabel.highlightedTextColor = [UIColor whiteColor];
+        _platformsLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_platformsLabel];
-        
-        _thumbnailView = [[UIImageView alloc] initWithFrame:CGRectMake(7.0, 7.0, 96.0, 96.0)];
+
+        _thumbnailView = [[UIImageView alloc] initWithFrame:CGRectMake(11.0, 11.0, 88.0, 88.0)];
         _thumbnailView.backgroundColor = [UIColor darkGrayColor];
+        _thumbnailView.layer.cornerRadius = 88/2;
         [self.contentView addSubview:_thumbnailView];
         
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        _borderImageView = [[UIImageView alloc] initWithFrame:CGRectMake(7.0, 7.0, 96.0, 96.0)];
+        _borderImageView.image = [UIImage imageNamed:@"circle_border_light"];
+        _borderImageView.highlightedImage = [UIImage imageNamed:@"highlight_circle"];
+        [self.contentView addSubview:_borderImageView];
+        
+        self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosureArrow"]
+                                               highlightedImage:[UIImage imageNamed:@"disclosureArrow_highlight"]];
     }
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 }
 
 - (void)prepareForReuse {
@@ -63,7 +78,6 @@
     _titleLabel.text = @"";
     _releaseDateLabel.text = @"";
     _platformsLabel.text = @"";
-    
 }
 
 #pragma mark - Custom Methods
@@ -71,8 +85,8 @@
 - (void)resizeSubviews {
     [_titleLabel setFrame:CGRectMake(110.0, 3.0, 180.0, 40.0)];
     [_titleLabel sizeToFit];
-    [_releaseDateImage setFrame:CGRectMake(109.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 3, 20, 20)];
-    [_releaseDateLabel setFrame:CGRectMake(131.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 3, 100.0, 20.0)];
+    [_releaseDateImage setFrame:CGRectMake(110.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 4, 12, 14)];
+    [_releaseDateLabel setFrame:CGRectMake(127.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 1, 100.0, 20.0)];
 }
 
 @end

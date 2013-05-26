@@ -9,6 +9,8 @@
 #import "SBLeftSideNavViewController.h"
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
+#import "UIColor+Extras.h"
+#import "SBLeftNavCell.h"
 
 @interface SBLeftSideNavViewController ()
 
@@ -38,15 +40,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _views = [[NSArray alloc] init];
-    _views = [NSArray arrayWithObjects:NSLocalizedString(@"Upcoming", nil),
-              NSLocalizedString(@"Released", nil), NSLocalizedString(@"Search", nil), NSLocalizedString(@"Watch List", nil), nil];
+    _views = @[ NSLocalizedString(@"Upcoming", nil),
+                NSLocalizedString(@"Shipped", nil),
+                NSLocalizedString(@"Search", nil),
+                NSLocalizedString(@"Watchlist", nil) ];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView.scrollEnabled = NO;
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"cdc9c7"]];
+    
+    UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 331, 114, 20)];
+    [versionLabel setTextAlignment:NSTextAlignmentRight];
+    [versionLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
+    [versionLabel setTextColor:[UIColor colorWithHexValue:@"cdc9c7"]];
+    [versionLabel setText:@"Version 1.00"];
+    [versionLabel setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(137, 331, 114, 20)];
+    [authorLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:11]];
+    [authorLabel setTextColor:[UIColor colorWithHexValue:@"cdc9c7"]];
+    [authorLabel setText:@"by Mick Dev"];
+    [authorLabel setBackgroundColor:[UIColor clearColor]];
+    
+    UIImageView *footerImage = [[UIImageView alloc] initWithFrame:CGRectMake(94, 284, 133, 62)];
+    [footerImage setImage:[UIImage imageNamed:@"leftNavLogoImage"]];
+    [footerImage sizeToFit];
+    
+    _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 372)];
+    _footer.backgroundColor = [UIColor colorWithHexValue:@"e5e0dd"];
+    [_footer addSubview:footerImage];
+    [_footer addSubview:versionLabel];
+    [_footer addSubview:authorLabel];
+
+    self.tableView.tableFooterView = _footer;
 }
 
 #pragma mark - Table view data source
@@ -66,13 +92,61 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    SBLeftNavCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[SBLeftNavCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
+    background.backgroundColor = [UIColor colorWithHexValue:@"e5e0dd"];
+    cell.backgroundView = background;
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    [bgColorView setBackgroundColor:[UIColor colorWithHexValue:@"cdc9c7"]];
+    [cell setSelectedBackgroundView:bgColorView];
+    
+    cell.textLabel.textColor = [UIColor colorWithHexValue:@"3e434d"];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.titleLabel.text = [_views objectAtIndex:indexPath.row];
+    
+    switch (indexPath.row) {
+        case 0:
+            cell.iconImageView.image = [UIImage imageNamed:@"leftNavUpcomingImage"];
+            [cell.iconImageView sizeToFit];
+            [cell.iconImageView setFrame:CGRectMake(26 - (cell.iconImageView.frame.size.width)/2,
+                                                    20 - (cell.iconImageView.frame.size.height/2),
+                                                    cell.iconImageView.frame.size.width,
+                                                    cell.iconImageView.frame.size.height)];
+            break;
+        case 1:
+            cell.iconImageView.image = [UIImage imageNamed:@"leftNavShippedImage"];
+            [cell.iconImageView sizeToFit];
+            [cell.iconImageView setFrame:CGRectMake(26 - (cell.iconImageView.frame.size.width/2),
+                                                    21 - (cell.iconImageView.frame.size.height/2),
+                                                    cell.iconImageView.frame.size.width,
+                                                    cell.iconImageView.frame.size.height)];
+            break;
+        case 2:
+            cell.iconImageView.image = [UIImage imageNamed:@"leftNavSearchImage"];
+            [cell.iconImageView sizeToFit];
+            [cell.iconImageView setFrame:CGRectMake(26 - (cell.iconImageView.frame.size.width/2),
+                                                    21 - (cell.iconImageView.frame.size.height/2),
+                                                    cell.iconImageView.frame.size.width,
+                                                    cell.iconImageView.frame.size.height)];
+            break;
+        case 3:
+            cell.iconImageView.image = [UIImage imageNamed:@"leftNavWatchlistImage"];
+            [cell.iconImageView sizeToFit];
+            [cell.iconImageView setFrame:CGRectMake(26 - (cell.iconImageView.frame.size.width/2),
+                                                    21 - (cell.iconImageView.frame.size.height/2),
+                                                    cell.iconImageView.frame.size.width,
+                                                    cell.iconImageView.frame.size.height)];
+            break;
+        default:
+            break;
     }
     
-    cell.textLabel.text = [_views objectAtIndex:indexPath.row];
-    
+    [cell.imageView sizeToFit];
     return cell;
 }
 
@@ -80,22 +154,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Resolves arc warning regarding controller being unpredictably null 
+    JASidePanelController *sidePanel = self.sidePanelController;
     switch (indexPath.row) {
         case 0:
-            [self.sidePanelController setCenterPanel:_utvc];
+            [sidePanel setCenterPanel:_utvc];
             break;
         case 1:
-            [self.sidePanelController setCenterPanel:_rtvc];
+            [sidePanel setCenterPanel:_rtvc];
             break;
         case 2:
-            [self.sidePanelController setCenterPanel:_stvc];
+            [sidePanel setCenterPanel:_stvc];
             break;
         case 3:
-            [self.sidePanelController setCenterPanel:_ftvc];
+            [sidePanel setCenterPanel:_ftvc];
             break;
         default:
             break;
     }
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
+                                  animated:YES];
 }
 
 @end

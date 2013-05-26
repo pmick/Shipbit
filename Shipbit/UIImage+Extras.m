@@ -48,13 +48,13 @@
         // center the image
         if (widthFactor > heightFactor)
         {
-            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5f;
         }
         else
         {
             if (widthFactor < heightFactor)
             {
-                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5f;
             }
         }
         //thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
@@ -81,6 +81,25 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (UIImage *)circleImage {
+    // start with an image
+    CGRect imageRect = CGRectMake(0, 0, self.size.width, self.size.height);
+    // set the implicit graphics context ("canvas") to a bitmap context for images
+    UIGraphicsBeginImageContextWithOptions(imageRect.size,NO,0.0);
+    // create a bezier path defining rounded corners
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:imageRect cornerRadius:self.size.height/2];
+    // use this path for clipping in the implicit context
+    [path addClip];
+    // draw the image into the implicit context
+    [self drawInRect:imageRect];
+    // save the clipped image from the implicit context into an image
+    UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
+    // cleanup
+    UIGraphicsEndImageContext();
+    
+    return maskedImage;
 }
 
 @end

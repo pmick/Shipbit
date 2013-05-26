@@ -1,55 +1,32 @@
 //
-//  SBGameDetailViewController.m
+//  SBGameDetail2ViewController.m
 //  Shipbit
 //
-//  Created by Patrick Mick on 1/20/13.
+//  Created by Patrick Mick on 5/19/13.
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
 #import "SBGameDetailViewController.h"
-#import "SBRatingCell.h"
-#import "SBSummaryCell.h"
-#import "SBInfoCell.h"
-#import "SBCoreDataController.h"
-#import "SBSyncEngine.h"
-#import <SystemConfiguration/SystemConfiguration.h>
-
-#define FONT_SIZE 14.0f
-#define CELL_CONTENT_WIDTH 280.0f
-#define CELL_CONTENT_MARGIN 24.0f
-#define CELL_CONTENT_HEIGHT_MAXIMUM 20000.0f
+#import "SDSegmentedControl.h"
 
 @interface SBGameDetailViewController ()
 
-@property (nonatomic, strong) SBRatingCell *ratingCell;
-@property (nonatomic, strong) SBSummaryCell *summaryCell;
-@property (nonatomic, strong) SBInfoCell *infoCell;
-@property (nonatomic, strong) UIButton *likeButton;
-@property (nonatomic, strong) UIButton *favoriteButton;
-@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) SDSegmentedControl *segmentedControl;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+
 
 @end
 
 @implementation SBGameDetailViewController
 
-#pragma mark - Memory Management
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - View Lifecycle
-
 - (id)init {
     self = [super init];
     if (self) {
-        self.title = NSLocalizedString(@"Info", nil);
+        [self setTitle:NSLocalizedString(@"Info", nil)];
         
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 215.0)];
-        [_headerView setBackgroundColor:[UIColor lightGrayColor]];
-        
-        [self.tableView setTableHeaderView:_headerView];
+        _headerView = [[SBGameDetailHeaderView alloc] init];
+        [self.view addSubview:_headerView];
     }
     return self;
 }
@@ -57,249 +34,170 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 98.0, 136.0)];
-    [_imageView setContentMode:UIViewContentModeCenter];
-    [_imageView setBackgroundColor:[UIColor darkGrayColor]];
-    [_headerView addSubview:_imageView];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [self.dateFormatter setDateFormat:@"MMM dd"];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 10.0, 200.0, 46.0)];
-    [_titleLabel setFont:[UIFont boldSystemFontOfSize:18.0]];
-    [_titleLabel setNumberOfLines:2];
-    [_titleLabel setTextAlignment:NSTextAlignmentLeft];
-    [_titleLabel setBackgroundColor:[UIColor clearColor]];
-    [_headerView addSubview:_titleLabel];
+    [self.view setBackgroundColor:[UIColor colorWithRed:(196.0f/255.0f)
+                                                  green:(190.0f/255.0f)
+                                                   blue:(186.0f/255.0f)
+                                                  alpha:1]];
     
-    _releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 60.0, 200.0, 16.0)];
-    [_releaseDateLabel setFont:[UIFont systemFontOfSize:14]];
-    [_releaseDateLabel setTextAlignment:NSTextAlignmentLeft];
-    [_releaseDateLabel setBackgroundColor:[UIColor clearColor]];
-    [_headerView addSubview:_releaseDateLabel];
-    
-    _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0, 100.0, 200.0, 50.0)];
-    [_platformsLabel setNumberOfLines:0];
-    [_platformsLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [_platformsLabel setFont:[UIFont systemFontOfSize:14]];
-    [_platformsLabel setTextAlignment:NSTextAlignmentLeft];
-    [_platformsLabel setBackgroundColor:[UIColor clearColor]];
-    [_headerView addSubview:_platformsLabel];
-    
-    _likeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_likeButton setFrame:CGRectMake(10.0, 160.0, 145.0, 45.0)];
-    [_likeButton setTitle:NSLocalizedString(@"Like", nil) forState:UIControlStateNormal];
-    [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [_headerView addSubview:_likeButton];
-    
-    _favoriteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_favoriteButton setFrame:CGRectMake(165.0, 160.0, 145.0, 45.0)];
-
-    [_favoriteButton addTarget:self action:@selector(favoriteButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [_headerView addSubview:_favoriteButton];
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    // scrollRectToVisible necessary for changing games. Previously if you scrolled to the bottom of the table for 1 game, and then looked at another game, the view was reused, and the tableview would be scrolled down.
-    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [self setupNavigationBar];
+    [self setupSegmentedController];
+    [self setupScrollView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    _headerView.game = _game;
     
     if (_game.hasLiked) {
-        [_likeButton setEnabled:NO];
+        [_headerView.likeButton setEnabled:NO];
     } else {
-        [_likeButton setEnabled:YES];
-    }
-    
-    NSString *favoriteButtonText = _game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
-    [_favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
-    
-    [self.tableView beginUpdates];
-    [self.tableView endUpdates];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 3;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    
-    switch (indexPath.row) {
-        case 0:
-            if (_ratingCell == nil) {
-                _ratingCell = [[SBRatingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"RatingCell"];
-            }
-            
-            if (_game.likes) {
-                _ratingCell.likeLabel.text = [NSString stringWithFormat:@"%@", _game.likes];
-            } else {
-                _ratingCell.likeLabel.text = [NSString stringWithFormat:@"%d", 0];
-            }
-            
-            if ([_game.criticScore integerValue] > 0) {
-                _ratingCell.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", _game.criticScore];
-            } else {
-                _ratingCell.metacriticRatingLabel.text = NSLocalizedString(@"Not yet rated.", nil);
-            }
-            
-            cell = _ratingCell;
-            break;
-        case 1:
-            if (_summaryCell == nil) {
-                _summaryCell = [[SBSummaryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SummaryCell"];
-            }
-            
-            if (_game.summary) {
-                _summaryCell.summaryLabel.text = _game.summary;
-            } else {
-                _summaryCell.summaryLabel.text = NSLocalizedString(@"No summary just yet...", nil);
-            }
-            CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH, 20000.0f);
-            CGSize size = [_summaryCell.summaryLabel.text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
-            CGRect newFrame = _summaryCell.summaryLabel.frame;
-            newFrame.size.height = size.height;
-            _summaryCell.summaryLabel.frame = newFrame;
-            cell = _summaryCell;
-            break;
-        case 2:
-            if (_infoCell == nil) {
-                _infoCell = [[SBInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"InfoCell"];
-            }
-            _infoCell.genreLabel.text = _game.genre;
-            _infoCell.publisherLabel.text = _game.publisher;
-            _infoCell.developerLabel.text = _game.developer;
-            _infoCell.esrbLabel.text = _game.esrb ? _game.esrb : NSLocalizedString(@"RP", nil);
-            _infoCell.platformsLabel.text = _game.platformsString;
-            cell = _infoCell;
-            break;
-        default:
-            break;
-    }
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {    
-    switch (indexPath.row) {
-        case 0:
-            return 88;
-            break;
-        case 1: {
-            CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH, CELL_CONTENT_HEIGHT_MAXIMUM);
-            CGSize size = [_game.summary sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
-            CGFloat height = MAX(size.height, 30.0f);
-            return height + (CELL_CONTENT_MARGIN * 2);
-            break;
-        }
-        case 2:
-            return 138;
-            break;
-        default:
-            return 55;
-            break;
+        [_headerView.likeButton setEnabled:YES];
     }
 }
 
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO implement selection functionality for metacritic links and other web links
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Action Methods
-
-- (IBAction)likeButtonPressed:(id)sender {
-    // TODO: keep from liking when you are not connected
+- (void)setupNavigationBar {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0,0,40,45);
+    [button setImage:[UIImage imageNamed:@"backButton"]
+            forState:UIControlStateNormal];
     
-    // Increment likes on server
-    [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId];
-    
-    // Increment likes locally
-    _game.likes = @(_game.likes.integerValue + 1);
-    
-    // Update label to reflect increment on likes
-    [self.tableView reloadData];
-    
-    // Set game as liked
-    _game.hasLiked = @YES;
-    
-    // Update coredata
-    NSError *error;
-    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-        // Handle the error.
-        DDLogError(@"Saving changes failed: %@", error);
-    }
-    
-    [_likeButton setEnabled:NO];
+    [button addTarget:self.navigationController
+               action:@selector(popViewControllerAnimated:)
+     forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setLeftBarButtonItem:barButtonItem];
 }
 
-- (IBAction)favoriteButtonPressed:(id)sender {
-    if (_game.isFavorite) {
-        // Set isFavorite to NO
-        _game.isFavorite = NO;
-        
-        // Remove local notification
-        UIApplication *app = [UIApplication sharedApplication];
-        NSArray *eventArray = [app scheduledLocalNotifications];
-        for (int i=0; i<(int)[eventArray count]; i++)
-        {
-            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
-            NSDictionary *userInfoCurrent = oneEvent.userInfo;
-            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
-            if ([uid isEqualToString:_game.objectId])
-            {
-                //Cancelling local notification
-                [app cancelLocalNotification:oneEvent];
-                DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
-                break;
-            }
-        }
-        
+- (void)setupSegmentedController {
+    _segmentedControl = [[SDSegmentedControl alloc] initWithItems:@[ @"Summary", @"Info", @"Ratings" ]];
+    [_segmentedControl setFrame:CGRectMake(0, 200, 320, 44)];
+    [_segmentedControl setBackgroundColor:[UIColor colorWithRed:(220.0f/255.0f)
+                                                         green:(214.0f/255.0f)
+                                                          blue:(210.0f/255.0f)
+                                                         alpha:1]];
+    _segmentedControl.arrowHeightFactor *= -1.0;
+    [_segmentedControl addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:_segmentedControl];
+}
+
+- (void)setupScrollView {
+    UIColor *sbLightGrayColor = [UIColor colorWithRed:(196.0f/255.0f)
+                                                green:(190.0f/255.0f)
+                                                 blue:(186.0f/255.0f)
+                                                alpha:1];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 255, 320, 249)];
+    _scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 3, 200);
+    _scrollView.pagingEnabled = YES;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.delegate = self;
+    [_scrollView setBackgroundColor:sbLightGrayColor];
+
+    _verticalScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 249)];
+    _verticalScrollView.contentSize = CGSizeMake(320, 400);
+    [_verticalScrollView setBackgroundColor:[UIColor clearColor]];
+    [_scrollView addSubview:_verticalScrollView];
+    
+    _summaryView = [[SBSummaryView alloc] initWithFrame:CGRectMake(0, 0, 320, 249)];
+    [_summaryView setBackgroundColor:sbLightGrayColor];
+    [_verticalScrollView addSubview:_summaryView];
+    
+    _infoView = [[SBInfoView alloc] initWithFrame:CGRectMake(320, 0, 320, 249)];
+    [_infoView setBackgroundColor:sbLightGrayColor];
+    [_scrollView addSubview:_infoView];
+    
+    _ratingView = [[SBRatingView alloc] initWithFrame:CGRectMake(320*2, 0, 320, 249)];
+    [_ratingView setBackgroundColor:sbLightGrayColor];
+    [_scrollView addSubview:_ratingView];
+    
+    [self.view addSubview:_scrollView];
+}
+
+#pragma mark - Scrollview delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_scrollView.contentOffset.x < 160) {
+        [_segmentedControl setSelectedSegmentIndex:0];
+    } else if (_scrollView.contentOffset.x >= 160 && _scrollView.contentOffset.x < 480) {
+        [_segmentedControl setSelectedSegmentIndex:1];
     } else {
-        // Update local coredata store
-        _game.isFavorite = @YES;
-        
-        // Create a local notification
-        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
-        if (notifyAlarm) {
-            notifyAlarm.fireDate = [_game.releaseDate dateByAddingTimeInterval:-3600*9];
-            notifyAlarm.timeZone = [NSTimeZone defaultTimeZone];
-            notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"%@ is released tomorrow!", _game.title];
-            NSDictionary *userInfo = @{@"uid": [NSString stringWithFormat:@"%@", _game.objectId]};
-            notifyAlarm.userInfo = userInfo;
-            [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
-        }
-        
-        DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-3600*9]);
-        
+        [_segmentedControl setSelectedSegmentIndex:2];
     }
-    
-    // Save data store
-    NSError *error;
-    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-        // Handle the error.
-        DDLogError(@"Saving changes failed: %@", error);
-    }
-    
-    NSString *favoriteButtonText = _game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
-    // Update button appearance
-    [self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
-    
 }
 
-#pragma mark - Testing internet connection
+- (void)segmentChanged:(id)sender {
+    // Setting delegate to nil until the animation completes so that the
+    // view did scroll function is not called.
+    _scrollView.delegate = nil;
+    CGRect frame = _scrollView.frame;
+    frame.origin.x = frame.size.width * ((SDSegmentedControl *)sender).selectedSegmentIndex;
+    frame.origin.y = 0;
+    [UIView animateWithDuration:0.2f animations:^{
+        [_scrollView scrollRectToVisible:frame animated:NO];
+    } completion:^(BOOL finished) {
+        _scrollView.delegate = self;
+    }];
+}
 
+#pragma mark - Custom Methods
+- (void)prepareForReuse {
+    // Header
+    self.headerView.titleLabel.text = nil;
+    self.headerView.releaseDateLabel.text = nil;
+    self.headerView.platformsLabel.text = nil;
+    
+    // Summary
+    self.summaryView.summaryLabel.text = nil;
+    
+    // Info
+    self.infoView.titleLabel.text = nil;
+    self.infoView.releaseDateLabel.text = nil;
+    self.infoView.genreLabel.text = nil;
+    self.infoView.developerLabel.text = nil;
+    self.infoView.publisherLabel.text = nil;
+    self.infoView.esrbLabel.text = nil;
+    self.infoView.platformsLabel.text = nil;
+    
+    // Ratings
+    self.ratingView.likeLabel.text = nil;
+    self.ratingView.metacriticRatingLabel.text = nil;
+}
+
+- (void)populateWithDataFromGame:(Game *)game {
+    [self setGame:game];
+    self.headerView.titleLabel.text = game.title;
+    self.headerView.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    self.headerView.platformsLabel.text = [game platformsString];
+    
+    self.summaryView.summaryLabel.text = game.summary;
+    
+    self.infoView.titleLabel.text = game.title;
+    self.infoView.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
+    self.infoView.genreLabel.text = game.genre;
+    self.infoView.developerLabel.text = game.developer;
+    self.infoView.publisherLabel.text = game.publisher;
+    self.infoView.esrbLabel.text = game.esrb;
+    self.infoView.platformsLabel.text = game.platformsString;
+    
+    self.ratingView.metacriticRatingLabel.text = [NSString stringWithFormat:@"%@", game.criticScore];
+    self.ratingView.likeLabel.text = [NSString stringWithFormat:@"%@", game.likes];
+    
+    //    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
+    //                    placeholderImage:[UIImage imageNamed:nil]];
+    //    [_gdvc.tableView reloadData];
+    //    [self.navigationController pushViewController:self.gdvc animated:YES];
+    
+    [self.headerView resizeSubviews];
+    [self.summaryView resizeSubviews];
+    
+    [self.verticalScrollView setContentSize:CGSizeMake(320.0f, self.summaryView.summaryLabel.frame.size.height+30.0f)];
+}
 
 @end

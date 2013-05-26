@@ -1,20 +1,27 @@
 //
-//  SBGameDetailViewController.h
+//  SBGameDetail2ViewController.h
 //  Shipbit
 //
-//  Created by Patrick Mick on 1/20/13.
+//  Created by Patrick Mick on 5/19/13.
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "Game.h"
+#import "SBGameDetailHeaderView.h"
+#import "SBSummaryView.h"
+#import "SBInfoView.h"
+#import "SBRatingView.h"
 
-@interface SBGameDetailViewController : UITableViewController
+@interface SBGameDetailViewController : UIViewController <UIScrollViewDelegate>
 
+@property (nonatomic, strong) SBGameDetailHeaderView *headerView;
+@property (nonatomic, strong) SBSummaryView *summaryView;
+@property (nonatomic, strong) SBInfoView *infoView;
+@property (nonatomic, strong) SBRatingView *ratingView;
+@property (nonatomic, strong) UIScrollView *verticalScrollView;
 @property (nonatomic, strong) Game *game;
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *releaseDateLabel;
-@property (nonatomic, strong) UILabel *platformsLabel;
+
+- (void)prepareForReuse;
+- (void)populateWithDataFromGame:(Game *)game;
 
 @end

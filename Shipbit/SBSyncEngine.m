@@ -93,7 +93,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
                 [self writeJSONReponse:responseObject toDiskForClassWithName:className];
-                //DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
+                //NSLog(@"JSON RESPONSE: %@", responseObject);
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             DDLogError(@"Request for class %@ failed with error: %@", className, error);
@@ -142,7 +142,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)writeJSONReponse:(id)response toDiskForClassWithName:(NSString *)className {
-    DDLogInfo(@"Writing JSON response to disk.");
+    DDLogInfo(@"Writing JSON response to disk for class %@.", className);
     NSURL *fileURL = [NSURL URLWithString:className relativeToURL:[self JSONDataRecordsDirectory]];
     if (![(NSDictionary *)response writeToFile:[fileURL path] atomically:YES]) {
         DDLogWarn(@"Error saving response to disk, removing nulls.");
@@ -388,8 +388,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                     }
                     
                     if ([[storedManagedObject valueForKey:@"objectId"] isEqualToString:[record valueForKey:@"objectId"]]) {
+                        DDLogVerbose(@"Updating Object with name: %@", [storedManagedObject valueForKey:@"title"]);
                         [self updateManagedObject:[storedRecords objectAtIndex:currentIndex] withRecord:record];
                     } else {
+                        DDLogVerbose(@"Creating new managed object for game with name: %@, because %@ =/= %@", [record valueForKey:@"title"], [record valueForKey:@"objectId"], [storedManagedObject valueForKey:@"objectId"]);
                         [self newManagedObjectWithClassName:className forRecord:record];
                     }
                     currentIndex++;
@@ -455,6 +457,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
             DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
+            DDLogInfo(@"Like count on server succesfully updated.");
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DDLogError(@"PUTRequest for class Game failed with error: %@", error);

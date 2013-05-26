@@ -287,8 +287,8 @@ static char ja_kvoContext;
     }
     container.layer.shadowPath = shadowPath.CGPath;	
     container.layer.shadowColor = [UIColor blackColor].CGColor;
-    container.layer.shadowRadius = 10.0f;
-    container.layer.shadowOpacity = 0.75f;
+    container.layer.shadowRadius = 1.5f;
+    container.layer.shadowOpacity = 0.3f;
     container.clipsToBounds = NO;
 }
 

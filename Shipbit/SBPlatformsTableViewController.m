@@ -7,6 +7,8 @@
 //
 
 #import "SBPlatformsTableViewController.h"
+#import "UIColor+Extras.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SBPlatformsTableViewController ()
 
@@ -26,6 +28,21 @@
 - (id)init {
     self = [super init];
     if(self) {
+        UILabel* label = [[UILabel alloc] init] ;
+        label.text = NSLocalizedString(@"Platforms", @"");
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
+        label.shadowColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.layer.shadowColor = [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = .5;
+        label.layer.shadowOffset = CGSizeMake(0, 1);
+        label.layer.shadowRadius = .8;
+        
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
         self.title = NSLocalizedString(@"Platforms", @"");
     }
     return self;
@@ -75,7 +92,7 @@
 
         }
     }
-    
+    cell.textLabel.textColor = [UIColor colorWithHexValue:@"3e434d"];
     cell.textLabel.text = [_platforms objectAtIndex:indexPath.row];
     
     return cell;

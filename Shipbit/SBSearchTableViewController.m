@@ -7,8 +7,10 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "SBSearchTableViewController.h"
+#import "SBGameDetailViewController.h"
 #import "SBGameCell.h"
 #import "SBCoreDataController.h"
 #import "Game.h"
@@ -22,6 +24,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSFetchedResultsController *searchFetchedResultsController;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) SBGameDetailViewController *gdvc;
 @property (nonatomic, strong) NSArray *platforms;
 
 @end
@@ -40,6 +43,21 @@
 - (id)init {
     self = [super init];
     if(self) {
+        UILabel* label = [[UILabel alloc] init] ;
+        label.text = NSLocalizedString(@"Search", @"");
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
+        label.shadowColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = [UIColor clearColor];
+        label.layer.shadowColor = [UIColor blackColor].CGColor;
+        label.layer.shadowOpacity = .5;
+        label.layer.shadowOffset = CGSizeMake(0, 1);
+        label.layer.shadowRadius = .8;
+        
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+        
         self.title = NSLocalizedString(@"Search", nil);
         self.tableView.rowHeight = CELL_HEIGHT;
     }
@@ -86,8 +104,6 @@
     cell.titleLabel.text = game.title;
     cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = [game platformsString];    
-    //[cell.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
-    //                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     manager.delegate = self;
@@ -96,7 +112,11 @@
                      options:0
                     progress:nil
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       cell.thumbnailView.image = [image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size];
+                       if (image) {
+                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
+                       } else {
+                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
+                       }
                    }];
 }
 
@@ -108,6 +128,7 @@
     }
     
     [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
+    [cell resizeSubviews];
     
     return cell;
 }
@@ -126,19 +147,16 @@
     
     Game *game;
     
+    // If tableview that called didselect is default tableview then not searching
     if (tableView == self.tableView) {
         game = [_fetchedResultsController objectAtIndexPath:indexPath];
     } else {
         game = [_searchFetchedResultsController objectAtIndexPath:indexPath];
     }
     
-    [_gdvc setGame:game];
-    _gdvc.titleLabel.text = game.title;
-    _gdvc.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
-    _gdvc.platformsLabel.text = game.platformsString;
-    [_gdvc.imageView setImageWithURL:[NSURL URLWithString:game.art]
-                    placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
-    [_gdvc.tableView reloadData];
+    [_gdvc prepareForReuse];
+    [_gdvc populateWithDataFromGame:game];
+
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }
 

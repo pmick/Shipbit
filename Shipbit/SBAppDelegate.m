@@ -27,7 +27,19 @@
 
 @implementation SBAppDelegate
 
+- (void)customizeAppearance {
+    // Navbar background
+    UIImage *navbarBackgroundImage = [UIImage imageNamed:@"navbar-background"];
+    [[UINavigationBar appearance] setBackgroundImage:navbarBackgroundImage
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    // Label background
+    //[[UILabel appearance] setBackgroundColor:[UIColor clearColor]];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    clock_t start = clock();
+
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
     [xcodeConsoleLogger setLogFormatter:logFormatter];
@@ -35,6 +47,8 @@
     
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Platform class]];
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Game class]];
+    
+    [self customizeAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
@@ -61,7 +75,7 @@
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     
-    [upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
+    //[upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
     
     // Set side nav views to the newly created views
     lsnvc.utvc = upcomingNav;
@@ -80,6 +94,14 @@
     
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
 
+    double executionTime = (double)(clock()-start) / CLOCKS_PER_SEC;
+    DDLogInfo(@"Startup Time: %f", executionTime);
+    // Make sure splash screen displays for at least 1 second.
+    if (executionTime < 1.0) {
+        DDLogInfo(@"Pausing main thread for: %f", (1.2-executionTime));
+        [NSThread sleepForTimeInterval:1.2-executionTime];
+    }
+    
     
     return YES;
 }
