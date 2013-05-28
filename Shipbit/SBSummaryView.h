@@ -11,6 +11,7 @@
 @interface SBSummaryView : UIView
 
 @property (nonatomic, strong) UILabel *summaryLabel;
+@property (nonatomic, strong) UIImageView *noSummaryImage;
 
 - (void)resizeSubviews;
 

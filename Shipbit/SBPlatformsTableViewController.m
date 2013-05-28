@@ -49,7 +49,10 @@
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    
     _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
                   NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
                   NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
@@ -63,11 +66,11 @@
         _selected = [[NSMutableArray alloc] initWithArray:_platforms];
     }
     
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil)
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(donePressed)];
-    self.navigationItem.rightBarButtonItem = doneButton;
+    [self.navigationItem setRightBarButtonItem:doneButton];
 }
 
 #pragma mark - Table view data source
@@ -89,10 +92,21 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         if ([_selected containsObject:[_platforms objectAtIndex:indexPath.row]]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
+            UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
+            [accessoryImage sizeToFit];
+            [cell setAccessoryView:accessoryImage];
         }
+        
+        UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
+        background.backgroundColor = [UIColor whiteColor];
+        cell.backgroundView = background;
+        
+        UIView *bgColorView = [[UIView alloc] initWithFrame:CGRectZero];
+        [bgColorView setBackgroundColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+        [cell setSelectedBackgroundView:bgColorView];
     }
     cell.textLabel.textColor = [UIColor colorWithHexValue:@"3e434d"];
+    cell.textLabel.highlightedTextColor = [UIColor colorWithHexValue:@"3e434d"];
     cell.textLabel.text = [_platforms objectAtIndex:indexPath.row];
     
     return cell;
@@ -108,6 +122,7 @@
         // Prevent less than 1 selection
         if (numberOfSelectedPlatforms > 1) {
             cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.accessoryView = nil;
             int objectToRemove = 0;
             for (int i = 0; i < numberOfSelectedPlatforms; i++) {
                 if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
@@ -119,6 +134,9 @@
         }
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
+        [accessoryImage sizeToFit];
+        [cell setAccessoryView:accessoryImage];
         [_selected addObject:cell.textLabel.text];
     }
     

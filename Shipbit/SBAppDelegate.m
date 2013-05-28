@@ -33,8 +33,20 @@
     [[UINavigationBar appearance] setBackgroundImage:navbarBackgroundImage
                                        forBarMetrics:UIBarMetricsDefault];
     
-    // Label background
-    //[[UILabel appearance] setBackgroundColor:[UIColor clearColor]];
+    UIBarButtonItem *searchBarButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    //[searchBarButton setBackgroundImage:[UIImage imageNamed:@"cancelButtonBackground"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [searchBarButton setImage:[UIImage imageNamed:@"cancelButton"]];
+    //[searchBarButton setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesNormal forState:UIControlStateNormal];
+    //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesHighlighted forState:UIControlStateHighlighted];
+    
+    UIBarButtonItem *sharingButton = [UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBack"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBackSelected"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBackSelected"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImage"] forState:UIControlStateNormal style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImagePressed"] forState:UIControlStateSelected style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
+    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImagePressed"] forState:UIControlStateHighlighted style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

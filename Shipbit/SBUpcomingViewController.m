@@ -74,6 +74,9 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateFormat:@"MMM dd"];
@@ -107,6 +110,8 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    //[self.tableView reloadData]; //fetched results controller will be lazily recreated
+    
 }
 
 #pragma mark - Table View Data Source
@@ -344,7 +349,15 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (void)platformsUpdated:(NSNotification *)note {
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
     self.fetchedResultsController = nil;
-    [self.tableView reloadData]; //fetched results controller will be lazily recreated
+    [UIView transitionWithView: self.tableView
+                      duration: 0.65f
+                       options: UIViewAnimationOptionTransitionCrossDissolve
+                    animations: ^(void) {
+                        [self.tableView reloadData];
+                    }
+                    completion: ^(BOOL isFinished) {
+                        /* TODO: Whatever you want here */
+                    }];
 }
 
 - (void)syncCompleted:(NSNotification *)note {

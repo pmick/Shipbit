@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SBSearchTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, SDWebImageManagerDelegate>
+@interface SBSearchTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, SDWebImageManagerDelegate, UISearchBarDelegate>
 
 
 @end

@@ -50,7 +50,7 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     return request;
 }
 
-- (NSMutableURLRequest *)GETRequestForAllRecordsOfClass:(NSString *)className updateAfterDate:(NSDate *)updatedDate {
+- (NSMutableURLRequest *)GETRequestForAllRecordsOfClass:(NSString *)className updatedAfterDate:(NSDate *)updatedDate {
     NSMutableURLRequest *request = nil;
     NSDictionary *parameters = nil;
     NSString *jsonString = @"";

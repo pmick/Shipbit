@@ -49,6 +49,15 @@
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"cdc9c7"]];
     
+    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setFrame:CGRectMake(25.0, 20.0, 220.0, 44.0)];
+    [shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [shareButton setBackgroundColor:[UIColor clearColor]];
+    [shareButton setImage:[UIImage imageNamed:@"tellFriends"] forState:UIControlStateNormal];
+    [shareButton setImage:[UIImage imageNamed:@"tellFriendsPressed"] forState:UIControlStateSelected];
+    [shareButton setImage:[UIImage imageNamed:@"tellFriendsPressed"] forState:UIControlStateHighlighted];
+    [shareButton sizeToFit];
+    
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 331, 114, 20)];
     [versionLabel setTextAlignment:NSTextAlignmentRight];
     [versionLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
@@ -71,6 +80,7 @@
     [_footer addSubview:footerImage];
     [_footer addSubview:versionLabel];
     [_footer addSubview:authorLabel];
+    [_footer addSubview:shareButton];
 
     self.tableView.tableFooterView = _footer;
 }
@@ -96,14 +106,15 @@
     if (cell == nil) {
         cell = [[SBLeftNavCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        
+        UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
+        background.backgroundColor = [UIColor colorWithHexValue:@"e5e0dd"];
+        cell.backgroundView = background;
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        [bgColorView setBackgroundColor:[UIColor colorWithHexValue:@"cdc9c7"]];
+        [cell setSelectedBackgroundView:bgColorView];
     }
-    UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
-    background.backgroundColor = [UIColor colorWithHexValue:@"e5e0dd"];
-    cell.backgroundView = background;
-    
-    UIView *bgColorView = [[UIView alloc] init];
-    [bgColorView setBackgroundColor:[UIColor colorWithHexValue:@"cdc9c7"]];
-    [cell setSelectedBackgroundView:bgColorView];
     
     cell.textLabel.textColor = [UIColor colorWithHexValue:@"3e434d"];
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -174,6 +185,25 @@
     }
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow]
                                   animated:YES];
+}
+
+#pragma mark - Custom Methods
+
+- (void)shareButtonPressed:(id)sender {
+    DDLogVerbose(@"Share Button Pressed");
+    
+    NSString *message = @"Check out Shipbit! It's an app that shows you upcoming game releases.";
+    NSString *path = @"<appstorelink>";
+    NSArray *items = @[ message, path ];
+    
+    // Display the view controller
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:items
+                                            applicationActivities:nil];
+    [self presentViewController:activityVC
+                       animated:YES
+                     completion:nil];
+
 }
 
 @end

@@ -81,30 +81,32 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)downloadDataForRegisteredObjects:(BOOL)useUpdatedAtDate toDeleteLocalRecords:(BOOL)toDelete {
-    NSMutableArray *requestOperations = [NSMutableArray array];
+    DDLogInfo(@"Downloading data to %@", toDelete ? @"delete." : @"update.");
+    NSMutableArray *operations = [NSMutableArray array];
     
     for (NSString *className in self.registeredClassesToSync) {
         NSDate *mostRecentUpdatedDate = nil;
         if (useUpdatedAtDate) {
             mostRecentUpdatedDate = [self mostRecentUpdatedAtDateForEntityWithName:className];
         }
-        NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] GETRequestForAllRecordsOfClass:className updateAfterDate:mostRecentUpdatedDate];
-        
-        AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableURLRequest *request = [[SBAFParseAPIClient sharedClient]
+                                        GETRequestForAllRecordsOfClass:className
+                                        updatedAfterDate:mostRecentUpdatedDate];
+        AFHTTPRequestOperation *operation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                [self writeJSONReponse:responseObject toDiskForClassWithName:className];
-                //NSLog(@"JSON RESPONSE: %@", responseObject);
+                [self writeJSONResponse:responseObject toDiskForClassWithName:className];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            DDLogError(@"Request for class %@ failed with error: %@", className, error);
+            NSLog(@"Request for class %@ failed with error: %@", className, error);
         }];
         
-        [requestOperations addObject:requestOperation];
+        [operations addObject:operation];
     }
-        
-    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+    
+    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:operations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
         
     } completionBlock:^(NSArray *operations) {
+        
         if (!toDelete) {
             [self processJSONDataRecordsIntoCoreData];
         } else {
@@ -141,7 +143,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     return url;
 }
 
-- (void)writeJSONReponse:(id)response toDiskForClassWithName:(NSString *)className {
+- (void)writeJSONResponse:(id)response toDiskForClassWithName:(NSString *)className {
     DDLogInfo(@"Writing JSON response to disk for class %@.", className);
     NSURL *fileURL = [NSURL URLWithString:className relativeToURL:[self JSONDataRecordsDirectory]];
     if (![(NSDictionary *)response writeToFile:[fileURL path] atomically:YES]) {
@@ -195,10 +197,11 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 // Returns an array of all of the records in the response.
-- (NSArray *)JSONDataRecordsForClass:(NSString *)className sortByKey:(NSString *)key {
+- (NSArray *)JSONDataRecordsForClass:(NSString *)className sortedByKey:(NSString *)key {
     NSDictionary *JSONDictionary = [self JSONDictionaryForClassWithName:className];
     NSArray *records = [JSONDictionary objectForKey:@"results"];
-    return [records sortedArrayUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
+    return [records sortedArrayUsingDescriptors:[NSArray arrayWithObject:
+                                                 [NSSortDescriptor sortDescriptorWithKey:key ascending:YES]]];
 }
 
 // No reason to keep the JSON response saved to the disk once they are put in core data.
@@ -345,7 +348,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     return results;
 }
 
-- (NSArray *)managedObjectForClass:(NSString *)className sortedByKey:(NSString *)key usingArrayOfIds:(NSArray *)idArray inArrayOfIds:(BOOL)inIds {
+- (NSArray *)managedObjectsForClass:(NSString *)className sortedByKey:(NSString *)key usingArrayOfIds:(NSArray *)idArray inArrayOfIds:(BOOL)inIds {
     __block NSArray *results = nil;
     NSManagedObjectContext *managedObjectContext = [[SBCoreDataController sharedInstance] backgroundManagedObjectContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:className];
@@ -355,8 +358,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     } else {
         predicate = [NSPredicate predicateWithFormat:@"NOT (objectId IN %@)", idArray];
     }
+    
     [fetchRequest setPredicate:predicate];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"objectId" ascending:YES]]];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:
+                                      [NSSortDescriptor sortDescriptorWithKey:@"objectId" ascending:YES]]];
     [managedObjectContext performBlockAndWait:^{
         NSError *error = nil;
         results = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -373,28 +378,35 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             NSDictionary *JSONDictionary = [self JSONDictionaryForClassWithName:className];
             NSArray *records = [JSONDictionary objectForKey:@"results"];
             for (NSDictionary *record in records) {
-                [self newManagedObjectWithClassName:className forRecord:record];
+                [self newManagedObjectWithClassName:className
+                                          forRecord:record];
             }
         } else {
-            NSArray *downloadedRecords = [self JSONDataRecordsForClass:className sortByKey:@"objectId"];
+            NSArray *downloadedRecords = [self JSONDataRecordsForClass:className
+                                                           sortedByKey:@"objectId"];
             if ([downloadedRecords lastObject]) {
-                NSArray *storedRecords = [self managedObjectForClass:className sortedByKey:@"objectId" usingArrayOfIds:[downloadedRecords valueForKey:@"objectId"] inArrayOfIds:YES];
+                NSArray *storedRecords = [self managedObjectsForClass:className
+                                                          sortedByKey:@"objectId"
+                                                      usingArrayOfIds:[downloadedRecords valueForKey:@"objectId"]
+                                                         inArrayOfIds:YES];
                 int currentIndex = 0;
                 
                 for (NSDictionary *record in downloadedRecords) {
                     NSManagedObject *storedManagedObject = nil;
-                    if ([storedRecords count] > (unsigned)currentIndex) {
+                    if ((int)[storedRecords count] > currentIndex) {
                         storedManagedObject = [storedRecords objectAtIndex:currentIndex];
                     }
+                    
+                    DDLogVerbose(@"Comparing %@ : %@ to %@ : %@", [storedManagedObject valueForKey:@"title"], [storedManagedObject valueForKey:@"objectId"], [record valueForKey:@"title"], [record valueForKey:@"objectId"]);
                     
                     if ([[storedManagedObject valueForKey:@"objectId"] isEqualToString:[record valueForKey:@"objectId"]]) {
                         DDLogVerbose(@"Updating Object with name: %@", [storedManagedObject valueForKey:@"title"]);
                         [self updateManagedObject:[storedRecords objectAtIndex:currentIndex] withRecord:record];
+                        currentIndex++;
                     } else {
                         DDLogVerbose(@"Creating new managed object for game with name: %@, because %@ =/= %@", [record valueForKey:@"title"], [record valueForKey:@"objectId"], [storedManagedObject valueForKey:@"objectId"]);
                         [self newManagedObjectWithClassName:className forRecord:record];
                     }
-                    currentIndex++;
                 }
             }
         }
@@ -415,15 +427,23 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 
 - (void)processJSONDataRecordsForDeletion {
     NSManagedObjectContext *managedObjectContext = [[SBCoreDataController sharedInstance] backgroundManagedObjectContext];
-    
-    //Iterate over all of the registered classes
+
+    // Iterate over all registered classes to sync
     for (NSString *className in self.registeredClassesToSync) {
-        //Get JSON response records off of the disk
-        NSArray *JSONRecords = [self JSONDataRecordsForClass:className sortByKey:@"objectId"];
+
+        // Retrieve the JSON response records from disk
+        NSArray *JSONRecords = [self JSONDataRecordsForClass:className sortedByKey:@"objectId"];
+        DDLogInfo(@"Downloaded JSONRecords count %d", [JSONRecords count]);
         if ([JSONRecords count] > 0) {
+
             // If there are any records fetch all locally stored records that are NOT in the list of downloaded records
-            NSArray *storedRecords = [self managedObjectForClass:className sortedByKey:@"objectId" usingArrayOfIds:[JSONRecords valueForKey:@"objectId"] inArrayOfIds:NO];
-            //Schedule ManagedObjects for deletion and save context
+            NSArray *storedRecords = [self
+                                      managedObjectsForClass:className
+                                      sortedByKey:@"objectId"
+                                      usingArrayOfIds:[JSONRecords valueForKey:@"objectId"]
+                                      inArrayOfIds:NO];
+            DDLogInfo(@"Number of records to be deleted: %d", [storedRecords count]);
+            // Schedule the NSManagedObject for deletion and save the context
             [managedObjectContext performBlockAndWait:^{
                 for (NSManagedObject *managedObject in storedRecords) {
                     [managedObjectContext deleteObject:managedObject];
@@ -435,7 +455,8 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                 }
             }];
         }
-        //Delete all JSON Record response files
+        
+        // Delete all JSON Record response files to clean up after yourself
         [self deleteJSONDataRecordsForClassWithName:className];
     }
     
@@ -450,6 +471,33 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     
     // create parameter array based off object id and increment like count
     NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(1)}};
+    NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
+                                                                          forObjectWithId:objectId
+                                                                               parameters:params];
+    AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
+            DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
+            DDLogInfo(@"Like count on server succesfully updated.");
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        DDLogError(@"PUTRequest for class Game failed with error: %@", error);
+    }];
+    
+    [requestOperations addObject:requestOperation];
+    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+        
+    } completionBlock:^(NSArray *operations) {
+        
+    }];
+}
+
+
+- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId {
+    NSMutableArray *requestOperations = [NSMutableArray array];
+    
+    // create parameter array based off object id and increment like count
+    NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(-1)}};
     NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
                                                                           forObjectWithId:objectId
                                                                                parameters:params];

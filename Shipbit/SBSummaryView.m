@@ -14,6 +14,13 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        _noSummaryImage = [[UIImageView alloc] initWithFrame:CGRectMake(23, 12, 100, 100)];
+        [_noSummaryImage setImage:[UIImage imageNamed:@"no_summary"]];
+        [_noSummaryImage sizeToFit];
+        [_noSummaryImage setBackgroundColor:[UIColor clearColor]];
+        [self addSubview:_noSummaryImage];
+        
         _summaryLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, 12, 274, 249)];
         [_summaryLabel setBackgroundColor:[UIColor clearColor]];
         [_summaryLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];

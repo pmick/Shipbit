@@ -57,12 +57,14 @@
     [self addSubview:_platformsLabel];
     
     _likeButton = [[UIButton alloc] initWithFrame:CGRectMake(152, 158, 58, 29)];
-    [_likeButton setBackgroundImage:[UIImage imageNamed:@"likeButton"] forState:UIControlStateNormal];
+    [_likeButton setShowsTouchWhenHighlighted:YES];
+    [_likeButton setBackgroundImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
     [_likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_likeButton];
     
     _watchlistButton = [[UIButton alloc] initWithFrame:CGRectMake(219, 158, 89, 29)];
-    [_watchlistButton setBackgroundImage:[UIImage imageNamed:@"watchListButton"] forState:UIControlStateNormal];
+    [_watchlistButton setShowsTouchWhenHighlighted:YES];
+    [_watchlistButton setBackgroundImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
     [_watchlistButton addTarget:self action:@selector(watchlistButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_watchlistButton];
 }
@@ -70,32 +72,48 @@
 - (void)likeButtonPressed:(id)sender {
     // TODO: keep from liking when you are not connected
     
-    // Increment likes on server
-    DDLogInfo(@"Like count will update.");
-    [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId];
-    
-    // Increment likes locally
-    _game.likes = @(_game.likes.integerValue + 1);
-    
-    // Update label to reflect increment on likes
-    
-    // Set game as liked
-    _game.hasLiked = @YES;
-    
-    // Update coredata
-    NSError *error;
-    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-        // Handle the error.
-        DDLogError(@"Saving changes failed: %@", error);
+    if (_game.hasLiked) {
+        [[SBSyncEngine sharedEngine] decrementLikesByOneForObjectWithId:_game.objectId];
+        
+        [_likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+        _game.hasLiked = NO;
+        // Update coredata
+        NSError *error;
+        if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+            // Handle the error.
+            DDLogError(@"Saving changes failed: %@", error);
+        }
+        
+    } else {
+        // Increment likes on server
+        DDLogInfo(@"Like count will update.");
+        [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId];
+        
+        // Increment likes locally
+        _game.likes = @(_game.likes.integerValue + 1);
+        
+        // Update label to reflect increment on likes
+        
+        // Set game as liked
+        _game.hasLiked = @YES;
+        
+        // Update coredata
+        NSError *error;
+        if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+            // Handle the error.
+            DDLogError(@"Saving changes failed: %@", error);
+        }
+        
+        [_likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
     }
     
-    [_likeButton setEnabled:NO];
 }
 
 - (void)watchlistButtonPressed:(id)sender {
     if (_game.isFavorite) {
         // Set isFavorite to NO
         _game.isFavorite = NO;
+        [_watchlistButton setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
         
         // Remove local notification
         UIApplication *app = [UIApplication sharedApplication];
@@ -115,8 +133,11 @@
         }
         
     } else {
+        DDLogVerbose(@"Adding favorite for game with id: %@", _game.objectId);
+        
         // Update local coredata store
         _game.isFavorite = @YES;
+        [_watchlistButton setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
         
         // Create a local notification
         UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];

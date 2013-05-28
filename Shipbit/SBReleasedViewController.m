@@ -17,6 +17,7 @@
 #import "SBSyncEngine.h"
 #import "UIImage+Extras.h"
 #import "SBGameDetailViewController.h"
+#import "UIColor+Extras.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -71,6 +72,10 @@ NSString * const kSBSelectedKey = @"selected";
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];

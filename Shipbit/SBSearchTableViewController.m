@@ -16,6 +16,7 @@
 #import "Game.h"
 #import "Platform.h"
 #import "UIImage+Extras.h"
+#import "UIColor+Extras.h"
 
 #define CELL_HEIGHT 110
 
@@ -67,6 +68,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    
     _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
                   NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
                   NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
@@ -76,6 +79,17 @@
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    UISearchBar *searchBar = self.searchDisplayController.searchBar;
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"searchbarBackground"]];
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"searchFieldBackground"]
+                                    forState:UIControlStateNormal];
+    [searchBar setImage:[UIImage imageNamed:@"searchbarIcon"]
+       forSearchBarIcon:UISearchBarIconSearch
+                  state:UIControlStateNormal];
+    searchBar.delegate = self;
+    
+    
 }
 
 #pragma mark - Table View Data Source
@@ -195,6 +209,18 @@
     
     // Return YES to cause the search result table view to be reloaded.
     return YES;
+}
+
+#pragma mark - Search Bar Delegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"searchingFieldBackground"]
+                                    forState:UIControlStateNormal];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"searchFieldBackground"]
+                                    forState:UIControlStateNormal];
 }
 
 #pragma mark - Fetched Results Controller Configuration

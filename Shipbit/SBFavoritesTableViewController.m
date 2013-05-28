@@ -16,6 +16,7 @@
 #import "Game.h"
 #import "Platform.h"
 #import "UIImage+Extras.h"
+#import "UIColor+Extras.h"
 
 #define CELL_HEIGHT 110
 
@@ -69,6 +70,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -132,8 +136,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(!_gdvc)
-    {
+    if(!_gdvc) {
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
     
@@ -174,7 +177,19 @@
             DDLogError(@"Saving changes failed: %@", error);
             
         }        
+    } 
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    if (editing) {
+        // Show custom done button background
+    } else {
+        // Show edit button (default)
     }
+    
+    DDLogInfo(@"Editing: %@", editing ? @"yes" : @"no");
 }
 
 #pragma mark - Fetched Results Controller Configuration

@@ -52,9 +52,15 @@
     _headerView.game = _game;
     
     if (_game.hasLiked) {
-        [_headerView.likeButton setEnabled:NO];
+        [_headerView.likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
     } else {
-        [_headerView.likeButton setEnabled:YES];
+        [_headerView.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    }
+    
+    if (_game.isFavorite) {
+        [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
+    } else {
+        [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
     }
 }
 
@@ -168,6 +174,8 @@
     // Ratings
     self.ratingView.likeLabel.text = nil;
     self.ratingView.metacriticRatingLabel.text = nil;
+    
+    [_verticalScrollView setContentOffset:CGPointZero animated:NO];
 }
 
 - (void)populateWithDataFromGame:(Game *)game {
@@ -177,6 +185,11 @@
     self.headerView.platformsLabel.text = [game platformsString];
     
     self.summaryView.summaryLabel.text = game.summary;
+    if (game.summary.length > 0) {
+        self.summaryView.noSummaryImage.hidden = YES;
+    } else {
+        self.summaryView.noSummaryImage.hidden = NO;
+    }
     
     self.infoView.titleLabel.text = game.title;
     self.infoView.releaseDateLabel.text = [_dateFormatter stringFromDate:game.releaseDate];
