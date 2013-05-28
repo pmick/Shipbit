@@ -20,6 +20,7 @@
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
 #import "XCodeConsoleLogFormatter.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface SBAppDelegate ()
 
@@ -52,6 +53,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     clock_t start = clock();
 
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
     [xcodeConsoleLogger setLogFormatter:logFormatter];
