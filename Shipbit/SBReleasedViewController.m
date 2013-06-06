@@ -78,7 +78,7 @@ NSString * const kSBSelectedKey = @"selected";
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateFormat:@"MMM dd"];
     
     // Load selected from userdefaults if they exist
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey]) {
@@ -86,6 +86,7 @@ NSString * const kSBSelectedKey = @"selected";
     }
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor colorWithHexValue:@"B1ABA7"];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
@@ -99,6 +100,11 @@ NSString * const kSBSelectedKey = @"selected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark - Table View Data Source
@@ -222,6 +228,7 @@ NSString * const kSBSelectedKey = @"selected";
     }
 
     [_gdvc prepareForReuse];
+    [_gdvc.headerView.imageView setImage:((SBGameCell *)[self.tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
     [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
     [self.navigationController pushViewController:self.gdvc animated:YES];
@@ -254,14 +261,26 @@ NSString * const kSBSelectedKey = @"selected";
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.month = -3;
     NSDate *threeMonthsAgo = [calendar dateByAddingComponents:components toDate:now options:0];
+    
+    //NSDate *today = [NSDate date];
+    //NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    //[calendar setLocale:[NSLocale systemLocale]];
+    //[calendar setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    //NSDateComponents *nowComponents = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:today];
+    //today = [calendar dateFromComponents:nowComponents];
+    
+    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit) fromDate:[NSDate date]]; // gets the year, month, and day for today's date
+    NSDate *today = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
+        
     NSPredicate *predicate;
     
     if ([_selected count] > 0) {
         // Filter using platforms.
-        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", threeMonthsAgo, now, _selected];
+        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate < %@)) AND (ANY platforms.title IN %@)", threeMonthsAgo, today, _selected];
     } else {
         // Don't filter.
-        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", threeMonthsAgo, now];
+        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate < %@)", threeMonthsAgo, today];
     }
     
     [fetchRequest setPredicate:predicate];
@@ -361,10 +380,20 @@ NSString * const kSBSelectedKey = @"selected";
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSelectedKey];
     self.fetchedResultsController = nil;
     [self.tableView reloadData]; //fetched results controller will be lazily recreated
+    [UIView transitionWithView: self.tableView
+                      duration: 1.05f
+                       options: UIViewAnimationOptionTransitionCrossDissolve
+                    animations: ^(void) {
+                        [self.tableView reloadData];
+                    }
+                    completion: ^(BOOL isFinished) {
+                        /* TODO: Whatever you want here */
+                    }];
 }
 
 - (void)syncCompleted:(NSNotification *)note {
     [self.refreshControl endRefreshing];
+    [self.tableView reloadData];
 }
 
 @end

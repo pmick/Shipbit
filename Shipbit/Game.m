@@ -1,6 +1,6 @@
 #import "Game.h"
 #import "Platform.h"
-
+#import "NSDate+Utilities.h"
 
 @interface Game ()
 
@@ -36,6 +36,59 @@
         tmp = [NSString stringWithFormat:@"%d", ([components year] * 1000) + [components month]];
         [self setPrimitiveSectionIdentifier:tmp];
     }
+    return tmp;
+}
+
+- (NSString *)watchSection {
+    
+    // Create and cache the section identifier on demand.
+    
+    [self willAccessValueForKey:@"sectionIdentifier"];
+    NSString *tmp = [self primitiveWatchSection];
+    [self didAccessValueForKey:@"sectionIdentifier"];
+    
+    // No calculations if the sectionIdentifier was cached on demand.
+    if (!tmp) {
+        
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+                                                      fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
+        [calComponents setHour:23];
+        [calComponents setMinute:59];
+        [calComponents setSecond:59];
+        
+        NSDate *modRelease = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
+        if ([modRelease isInFuture]) {
+            tmp = @"Upcoming";
+        } else {
+            tmp = @"Shipped";
+        }
+        [self setPrimitiveWatchSection:tmp];
+    }
+    return tmp;
+}
+
+- (NSString *)firstLetter
+{
+    [self willAccessValueForKey:@"sectionIdentifier"];
+    NSString *tmp = [self primitiveFirstLetter];
+    [self didAccessValueForKey:@"sectionIdentifier"];
+    
+    if (!tmp) {
+        if (![self title]) {
+            return [self title];
+        } else {
+            NSCharacterSet *decimalSet = [NSCharacterSet decimalDigitCharacterSet];
+            BOOL valid = [[[[self title] substringToIndex:1] stringByTrimmingCharactersInSet: decimalSet] isEqualToString:@""];
+            if (valid) {
+                tmp = @"#";
+            } else {
+                tmp = [[[self title] substringToIndex:1] uppercaseString];
+            }
+        }
+        [self setPrimitiveFirstLetter:tmp];
+    }
+    
     return tmp;
 }
 

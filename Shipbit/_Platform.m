@@ -6,6 +6,7 @@
 const struct PlatformAttributes PlatformAttributes = {
 	.createdAt = @"createdAt",
 	.objectId = @"objectId",
+	.syncStatus = @"syncStatus",
 	.title = @"title",
 	.updatedAt = @"updatedAt",
 };
@@ -43,6 +44,11 @@ const struct PlatformFetchedProperties PlatformFetchedProperties = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
+	if ([key isEqualToString:@"syncStatusValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"syncStatus"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -59,6 +65,32 @@ const struct PlatformFetchedProperties PlatformFetchedProperties = {
 
 @dynamic objectId;
 
+
+
+
+
+
+@dynamic syncStatus;
+
+
+
+- (int16_t)syncStatusValue {
+	NSNumber *result = [self syncStatus];
+	return [result shortValue];
+}
+
+- (void)setSyncStatusValue:(int16_t)value_ {
+	[self setSyncStatus:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveSyncStatusValue {
+	NSNumber *result = [self primitiveSyncStatus];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveSyncStatusValue:(int16_t)value_ {
+	[self setPrimitiveSyncStatus:[NSNumber numberWithShort:value_]];
+}
 
 
 

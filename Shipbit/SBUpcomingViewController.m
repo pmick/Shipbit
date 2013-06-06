@@ -18,6 +18,7 @@
 #import "SBSyncEngine.h"
 #import "UIImage+Extras.h"
 #import "UIColor+Extras.h"
+#import "NSDate+Utilities.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -87,7 +88,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     }
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = [UIColor colorWithRed:(177.0/255.0) green:(171.0/255.0) blue:(167.0/255.0) alpha:0.97];
+    refreshControl.tintColor = [UIColor colorWithHexValue:@"B1ABA7"];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
@@ -128,7 +129,33 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
-    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+    
+    if ([game.releaseDate isToday]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out Today";
+
+    } else if ([game.releaseDate isTomorrow]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out Tomorrow";
+
+    } else if ([game.releaseDate isThisWeek]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out This Week";
+
+    } else {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
+        cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+        cell.urgentLabel.text = @"";
+
+    }
+    
     cell.platformsLabel.text = game.platformsString;
     cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
     
@@ -144,7 +171,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
                        } else {
                            cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
                        }
-                       
     }];
 
     [cell resizeSubviews];
@@ -212,6 +238,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     }
 
     [_gdvc prepareForReuse];
+    [_gdvc.headerView.imageView setImage:((SBGameCell *)[self.tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
     [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
     [self.navigationController pushViewController:_gdvc animated:YES];
@@ -245,12 +272,16 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     components.year = 2;
     NSDate *twoYearsFromNow = [calendar dateByAddingComponents:components toDate:now options:0];
     
+    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+                                                  fromDate:[NSDate date]]; // gets the year, month, and day for today's date
+    NSDate *today = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
+    
     NSPredicate *predicate;
     
     if ([_selected count] > 0) {
-        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", now, twoYearsFromNow, _selected];
+        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", today, twoYearsFromNow, _selected];
     } else {
-        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", now, twoYearsFromNow];
+        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", today, twoYearsFromNow];
     }
     
     [fetchRequest setPredicate:predicate];
@@ -337,6 +368,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)refresh:(id)sender {
     [[SBSyncEngine sharedEngine] startSync];
+    [self.tableView reloadData];
 }
 
 - (void)platformsButtonPressed {
@@ -350,7 +382,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
     self.fetchedResultsController = nil;
     [UIView transitionWithView: self.tableView
-                      duration: 0.65f
+                      duration: 1.05f
                        options: UIViewAnimationOptionTransitionCrossDissolve
                     animations: ^(void) {
                         [self.tableView reloadData];
@@ -362,6 +394,8 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)syncCompleted:(NSNotification *)note {
     [self.refreshControl endRefreshing];
+    [self.tableView reloadData];
+
 }
 
 @end

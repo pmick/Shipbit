@@ -36,6 +36,19 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
         [self setDefaultHeader:@"X-Parse-REST-API-Key" value:kSBFParseAPIKey];
         [self setDefaultHeader:@"Accept" value:@"application/json"];
         [self setDefaultHeader:@"content-type" value:@"application/json"];
+        [self setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            if (status == AFNetworkReachabilityStatusNotReachable) {
+                DDLogVerbose(@"Not reachable");
+                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Network Problem"
+                                                                  message:@"You lost connection to the internet, some parts of Shipbit might not work."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+                [message show];
+            } else {
+                DDLogVerbose(@"Reachable");
+            }
+        }];
     }
     
     return self;
@@ -66,6 +79,35 @@ static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3
     
     // Parse added a default limit value of 100, takes values between 1-1000
     NSString *jsonLimit = @"1000";
+    
+    if (jsonString.length > 0) {
+        parameters = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects: jsonString, jsonLimit, nil]
+                                                 forKeys:[NSArray arrayWithObjects: @"where", @"limit", nil]];
+    } else {
+        parameters = [NSDictionary dictionaryWithObject:jsonLimit
+                                                 forKey:@"limit"];
+    }
+    
+    request = [self GETRequestForClass:className parameters:parameters];
+    return request;
+}
+
+- (NSMutableURLRequest *)GETRequestForSomeRecordsOfClass:(NSString *)className releasedAfterDate:(NSDate *)releaseDate {
+    NSMutableURLRequest *request = nil;
+    NSDictionary *parameters = nil;
+    NSString *jsonString = @"";
+    if (releaseDate) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.'999Z'"];
+        [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        
+        jsonString = [NSString stringWithFormat:@"{\"releaseDateLong\":{\"$gte\":{\"__type\":\"Date\",\"iso\":\"%@\"}}}",
+                      [dateFormatter stringFromDate:releaseDate]];
+        
+    }
+    
+    // Parse added a default limit value of 100, takes values between 1-1000
+    NSString *jsonLimit = @"100";
     
     if (jsonString.length > 0) {
         parameters = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects: jsonString, jsonLimit, nil]

@@ -55,6 +55,7 @@
     
     _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
                   NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
+                  NSLocalizedString(@"Xbox One", nil), NSLocalizedString(@"PlayStation 4", nil),
                   NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
                   NSLocalizedString(@"Wii", nil), NSLocalizedString(@"Wii U", nil),
                   NSLocalizedString(@"DS", nil), NSLocalizedString(@"3DS", nil), nil];

@@ -12,6 +12,10 @@
 #import "Platform.h"
 #import "Game.h"
 #import "AFJSONRequestOperation.h"
+#import "MBProgressHUD.h"
+#import "SBAppDelegate.h"
+#import "UIColor+Extras.h"
+#import "NSDate+Utilities.h"
 
 #import <CoreData/CoreData.h>
 
@@ -19,6 +23,7 @@
 
 @property (nonatomic, strong) NSMutableArray *registeredClassesToSync;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
@@ -26,6 +31,7 @@
 
 NSString * const kSDSyncEngineInitialCompleteKey = @"SBSyncEngineInitialSyncCompleted";
 NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSyncCompleted";
+NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComplete";
 
 #pragma mark - Engine Creation and Object Registration
 
@@ -92,11 +98,13 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         NSMutableURLRequest *request = [[SBAFParseAPIClient sharedClient]
                                         GETRequestForAllRecordsOfClass:className
                                         updatedAfterDate:mostRecentUpdatedDate];
-        AFHTTPRequestOperation *operation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        AFHTTPRequestOperation *operation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *anOperation, id responseObject) {
             if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                [self writeJSONResponse:responseObject toDiskForClassWithName:className];
+//                [self writeJSONResponse:responseObject toDiskForClassWithName:className];
+//                NSArray *records = [(NSDictionary *)responseObject objectForKey:@"results"];
+//                DDLogVerbose(@"Number of downloaded records: %d, for class %@", [records count], className);
             }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        } failure:^(AFHTTPRequestOperation *anOperation, NSError *error) {
             NSLog(@"Request for class %@ failed with error: %@", className, error);
         }];
         
@@ -104,14 +112,99 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     }
     
     [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:operations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+        DDLogInfo(@"Operation %d of %d completed.", numberOfCompletedOperations, totalNumberOfOperations);
+
+    } completionBlock:^(NSArray *theOperations) {
+        __block BOOL syncSuccess = YES;
+
+        [theOperations enumerateObjectsWithOptions: NSEnumerationConcurrent usingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+            //DDLogVerbose(@"%@", ((AFJSONRequestOperation *)obj).responseJSON);
+            
+            DDLogInfo(@"%d", ((AFJSONRequestOperation *)obj).response.statusCode);
+            if (((AFJSONRequestOperation *)obj).response.statusCode == 200) {
+                if (idx == 0) {
+                    [self writeJSONResponse:((AFJSONRequestOperation *)obj).responseJSON toDiskForClassWithName:@"Platform"];
+                } else {
+                    [self writeJSONResponse:((AFJSONRequestOperation *)obj).responseJSON toDiskForClassWithName:@"Game"];
+                }
+            } else {
+                syncSuccess = NO;
+            }
+            
+        }];
         
-    } completionBlock:^(NSArray *operations) {
+        if (syncSuccess) {
+            DDLogInfo(@"Sync Success, toDelete: %@ useUpdatedAtDate: %@", toDelete ? @"yes" : @"no", useUpdatedAtDate ? @"yes" : @"no");
+            if (!toDelete && !useUpdatedAtDate) {
+                DDLogWarn(@"Synced everything without deleting. Full library of games acquired.");
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSBSyncEngineLongSyncCompleteKey];
+            }
+        }
         
         if (!toDelete) {
             [self processJSONDataRecordsIntoCoreData];
         } else {
             [self processJSONDataRecordsForDeletion];
         }
+    }];
+}
+
+- (void)downloadSomeDataForInitialSync
+{
+    DDLogInfo(@"Downloading some data to display quickly for the initial sync.");
+    NSMutableArray *operations = [NSMutableArray array];
+    NSDate *releaseDate = [NSDate dateYesterday];
+    
+    NSMutableURLRequest *platformRequest = [[SBAFParseAPIClient sharedClient] GETRequestForAllRecordsOfClass:@"Platform" updatedAfterDate:[self mostRecentUpdatedAtDateForEntityWithName:@"Platform"]];
+    
+    AFHTTPRequestOperation *dateOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:platformRequest success:^(AFHTTPRequestOperation *anOperation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            //[self writeJSONResponse:responseObject toDiskForClassWithName:@"Platform"];
+            //NSArray *records = [(NSDictionary *)responseObject objectForKey:@"results"];
+            //DDLogVerbose(@"Number of downloaded records: %d, for class %@", [records count], @"Platform");
+        }
+    } failure:^(AFHTTPRequestOperation *anOperation, NSError *error) {
+        DDLogError(@"Request for class %@ failed with error: %@", @"Platform", error);
+    }];
+    
+    [operations addObject:dateOperation];
+    
+    NSMutableURLRequest *request = [[SBAFParseAPIClient sharedClient] GETRequestForSomeRecordsOfClass:@"Game" releasedAfterDate:releaseDate];
+    
+    AFHTTPRequestOperation *operation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *anOperation, id responseObject) {
+        DDLogVerbose(@"%@", responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            // processing has to be taken out of individual completions, because this crap is broken.
+            // individual completion blocks are called after the final. processing has to happen before others stuff.
+            //[self writeJSONResponse:responseObject toDiskForClassWithName:@"Game"];
+            //NSArray *records = [(NSDictionary *)responseObject objectForKey:@"results"];
+            //DDLogVerbose(@"Number of downloaded records: %d, for class %@", [records count], @"Game");
+        }
+    } failure:^(AFHTTPRequestOperation *anOperation, NSError *error) {
+        DDLogError(@"Request for class %@ failed with error: %@", @"Game", error);
+    }];
+    
+    [operations addObject:operation];
+    
+    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:operations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+        DDLogInfo(@"Operation %d of %d completed.", numberOfCompletedOperations, totalNumberOfOperations);
+    } completionBlock:^(NSArray *theOperations) {
+        [theOperations enumerateObjectsWithOptions: NSEnumerationConcurrent usingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+            //DDLogVerbose(@"%@", ((AFJSONRequestOperation *)obj).responseJSON);
+            DDLogInfo(@"%d", ((AFJSONRequestOperation *)obj).response.statusCode);
+            if (((AFJSONRequestOperation *)obj).response.statusCode == 200) {
+                if (idx == 0) {
+                    [self writeJSONResponse:((AFJSONRequestOperation *)obj).responseJSON toDiskForClassWithName:@"Platform"];
+                } else {
+                    [self writeJSONResponse:((AFJSONRequestOperation *)obj).responseJSON toDiskForClassWithName:@"Game"];
+                }
+            }
+            
+        }];
+        
+        DDLogInfo(@"Completed request operations.");
+        [self processJSONDataRecordsIntoCoreData];
+
     }];
 }
 
@@ -122,8 +215,23 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         _syncInProgress = YES;
         [self didChangeValueForKey:@"syncInProgress"];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [self downloadDataForRegisteredObjects:YES toDeleteLocalRecords:NO];
+            //if initial sync perform fast sync
+            if (![self initialSyncComplete]) {
+                DDLogWarn(@"Performing quick sync");
+                [self downloadSomeDataForInitialSync];
+            } else {
+                [self downloadDataForRegisteredObjects:YES toDeleteLocalRecords:NO];
+            }
+            
         });
+        if (![self initialSyncComplete]) {
+            SBAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            _hud = [MBProgressHUD showHUDAddedTo:appDelegate.window.rootViewController.view animated:YES];
+            _hud.color = [UIColor colorWithHexValue:@"3e434d"];
+            _hud.mode = MBProgressHUDModeIndeterminate;
+            _hud.labelText = @"Loading";
+            _hud.yOffset = -96;
+        }
     }
 }
 
@@ -164,6 +272,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
         if (![nullFreeDictionary writeToFile:[fileURL path] atomically:YES]) {
             DDLogError(@"Failed all attempts to save response to disk: %@", response);
         }
+        DDLogInfo(@"Saving records for %@ to %@", className, [fileURL path]);
     }
 }
 
@@ -174,17 +283,28 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)setInitialSyncCompleted {
+    SBAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [MBProgressHUD hideAllHUDsForView:appDelegate.window.rootViewController.view animated:YES];
     [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:kSDSyncEngineInitialCompleteKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)executeSyncCompletedOperations {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setInitialSyncCompleted];
         [[NSNotificationCenter defaultCenter] postNotificationName:kSDSyncEngineSyncCompletedNotificationName object:nil];
         [self willChangeValueForKey:@"syncInProgress"];
         _syncInProgress = NO;
         [self didChangeValueForKey:@"syncInProgress"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            DDLogWarn(@"Inital sync complete? %@  Long sync success? %@", [self initialSyncComplete] ? @"yes" : @"no", [[NSUserDefaults standardUserDefaults] boolForKey:kSBSyncEngineLongSyncCompleteKey] ? @"yes" : @"no");
+            if ((![self initialSyncComplete]) || (![[NSUserDefaults standardUserDefaults] boolForKey:kSBSyncEngineLongSyncCompleteKey])) {
+                DDLogWarn(@"Performing full sync because initial sync didnt happen or failed.");
+                [self downloadDataForRegisteredObjects:NO toDeleteLocalRecords:NO];
+            }
+        });
+        [self setInitialSyncCompleted];
+        
         DDLogInfo(@"Sync completed.");
     });
 }
@@ -211,6 +331,8 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     BOOL deleted = [[NSFileManager defaultManager] removeItemAtURL:url error:&error];
     if (!deleted) {
         DDLogError(@"Unable to delete JSON Records at %@, reason: %@", url, error);
+    } else {
+        DDLogInfo(@"Deleted files for class %@", className);
     }
 }
 
@@ -255,8 +377,11 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
     NSDate *date;
     [self initializeDateFormatter];
     [self.dateFormatter setDateFormat:@"MMM dd, yyyy"];
+    [self.dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     date = [self.dateFormatter dateFromString:dateString];
+    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+    
     return date;
 }
 
@@ -312,7 +437,10 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             if ([dataType isEqualToString:@"Date"]) {
                 NSString *dateString = [(NSDictionary *)value objectForKey:@"iso"];
                 NSDate *date = [self dateUsingStringFromAPI:dateString];
-                [managedObject setValue:date forKey:key];
+                if (![key isEqualToString:@"releaseDateLong"]) {
+                    [managedObject setValue:date forKey:key];
+                }
+            
             } else if ([dataType isEqualToString:@"File"]) {
                 NSString *urlString = [(NSDictionary *)value objectForKey:@"url"];
                 NSURL *url = [NSURL URLWithString:urlString];
@@ -371,6 +499,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 }
 
 - (void)processJSONDataRecordsIntoCoreData {
+    DDLogInfo(@"Processing records into core data.");
     NSManagedObjectContext *managedObjectContext = [[SBCoreDataController sharedInstance] backgroundManagedObjectContext];
     // Iterate over all classes registered to object context
     for (NSString *className in self.registeredClassesToSync) {
@@ -418,11 +547,16 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             }
         }];
         
-        [self deleteJSONDataRecordsForClassWithName:className];
+        //[self deleteJSONDataRecordsForClassWithName:className];
         
     }
-    
-    [self downloadDataForRegisteredObjects:NO toDeleteLocalRecords:YES];
+    if (![self initialSyncComplete]) {
+        DDLogInfo(@"Initial sync, ending sync early.");
+        [self processJSONDataRecordsForDeletion];
+    } else {
+        [self downloadDataForRegisteredObjects:NO toDeleteLocalRecords:YES];
+
+    }
 }
 
 - (void)processJSONDataRecordsForDeletion {
@@ -433,7 +567,6 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 
         // Retrieve the JSON response records from disk
         NSArray *JSONRecords = [self JSONDataRecordsForClass:className sortedByKey:@"objectId"];
-        DDLogInfo(@"Downloaded JSONRecords count %d", [JSONRecords count]);
         if ([JSONRecords count] > 0) {
 
             // If there are any records fetch all locally stored records that are NOT in the list of downloaded records
@@ -442,7 +575,7 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
                                       sortedByKey:@"objectId"
                                       usingArrayOfIds:[JSONRecords valueForKey:@"objectId"]
                                       inArrayOfIds:NO];
-            DDLogInfo(@"Number of records to be deleted: %d", [storedRecords count]);
+            //DDLogInfo(@"Number of records to be deleted: %d", [storedRecords count]);
             // Schedule the NSManagedObject for deletion and save the context
             [managedObjectContext performBlockAndWait:^{
                 for (NSManagedObject *managedObject in storedRecords) {
@@ -466,8 +599,8 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
 
 #pragma mark - Update Execution
 
-- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId {
-    NSMutableArray *requestOperations = [NSMutableArray array];
+- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {
+    //NSMutableArray *requestOperations = [NSMutableArray array];
     
     // create parameter array based off object id and increment like count
     NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(1)}};
@@ -479,21 +612,29 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
             DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
             DDLogInfo(@"Like count on server succesfully updated.");
+            if (completionBlock) {
+                completionBlock(YES);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DDLogError(@"PUTRequest for class Game failed with error: %@", error);
+        if (completionBlock) {
+            completionBlock(NO);
+        }
     }];
     
-    [requestOperations addObject:requestOperation];
-    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
-        
-    } completionBlock:^(NSArray *operations) {
-        
-    }];
+    [requestOperation start];
+    
+//    [requestOperations addObject:requestOperation];
+//    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
+//        
+//    } completionBlock:^(NSArray *operations) {
+//        
+//    }];
 }
 
 
-- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId {
+- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {
     NSMutableArray *requestOperations = [NSMutableArray array];
     
     // create parameter array based off object id and increment like count
@@ -506,9 +647,15 @@ NSString * const kSDSyncEngineSyncCompletedNotificationName = @"SBSyncEngineSync
             //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
             DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
             DDLogInfo(@"Like count on server succesfully updated.");
+            if (completionBlock) {
+                completionBlock(YES);
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         DDLogError(@"PUTRequest for class Game failed with error: %@", error);
+        if (completionBlock) {
+            completionBlock(NO);
+        }
     }];
     
     [requestOperations addObject:requestOperation];

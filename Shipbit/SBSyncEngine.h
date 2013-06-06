@@ -16,8 +16,8 @@
 
 - (void)registerNSManagedObjectClassToSync:(Class)aClass;
 - (void)startSync;
-- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId;
-- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId;
+- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock;
+- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock;
 
 
 typedef enum {

@@ -3,5 +3,6 @@
 @interface Game : _Game {}
 
 - (NSString *)platformsString;
+- (NSString *)firstLetter;
 
 @end

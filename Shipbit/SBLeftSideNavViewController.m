@@ -42,7 +42,7 @@
     [super viewDidLoad];
     _views = @[ NSLocalizedString(@"Upcoming", nil),
                 NSLocalizedString(@"Shipped", nil),
-                NSLocalizedString(@"Search", nil),
+                NSLocalizedString(@"Browse", nil),
                 NSLocalizedString(@"Watchlist", nil) ];
     
     self.tableView.scrollEnabled = NO;
@@ -74,6 +74,17 @@
     UIImageView *footerImage = [[UIImageView alloc] initWithFrame:CGRectMake(94, 284, 133, 62)];
     [footerImage setImage:[UIImage imageNamed:@"leftNavLogoImage"]];
     [footerImage sizeToFit];
+    
+    
+    float screenHeight = [[UIScreen mainScreen] applicationFrame].size.height;
+    if (screenHeight < 548.0f) {
+        DDLogInfo(@"DO SPECIAL STUFF");
+        [footerImage setFrame:CGRectMake(94, 194, 133, 62)];
+        [footerImage sizeToFit];
+        [versionLabel setFrame:CGRectMake(20, 241, 114, 20)];
+        [authorLabel setFrame:CGRectMake(137, 241, 114, 20)];
+
+    }
     
     _footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 372)];
     _footer.backgroundColor = [UIColor colorWithHexValue:@"e5e0dd"];

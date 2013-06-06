@@ -47,6 +47,14 @@
         _releaseDateLabel.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_releaseDateLabel];
         
+        _urgentLabel = [[UILabel alloc] init];
+        _urgentLabel.font = [UIFont systemFontOfSize:13.0];
+        _urgentLabel.textAlignment = NSTextAlignmentLeft;
+        _urgentLabel.textColor = [UIColor colorWithHexValue:@"8d8885"];
+        _urgentLabel.highlightedTextColor = [UIColor whiteColor];
+        _urgentLabel.backgroundColor = [UIColor clearColor];
+        [self.contentView addSubview:_urgentLabel];
+        
         _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(110.0, 88.0, 190.0, 16.0)];
         _platformsLabel.font = [UIFont boldSystemFontOfSize:11.0];
         _platformsLabel.textAlignment = NSTextAlignmentLeft;
@@ -85,8 +93,9 @@
 - (void)resizeSubviews {
     [_titleLabel setFrame:CGRectMake(110.0, 3.0, 180.0, 40.0)];
     [_titleLabel sizeToFit];
-    [_releaseDateImage setFrame:CGRectMake(110.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 4, 12, 14)];
+    [_releaseDateImage setFrame:CGRectMake(111.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 4, 12, 14)];
     [_releaseDateLabel setFrame:CGRectMake(127.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 1, 100.0, 20.0)];
+    [_urgentLabel setFrame:CGRectMake(_releaseDateLabel.frame.origin.x + 52, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 1, 100.0, 20.0)];
 }
 
 @end

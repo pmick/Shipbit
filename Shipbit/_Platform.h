@@ -7,6 +7,7 @@
 extern const struct PlatformAttributes {
 	__unsafe_unretained NSString *createdAt;
 	__unsafe_unretained NSString *objectId;
+	__unsafe_unretained NSString *syncStatus;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *updatedAt;
 } PlatformAttributes;
@@ -19,6 +20,7 @@ extern const struct PlatformFetchedProperties {
 } PlatformFetchedProperties;
 
 @class Game;
+
 
 
 
@@ -53,6 +55,20 @@ extern const struct PlatformFetchedProperties {
 
 
 //- (BOOL)validateObjectId:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSNumber* syncStatus;
+
+
+
+@property int16_t syncStatusValue;
+- (int16_t)syncStatusValue;
+- (void)setSyncStatusValue:(int16_t)value_;
+
+//- (BOOL)validateSyncStatus:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -108,6 +124,15 @@ extern const struct PlatformFetchedProperties {
 
 - (NSString*)primitiveObjectId;
 - (void)setPrimitiveObjectId:(NSString*)value;
+
+
+
+
+- (NSNumber*)primitiveSyncStatus;
+- (void)setPrimitiveSyncStatus:(NSNumber*)value;
+
+- (int16_t)primitiveSyncStatusValue;
+- (void)setPrimitiveSyncStatusValue:(int16_t)value_;
 
 
 

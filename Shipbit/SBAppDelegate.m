@@ -35,8 +35,11 @@
                                        forBarMetrics:UIBarMetricsDefault];
     
     UIBarButtonItem *searchBarButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
-    //[searchBarButton setBackgroundImage:[UIImage imageNamed:@"cancelButtonBackground"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [searchBarButton setImage:[UIImage imageNamed:@"cancelButton"]];
+    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButton"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButtonPressed"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButtonPressed"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    
+    //[searchBarButton setImage:[UIImage imageNamed:@"cancelButton"]];
     //[searchBarButton setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesNormal forState:UIControlStateNormal];
     //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesHighlighted forState:UIControlStateHighlighted];
@@ -51,9 +54,9 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    clock_t start = clock();
-
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
+    [TestFlight takeOff:@"8a468878-2f6f-4b89-91d4-dfb85475e88b"];
     
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
@@ -109,15 +112,6 @@
     
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
 
-    double executionTime = (double)(clock()-start) / CLOCKS_PER_SEC;
-    DDLogInfo(@"Startup Time: %f", executionTime);
-    // Make sure splash screen displays for at least 1 second.
-    if (executionTime < 1.0) {
-        DDLogInfo(@"Pausing main thread for: %f", (1.2-executionTime));
-        [NSThread sleepForTimeInterval:1.2-executionTime];
-    }
-    
-    
     return YES;
 }
 

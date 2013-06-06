@@ -9,6 +9,7 @@ const struct GameAttributes GameAttributes = {
 	.criticScore = @"criticScore",
 	.developer = @"developer",
 	.esrb = @"esrb",
+	.firstLetter = @"firstLetter",
 	.genre = @"genre",
 	.hasLiked = @"hasLiked",
 	.isFavorite = @"isFavorite",
@@ -19,8 +20,10 @@ const struct GameAttributes GameAttributes = {
 	.releaseDate = @"releaseDate",
 	.sectionIdentifier = @"sectionIdentifier",
 	.summary = @"summary",
+	.syncStatus = @"syncStatus",
 	.title = @"title",
 	.updatedAt = @"updatedAt",
+	.watchSection = @"watchSection",
 };
 
 const struct GameRelationships GameRelationships = {
@@ -73,6 +76,11 @@ const struct GameFetchedProperties GameFetchedProperties = {
 	}
 	if ([key isEqualToString:@"likesValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"likes"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
+	if ([key isEqualToString:@"syncStatusValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"syncStatus"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
@@ -131,6 +139,13 @@ const struct GameFetchedProperties GameFetchedProperties = {
 
 
 @dynamic esrb;
+
+
+
+
+
+
+@dynamic firstLetter;
 
 
 
@@ -264,6 +279,32 @@ const struct GameFetchedProperties GameFetchedProperties = {
 
 
 
+@dynamic syncStatus;
+
+
+
+- (int16_t)syncStatusValue {
+	NSNumber *result = [self syncStatus];
+	return [result shortValue];
+}
+
+- (void)setSyncStatusValue:(int16_t)value_ {
+	[self setSyncStatus:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveSyncStatusValue {
+	NSNumber *result = [self primitiveSyncStatus];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveSyncStatusValue:(int16_t)value_ {
+	[self setPrimitiveSyncStatus:[NSNumber numberWithShort:value_]];
+}
+
+
+
+
+
 @dynamic title;
 
 
@@ -272,6 +313,13 @@ const struct GameFetchedProperties GameFetchedProperties = {
 
 
 @dynamic updatedAt;
+
+
+
+
+
+
+@dynamic watchSection;
 
 
 

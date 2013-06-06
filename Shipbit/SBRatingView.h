@@ -12,5 +12,7 @@
 
 @property (nonatomic, strong) UILabel *metacriticRatingLabel;
 @property (nonatomic, strong) UILabel *likeLabel;
+@property (nonatomic, strong) UIButton *ratingButton;
+@property (nonatomic, strong) NSString *metacriticPath;
 
 @end

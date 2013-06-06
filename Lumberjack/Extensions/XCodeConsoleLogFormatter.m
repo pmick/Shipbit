@@ -13,7 +13,7 @@
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
     //Alter the message to your liking
-    NSString *msg = [logMessage->logMsg stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
+    //NSString *msg = [logMessage->logMsg stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
     
     NSString *logLevel;
     switch (logMessage->logFlag)
@@ -28,7 +28,7 @@
     NSString *file = [[[NSString stringWithUTF8String:logMessage->file] lastPathComponent] stringByDeletingPathExtension];
     
     //Format the message
-    return [NSString stringWithFormat:@"%@ %x %@ \"%@\" || [%@@%s@%i]", logMessage->timestamp, logMessage->machThreadID, logLevel, msg, file, logMessage->function, logMessage->lineNumber];
+    return [NSString stringWithFormat:@"%@ %x %@ %@ [%@@%s@%i]", logMessage->timestamp, logMessage->machThreadID, logLevel, logMessage->logMsg, file, logMessage->function, logMessage->lineNumber];
 }
 
 @end

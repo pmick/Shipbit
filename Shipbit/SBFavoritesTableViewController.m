@@ -17,6 +17,7 @@
 #import "Platform.h"
 #import "UIImage+Extras.h"
 #import "UIColor+Extras.h"
+#import "NSDate+Utilities.h"
 
 #define CELL_HEIGHT 110
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) UIImageView *placeholder;
 
 
 @end
@@ -77,15 +79,36 @@
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateFormat:@"MMM dd"];
+    
+    _placeholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"watchlist_unpopulated"]];
+    //[_placeholder setImage:[UIImage imageNamed:@"watchlist_unpopulated"]];
+    //[_placeholder sizeToFit];
+    [self.tableView setTableHeaderView:_placeholder];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    DDLogVerbose(@"Num Sections: %d", [[self.fetchedResultsController sections] count]);
+    if ([[self.fetchedResultsController sections] count] > 0) {
+        DDLogVerbose(@"Scrolling enabled");
+        [self.tableView setTableHeaderView:nil];
+        [self.tableView setScrollEnabled:YES];
+        [self.navigationItem.rightBarButtonItem setEnabled:YES];
+    } else {
+        DDLogVerbose(@"Scrolling disabled");
+        self.editing = NO;
+        [self.tableView setTableHeaderView:_placeholder];
+        [self.tableView setScrollEnabled:NO];
+        [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    }
+    
     // Return the number of sections.
     return [[self.fetchedResultsController sections] count];
 }
@@ -99,9 +122,34 @@
 - (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
     cell.titleLabel.text = game.title;
-    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
     cell.platformsLabel.text = game.platformsString;
 
+    if ([game.releaseDate isToday]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out Today";
+        
+    } else if ([game.releaseDate isTomorrow]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out Tomorrow";
+        
+    } else if ([game.releaseDate isThisWeek]) {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
+        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
+        cell.urgentLabel.text = @"Out This Week";
+        
+    } else {
+        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
+        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
+        cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
+        cell.urgentLabel.text = @"";
+        
+    }
+    
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     manager.delegate = self;
     
@@ -129,6 +177,33 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo name];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
+    [headerView setBackgroundColor:[UIColor colorWithRed:(177.0f/255.0f) green:(171.0f/255.0f) blue:(167.0f/255.0f) alpha:0.97f]];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(11,-11, 320.0, 44.0);
+    headerLabel.textAlignment = NSTextAlignmentLeft;
+    headerLabel.shadowColor = [UIColor clearColor];
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    headerLabel.text = [sectionInfo name];
+    
+    [headerView addSubview:headerLabel];
+    return headerView;
+}
+
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -141,6 +216,7 @@
     }
     
     [_gdvc prepareForReuse];
+    [_gdvc.headerView.imageView setImage:((SBGameCell *)[self.tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
     [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
 
     [self.navigationController pushViewController:self.gdvc animated:YES];
@@ -205,9 +281,10 @@
     [fetchRequest setEntity:entity];
     
     // Create the sort descriptors array.
+    NSSortDescriptor *watchSectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"watchSection" ascending:NO];
     NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:YES];
     NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: releaseDateDescriptor, alphabeticDescriptor, nil];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: watchSectionDescriptor, releaseDateDescriptor, alphabeticDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     [fetchRequest setFetchBatchSize:20];
@@ -216,7 +293,7 @@
     [fetchRequest setPredicate:predicate];
     
     // Create and initialize the fetch results controller.
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"sectionIdentifier" cacheName:@"GameCache"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"watchSection" cacheName:@"GameCache"];
     aFetchedResultsController.delegate = self;
     _fetchedResultsController = aFetchedResultsController;
     

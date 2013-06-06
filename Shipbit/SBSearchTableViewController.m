@@ -13,6 +13,7 @@
 #import "SBGameDetailViewController.h"
 #import "SBGameCell.h"
 #import "SBCoreDataController.h"
+#import "SBSyncEngine.h"
 #import "Game.h"
 #import "Platform.h"
 #import "UIImage+Extras.h"
@@ -45,7 +46,7 @@
     self = [super init];
     if(self) {
         UILabel* label = [[UILabel alloc] init] ;
-        label.text = NSLocalizedString(@"Search", @"");
+        label.text = NSLocalizedString(@"Browse", @"");
         label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
         label.shadowColor = [UIColor clearColor];
         label.textAlignment = NSTextAlignmentCenter;
@@ -59,7 +60,7 @@
         [label sizeToFit];
         self.navigationItem.titleView = label;
         
-        self.title = NSLocalizedString(@"Search", nil);
+        self.title = NSLocalizedString(@"Browse", nil);
         self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
@@ -69,16 +70,28 @@
     [super viewDidLoad];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
+    [self.tableView setSectionIndexColor:[UIColor colorWithHexValue:@"3e434d"]];
+    [self.tableView setSectionIndexTrackingBackgroundColor:[UIColor colorWithRed:(141.0f/255.0f)
+                                                                           green:(136.0f/255.0f)
+                                                                            blue:(133.0f/255.0f)
+                                                                           alpha:.4f]];
+    //self.tableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
     
     _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
                   NSLocalizedString(@"Xbox 360", nil), NSLocalizedString(@"PlayStation 3", nil),
+                  NSLocalizedString(@"Xbox One", nil), NSLocalizedString(@"PlayStation 4", nil),
                   NSLocalizedString(@"PSP", nil), NSLocalizedString(@"PlayStation Vita", nil),
                   NSLocalizedString(@"Wii", nil), NSLocalizedString(@"Wii U", nil),
                   NSLocalizedString(@"DS", nil), NSLocalizedString(@"3DS", nil), nil];
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor colorWithHexValue:@"B1ABA7"];;
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self setRefreshControl:refreshControl];
+    
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setDateFormat:@"MMM dd, yyyy"];
     
     UISearchBar *searchBar = self.searchDisplayController.searchBar;
     [searchBar setBackgroundImage:[UIImage imageNamed:@"searchbarBackground"]];
@@ -87,9 +100,19 @@
     [searchBar setImage:[UIImage imageNamed:@"searchbarIcon"]
        forSearchBarIcon:UISearchBarIconSearch
                   state:UIControlStateNormal];
+    [searchBar setClipsToBounds:YES];
     searchBar.delegate = self;
     
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(syncCompleted:)
+                                                 name:@"SBSyncEngineSyncCompleted"
+                                               object:nil];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark - Table View Data Source
@@ -151,6 +174,47 @@
     return CELL_HEIGHT;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.searchDisplayController.searchBar.text.length) {
+        return 0.0;
+    } else {
+        return 22.0;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
+    [headerView setBackgroundColor:[UIColor colorWithRed:(177.0f/255.0f) green:(171.0f/255.0f) blue:(167.0f/255.0f) alpha:0.97f]];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(11,-11, 320.0, 44.0);
+    headerLabel.textAlignment = NSTextAlignmentLeft;
+    headerLabel.shadowColor = [UIColor clearColor];
+    
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    headerLabel.text = [sectionInfo name];
+    
+    [headerView addSubview:headerLabel];
+    
+    return headerView;
+}
+
+- (NSString *)tableView:(UITableView *)TableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    if (self.searchDisplayController.searchBar.text.length) {
+        return nil;
+    }
+    return [self.fetchedResultsController sectionIndexTitles];
+}
+
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -167,8 +231,9 @@
     } else {
         game = [_searchFetchedResultsController objectAtIndexPath:indexPath];
     }
-    
+
     [_gdvc prepareForReuse];
+    [_gdvc.headerView.imageView setImage:((SBGameCell *)[tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
     [_gdvc populateWithDataFromGame:game];
 
     [self.navigationController pushViewController:self.gdvc animated:YES];
@@ -231,9 +296,10 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext]];
     [fetchRequest setEntity:entity];
     
+    NSSortDescriptor *firstLetter = [[NSSortDescriptor alloc] initWithKey:@"firstLetter" ascending:YES];
     NSSortDescriptor *titleDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
     
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: titleDescriptor, nil];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: firstLetter, titleDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     [fetchRequest setFetchBatchSize:20];
@@ -259,8 +325,16 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
+    NSFetchedResultsController *aFetchedResultsController;
+    
+    if(searchString.length) {
+        aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    } else {
+        aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"firstLetter" cacheName:nil];
+    }
+    
     // Edit the section name key path and cache name if appropriate.
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+     
     aFetchedResultsController.delegate = self;
 
     
@@ -346,5 +420,15 @@
     [tableView endUpdates];
 }
 
+#pragma mark - Custom Methods
+
+- (void)refresh:(id)sender {
+    [[SBSyncEngine sharedEngine] startSync];
+}
+
+- (void)syncCompleted:(NSNotification *)note {
+    [self.refreshControl endRefreshing];
+    [self.tableView reloadData];
+}
 
 @end

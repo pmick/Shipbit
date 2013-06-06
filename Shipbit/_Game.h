@@ -10,6 +10,7 @@ extern const struct GameAttributes {
 	__unsafe_unretained NSString *criticScore;
 	__unsafe_unretained NSString *developer;
 	__unsafe_unretained NSString *esrb;
+	__unsafe_unretained NSString *firstLetter;
 	__unsafe_unretained NSString *genre;
 	__unsafe_unretained NSString *hasLiked;
 	__unsafe_unretained NSString *isFavorite;
@@ -20,8 +21,10 @@ extern const struct GameAttributes {
 	__unsafe_unretained NSString *releaseDate;
 	__unsafe_unretained NSString *sectionIdentifier;
 	__unsafe_unretained NSString *summary;
+	__unsafe_unretained NSString *syncStatus;
 	__unsafe_unretained NSString *title;
 	__unsafe_unretained NSString *updatedAt;
+	__unsafe_unretained NSString *watchSection;
 } GameAttributes;
 
 extern const struct GameRelationships {
@@ -32,6 +35,9 @@ extern const struct GameFetchedProperties {
 } GameFetchedProperties;
 
 @class Platform;
+
+
+
 
 
 
@@ -113,6 +119,16 @@ extern const struct GameFetchedProperties {
 
 
 //- (BOOL)validateEsrb:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* firstLetter;
+
+
+
+//- (BOOL)validateFirstLetter:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -230,6 +246,20 @@ extern const struct GameFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* syncStatus;
+
+
+
+@property int16_t syncStatusValue;
+- (int16_t)syncStatusValue;
+- (void)setSyncStatusValue:(int16_t)value_;
+
+//- (BOOL)validateSyncStatus:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* title;
 
 
@@ -245,6 +275,16 @@ extern const struct GameFetchedProperties {
 
 
 //- (BOOL)validateUpdatedAt:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* watchSection;
+
+
+
+//- (BOOL)validateWatchSection:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -301,6 +341,12 @@ extern const struct GameFetchedProperties {
 
 - (NSString*)primitiveEsrb;
 - (void)setPrimitiveEsrb:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveFirstLetter;
+- (void)setPrimitiveFirstLetter:(NSString*)value;
 
 
 
@@ -374,6 +420,15 @@ extern const struct GameFetchedProperties {
 
 
 
+- (NSNumber*)primitiveSyncStatus;
+- (void)setPrimitiveSyncStatus:(NSNumber*)value;
+
+- (int16_t)primitiveSyncStatusValue;
+- (void)setPrimitiveSyncStatusValue:(int16_t)value_;
+
+
+
+
 - (NSString*)primitiveTitle;
 - (void)setPrimitiveTitle:(NSString*)value;
 
@@ -382,6 +437,12 @@ extern const struct GameFetchedProperties {
 
 - (NSDate*)primitiveUpdatedAt;
 - (void)setPrimitiveUpdatedAt:(NSDate*)value;
+
+
+
+
+- (NSString*)primitiveWatchSection;
+- (void)setPrimitiveWatchSection:(NSString*)value;
 
 
 
