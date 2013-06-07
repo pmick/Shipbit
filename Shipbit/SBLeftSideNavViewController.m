@@ -204,7 +204,7 @@
     DDLogVerbose(@"Share Button Pressed");
     
     NSString *message = @"Check out Shipbit! It's an app that shows you upcoming game releases.";
-    NSString *path = @"<appstorelink>";
+    NSString *path = @"https://itunes.apple.com/us/app/shipbit/id658728056?ls=1&mt=8";
     NSArray *items = @[ message, path ];
     
     // Display the view controller
