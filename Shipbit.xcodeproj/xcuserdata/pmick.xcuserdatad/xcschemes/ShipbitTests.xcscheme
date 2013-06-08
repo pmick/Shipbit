@@ -16,9 +16,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0F51F4031741EF16003BE3F9"
-               BuildableName = "LogicTests.octest"
-               BlueprintName = "LogicTests"
+               BlueprintIdentifier = "0FA128FB17630729004174CB"
+               BuildableName = "ShipbitTests.octest"
+               BlueprintName = "ShipbitTests"
                ReferencedContainer = "container:Shipbit.xcodeproj">
             </BuildableReference>
          </TestableReference>

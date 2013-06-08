@@ -404,7 +404,6 @@ const CGFloat kSDSegmentedControlScrollOffset = 20;
     [self layoutSegments];
 }
 
-// TODO: ALIGN THIS SHIT YO
 - (void)layoutSegments
 {
     CGFloat totalItemWidth = 0;

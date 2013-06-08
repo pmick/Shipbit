@@ -388,7 +388,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
                         [self.tableView reloadData];
                     }
                     completion: ^(BOOL isFinished) {
-                        /* TODO: Whatever you want here */
                     }];
 }
 

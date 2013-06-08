@@ -80,6 +80,7 @@
     [self addSubview:borderImageView];
 }
 
+// TODO: View controller should take care of all this crap.
 - (void)likeButtonPressed:(id)sender {
     if (!_pressed) {
         _pressed = YES;

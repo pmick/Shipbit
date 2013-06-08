@@ -546,9 +546,6 @@ NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComple
                 DDLogError(@"Unable to save context for class %@", className);
             }
         }];
-        
-        //[self deleteJSONDataRecordsForClassWithName:className];
-        
     }
     if (![self initialSyncComplete]) {
         DDLogInfo(@"Initial sync, ending sync early.");
@@ -599,9 +596,7 @@ NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComple
 
 #pragma mark - Update Execution
 
-- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {
-    //NSMutableArray *requestOperations = [NSMutableArray array];
-    
+- (void)incrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {    
     // create parameter array based off object id and increment like count
     NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(1)}};
     NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
@@ -624,19 +619,10 @@ NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComple
     }];
     
     [requestOperation start];
-    
-//    [requestOperations addObject:requestOperation];
-//    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
-//        
-//    } completionBlock:^(NSArray *operations) {
-//        
-//    }];
 }
 
 
-- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {
-    NSMutableArray *requestOperations = [NSMutableArray array];
-    
+- (void)decrementLikesByOneForObjectWithId:(NSString *)objectId completionBlock:(void (^)(bool success))completionBlock {    
     // create parameter array based off object id and increment like count
     NSDictionary *params = @{@"likes": @{@"__op":@"Increment", @"amount":@(-1)}};
     NSMutableURLRequest * request = [[SBAFParseAPIClient sharedClient] PUTRequestForClass:@"Game"
@@ -644,7 +630,6 @@ NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComple
                                                                                parameters:params];
     AFHTTPRequestOperation *requestOperation = [[SBAFParseAPIClient sharedClient] HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
-            //[self writeJSONReponse:responseObject toDiskForClassWithName:className];
             DDLogVerbose(@"JSON RESPONSE: %@", responseObject);
             DDLogInfo(@"Like count on server succesfully updated.");
             if (completionBlock) {
@@ -658,12 +643,7 @@ NSString * const kSBSyncEngineLongSyncCompleteKey = @"SBSyncEngineLongSyncComple
         }
     }];
     
-    [requestOperations addObject:requestOperation];
-    [[SBAFParseAPIClient sharedClient] enqueueBatchOfHTTPRequestOperations:requestOperations progressBlock:^(NSUInteger numberOfCompletedOperations, NSUInteger totalNumberOfOperations) {
-        
-    } completionBlock:^(NSArray *operations) {
-        
-    }];
+    [requestOperation start];
 }
 
 @end
