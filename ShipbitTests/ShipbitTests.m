@@ -7,6 +7,11 @@
 //
 
 #import "ShipbitTests.h"
+#import "OCMockObject.h"
+#import "OCMock.h"
+//#import "OCMArg.h"
+//#import "OCMConstraint.h"
+//#import "OCMockRecorder.h"
 
 @implementation ShipbitTests
 
@@ -26,7 +31,13 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in ShipbitTests");
+    id mockUserDefaults = [OCMockObject mockForClass:[NSUserDefaults class]];
+
+    [[[mockUserDefaults stub] andReturn:@"stuff"] objectForKey:@"key"];
+    [[[mockUserDefaults stub] andReturn:@"thingy"] objectForKey:@"key2"];
+    
+    STAssertEqualObjects(@"stuff", [mockUserDefaults objectForKey:@"key"], nil);
+    STAssertEqualObjects(@"thingy", [mockUserDefaults objectForKey:@"key2"], nil);
 }
 
 @end

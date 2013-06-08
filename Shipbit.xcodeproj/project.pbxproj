@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F011038172DA668003BAFF6 /* QuartzCore.framework */; };
 		0F0D26301762F59C00015D47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0D262F1762F59C00015D47 /* Default-568h@2x.png */; };
+		0F2A26281763E67D002535A3 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A26201763E67D002535A3 /* libOCMock.a */; };
 		0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
 		0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */; };
 		0F6BC4CE1762FCA800B73166 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BD1762FCA800B73166 /* AFHTTPRequestOperation.m */; };
@@ -129,6 +130,13 @@
 /* Begin PBXFileReference section */
 		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0F0D262F1762F59C00015D47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0F2A26201763E67D002535A3 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
+		0F2A26221763E67D002535A3 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		0F2A26231763E67D002535A3 /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
+		0F2A26241763E67D002535A3 /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
+		0F2A26251763E67D002535A3 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
+		0F2A26261763E67D002535A3 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
+		0F2A26271763E67D002535A3 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
 		0F6BC4BA1762FCA800B73166 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
 		0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
 		0F6BC4BC1762FCA800B73166 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -306,6 +314,7 @@
 				0FA128FE17630729004174CB /* SenTestingKit.framework in Frameworks */,
 				0FA128FF17630729004174CB /* UIKit.framework in Frameworks */,
 				0FA1290017630729004174CB /* Foundation.framework in Frameworks */,
+				0F2A26281763E67D002535A3 /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +338,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F2A261E1763E67D002535A3 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				0F2A261F1763E67D002535A3 /* OCMock */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		0F2A261F1763E67D002535A3 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				0F2A26201763E67D002535A3 /* libOCMock.a */,
+				0F2A26211763E67D002535A3 /* OCMock */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
+		0F2A26211763E67D002535A3 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				0F2A26221763E67D002535A3 /* NSNotificationCenter+OCMAdditions.h */,
+				0F2A26231763E67D002535A3 /* OCMArg.h */,
+				0F2A26241763E67D002535A3 /* OCMConstraint.h */,
+				0F2A26251763E67D002535A3 /* OCMock.h */,
+				0F2A26261763E67D002535A3 /* OCMockObject.h */,
+				0F2A26271763E67D002535A3 /* OCMockRecorder.h */,
+			);
+			path = OCMock;
+			sourceTree = "<group>";
+		};
 		0F9048BB1762D1C60051DCDF /* Shipbit */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +697,7 @@
 		0FA1290117630729004174CB /* ShipbitTests */ = {
 			isa = PBXGroup;
 			children = (
+				0F2A261E1763E67D002535A3 /* Vendor */,
 				0FA1290717630729004174CB /* ShipbitTests.h */,
 				0FA1290817630729004174CB /* ShipbitTests.m */,
 				0FA1290217630729004174CB /* Supporting Files */,
@@ -972,8 +1012,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShipbitTests/ShipbitTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/OCMock/**",
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/**",
+				);
 				INFOPLIST_FILE = "ShipbitTests/ShipbitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ShipbitTests/Vendor/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -991,8 +1043,20 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShipbitTests/ShipbitTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/OCMock/**",
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/**",
+				);
 				INFOPLIST_FILE = "ShipbitTests/ShipbitTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/ShipbitTests/Vendor/OCMock\"",
+				);
+				OTHER_LDFLAGS = (
+					"-force_load",
+					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -1160,6 +1224,7 @@
 				0FA1290C17630729004174CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */ = {
 			isa = XCConfigurationList;
