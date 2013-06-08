@@ -56,7 +56,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-    [TestFlight takeOff:@"8a468878-2f6f-4b89-91d4-dfb85475e88b"];
+    //[TestFlight takeOff:@"8a468878-2f6f-4b89-91d4-dfb85475e88b"];
     
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];
