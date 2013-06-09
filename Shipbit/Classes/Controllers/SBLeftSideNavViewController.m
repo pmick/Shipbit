@@ -9,7 +9,6 @@
 #import "SBLeftSideNavViewController.h"
 #import "JASidePanelController.h"
 #import "UIViewController+JASidePanel.h"
-#import "UIColor+Extras.h"
 #import "SBLeftNavCell.h"
 
 @interface SBLeftSideNavViewController ()

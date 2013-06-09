@@ -120,6 +120,8 @@
 		0FA1290017630729004174CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
 		0FA1290617630729004174CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FA1290417630729004174CB /* InfoPlist.strings */; };
 		0FA1290917630729004174CB /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1290817630729004174CB /* ShipbitTests.m */; };
+		0FF181E817643C0C009581CA /* TableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181E717643C0C009581CA /* TableDataSource.m */; };
+		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
 		B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */; };
@@ -297,6 +299,10 @@
 		0FA1290717630729004174CB /* ShipbitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipbitTests.h; sourceTree = "<group>"; };
 		0FA1290817630729004174CB /* ShipbitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
 		0FA1290A17630729004174CB /* ShipbitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShipbitTests-Prefix.pch"; sourceTree = "<group>"; };
+		0FF181E617643C0C009581CA /* TableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableDataSource.h; sourceTree = "<group>"; };
+		0FF181E717643C0C009581CA /* TableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableDataSource.m; sourceTree = "<group>"; };
+		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
+		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B7E3F516AB15E800FFC031 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B9B7E3F716AB15E800FFC031 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -506,6 +512,8 @@
 				0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */,
 				0F9049081762D1C60051DCDF /* SBUpcomingViewController.h */,
 				0F9049091762D1C60051DCDF /* SBUpcomingViewController.m */,
+				0FF181E617643C0C009581CA /* TableDataSource.h */,
+				0FF181E717643C0C009581CA /* TableDataSource.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -570,6 +578,8 @@
 				0F9049291762D1C60051DCDF /* UIColor+Extras.m */,
 				0F90492A1762D1C60051DCDF /* UIImage+Extras.h */,
 				0F90492B1762D1C60051DCDF /* UIImage+Extras.m */,
+				0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */,
+				0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -967,6 +977,8 @@
 				0F6BC4D31762FCA800B73166 /* AFURLConnectionOperation.m in Sources */,
 				0F6BC4D41762FCA800B73166 /* AFXMLRequestOperation.m in Sources */,
 				0F6BC4D51762FCA800B73166 /* UIImageView+AFNetworking.m in Sources */,
+				0FF181E817643C0C009581CA /* TableDataSource.m in Sources */,
+				0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

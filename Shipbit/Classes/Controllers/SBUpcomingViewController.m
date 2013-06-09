@@ -6,19 +6,12 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-
 #import "SBUpcomingViewController.h"
-#import "Game.h"
-#import "Platform.h"
-#import "SBGameCell.h"
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
-#import "UIImage+Extras.h"
-#import "UIColor+Extras.h"
-#import "NSDate+Utilities.h"
+#import "SBGameCell+ConfigureForGame.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -126,56 +119,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     return [sectionInfo numberOfObjects];
 }
 
-- (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.titleLabel.text = game.title;
-    
-    if ([game.releaseDate isToday]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out Today";
-
-    } else if ([game.releaseDate isTomorrow]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out Tomorrow";
-
-    } else if ([game.releaseDate isThisWeek]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out This Week";
-
-    } else {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
-        cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-        cell.urgentLabel.text = @"";
-
-    }
-    
-    cell.platformsLabel.text = game.platformsString;
-    cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-    
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    manager.delegate = self;
-    
-    [manager downloadWithURL:[NSURL URLWithString:game.art]
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       if (image) {
-                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
-                       } else {
-                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-                       }
-    }];
-
-    [cell resizeSubviews];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -183,7 +126,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
         cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    [self configureCell:cell atIndexPath:indexPath];
+    [cell configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
     return cell;
 }
@@ -330,7 +273,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
                 break;
                 
             case NSFetchedResultsChangeMove:

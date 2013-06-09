@@ -6,18 +6,11 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-
 #import "SBFavoritesTableViewController.h"
 #import "SBGameDetailViewController.h"
-#import "SBGameCell.h"
 #import "SBCoreDataController.h"
-#import "Game.h"
-#import "Platform.h"
-#import "UIImage+Extras.h"
-#import "UIColor+Extras.h"
-#import "NSDate+Utilities.h"
+#import "SBGameCell+ConfigureForGame.h"
 
 #define CELL_HEIGHT 110
 
@@ -119,60 +112,13 @@
     return [sectionInfo numberOfObjects];
 }
 
-- (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
-    cell.titleLabel.text = game.title;
-    cell.platformsLabel.text = game.platformsString;
-
-    if ([game.releaseDate isToday]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out Today";
-        
-    } else if ([game.releaseDate isTomorrow]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"stopwatchImage"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"stopwatchImageWhite"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out Tomorrow";
-        
-    } else if ([game.releaseDate isThisWeek]) {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
-        cell.releaseDateLabel.text = [NSString stringWithFormat:@"%@:",[self.dateFormatter stringFromDate:game.releaseDate]];
-        cell.urgentLabel.text = @"Out This Week";
-        
-    } else {
-        cell.releaseDateImage.image = [UIImage imageNamed:@"calendarIcon"];
-        cell.releaseDateImage.highlightedImage = [UIImage imageNamed:@"calendarIcon_highlight"];
-        cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-        cell.urgentLabel.text = @"";
-        
-    }
-    
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    manager.delegate = self;
-    
-    [manager downloadWithURL:[NSURL URLWithString:game.art]
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       if (image) {
-                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
-                       } else {
-                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-                       }
-                   }];
-    [cell resizeSubviews];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"FavoriteCell";
     SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    [self configureCell:cell atIndexPath:indexPath];
+    [cell configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
     return cell;
 }
@@ -336,7 +282,7 @@
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
                 break;
                 
             case NSFetchedResultsChangeMove:

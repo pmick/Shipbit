@@ -7,7 +7,6 @@
 //
 
 #import "SBPlatformsTableViewController.h"
-#import "UIColor+Extras.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SBPlatformsTableViewController ()

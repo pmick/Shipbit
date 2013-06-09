@@ -7,7 +7,6 @@
 //
 
 #import "SBLeftNavCell.h"
-#import "UIColor+Extras.h"
 
 @implementation SBLeftNavCell
 

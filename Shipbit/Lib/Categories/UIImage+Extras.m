@@ -58,10 +58,10 @@
             }
         }
         //thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
-
     }
     
-    UIGraphicsBeginImageContext(targetSize); // this will crop
+    
+    UIGraphicsBeginImageContextWithOptions(targetSize, YES, 0.0);
     
     CGRect thumbnailRect = CGRectZero;
     thumbnailRect.origin = thumbnailPoint;

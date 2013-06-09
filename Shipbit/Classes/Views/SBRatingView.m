@@ -7,7 +7,6 @@
 //
 
 #import "SBRatingView.h"
-#import "UIColor+Extras.h"
 
 @implementation SBRatingView
 

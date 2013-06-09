@@ -7,7 +7,6 @@
 //
 
 #import "SBGameCell.h"
-#import "UIColor+Extras.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SBGameCell

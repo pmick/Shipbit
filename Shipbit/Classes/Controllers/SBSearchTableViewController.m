@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "SBSearchTableViewController.h"
@@ -14,10 +13,7 @@
 #import "SBGameCell.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
-#import "Game.h"
-#import "Platform.h"
-#import "UIImage+Extras.h"
-#import "UIColor+Extras.h"
+#import "SBGameCell+ConfigureForGame.h"
 
 #define CELL_HEIGHT 110
 
@@ -91,7 +87,7 @@
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateFormat:@"MMM dd, yyyy"];
+    [self.dateFormatter setDateFormat:@"MMM dd"];
     
     UISearchBar *searchBar = self.searchDisplayController.searchBar;
     [searchBar setBackgroundImage:[UIImage imageNamed:@"searchbarBackground"]];
@@ -135,28 +131,6 @@
     return numberOfRows;
 }
 
-- (void)fetchedResultsController:(NSFetchedResultsController *)fetchedResultsController configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Game *game = [fetchedResultsController objectAtIndexPath:indexPath];
-    
-    cell.titleLabel.text = game.title;
-    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    cell.platformsLabel.text = [game platformsString];    
-    
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    manager.delegate = self;
-    
-    [manager downloadWithURL:[NSURL URLWithString:game.art]
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       if (image) {
-                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
-                       } else {
-                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-                       }
-                   }];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -164,7 +138,7 @@
         cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    [self fetchedResultsController:[self fetchedResultsControllerForTableView:tableView] configureCell:cell atIndexPath:indexPath];
+    [cell configureForGame:[[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath]];
     [cell resizeSubviews];
     
     return cell;
@@ -404,7 +378,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self fetchedResultsController:controller configureCell:(SBGameCell *)[tableView cellForRowAtIndexPath:theIndexPath] atIndexPath:theIndexPath];
+            [(SBGameCell *)[tableView cellForRowAtIndexPath:theIndexPath] configureForGame:[_fetchedResultsController objectAtIndexPath:theIndexPath]];
             break;
             
         case NSFetchedResultsChangeMove:

@@ -6,18 +6,12 @@
 //  Copyright (c) 2013 PatrickMick. All rights reserved.
 //
 
-#import <SDWebImage/UIImageView+WebCache.h>
 #import <QuartzCore/QuartzCore.h>
-
 #import "SBReleasedViewController.h"
-#import "Game.h"
-#import "Platform.h"
-#import "SBGameCell.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
-#import "UIImage+Extras.h"
 #import "SBGameDetailViewController.h"
-#import "UIColor+Extras.h"
+#import "SBGameCell+ConfigureForGame.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -143,38 +137,13 @@ NSString * const kSBSelectedKey = @"selected";
 	return titleString;
 }
 
-- (void)configureCell:(SBGameCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Game *game = [_fetchedResultsController objectAtIndexPath:indexPath];
-    
-    cell.titleLabel.text = game.title;
-    cell.releaseDateLabel.text = [self.dateFormatter stringFromDate:game.releaseDate];
-    cell.platformsLabel.text = [game platformsString];
-    cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-    
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    manager.delegate = self;
-    
-    [manager downloadWithURL:[NSURL URLWithString:game.art]
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       if (image) {
-                           cell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:cell.thumbnailView.frame.size] circleImage];
-                       } else {
-                           cell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-                       }
-                   }];
-    [cell resizeSubviews];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    [self configureCell:cell atIndexPath:indexPath];
-    
+    [cell configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     return cell;
 }
 
@@ -329,7 +298,7 @@ NSString * const kSBSelectedKey = @"selected";
                 break;
                 
             case NSFetchedResultsChangeUpdate:
-                [self configureCell:(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+                [(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
                 break;
                 
             case NSFetchedResultsChangeMove:

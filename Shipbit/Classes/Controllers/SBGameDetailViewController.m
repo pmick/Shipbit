@@ -8,7 +8,6 @@
 
 #import "SBGameDetailViewController.h"
 #import "SDSegmentedControl.h"
-#import "UIColor+Extras.h"
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "NSDate+Utilities.h"
@@ -375,7 +374,7 @@
         notifyAlarm.userInfo = userInfo;
         [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
         
-        DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-(3600*9)]);
+        DDLogInfo(@"Created a local notification for %@ at %@", game.title, [game.releaseDate dateByAddingTimeInterval:-(3600*9)]);
     }
 }
 
@@ -399,6 +398,9 @@
         [self addLocalNotificationForGame:_game];
         
     }
+    
+    [[SBCoreDataController sharedInstance] saveMasterContext];
+    
 }
 
 

@@ -7,11 +7,6 @@
 //
 
 #import "SBGameDetailHeaderView.h"
-#import "SBSyncEngine.h"
-#import "SBAFParseAPIClient.h"
-#import "SBGameDetailViewController.h"
-#import "UIColor+Extras.h"
-#import "NSDate+Utilities.h"
 
 @implementation SBGameDetailHeaderView {
     BOOL _pressed;
