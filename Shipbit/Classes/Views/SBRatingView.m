@@ -14,10 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIColor *sbDarkGrayColor = [UIColor colorWithRed:(81.0f/255.0f)
-                                                   green:(77.0f/255.0f)
-                                                    blue:(74.0f/255.0f)
-                                                   alpha:1];
+        UIColor *sbDarkGrayColor = [UIColor colorWithHexValue:@"514D4A"];
         
         UILabel *likesLeftLabel = [[UILabel alloc] initWithFrame:CGRectMake(15.0, 12.0, 70.0, 16.0)];
         likesLeftLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];

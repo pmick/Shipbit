@@ -67,10 +67,7 @@
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     [self.tableView setSectionIndexColor:[UIColor colorWithHexValue:@"3e434d"]];
-    [self.tableView setSectionIndexTrackingBackgroundColor:[UIColor colorWithRed:(141.0f/255.0f)
-                                                                           green:(136.0f/255.0f)
-                                                                            blue:(133.0f/255.0f)
-                                                                           alpha:.4f]];
+    [self.tableView setSectionIndexTrackingBackgroundColor:[UIColor colorWithHexValue:@"8D8885" alpha:0.4f]];
     //self.tableView.frame = CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44);
     
     _platforms = [[NSArray alloc] initWithObjects: NSLocalizedString(@"PC", nil),
@@ -158,7 +155,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
-    [headerView setBackgroundColor:[UIColor colorWithRed:(177.0f/255.0f) green:(171.0f/255.0f) blue:(167.0f/255.0f) alpha:0.97f]];
+    [headerView setBackgroundColor:[UIColor colorWithHexValue:@"B1ABA7" alpha:0.93f]];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     headerLabel.backgroundColor = [UIColor clearColor];
@@ -166,7 +163,7 @@
     headerLabel.textColor = [UIColor whiteColor];
     headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
     headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.shadowColor = [UIColor colorWithHexValue:@"000000" alpha:0.5f];
     headerLabel.frame = CGRectMake(11,-11, 320.0, 44.0);
     headerLabel.textAlignment = NSTextAlignmentLeft;
     headerLabel.shadowColor = [UIColor clearColor];

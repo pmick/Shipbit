@@ -24,7 +24,7 @@
         _summaryLabel = [[UILabel alloc] initWithFrame:CGRectMake(23, 12, 274, 249)];
         [_summaryLabel setBackgroundColor:[UIColor clearColor]];
         [_summaryLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
-        [_summaryLabel setTextColor:[UIColor colorWithRed:(81.0f/255.0f) green:(77.0f/255.0f) blue:(74.0f/255.0f) alpha:1]];
+        [_summaryLabel setTextColor:[UIColor colorWithHexValue:@"514D4A"]];
         [_summaryLabel setNumberOfLines:0];
         [_summaryLabel sizeToFit];
         [self addSubview:_summaryLabel];

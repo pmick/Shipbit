@@ -44,10 +44,7 @@
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [self.dateFormatter setDateFormat:@"MMM dd, yyyy"];
     
-    [self.view setBackgroundColor:[UIColor colorWithRed:(196.0f/255.0f)
-                                                  green:(190.0f/255.0f)
-                                                   blue:(186.0f/255.0f)
-                                                  alpha:1]];
+    [self.view setBackgroundColor:[UIColor colorWithHexValue:@"C4BEBA"]];
     
     [_headerView.likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [_headerView.watchlistButton addTarget:self action:@selector(watchlistButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -101,20 +98,14 @@
 - (void)setupSegmentedController {
     _segmentedControl = [[SDSegmentedControl alloc] initWithItems:@[ @"Summary", @"Info", @"Ratings" ]];
     [_segmentedControl setFrame:CGRectMake(0, 200, 320, 44)];
-    [_segmentedControl setBackgroundColor:[UIColor colorWithRed:(220.0f/255.0f)
-                                                         green:(214.0f/255.0f)
-                                                          blue:(210.0f/255.0f)
-                                                         alpha:1]];
+    [_segmentedControl setBackgroundColor:[UIColor colorWithHexValue:@"DCD6D2"]];
     _segmentedControl.arrowHeightFactor *= -1.0;
     [_segmentedControl addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:_segmentedControl];
 }
 
 - (void)setupScrollView {
-    UIColor *sbLightGrayColor = [UIColor colorWithRed:(196.0f/255.0f)
-                                                green:(190.0f/255.0f)
-                                                 blue:(186.0f/255.0f)
-                                                alpha:1];
+    UIColor *sbLightGrayColor = [UIColor colorWithHexValue:@"C4BEBA"];
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 255, 320, 249)];
     _scrollView.contentSize = CGSizeMake(self.view.frame.size.width * 3, 200);
     _scrollView.pagingEnabled = YES;

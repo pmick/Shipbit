@@ -44,13 +44,13 @@
     _releaseDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(172.0, _titleLabel.frame.origin.y + _titleLabel.frame.size.height + 3, 139.0, 20.0)];
     //[_releaseDateLabel setBackgroundColor:[UIColor greenColor]];
     [_releaseDateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:13]];
-    [_releaseDateLabel setTextColor:[UIColor colorWithRed:(141.0f/255.0f) green:(136.0f/255.0f) blue:(133.0f/255.0f) alpha:1]];
+    [_releaseDateLabel setTextColor:[UIColor colorWithHexValue:@"8D8885"]];
     [self addSubview:_releaseDateLabel];
     
     _platformsLabel = [[UILabel alloc] initWithFrame:CGRectMake(112, 116, 160, 40)];
     //[_platformsLabel setBackgroundColor:[UIColor greenColor]];
     [_platformsLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
-    [_platformsLabel setTextColor:[UIColor colorWithRed:(141.0f/255.0f) green:(136.0f/255.0f) blue:(133.0f/255.0f) alpha:1]];
+    [_platformsLabel setTextColor:[UIColor colorWithHexValue:@"8D8885"]];
     [_platformsLabel setNumberOfLines:2];
     [self addSubview:_platformsLabel];
     
