@@ -290,26 +290,28 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)updateLikeCount {
+    DDLogInfo(@"Like count will update.");
+    if (_game.hasLiked) {
+        _game.likes = @(_game.likes.integerValue - 1);
+        _game.hasLiked = NO;
+        [_headerView.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+    } else {
+        _game.likes = @(_game.likes.integerValue + 1);
+        _game.hasLiked = @YES;
+        [_headerView.likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
+    }
+    
+    [self populateWithDataFromGame:_game];
+}
+
 - (void)likeButtonPressed:(id)sender {
     if (!_pressed) {
         _pressed = YES;
         if (_game.hasLiked) {
             [[SBSyncEngine sharedEngine] decrementLikesByOneForObjectWithId:_game.objectId completionBlock:^(bool success) {
                 if (success) {
-                    _game.likes = @(_game.likes.integerValue - 1);
-                    
-                    _game.hasLiked = NO;
-                    // Update coredata
-                    NSError *error;
-                    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-                        // Handle the error.
-                        DDLogError(@"Saving changes failed: %@", error);
-                    }
-                    
-                    [_headerView.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
-                    
-                    // Update likes label
-                    [self populateWithDataFromGame:_game];
+                    [self updateLikeCount];
                 } else {
                     DDLogInfo(@"Could not dislike");
                     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Network Problem"
@@ -322,31 +324,11 @@
                 _pressed = NO;
             }];
             
-            
         } else {
             // Increment likes on server
             [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId completionBlock:^(bool success) {
                 if (success) {
-                    DDLogInfo(@"Like count will update.");
-                    // Increment likes locally
-                    _game.likes = @(_game.likes.integerValue + 1);
-                    
-                    // Update label to reflect increment on likes
-                    
-                    // Set game as liked
-                    _game.hasLiked = @YES;
-                    
-                    // Update coredata
-                    NSError *error;
-                    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-                        // Handle the error.
-                        DDLogError(@"Saving changes failed: %@", error);
-                    }
-                    
-                    [_headerView.likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
-                    
-                    // Update likes label
-                    [self populateWithDataFromGame:_game];
+                    [self updateLikeCount];
                 } else {
                     DDLogInfo(@"Could not like");
                     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Network Problem"
@@ -358,13 +340,43 @@
                 }
                 _pressed = NO;
             }];
-            
-            
         }
     }
-    // Update likes label
-    [self populateWithDataFromGame:_game];
-    
+}
+
+- (void)removeLocalNotificationForGame:(Game *)game
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *eventArray = [app scheduledLocalNotifications];
+    for (int i=0; i<(int)[eventArray count]; i++)
+    {
+        UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+        NSDictionary *userInfoCurrent = oneEvent.userInfo;
+        NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+        if ([uid isEqualToString:game.objectId])
+        {
+            //Cancelling local notification
+            [app cancelLocalNotification:oneEvent];
+            DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
+            break;
+        }
+    }
+}
+
+- (void)addLocalNotificationForGame:(Game *)game
+{
+    if ([game.releaseDate isInFuture]) {
+        UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+        notifyAlarm.fireDate = [game.releaseDate dateByAddingTimeInterval:-(3600*9)];
+        notifyAlarm.timeZone = [NSTimeZone systemTimeZone];
+        notifyAlarm.repeatInterval = 0;
+        notifyAlarm.alertBody = [NSString stringWithFormat:@"%@ is released tomorrow!", game.title];
+        NSDictionary *userInfo = @{@"uid": [NSString stringWithFormat:@"%@", game.objectId]};
+        notifyAlarm.userInfo = userInfo;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
+        
+        DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-(3600*9)]);
+    }
 }
 
 - (void)watchlistButtonPressed:(id)sender {
@@ -374,21 +386,7 @@
         [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
         
         // Remove local notification
-        UIApplication *app = [UIApplication sharedApplication];
-        NSArray *eventArray = [app scheduledLocalNotifications];
-        for (int i=0; i<(int)[eventArray count]; i++)
-        {
-            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
-            NSDictionary *userInfoCurrent = oneEvent.userInfo;
-            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
-            if ([uid isEqualToString:_game.objectId])
-            {
-                //Cancelling local notification
-                [app cancelLocalNotification:oneEvent];
-                DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
-                break;
-            }
-        }
+        [self removeLocalNotificationForGame:_game];
         
     } else {
         DDLogVerbose(@"Adding favorite for game with id: %@", _game.objectId);
@@ -398,30 +396,9 @@
         [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
         
         // Create a local notification
-        if ([_game.releaseDate isInFuture]) {
-            UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
-            notifyAlarm.fireDate = [_game.releaseDate dateByAddingTimeInterval:-(3600*9)];
-            notifyAlarm.timeZone = [NSTimeZone systemTimeZone];
-            notifyAlarm.repeatInterval = 0;
-            notifyAlarm.alertBody = [NSString stringWithFormat:@"%@ is released tomorrow!", _game.title];
-            NSDictionary *userInfo = @{@"uid": [NSString stringWithFormat:@"%@", _game.objectId]};
-            notifyAlarm.userInfo = userInfo;
-            [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
-            
-            DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-(3600*9)]);
-        }
+        [self addLocalNotificationForGame:_game];
+        
     }
-    
-    // Save data store
-    NSError *error;
-    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
-        // Handle the error.
-        DDLogError(@"Saving changes failed: %@", error);
-    }
-    
-    //NSString *favoriteButtonText = game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
-    // Update button appearance
-    //[self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
 }
 
 
