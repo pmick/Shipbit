@@ -9,6 +9,9 @@
 #import "SBGameDetailViewController.h"
 #import "SDSegmentedControl.h"
 #import "UIColor+Extras.h"
+#import "SBCoreDataController.h"
+#import "SBSyncEngine.h"
+#import "NSDate+Utilities.h"
 
 @interface SBGameDetailViewController ()
 
@@ -19,7 +22,10 @@
 
 @end
 
-@implementation SBGameDetailViewController
+@implementation SBGameDetailViewController {
+    BOOL _pressed;
+
+}
 
 - (id)init {
     self = [super init];
@@ -43,6 +49,9 @@
                                                   green:(190.0f/255.0f)
                                                    blue:(186.0f/255.0f)
                                                   alpha:1]];
+    
+    [_headerView.likeButton addTarget:self action:@selector(likeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView.watchlistButton addTarget:self action:@selector(watchlistButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self setupNavigationBar];
     [self setupSegmentedController];
@@ -280,5 +289,140 @@
 - (void)popView:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)likeButtonPressed:(id)sender {
+    if (!_pressed) {
+        _pressed = YES;
+        if (_game.hasLiked) {
+            [[SBSyncEngine sharedEngine] decrementLikesByOneForObjectWithId:_game.objectId completionBlock:^(bool success) {
+                if (success) {
+                    _game.likes = @(_game.likes.integerValue - 1);
+                    
+                    _game.hasLiked = NO;
+                    // Update coredata
+                    NSError *error;
+                    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+                        // Handle the error.
+                        DDLogError(@"Saving changes failed: %@", error);
+                    }
+                    
+                    [_headerView.likeButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];
+                    
+                    // Update likes label
+                    [self populateWithDataFromGame:_game];
+                } else {
+                    DDLogInfo(@"Could not dislike");
+                    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Network Problem"
+                                                                      message:@"You need an internet connection to be able to unlike a game."
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"OK"
+                                                            otherButtonTitles:nil];
+                    [message show];
+                }
+                _pressed = NO;
+            }];
+            
+            
+        } else {
+            // Increment likes on server
+            [[SBSyncEngine sharedEngine] incrementLikesByOneForObjectWithId:_game.objectId completionBlock:^(bool success) {
+                if (success) {
+                    DDLogInfo(@"Like count will update.");
+                    // Increment likes locally
+                    _game.likes = @(_game.likes.integerValue + 1);
+                    
+                    // Update label to reflect increment on likes
+                    
+                    // Set game as liked
+                    _game.hasLiked = @YES;
+                    
+                    // Update coredata
+                    NSError *error;
+                    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+                        // Handle the error.
+                        DDLogError(@"Saving changes failed: %@", error);
+                    }
+                    
+                    [_headerView.likeButton setImage:[UIImage imageNamed:@"liked"] forState:UIControlStateNormal];
+                    
+                    // Update likes label
+                    [self populateWithDataFromGame:_game];
+                } else {
+                    DDLogInfo(@"Could not like");
+                    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Network Problem"
+                                                                      message:@"You need an internet connection to be able to like a game."
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"OK"
+                                                            otherButtonTitles:nil];
+                    [message show];
+                }
+                _pressed = NO;
+            }];
+            
+            
+        }
+    }
+    // Update likes label
+    [self populateWithDataFromGame:_game];
+    
+}
+
+- (void)watchlistButtonPressed:(id)sender {
+    if (_game.isFavorite) {
+        // Set isFavorite to NO
+        _game.isFavorite = NO;
+        [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
+        
+        // Remove local notification
+        UIApplication *app = [UIApplication sharedApplication];
+        NSArray *eventArray = [app scheduledLocalNotifications];
+        for (int i=0; i<(int)[eventArray count]; i++)
+        {
+            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+            NSDictionary *userInfoCurrent = oneEvent.userInfo;
+            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+            if ([uid isEqualToString:_game.objectId])
+            {
+                //Cancelling local notification
+                [app cancelLocalNotification:oneEvent];
+                DDLogInfo(@"Deleting notification for event: %@", oneEvent.alertBody);
+                break;
+            }
+        }
+        
+    } else {
+        DDLogVerbose(@"Adding favorite for game with id: %@", _game.objectId);
+        
+        // Update local coredata store
+        _game.isFavorite = @YES;
+        [_headerView.watchlistButton setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
+        
+        // Create a local notification
+        if ([_game.releaseDate isInFuture]) {
+            UILocalNotification* notifyAlarm = [[UILocalNotification alloc] init];
+            notifyAlarm.fireDate = [_game.releaseDate dateByAddingTimeInterval:-(3600*9)];
+            notifyAlarm.timeZone = [NSTimeZone systemTimeZone];
+            notifyAlarm.repeatInterval = 0;
+            notifyAlarm.alertBody = [NSString stringWithFormat:@"%@ is released tomorrow!", _game.title];
+            NSDictionary *userInfo = @{@"uid": [NSString stringWithFormat:@"%@", _game.objectId]};
+            notifyAlarm.userInfo = userInfo;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notifyAlarm];
+            
+            DDLogInfo(@"Created a local notification for %@ at %@", _game.title, [_game.releaseDate dateByAddingTimeInterval:-(3600*9)]);
+        }
+    }
+    
+    // Save data store
+    NSError *error;
+    if (![[[SBCoreDataController sharedInstance] masterManagedObjectContext] save:&error]) {
+        // Handle the error.
+        DDLogError(@"Saving changes failed: %@", error);
+    }
+    
+    //NSString *favoriteButtonText = game.isFavorite ? NSLocalizedString(@"Unwatch", nil) : NSLocalizedString(@"Add to Watchlist", nil);
+    // Update button appearance
+    //[self.favoriteButton setTitle:favoriteButtonText forState:UIControlStateNormal];
+}
+
 
 @end

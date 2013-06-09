@@ -18,14 +18,12 @@
 - (void)setUp
 {
     [super setUp];
-    
     // Set-up code here.
 }
 
 - (void)tearDown
 {
     // Tear-down code here.
-    
     [super tearDown];
 }
 
@@ -38,6 +36,11 @@
     
     STAssertEqualObjects(@"stuff", [mockUserDefaults objectForKey:@"key"], nil);
     STAssertEqualObjects(@"thingy", [mockUserDefaults objectForKey:@"key2"], nil);
+}
+
+- (void)test2
+{
+    
 }
 
 @end
