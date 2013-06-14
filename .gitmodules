@@ -1,3 +1,6 @@
 [submodule "Shipbit/Vendor/AFNetworking"]
 	path = Shipbit/Vendor/AFNetworking
 	url = https://github.com/AFNetworking/AFNetworking
+[submodule "Shipbit/Vendor/MagicalRecord"]
+	path = Shipbit/Vendor/MagicalRecord
+	url = https://github.com/magicalpanda/MagicalRecord
