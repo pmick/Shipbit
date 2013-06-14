@@ -10,6 +10,7 @@
 		0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F011038172DA668003BAFF6 /* QuartzCore.framework */; };
 		0F0D26301762F59C00015D47 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F0D262F1762F59C00015D47 /* Default-568h@2x.png */; };
 		0F2A26281763E67D002535A3 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F2A26201763E67D002535A3 /* libOCMock.a */; };
+		0F4815C217650EE4005053E3 /* FetchedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4815C117650EE4005053E3 /* FetchedDataSource.m */; };
 		0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
 		0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */; };
 		0F6BC4CE1762FCA800B73166 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BD1762FCA800B73166 /* AFHTTPRequestOperation.m */; };
@@ -30,11 +31,6 @@
 		0F9049761762D1C70051DCDF /* disclosureArrow_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048C61762D1C60051DCDF /* disclosureArrow_highlight@2x.png */; };
 		0F9049771762D1C70051DCDF /* doneButtonBackgroundImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048C71762D1C60051DCDF /* doneButtonBackgroundImage@2x.png */; };
 		0F9049781762D1C70051DCDF /* doneButtonBackgroundImagePressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048C81762D1C60051DCDF /* doneButtonBackgroundImagePressed@2x.png */; };
-		0F9049791762D1C70051DCDF /* doneButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048C91762D1C60051DCDF /* doneButtonPressed@2x.png */; };
-		0F90497A1762D1C70051DCDF /* editButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048CA1762D1C60051DCDF /* editButton@2x.png */; };
-		0F90497B1762D1C70051DCDF /* editButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048CB1762D1C60051DCDF /* editButtonPressed@2x.png */; };
-		0F90497C1762D1C70051DCDF /* editDoneButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048CC1762D1C60051DCDF /* editDoneButton@2x.png */; };
-		0F90497D1762D1C70051DCDF /* editDoneButtonPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048CD1762D1C60051DCDF /* editDoneButtonPressed@2x.png */; };
 		0F90497E1762D1C70051DCDF /* highlight_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048CE1762D1C60051DCDF /* highlight_circle@2x.png */; };
 		0F90497F1762D1C70051DCDF /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048D01762D1C60051DCDF /* 114.png */; };
 		0F9049801762D1C70051DCDF /* 57.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F9048D11762D1C60051DCDF /* 57.png */; };
@@ -119,9 +115,14 @@
 		0FA128FF17630729004174CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		0FA1290017630729004174CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
 		0FA1290617630729004174CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0FA1290417630729004174CB /* InfoPlist.strings */; };
-		0FA1290917630729004174CB /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1290817630729004174CB /* ShipbitTests.m */; };
-		0FF181E817643C0C009581CA /* TableDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181E717643C0C009581CA /* TableDataSource.m */; };
+		0FA1290917630729004174CB /* ShipbitTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA1290817630729004174CB /* ShipbitTestCase.m */; };
+		0FEEC127176BAB1E0038AFA7 /* FetchedDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEEC126176BAB1E0038AFA7 /* FetchedDataSourceTest.m */; };
+		0FEEC128176BAF820038AFA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
+		0FEEC129176BAFFB0038AFA7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
+		0FEEC12A176BB0070038AFA7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
+		0FF6ED15176AE19800928295 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF6ED14176AE19800928295 /* libFlurry.a */; };
+		0FF6ED16176AE19800928295 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FF6ED14176AE19800928295 /* libFlurry.a */; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
 		B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */; };
@@ -139,6 +140,9 @@
 		0F2A26251763E67D002535A3 /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
 		0F2A26261763E67D002535A3 /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
 		0F2A26271763E67D002535A3 /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
+		0F31A7591769A20F0097A92B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		0F4815C017650EE4005053E3 /* FetchedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedDataSource.h; sourceTree = "<group>"; };
+		0F4815C117650EE4005053E3 /* FetchedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedDataSource.m; sourceTree = "<group>"; };
 		0F6BC4BA1762FCA800B73166 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
 		0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
 		0F6BC4BC1762FCA800B73166 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -168,11 +172,6 @@
 		0F9048C61762D1C60051DCDF /* disclosureArrow_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclosureArrow_highlight@2x.png"; sourceTree = "<group>"; };
 		0F9048C71762D1C60051DCDF /* doneButtonBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doneButtonBackgroundImage@2x.png"; sourceTree = "<group>"; };
 		0F9048C81762D1C60051DCDF /* doneButtonBackgroundImagePressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doneButtonBackgroundImagePressed@2x.png"; sourceTree = "<group>"; };
-		0F9048C91762D1C60051DCDF /* doneButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doneButtonPressed@2x.png"; sourceTree = "<group>"; };
-		0F9048CA1762D1C60051DCDF /* editButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editButton@2x.png"; sourceTree = "<group>"; };
-		0F9048CB1762D1C60051DCDF /* editButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editButtonPressed@2x.png"; sourceTree = "<group>"; };
-		0F9048CC1762D1C60051DCDF /* editDoneButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editDoneButton@2x.png"; sourceTree = "<group>"; };
-		0F9048CD1762D1C60051DCDF /* editDoneButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "editDoneButtonPressed@2x.png"; sourceTree = "<group>"; };
 		0F9048CE1762D1C60051DCDF /* highlight_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "highlight_circle@2x.png"; sourceTree = "<group>"; };
 		0F9048D01762D1C60051DCDF /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
 		0F9048D11762D1C60051DCDF /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
@@ -296,13 +295,14 @@
 		0FA128FD17630729004174CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0FA1290317630729004174CB /* ShipbitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShipbitTests-Info.plist"; sourceTree = "<group>"; };
 		0FA1290517630729004174CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0FA1290717630729004174CB /* ShipbitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipbitTests.h; sourceTree = "<group>"; };
-		0FA1290817630729004174CB /* ShipbitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
+		0FA1290717630729004174CB /* ShipbitTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipbitTestCase.h; sourceTree = "<group>"; };
+		0FA1290817630729004174CB /* ShipbitTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShipbitTestCase.m; sourceTree = "<group>"; };
 		0FA1290A17630729004174CB /* ShipbitTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShipbitTests-Prefix.pch"; sourceTree = "<group>"; };
-		0FF181E617643C0C009581CA /* TableDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableDataSource.h; sourceTree = "<group>"; };
-		0FF181E717643C0C009581CA /* TableDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableDataSource.m; sourceTree = "<group>"; };
+		0FEEC126176BAB1E0038AFA7 /* FetchedDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedDataSourceTest.m; sourceTree = "<group>"; };
 		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
+		0FF6ED13176AE19800928295 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		0FF6ED14176AE19800928295 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B7E3F516AB15E800FFC031 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B9B7E3F716AB15E800FFC031 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -317,10 +317,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FEEC12A176BB0070038AFA7 /* MobileCoreServices.framework in Frameworks */,
+				0FEEC129176BAFFB0038AFA7 /* SystemConfiguration.framework in Frameworks */,
+				0FEEC128176BAF820038AFA7 /* CoreData.framework in Frameworks */,
 				0FA128FE17630729004174CB /* SenTestingKit.framework in Frameworks */,
 				0FA128FF17630729004174CB /* UIKit.framework in Frameworks */,
 				0FA1290017630729004174CB /* Foundation.framework in Frameworks */,
 				0F2A26281763E67D002535A3 /* libOCMock.a in Frameworks */,
+				0FF6ED16176AE19800928295 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +342,7 @@
 				B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */,
 				B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */,
 				0F9395AD1727310800ED7D76 /* SDWebImage.framework in Frameworks */,
+				0FF6ED15176AE19800928295 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,11 +413,6 @@
 				0F9048C61762D1C60051DCDF /* disclosureArrow_highlight@2x.png */,
 				0F9048C71762D1C60051DCDF /* doneButtonBackgroundImage@2x.png */,
 				0F9048C81762D1C60051DCDF /* doneButtonBackgroundImagePressed@2x.png */,
-				0F9048C91762D1C60051DCDF /* doneButtonPressed@2x.png */,
-				0F9048CA1762D1C60051DCDF /* editButton@2x.png */,
-				0F9048CB1762D1C60051DCDF /* editButtonPressed@2x.png */,
-				0F9048CC1762D1C60051DCDF /* editDoneButton@2x.png */,
-				0F9048CD1762D1C60051DCDF /* editDoneButtonPressed@2x.png */,
 				0F9048CE1762D1C60051DCDF /* highlight_circle@2x.png */,
 				0F9048CF1762D1C60051DCDF /* Icon */,
 				0F9048D21762D1C60051DCDF /* leftNavLogoImage@2x.png */,
@@ -512,8 +512,8 @@
 				0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */,
 				0F9049081762D1C60051DCDF /* SBUpcomingViewController.h */,
 				0F9049091762D1C60051DCDF /* SBUpcomingViewController.m */,
-				0FF181E617643C0C009581CA /* TableDataSource.h */,
-				0FF181E717643C0C009581CA /* TableDataSource.m */,
+				0F4815C017650EE4005053E3 /* FetchedDataSource.h */,
+				0F4815C117650EE4005053E3 /* FetchedDataSource.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -564,6 +564,7 @@
 		0F9049241762D1C60051DCDF /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				0F31A7591769A20F0097A92B /* Constants.h */,
 				0F9049251762D1C60051DCDF /* Categories */,
 			);
 			path = Lib;
@@ -600,6 +601,7 @@
 		0F9049361762D1C60051DCDF /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				0FF6ED12176AE19800928295 /* Flurry */,
 				0F9049371762D1C60051DCDF /* AFNetworking */,
 				0F90494B1762D1C60051DCDF /* JASidePanels */,
 				0F9049511762D1C60051DCDF /* Lumberjack */,
@@ -708,8 +710,9 @@
 			isa = PBXGroup;
 			children = (
 				0F2A261E1763E67D002535A3 /* Vendor */,
-				0FA1290717630729004174CB /* ShipbitTests.h */,
-				0FA1290817630729004174CB /* ShipbitTests.m */,
+				0FA1290717630729004174CB /* ShipbitTestCase.h */,
+				0FA1290817630729004174CB /* ShipbitTestCase.m */,
+				0FEEC126176BAB1E0038AFA7 /* FetchedDataSourceTest.m */,
 				0FA1290217630729004174CB /* Supporting Files */,
 			);
 			path = ShipbitTests;
@@ -723,6 +726,15 @@
 				0FA1290A17630729004174CB /* ShipbitTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0FF6ED12176AE19800928295 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				0FF6ED13176AE19800928295 /* Flurry.h */,
+				0FF6ED14176AE19800928295 /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 		B9B7E3E616AB15E800FFC031 = {
@@ -851,11 +863,6 @@
 				0F9049761762D1C70051DCDF /* disclosureArrow_highlight@2x.png in Resources */,
 				0F9049771762D1C70051DCDF /* doneButtonBackgroundImage@2x.png in Resources */,
 				0F9049781762D1C70051DCDF /* doneButtonBackgroundImagePressed@2x.png in Resources */,
-				0F9049791762D1C70051DCDF /* doneButtonPressed@2x.png in Resources */,
-				0F90497A1762D1C70051DCDF /* editButton@2x.png in Resources */,
-				0F90497B1762D1C70051DCDF /* editButtonPressed@2x.png in Resources */,
-				0F90497C1762D1C70051DCDF /* editDoneButton@2x.png in Resources */,
-				0F90497D1762D1C70051DCDF /* editDoneButtonPressed@2x.png in Resources */,
 				0F90497E1762D1C70051DCDF /* highlight_circle@2x.png in Resources */,
 				0F90497F1762D1C70051DCDF /* 114.png in Resources */,
 				0F9049801762D1C70051DCDF /* 57.png in Resources */,
@@ -922,7 +929,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FA1290917630729004174CB /* ShipbitTests.m in Sources */,
+				0FA1290917630729004174CB /* ShipbitTestCase.m in Sources */,
+				0FEEC127176BAB1E0038AFA7 /* FetchedDataSourceTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,8 +985,8 @@
 				0F6BC4D31762FCA800B73166 /* AFURLConnectionOperation.m in Sources */,
 				0F6BC4D41762FCA800B73166 /* AFXMLRequestOperation.m in Sources */,
 				0F6BC4D51762FCA800B73166 /* UIImageView+AFNetworking.m in Sources */,
-				0FF181E817643C0C009581CA /* TableDataSource.m in Sources */,
 				0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */,
+				0F4815C217650EE4005053E3 /* FetchedDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,9 +1023,12 @@
 		0FA1290B17630729004174CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -1033,12 +1044,17 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ShipbitTests/Vendor/OCMock\"",
+					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
 				);
 				OTHER_LDFLAGS = (
 					"-force_load",
 					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/libOCMock.a",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TEST_AFTER_BUILD = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1046,9 +1062,12 @@
 		0FA1290C17630729004174CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -1064,12 +1083,17 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ShipbitTests/Vendor/OCMock\"",
+					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
 				);
 				OTHER_LDFLAGS = (
 					"-force_load",
 					"$(SRCROOT)/ShipbitTests/Vendor/OCMock/libOCMock.a",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TEST_AFTER_BUILD = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -1084,7 +1108,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1099,6 +1124,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
 				SDKROOT = iphoneos;
 				TEST_HOST = "";
 			};
@@ -1114,7 +1141,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1122,6 +1150,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
 				SDKROOT = iphoneos;
 				TEST_HOST = "";
 				VALIDATE_PRODUCT = YES;
@@ -1167,11 +1197,15 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "Shipbit/SupportingFiles/Shipbit-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TEST_AFTER_BUILD = YES;
 				TEST_HOST = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1216,11 +1250,15 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "Shipbit/SupportingFiles/Shipbit-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TEST_AFTER_BUILD = YES;
 				TEST_HOST = "";
 				WRAPPER_EXTENSION = app;
 			};

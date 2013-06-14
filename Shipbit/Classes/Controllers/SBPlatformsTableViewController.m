@@ -11,6 +11,8 @@
 
 @interface SBPlatformsTableViewController ()
 
+@property UIBarButtonItem *leftButton;
+
 @end
 
 @implementation SBPlatformsTableViewController
@@ -70,7 +72,15 @@
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(donePressed)];
+    
     [self.navigationItem setRightBarButtonItem:doneButton];
+
+    _leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Uncheck All"
+                                                   style:UIBarButtonItemStyleBordered
+                                                  target:self
+                                                  action:@selector(selectAllPressed:)];
+    [self.navigationItem setLeftBarButtonItem:_leftButton];
+    [self updateButtonText];
 }
 
 #pragma mark - Table view data source
@@ -119,19 +129,16 @@
     
     if (cell.accessoryType) {
         int numberOfSelectedPlatforms = [_selected count];
-        // Prevent less than 1 selection
-        if (numberOfSelectedPlatforms > 1) {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.accessoryView = nil;
-            int objectToRemove = 0;
-            for (int i = 0; i < numberOfSelectedPlatforms; i++) {
-                if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
-                    objectToRemove = i;
-                    break;
-                }
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryView = nil;
+        int objectToRemove = 0;
+        for (int i = 0; i < numberOfSelectedPlatforms; i++) {
+            if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
+                objectToRemove = i;
+                break;
             }
-            [_selected removeObjectAtIndex:objectToRemove];
         }
+        [_selected removeObjectAtIndex:objectToRemove];
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
@@ -141,9 +148,21 @@
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self updateButtonText];
 }
 
-#pragma mark Action Methods
+#pragma mark - Custom Methods
+
+- (void)updateButtonText
+{
+    if ([_selected count] < [_platforms count]) {
+        _leftButton.title = @"Check All";
+    } else {
+        _leftButton.title = @"Uncheck All";
+    }
+}
+
+#pragma mark - Action Methods
 
 - (void)donePressed {
     
@@ -153,8 +172,38 @@
     NSNotification *note = [NSNotification notificationWithName:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] postNotification:note];
     
+    DDLogInfo(@"Selected %@", _selected);
+    
     // Dismiss platforms view
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)selectAllPressed:(id)sender
+{
+    DDLogInfo(@"Select all pressed");
+    if ([_selected count] < [_platforms count]) {
+        DDLogInfo(@"selected is less than platforms");
+        // check all
+        for (int i = 0; i < (int)[_platforms count]; i++) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
+            [accessoryImage sizeToFit];
+            [cell setAccessoryView:accessoryImage];
+        }
+        [_selected removeAllObjects];
+        [_selected addObjectsFromArray:_platforms];
+    } else {
+        DDLogInfo(@"selected is not less than platforms");
+        // uncheck all
+        for (int i = 0; i < (int)[_platforms count]; i++) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.accessoryView = nil;
+        }
+        [_selected removeAllObjects];
+    }
+    [self updateButtonText];
 }
 
 @end

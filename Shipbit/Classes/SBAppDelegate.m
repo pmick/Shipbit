@@ -21,6 +21,7 @@
 #import "DDFileLogger.h"
 #import "XCodeConsoleLogFormatter.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "Flurry.h"
 
 @interface SBAppDelegate ()
 
@@ -57,6 +58,7 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     //[TestFlight takeOff:@"8a468878-2f6f-4b89-91d4-dfb85475e88b"];
+    [Flurry startSession:@"YRHYBXSV727TWSBDZGQM"];
     
     DDTTYLogger *xcodeConsoleLogger = [DDTTYLogger sharedInstance];
     XCodeConsoleLogFormatter *logFormatter = [[XCodeConsoleLogFormatter alloc] init];

@@ -61,7 +61,7 @@
     [versionLabel setTextAlignment:NSTextAlignmentRight];
     [versionLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
     [versionLabel setTextColor:[UIColor colorWithHexValue:@"cdc9c7"]];
-    [versionLabel setText:@"Version 1.00"];
+    [versionLabel setText:@"Version 1.1"];
     [versionLabel setBackgroundColor:[UIColor clearColor]];
     
     UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(137, 331, 114, 20)];

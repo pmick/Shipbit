@@ -69,6 +69,14 @@
                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
                        if (image) {
                            self.thumbnailView.image = [[image imageByScalingAndCroppingForSize:self.thumbnailView.frame.size] circleImage];
+                           self.thumbnailView.alpha = 0.0f;
+                           if (cacheType == SDImageCacheTypeNone) {
+                               [UIView animateWithDuration:0.3 animations:^{
+                                   self.thumbnailView.alpha = 1.0f;
+                               }];
+                           } else {
+                               self.thumbnailView.alpha = 1.0f;
+                           }
                        } else {
                            self.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
                        }

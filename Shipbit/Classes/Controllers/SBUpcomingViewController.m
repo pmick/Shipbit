@@ -12,6 +12,7 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "SBGameCell+ConfigureForGame.h"
+#import "FetchedDataSource.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -20,10 +21,10 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 @interface SBUpcomingViewController ()
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) SBGameDetailViewController *gdvc;
 @property (nonatomic, strong) NSArray *selected;
+@property (nonatomic, strong) FetchedDataSource *dataSource;
+@property (nonatomic, strong) NSFetchRequest *fetchRequest;
 
 @end
 
@@ -71,10 +72,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [self.dateFormatter setDateFormat:@"MMM dd"];
-    
     // Load selected in from userdefaults if it was saved
     if ([[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey]) {
         _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
@@ -91,44 +88,68 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [button1 setImage:[UIImage imageNamed:@"navBarRightButton"] forState:UIControlStateNormal];
     UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
     [self.navigationItem setRightBarButtonItem:button];
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
-    [self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    //[self.tableView reloadData]; //fetched results controller will be lazily recreated
     
+    
+    
+    self.tableView.delegate = self;
+    [self setupDataSource];
 }
 
-#pragma mark - Table View Data Source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+- (void)setupDataSource
+{
+    _dataSource = [[FetchedDataSource alloc] initWithFetchRequest:[self fetchRequest]
+                                               sectionNameKeyPath:@"sectionIdentifier"
+                                                   cellIdentifier:@"GameCell"
+                                               configureCellBlock:^(id cell, id item) {
+                                                   [cell configureForGame:item];
+                                               }];
+    [_dataSource setParent:self];
+    
+    self.tableView.dataSource = _dataSource;
 }
 
-- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+- (NSFetchRequest *)fetchRequest
+{
+    // Create and configure a fetch request with the Game entity.
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    // Create the sort descriptors array.
+    NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sectionIdentifier" ascending:YES];
+    NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:YES];
+    NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: sectionDescriptor, releaseDateDescriptor, alphabeticDescriptor, nil];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.year = 2;
+    NSDate *twoYearsFromNow = [calendar dateByAddingComponents:components toDate:now options:0];
+    
+    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+                                                  fromDate:[NSDate date]]; // gets the year, month, and day for today's date
+    NSDate *today = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
+    
+    NSPredicate *predicate;
+    
+    if ([_selected count] > 0) {
+        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", today, twoYearsFromNow, _selected];
+    } else if (!_selected) {
+        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", today, twoYearsFromNow];
+    } else {
+        predicate = [NSPredicate predicateWithFormat:@"title BEGINSWITH %@", @"zzzzzzz"];
     }
-    [cell configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
-    return cell;
+    [fetchRequest setPredicate:predicate];
+    
+    return fetchRequest;
 }
 
 #pragma mark - Table View Delegate
@@ -148,7 +169,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     headerLabel.textAlignment = NSTextAlignmentLeft;
     headerLabel.shadowColor = [UIColor clearColor];
     
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[_dataSource.fetchedResultsController sections] objectAtIndex:section];
     static NSArray *monthSymbols = nil;
     
     if (!monthSymbols) {
@@ -163,7 +184,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 	NSInteger month = numericSection - (year * YEAR_MULTIPLIER);
     
 	NSString *titleString = [NSString stringWithFormat:@"%@ %d", [monthSymbols objectAtIndex:month-1], year];
-        
+    
     headerLabel.text = titleString;
     [headerView addSubview:headerLabel];
     
@@ -179,132 +200,12 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     {
         _gdvc = [[SBGameDetailViewController alloc] init];
     }
-
+    
     [_gdvc prepareForReuse];
     [_gdvc.headerView.imageView setImage:((SBGameCell *)[self.tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
-    [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
+    [_gdvc populateWithDataFromGame:[_dataSource itemAtIndexPath:indexPath]];
     
     [self.navigationController pushViewController:_gdvc animated:YES];
-}
-
-#pragma mark - Fetched Results Controller Configuration
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    // Create and configure a fetch request with the Game entity.
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Game" inManagedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext]];
-    [fetchRequest setEntity:entity];
-    
-    // Create the sort descriptors array.
-    NSSortDescriptor *sectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sectionIdentifier" ascending:YES];
-    NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:YES];
-    NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: sectionDescriptor, releaseDateDescriptor, alphabeticDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSDate *now = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    components.year = 2;
-    NSDate *twoYearsFromNow = [calendar dateByAddingComponents:components toDate:now options:0];
-    
-    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
-                                                  fromDate:[NSDate date]]; // gets the year, month, and day for today's date
-    NSDate *today = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
-    
-    NSPredicate *predicate;
-    
-    if ([_selected count] > 0) {
-        predicate = [NSPredicate predicateWithFormat:@"((releaseDate >= %@) AND (releaseDate <= %@)) AND (ANY platforms.title IN %@)", today, twoYearsFromNow, _selected];
-    } else {
-        predicate = [NSPredicate predicateWithFormat:@"(releaseDate >= %@) AND (releaseDate <= %@)", today, twoYearsFromNow];
-    }
-    
-    [fetchRequest setPredicate:predicate];
-    
-    // Create and initialize the fetch results controller.
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"sectionIdentifier" cacheName:@"GameCache"];
-    aFetchedResultsController.delegate = self;
-    _fetchedResultsController = aFetchedResultsController;
-    
-    NSError *error = nil;
-    [NSFetchedResultsController deleteCacheWithName:@"GameCache"];
-    if (![_fetchedResultsController performFetch:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-         */
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _fetchedResultsController;
-}
-
-#pragma mark - Fetched Results Controller Delegates
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
-    if (controller == _fetchedResultsController) {
-        [self.tableView beginUpdates];
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    if (controller == _fetchedResultsController) {
-        UITableView *tableView = self.tableView;
-        
-        switch(type) {
-                
-            case NSFetchedResultsChangeInsert:
-                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeUpdate:
-                [(SBGameCell *)[tableView cellForRowAtIndexPath:indexPath] configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
-                break;
-                
-            case NSFetchedResultsChangeMove:
-                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-        }
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    if (controller == _fetchedResultsController) {
-        switch(type) {
-                
-            case NSFetchedResultsChangeInsert:
-                [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-                break;
-        }
-    }
-}
-
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
-    if (controller == _fetchedResultsController) {
-        [self.tableView endUpdates];
-    }
 }
 
 #pragma mark - Custom Methods
@@ -323,7 +224,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)platformsUpdated:(NSNotification *)note {
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
-    self.fetchedResultsController = nil;
+    [_dataSource resetFetchedResultsControllerForUpdatedRequest:[self fetchRequest]];
     [UIView transitionWithView: self.tableView
                       duration: 1.05f
                        options: UIViewAnimationOptionTransitionCrossDissolve
@@ -337,7 +238,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (void)syncCompleted:(NSNotification *)note {
     [self.refreshControl endRefreshing];
     [self.tableView reloadData];
-
 }
 
 @end

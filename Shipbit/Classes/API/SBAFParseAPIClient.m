@@ -8,11 +8,12 @@
 
 #import "SBAFParseAPIClient.h"
 #import "AFJSONRequestOperation.h"
+#import "Constants.h"
 
 static NSString * const kSBFParseAPIBaseURLString = @"https://api.parse.com/1/";
 
-static NSString * const kSBFParseAPIApplicationId = @"HJqzfHjn0qctt7JH5YIkaTdtjNQx46P21tbh9DbD";
-static NSString * const kSBFParseAPIKey = @"hsbqPntedrgTmBMlxpkkEOlaxeMvUmWUEsC3WmmU";
+static NSString * const kSBFParseAPIApplicationId = API_APPLICATION_ID;
+static NSString * const kSBFParseAPIKey = API_KEY;
 
 @implementation SBAFParseAPIClient
 
