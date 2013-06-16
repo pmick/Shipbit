@@ -31,14 +31,14 @@
 
 - (void)testCellConfiguration
 {
-    NSFetchRequest *request = nil;
-    __block UITableViewCell *configuredCell = nil;
-    __block id configuredObject = nil;
-    TableViewCellConfigureBlock block = ^(UITableViewCell *a, id b) {
-        configuredCell = a;
-        configuredObject = b;
-    };
-    FetchedDataSource *dataSource = [[FetchedDataSource alloc] initWithFetchRequest:request sectionNameKeyPath:nil cellIdentifier:@"Cell" configureCellBlock:block];
+//    NSFetchRequest *request = nil;
+//    __block UITableViewCell *configuredCell = nil;
+//    __block id configuredObject = nil;
+//    TableViewCellConfigureBlock block = ^(UITableViewCell *a, id b) {
+//        configuredCell = a;
+//        configuredObject = b;
+//    };
+//    FetchedDataSource *dataSource = [[FetchedDataSource alloc] initWithFetchRequest:request sectionNameKeyPath:nil cellIdentifier:@"Cell" configureCellBlock:block];
 }
 
 @end

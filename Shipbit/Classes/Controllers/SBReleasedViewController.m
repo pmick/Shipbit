@@ -237,7 +237,7 @@ NSString * const kSBSelectedKey = @"selected";
 
     [_gdvc prepareForReuse];
     [_gdvc.headerView.imageView setImage:((SBGameCell *)[self.tableView cellForRowAtIndexPath:indexPath]).thumbnailView.image];
-    [_gdvc populateWithDataFromGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
+    [_gdvc populateWithDataFromGame:[_dataSource itemAtIndexPath:indexPath]];
     
     [self.navigationController pushViewController:self.gdvc animated:YES];
 }

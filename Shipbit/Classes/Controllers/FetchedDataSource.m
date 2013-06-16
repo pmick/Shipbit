@@ -89,9 +89,8 @@
                                                              managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext]
                                                              sectionNameKeyPath:_sectionNameKeyPath
                                                              cacheName:nil];
-    
+    aFetchedResultsController.delegate = self;
     _fetchedResultsController = aFetchedResultsController;
-    _fetchedResultsController.delegate = self;
     
     NSError *error = nil;
     if (![_fetchedResultsController performFetch:&error]) {

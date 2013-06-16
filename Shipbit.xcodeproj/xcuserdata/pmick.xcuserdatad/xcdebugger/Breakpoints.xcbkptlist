@@ -151,13 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Shipbit/Classes/Controllers/SBUpcomingViewController.m"
-         timestampString = "392455423.625628"
+         timestampString = "393481106.872316"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "279"
-         endingLineNumber = "279"
-         landmarkName = "-controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "279">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
