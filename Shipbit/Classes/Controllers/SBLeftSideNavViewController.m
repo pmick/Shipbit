@@ -178,7 +178,7 @@
     // Resolves arc warning regarding controller being unpredictably null 
     JASidePanelController *sidePanel = self.sidePanelController;
     switch (indexPath.row) {
-        case 0:
+        case 0: 
             [sidePanel setCenterPanel:_utvc];
             break;
         case 1:

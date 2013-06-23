@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SBPlatformsTableViewController.h"
+#import "FetchedDataSource.h"
 
 
 @interface SBUpcomingViewController : UITableViewController <NSFetchedResultsControllerDelegate, SDWebImageManagerDelegate>

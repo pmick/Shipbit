@@ -13,6 +13,7 @@
 #import "SBGameDetailViewController.h"
 #import "SBGameCell+ConfigureForGame.h"
 #import "FetchedDataSource.h"
+#import "UILabel+TitleView.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -46,29 +47,15 @@ NSString * const kSBSelectedKey = @"selected";
 - (id)init {
     self = [super init];
     if(self) {
-        UILabel* label = [[UILabel alloc] init] ;
-        label.text = NSLocalizedString(@"Shipped", @"");
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
-        label.shadowColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = [UIColor clearColor];
-        label.layer.shadowColor = [UIColor blackColor].CGColor;
-        label.layer.shadowOpacity = .5;
-        label.layer.shadowOffset = CGSizeMake(0, 1);
-        label.layer.shadowRadius = .8;
-        
-        [label sizeToFit];
-        self.navigationItem.titleView = label;
-        
-        self.title = NSLocalizedString(@"Shipped", nil);
-        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.rowHeight = CELL_HEIGHT;
+    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Shipped"];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     
@@ -270,6 +257,7 @@ NSString * const kSBSelectedKey = @"selected";
 
 - (void)syncCompleted:(NSNotification *)note {
     [self.refreshControl endRefreshing];
+    [_dataSource resetFetchedResultsControllerForUpdatedRequest:[self fetchRequest]];
     [self.tableView reloadData];
 }
 

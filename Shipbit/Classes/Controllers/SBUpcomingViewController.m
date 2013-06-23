@@ -12,7 +12,7 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "SBGameCell+ConfigureForGame.h"
-#import "FetchedDataSource.h"
+#import "UILabel+TitleView.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -28,7 +28,9 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 @end
 
-@implementation SBUpcomingViewController
+@implementation SBUpcomingViewController {
+    
+}
 
 #pragma mark - Memory Management
 
@@ -45,30 +47,16 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (id)init {
     self = [super init];
     if(self) {
-        
-        UILabel* label = [[UILabel alloc] init] ;
-        label.text = NSLocalizedString(@"Upcoming", @"");
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
-        label.shadowColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = [UIColor clearColor];
-        label.layer.shadowColor = [UIColor blackColor].CGColor;
-        label.layer.shadowOpacity = .5;
-        label.layer.shadowOffset = CGSizeMake(0, 1);
-        label.layer.shadowRadius = .8;
-        
-        [label sizeToFit];
-        self.navigationItem.titleView = label;
-        
-        self.title = NSLocalizedString(@"Upcoming", @"");
-        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    self.tableView.rowHeight = CELL_HEIGHT;
+    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Upcoming"];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     
@@ -84,7 +72,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     
     UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
     [button1 setFrame:CGRectMake(0.0, 0.0, 45.0, 40.0)];
-    [button1 addTarget:self action:@selector(platformsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button1 addTarget:self action:@selector(platformsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button1 setImage:[UIImage imageNamed:@"navBarRightButton"] forState:UIControlStateNormal];
     UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
     [self.navigationItem setRightBarButtonItem:button];
@@ -110,6 +98,8 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     
     self.tableView.dataSource = _dataSource;
 }
+
+#pragma mark - Fetch
 
 - (NSFetchRequest *)fetchRequest
 {
@@ -208,19 +198,21 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [self.navigationController pushViewController:_gdvc animated:YES];
 }
 
-#pragma mark - Custom Methods
+#pragma mark - Action Methods
 
 - (void)refresh:(id)sender {
     [[SBSyncEngine sharedEngine] startSync];
     [self.tableView reloadData];
 }
 
-- (void)platformsButtonPressed {
+- (void)platformsButtonPressed:(id)sender {
     if (_ptvc) {
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:_ptvc];
         [self.navigationController presentViewController:nav animated:YES completion:nil];
     }
 }
+
+#pragma mark - Notification Methods
 
 - (void)platformsUpdated:(NSNotification *)note {
     _selected = [[NSUserDefaults standardUserDefaults] objectForKey:kSBUpcomingSelectedKey];
@@ -237,7 +229,10 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)syncCompleted:(NSNotification *)note {
     [self.refreshControl endRefreshing];
+    [_dataSource resetFetchedResultsControllerForUpdatedRequest:[self fetchRequest]];
     [self.tableView reloadData];
 }
 
 @end
+
+

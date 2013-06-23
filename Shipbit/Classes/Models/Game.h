@@ -4,5 +4,6 @@
 
 - (NSString *)platformsString;
 - (NSString *)firstLetter;
+- (NSString *)watchTest;
 
 @end

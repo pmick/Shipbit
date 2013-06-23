@@ -49,13 +49,13 @@
     
     // No calculations if the sectionIdentifier was cached on demand.
     if (!tmp) {
-        
+        NSString *tmp;
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
                                                       fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
-        [calComponents setHour:23];
-        [calComponents setMinute:59];
-        [calComponents setSecond:59];
+        [calComponents setHour:0];
+        [calComponents setMinute:0];
+        [calComponents setSecond:0];
         
         NSDate *modRelease = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
         if ([modRelease isInFuture]) {
@@ -66,6 +66,23 @@
         [self setPrimitiveWatchSection:tmp];
     }
     return tmp;
+}
+
+- (NSString *)watchTest
+{
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+                                                  fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
+    [calComponents setHour:0];
+    [calComponents setMinute:0];
+    [calComponents setSecond:0];
+    
+    NSDate *modRelease = [calendar dateFromComponents:calComponents];
+    if (modRelease > [NSDate date]) {
+        return @"Upcoming";
+    } else {
+        return @"Shipped";
+    }
 }
 
 - (NSString *)firstLetter

@@ -11,6 +11,7 @@
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBGameCell+ConfigureForGame.h"
+#import "UILabel+TitleView.h"
 
 #define CELL_HEIGHT 110
 
@@ -42,32 +43,17 @@
 - (id)init {
     self = [super init];
     if(self) {
-        UILabel* label = [[UILabel alloc] init] ;
-        label.text = NSLocalizedString(@"Watchlist", @"");
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
-        label.shadowColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = [UIColor clearColor];
-        label.layer.shadowColor = [UIColor blackColor].CGColor;
-        label.layer.shadowOpacity = .5;
-        label.layer.shadowOffset = CGSizeMake(0, 1);
-        label.layer.shadowRadius = .8;
-        
-        [label sizeToFit];
-        self.navigationItem.titleView = label;
-        
-        self.title = NSLocalizedString(@"Watchlist", nil);
-        self.tableView.rowHeight = CELL_HEIGHT;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.tableView.rowHeight = CELL_HEIGHT;
+    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Watchlist"];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
-    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
@@ -78,6 +64,8 @@
     //[_placeholder setImage:[UIImage imageNamed:@"watchlist_unpopulated"]];
     //[_placeholder sizeToFit];
     [self.tableView setTableHeaderView:_placeholder];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -239,12 +227,11 @@
     [fetchRequest setPredicate:predicate];
     
     // Create and initialize the fetch results controller.
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"watchSection" cacheName:@"GameCache"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"watchSection" cacheName:nil];
     aFetchedResultsController.delegate = self;
     _fetchedResultsController = aFetchedResultsController;
     
     NSError *error = nil;
-    [NSFetchedResultsController deleteCacheWithName:@"GameCache"];
     if (![_fetchedResultsController performFetch:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
@@ -317,5 +304,10 @@
 }
 
 #pragma mark - Action Methods
+
+- (void)syncCompleted:(NSNotification *)note {
+    self.fetchedResultsController = nil;
+    [self.tableView reloadData];
+}
 
 @end

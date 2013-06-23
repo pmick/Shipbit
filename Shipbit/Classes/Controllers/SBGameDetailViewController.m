@@ -11,6 +11,7 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "NSDate+Utilities.h"
+#import "UILabel+TitleView.h"
 
 @interface SBGameDetailViewController ()
 
@@ -29,7 +30,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        [self setTitle:NSLocalizedString(@"Details", nil)];
+        //[self setTitle:NSLocalizedString(@"Details", nil)];
         
         _headerView = [[SBGameDetailHeaderView alloc] init];
         [self.view addSubview:_headerView];
@@ -39,6 +40,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Details"];
+
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];

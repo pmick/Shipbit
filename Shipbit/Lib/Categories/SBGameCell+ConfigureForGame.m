@@ -61,7 +61,6 @@
     self.platformsLabel.text = game.platformsString;
     self.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
     
-    
     SDWebImageManager *manager = [SDWebImageManager sharedManager];    
     [manager downloadWithURL:[NSURL URLWithString:game.art]
                      options:0

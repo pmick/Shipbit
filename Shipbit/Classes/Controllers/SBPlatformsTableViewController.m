@@ -8,6 +8,7 @@
 
 #import "SBPlatformsTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UILabel+TitleView.h"
 
 @interface SBPlatformsTableViewController ()
 
@@ -44,13 +45,15 @@
         [label sizeToFit];
         self.navigationItem.titleView = label;
         
-        self.title = NSLocalizedString(@"Platforms", @"");
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Platforms"];
+
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     

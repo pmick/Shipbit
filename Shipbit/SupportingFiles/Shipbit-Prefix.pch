@@ -16,6 +16,7 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import "DDLog.h"
     #import "UIColor+Extras.h"
+    #import "NSDate+Utilities.h"
 
 //#import "TestFlight.h"
 #endif

@@ -169,6 +169,8 @@
 		0FB94268176BD1A400443DE1 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB94233176BD1A400443DE1 /* MagicalRecord.m */; };
 		0FB94269176BD1A400443DE1 /* MagicalRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB94233176BD1A400443DE1 /* MagicalRecord.m */; };
 		0FB94270176BD7DB00443DE1 /* GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FB9426F176BD7DB00443DE1 /* GameTests.m */; };
+		0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */; };
+		0FBC7D7817757FA7000B4F70 /* UILabel+TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */; };
 		0FEEC127176BAB1E0038AFA7 /* FetchedDataSourceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FEEC126176BAB1E0038AFA7 /* FetchedDataSourceTest.m */; };
 		0FEEC128176BAF820038AFA7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
 		0FEEC129176BAFFB0038AFA7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
@@ -406,6 +408,8 @@
 		0FB94234176BD1A400443DE1 /* MagicalRecordShorthand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalRecordShorthand.h; sourceTree = "<group>"; };
 		0FB94235176BD1A400443DE1 /* CoreData+MagicalRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreData+MagicalRecord.h"; sourceTree = "<group>"; };
 		0FB9426F176BD7DB00443DE1 /* GameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTests.m; sourceTree = "<group>"; };
+		0FBC7D7517757FA7000B4F70 /* UILabel+TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TitleView.h"; sourceTree = "<group>"; };
+		0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TitleView.m"; sourceTree = "<group>"; };
 		0FEEC126176BAB1E0038AFA7 /* FetchedDataSourceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedDataSourceTest.m; sourceTree = "<group>"; };
 		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
@@ -689,6 +693,8 @@
 				0F90492B1762D1C60051DCDF /* UIImage+Extras.m */,
 				0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */,
 				0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */,
+				0FBC7D7517757FA7000B4F70 /* UILabel+TitleView.h */,
+				0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1170,6 +1176,7 @@
 				0FB94267176BD1A400443DE1 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				0FB94269176BD1A400443DE1 /* MagicalRecord.m in Sources */,
 				0FB94270176BD7DB00443DE1 /* GameTests.m in Sources */,
+				0FBC7D7817757FA7000B4F70 /* UILabel+TitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1259,7 @@
 				0FB94264176BD1A400443DE1 /* MagicalRecord+Setup.m in Sources */,
 				0FB94266176BD1A400443DE1 /* MagicalRecord+ShorthandSupport.m in Sources */,
 				0FB94268176BD1A400443DE1 /* MagicalRecord.m in Sources */,
+				0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
