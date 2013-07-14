@@ -61,25 +61,25 @@
     self.platformsLabel.text = game.platformsString;
     self.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
     
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];    
-    [manager downloadWithURL:[NSURL URLWithString:game.art]
-                     options:0
-                    progress:nil
-                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-                       if (image) {
-                           self.thumbnailView.image = [[image imageByScalingAndCroppingForSize:self.thumbnailView.frame.size] circleImage];
-                           self.thumbnailView.alpha = 0.0f;
-                           if (cacheType == SDImageCacheTypeNone) {
-                               [UIView animateWithDuration:0.3 animations:^{
-                                   self.thumbnailView.alpha = 1.0f;
-                               }];
-                           } else {
-                               self.thumbnailView.alpha = 1.0f;
-                           }
-                       } else {
-                           self.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
-                       }
-                   }];
+    SBGameCell *wCell = self;
+    
+    [self.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+                       placeholderImage:[[UIImage imageNamed:@"placeholder"] circleImage]
+                                options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                    if (cacheType != SDImageCacheTypeNone) {
+                                        wCell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:wCell.thumbnailView.frame.size] circleImage];
+                                        
+                                    } else {
+                                        wCell.thumbnailView.image = [[UIImage imageNamed:@"placeholder"] circleImage];
+                                        [UIView transitionWithView:wCell.thumbnailView
+                                                          duration:0.3
+                                                           options:UIViewAnimationOptionTransitionCrossDissolve
+                                                        animations:^{
+                                                            wCell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:wCell.thumbnailView.frame.size] circleImage];
+                                                        }
+                                                        completion:nil];
+                                    }
+    }];
     
     [self resizeSubviews];
 }

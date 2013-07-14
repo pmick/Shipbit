@@ -77,7 +77,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     DDLogVerbose(@"Num Sections: %d", [[self.fetchedResultsController sections] count]);
-    if ([[self.fetchedResultsController sections] count] > 0) {
+    if ([_fetchedResultsController.fetchedObjects count] > 0) {
         DDLogVerbose(@"Scrolling enabled");
         [self.tableView setTableHeaderView:nil];
         [self.tableView setScrollEnabled:YES];
@@ -109,33 +109,6 @@
     [cell configureForGame:[_fetchedResultsController objectAtIndexPath:indexPath]];
     
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo name];
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 44)];
-    [headerView setBackgroundColor:[UIColor colorWithHexValue:@"B1ABA7" alpha:0.93f]];
-    
-    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    headerLabel.backgroundColor = [UIColor clearColor];
-    headerLabel.opaque = NO;
-    headerLabel.textColor = [UIColor whiteColor];
-    headerLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    headerLabel.shadowColor = [UIColor colorWithHexValue:@"000000" alpha:0.5];
-    headerLabel.frame = CGRectMake(11,-11, 320.0, 44.0);
-    headerLabel.textAlignment = NSTextAlignmentLeft;
-    headerLabel.shadowColor = [UIColor clearColor];
-    
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    headerLabel.text = [sectionInfo name];
-    
-    [headerView addSubview:headerLabel];
-    return headerView;
 }
 
 #pragma mark - Table view delegate
@@ -215,10 +188,9 @@
     [fetchRequest setEntity:entity];
     
     // Create the sort descriptors array.
-    NSSortDescriptor *watchSectionDescriptor = [[NSSortDescriptor alloc] initWithKey:@"watchSection" ascending:NO];
     NSSortDescriptor *releaseDateDescriptor = [[NSSortDescriptor alloc] initWithKey:@"releaseDate" ascending:YES];
     NSSortDescriptor *alphabeticDescriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: watchSectionDescriptor, releaseDateDescriptor, alphabeticDescriptor, nil];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects: releaseDateDescriptor, alphabeticDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     
     [fetchRequest setFetchBatchSize:20];
@@ -227,7 +199,7 @@
     [fetchRequest setPredicate:predicate];
     
     // Create and initialize the fetch results controller.
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:@"watchSection" cacheName:nil];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[SBCoreDataController sharedInstance] masterManagedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     aFetchedResultsController.delegate = self;
     _fetchedResultsController = aFetchedResultsController;
     

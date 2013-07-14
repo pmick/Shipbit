@@ -61,7 +61,7 @@
     [versionLabel setTextAlignment:NSTextAlignmentRight];
     [versionLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:11]];
     [versionLabel setTextColor:[UIColor colorWithHexValue:@"cdc9c7"]];
-    [versionLabel setText:@"Version 1.1"];
+    [versionLabel setText:[NSString stringWithFormat:@"Version %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]]];
     [versionLabel setBackgroundColor:[UIColor clearColor]];
     
     UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(137, 331, 114, 20)];
@@ -77,7 +77,6 @@
     
     float screenHeight = [[UIScreen mainScreen] applicationFrame].size.height;
     if (screenHeight < 548.0f) {
-        DDLogInfo(@"DO SPECIAL STUFF");
         [footerImage setFrame:CGRectMake(94, 194, 133, 62)];
         [footerImage sizeToFit];
         [versionLabel setFrame:CGRectMake(20, 241, 114, 20)];

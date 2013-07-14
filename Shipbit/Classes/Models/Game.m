@@ -49,7 +49,6 @@
     
     // No calculations if the sectionIdentifier was cached on demand.
     if (!tmp) {
-        NSString *tmp;
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
                                                       fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
@@ -78,7 +77,7 @@
     [calComponents setSecond:0];
     
     NSDate *modRelease = [calendar dateFromComponents:calComponents];
-    if (modRelease > [NSDate date]) {
+    if ([modRelease isInFuture]) {
         return @"Upcoming";
     } else {
         return @"Shipped";
