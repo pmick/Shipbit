@@ -28,8 +28,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0FA128FB17630729004174CB"
-               BuildableName = "ShipbitTests.octest"
+               BlueprintIdentifier = "40304E231ACA06DC00EF3A54"
+               BuildableName = "ShipbitTests.xctest"
                BlueprintName = "ShipbitTests"
                ReferencedContainer = "container:Shipbit.xcodeproj">
             </BuildableReference>
@@ -60,8 +60,8 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0FA128FB17630729004174CB"
-               BuildableName = "ShipbitTests.octest"
+               BlueprintIdentifier = "40304E231ACA06DC00EF3A54"
+               BuildableName = "ShipbitTests.xctest"
                BlueprintName = "ShipbitTests"
                ReferencedContainer = "container:Shipbit.xcodeproj">
             </BuildableReference>

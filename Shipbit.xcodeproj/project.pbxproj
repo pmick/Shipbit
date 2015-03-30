@@ -64,6 +64,7 @@
 		0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F94536D175D84FC00A16FA3 /* libz.dylib */; };
 		0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */; };
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
+		40304E291ACA06DC00EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E281ACA06DC00EF3A54 /* ShipbitTests.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
@@ -71,6 +72,16 @@
 		B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
 		B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40304E2A1ACA06DC00EF3A54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9B7E3E816AB15E800FFC031 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9B7E3F016AB15E800FFC031;
+			remoteInfo = Shipbit;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -232,6 +243,9 @@
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
 		0FF6ED13176AE19800928295 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		0FF6ED14176AE19800928295 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40304E271ACA06DC00EF3A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40304E281ACA06DC00EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +259,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		40304E211ACA06DC00EF3A54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B9B7E3EE16AB15E800FFC031 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -612,10 +633,28 @@
 			path = Flurry;
 			sourceTree = "<group>";
 		};
+		40304E251ACA06DC00EF3A54 /* ShipbitTests */ = {
+			isa = PBXGroup;
+			children = (
+				40304E281ACA06DC00EF3A54 /* ShipbitTests.m */,
+				40304E261ACA06DC00EF3A54 /* Supporting Files */,
+			);
+			path = ShipbitTests;
+			sourceTree = "<group>";
+		};
+		40304E261ACA06DC00EF3A54 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				40304E271ACA06DC00EF3A54 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		B9B7E3E616AB15E800FFC031 = {
 			isa = PBXGroup;
 			children = (
 				0F9048BB1762D1C60051DCDF /* Shipbit */,
+				40304E251ACA06DC00EF3A54 /* ShipbitTests */,
 				B9B7E3F416AB15E800FFC031 /* Frameworks */,
 				B9B7E3F216AB15E800FFC031 /* Products */,
 				03A41064EFBE00AAB5D979F9 /* Pods */,
@@ -626,6 +665,7 @@
 			isa = PBXGroup;
 			children = (
 				B9B7E3F116AB15E800FFC031 /* Shipbit.app */,
+				40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -651,6 +691,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		40304E231ACA06DC00EF3A54 /* ShipbitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40304E2C1ACA06DC00EF3A54 /* Build configuration list for PBXNativeTarget "ShipbitTests" */;
+			buildPhases = (
+				40304E201ACA06DC00EF3A54 /* Sources */,
+				40304E211ACA06DC00EF3A54 /* Frameworks */,
+				40304E221ACA06DC00EF3A54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40304E2B1ACA06DC00EF3A54 /* PBXTargetDependency */,
+			);
+			name = ShipbitTests;
+			productName = ShipbitTests;
+			productReference = 40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B9B7E3F016AB15E800FFC031 /* Shipbit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B9B7E40F16AB15E800FFC031 /* Build configuration list for PBXNativeTarget "Shipbit" */;
@@ -680,6 +738,12 @@
 				CLASSPREFIX = SB;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = PatrickMick;
+				TargetAttributes = {
+					40304E231ACA06DC00EF3A54 = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = B9B7E3F016AB15E800FFC031;
+					};
+				};
 			};
 			buildConfigurationList = B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -694,11 +758,19 @@
 			projectRoot = "";
 			targets = (
 				B9B7E3F016AB15E800FFC031 /* Shipbit */,
+				40304E231ACA06DC00EF3A54 /* ShipbitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		40304E221ACA06DC00EF3A54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B9B7E3EF16AB15E800FFC031 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -760,6 +832,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		40304E201ACA06DC00EF3A54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40304E291ACA06DC00EF3A54 /* ShipbitTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B9B7E3ED16AB15E800FFC031 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -819,6 +899,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		40304E2B1ACA06DC00EF3A54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9B7E3F016AB15E800FFC031 /* Shipbit */;
+			targetProxy = 40304E2A1ACA06DC00EF3A54 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		0F90492D1762D1C60051DCDF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -839,6 +927,74 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		40304E2D1ACA06DC00EF3A54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = ShipbitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
+			};
+			name = Debug;
+		};
+		40304E2E1ACA06DC00EF3A54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = ShipbitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
+			};
+			name = Release;
+		};
 		B9B7E40D16AB15E800FFC031 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1012,6 +1168,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		40304E2C1ACA06DC00EF3A54 /* Build configuration list for PBXNativeTarget "ShipbitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40304E2D1ACA06DC00EF3A54 /* Debug */,
+				40304E2E1ACA06DC00EF3A54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
