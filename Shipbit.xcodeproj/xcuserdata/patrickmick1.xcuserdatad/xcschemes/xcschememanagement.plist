@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Shipbit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>ShipbitData.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0FA128FB17630729004174CB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>400E07F51AC79825002067EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>400E080E1AC79825002067EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>406D4FE81AC8CDD800EBB2BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>406D4FF21AC8CDD800EBB2BA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B9B7E3F016AB15E800FFC031</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

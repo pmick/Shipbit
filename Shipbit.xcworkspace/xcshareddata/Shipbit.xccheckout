@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6BF7C822-9105-4B17-A79E-4120EB215DDC</string>
+	<string>06493287-31D4-4A87-92D3-5D484C4E952D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Shipbit</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -18,15 +18,15 @@
 		<string>https://github.com/AFNetworking/AFNetworking</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Shipbit.xcodeproj</string>
+	<string>Shipbit.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>2CE8630AB7CC48DADAB8AEF85597161D63B0783F</key>
-		<string>../..</string>
+		<string>..</string>
 		<key>958932E9D08E4465709D54DB1E7CECF23B0F442E</key>
-		<string>../..Shipbit/Vendor/MagicalRecord/</string>
+		<string>../Shipbit/Vendor/MagicalRecord</string>
 		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
-		<string>../..Shipbit/Vendor/AFNetworking/</string>
+		<string>../Shipbit/Vendor/AFNetworking</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/pmick/Shipbit.git</string>
