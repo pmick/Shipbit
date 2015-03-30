@@ -64,7 +64,7 @@
 		0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F94536D175D84FC00A16FA3 /* libz.dylib */; };
 		0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */; };
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
-		40304E291ACA06DC00EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E281ACA06DC00EF3A54 /* ShipbitTests.m */; };
+		40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E2F1ACA074500EF3A54 /* ShipbitTests.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
@@ -245,7 +245,7 @@
 		0FF6ED14176AE19800928295 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40304E271ACA06DC00EF3A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40304E281ACA06DC00EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
+		40304E2F1ACA074500EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -636,7 +636,7 @@
 		40304E251ACA06DC00EF3A54 /* ShipbitTests */ = {
 			isa = PBXGroup;
 			children = (
-				40304E281ACA06DC00EF3A54 /* ShipbitTests.m */,
+				40304E2F1ACA074500EF3A54 /* ShipbitTests.m */,
 				40304E261ACA06DC00EF3A54 /* Supporting Files */,
 			);
 			path = ShipbitTests;
@@ -836,7 +836,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40304E291ACA06DC00EF3A54 /* ShipbitTests.m in Sources */,
+				40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
