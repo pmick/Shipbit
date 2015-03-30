@@ -1,6 +1,0 @@
-framework module FlurrySDK {
-  umbrella header "Pods-FlurrySDK-umbrella.h"
-
-  export *
-  module * { export * }
-}
