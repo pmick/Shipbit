@@ -37,18 +37,7 @@ NSString * const kSBSelectedKey = @"selected";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - View Lifecycle
-
-- (id)init {
-    self = [super init];
-    if(self) {
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -50,6 +50,7 @@
 		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
 		0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F94536D175D84FC00A16FA3 /* libz.dylib */; };
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
+		401A2ED11AD1C3920089287A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401A2ED01AD1C3920089287A /* Main.storyboard */; };
 		40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E2F1ACA074500EF3A54 /* ShipbitTests.m */; };
 		40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */; };
 		403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */; };
@@ -203,6 +204,7 @@
 		0FA128FD17630729004174CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
+		401A2ED01AD1C3920089287A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40304E271ACA06DC00EF3A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40304E2F1ACA074500EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				0F9049241762D1C60051DCDF /* Lib */,
 				0F90492C1762D1C60051DCDF /* SupportingFiles */,
 				0F9049361762D1C60051DCDF /* Vendor */,
+				401A2ED01AD1C3920089287A /* Main.storyboard */,
 			);
 			path = Shipbit;
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				0F9049B61762D1C70051DCDF /* SBSearchTableViewController.xib in Resources */,
 				0F9049BC1762D1C70051DCDF /* Localizable.strings in Resources */,
 				40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */,
+				401A2ED11AD1C3920089287A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

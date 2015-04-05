@@ -27,9 +27,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 @end
 
-@implementation SBUpcomingViewController {
-    
-}
+@implementation SBUpcomingViewController
 
 #pragma mark - Memory Management
 
@@ -38,13 +36,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 }
 
 #pragma mark - View Lifecycle
-
-- (id)init {
-    self = [super init];
-    if(self) {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {

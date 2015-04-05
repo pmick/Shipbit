@@ -41,6 +41,8 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>SBLaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
