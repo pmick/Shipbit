@@ -8,7 +8,7 @@
 
 #import "SBAFParseAPIClient.h"
 #import "AFJSONRequestOperation.h"
-#import "Constants.h"
+#import "SBConstants.h"
 
 static NSString * const kSBFParseAPIBaseURLString = @"https://api.parse.com/1/";
 

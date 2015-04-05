@@ -14,9 +14,9 @@
 #import "SBGameCell+ConfigureForGame.h"
 #import "SBGameTableViewCell.h"
 #import "SBGameTableViewCell+ConfigureForGame.h"
+#import "SBConstants.h"
 
 #define YEAR_MULTIPLIER 1000
-#define CELL_HEIGHT 77
 
 NSString * const kSBUpcomingSelectedKey = @"selected";
 
@@ -43,7 +43,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 {
     [super viewDidLoad];
     
-    self.tableView.rowHeight = CELL_HEIGHT;
+    self.tableView.rowHeight = kSBGameTableViewCellHeight;
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     
@@ -74,12 +74,12 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 - (void)setupDataSource
 {
     UINib *nib = [UINib nibWithNibName:@"SBGameTableViewCell" bundle:[NSBundle bundleForClass:[self class]]];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"GameCell"];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kSBGameTableViewCellReuseIdentifier];
     
     _dataSource = [[FetchedDataSource alloc]
                    initWithFetchRequest:[self fetchRequest]
                    sectionNameKeyPath:@"sectionIdentifier"
-                   cellIdentifier:@"GameCell"
+                   cellIdentifier:kSBGameTableViewCellReuseIdentifier
                    configureCellBlock:^(SBGameTableViewCell *cell, Game *item) {
                        [cell configureForGame:item];
                    }];
@@ -168,10 +168,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [headerView addSubview:headerLabel];
     
     return headerView;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CELL_HEIGHT;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

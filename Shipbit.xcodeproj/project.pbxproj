@@ -58,6 +58,7 @@
 		40FC991A1AD1D7780059444C /* SBGameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99181AD1D7780059444C /* SBGameTableViewCell.m */; };
 		40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */; };
 		40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */; };
+		40FC99231AD1E7870059444C /* SBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99221AD1E7870059444C /* SBConstants.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
@@ -79,7 +80,6 @@
 /* Begin PBXFileReference section */
 		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0F0D262F1762F59C00015D47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0F31A7591769A20F0097A92B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		0F4815C017650EE4005053E3 /* FetchedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedDataSource.h; sourceTree = "<group>"; };
 		0F4815C117650EE4005053E3 /* FetchedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedDataSource.m; sourceTree = "<group>"; };
 		0F6BC4BA1762FCA800B73166 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
@@ -221,6 +221,8 @@
 		40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBGameTableViewCell.xib; sourceTree = "<group>"; };
 		40FC991C1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameTableViewCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameTableViewCell+ConfigureForGame.m"; sourceTree = "<group>"; };
+		40FC99211AD1E7870059444C /* SBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBConstants.h; sourceTree = "<group>"; };
+		40FC99221AD1E7870059444C /* SBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBConstants.m; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -459,8 +461,9 @@
 			children = (
 				403FA19F1AD0C7F5007106B6 /* XCodeConsoleLogFormatter.h */,
 				403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */,
-				0F31A7591769A20F0097A92B /* Constants.h */,
 				0F9049251762D1C60051DCDF /* Categories */,
+				40FC99211AD1E7870059444C /* SBConstants.h */,
+				40FC99221AD1E7870059444C /* SBConstants.m */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */,
 				0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */,
 				0F9049AB1762D1C70051DCDF /* SBUpcomingViewController.m in Sources */,
+				40FC99231AD1E7870059444C /* SBConstants.m in Sources */,
 				0F9049AC1762D1C70051DCDF /* Game.m in Sources */,
 				0F9049AD1762D1C70051DCDF /* _Game.m in Sources */,
 				0F9049AE1762D1C70051DCDF /* _Platform.m in Sources */,
