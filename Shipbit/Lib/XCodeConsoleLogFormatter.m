@@ -12,11 +12,8 @@
 
 - (NSString *)formatLogMessage:(DDLogMessage *)logMessage
 {
-    //Alter the message to your liking
-    //NSString *msg = [logMessage->logMsg stringByReplacingOccurrencesOfString:@"\n" withString:@"<br>"];
-    
     NSString *logLevel;
-    switch (logMessage->logFlag)
+    switch (logMessage.flag)
     {
         case LOG_FLAG_ERROR : logLevel = @"E"; break;
         case LOG_FLAG_WARN  : logLevel = @"W"; break;
@@ -24,11 +21,20 @@
         default             : logLevel = @"V"; break;
     }
     
-    //Also display the file the logging occurred in to ease later debugging
-    NSString *file = [[[NSString stringWithUTF8String:logMessage->file] lastPathComponent] stringByDeletingPathExtension];
+    static NSDateFormatter *formatter = nil;
+    if (!formatter) {
+        formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"HH:mm:ss.SSS";
+    }
+    
+    NSString *dateString = [formatter stringFromDate:logMessage.timestamp];
     
     //Format the message
-    return [NSString stringWithFormat:@"%@ %x %@ %@ [%@@%s@%i]", logMessage->timestamp, logMessage->machThreadID, logLevel, logMessage->logMsg, file, logMessage->function, logMessage->lineNumber];
+    NSString *output;
+    output = [NSString stringWithFormat:@"%@ %@ %@ >> %@", dateString,
+              logMessage.threadID, logLevel, logMessage.message];
+    
+    return output;
 }
 
 @end

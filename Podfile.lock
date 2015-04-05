@@ -1,4 +1,12 @@
 PODS:
+  - CocoaLumberjack (2.0.0):
+    - CocoaLumberjack/Default (= 2.0.0)
+    - CocoaLumberjack/Extensions (= 2.0.0)
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.0):
+    - CocoaLumberjack/Default
   - FlurrySDK (6.2.0):
     - FlurrySDK/FlurrySDK (= 6.2.0)
   - FlurrySDK/FlurrySDK (6.2.0)
@@ -10,11 +18,13 @@ PODS:
   - SDWebImage/Core (3.7.2)
 
 DEPENDENCIES:
+  - CocoaLumberjack (~> 2.0)
   - FlurrySDK (~> 6.2)
   - MagicalRecord (~> 2.2)
   - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
   FlurrySDK: 6d8cc2f898589214ed72e481cf59cffa55b88fe0
   MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
