@@ -12,9 +12,11 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "SBGameCell+ConfigureForGame.h"
+#import "SBGameTableViewCell.h"
+#import "SBGameTableViewCell+ConfigureForGame.h"
 
 #define YEAR_MULTIPLIER 1000
-#define CELL_HEIGHT 110
+#define CELL_HEIGHT 77
 
 NSString * const kSBUpcomingSelectedKey = @"selected";
 
@@ -64,21 +66,23 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
-    
-    
-    
+        
     self.tableView.delegate = self;
     [self setupDataSource];
 }
 
 - (void)setupDataSource
 {
-    _dataSource = [[FetchedDataSource alloc] initWithFetchRequest:[self fetchRequest]
-                                               sectionNameKeyPath:@"sectionIdentifier"
-                                                   cellIdentifier:@"GameCell"
-                                               configureCellBlock:^(id cell, id item) {
-                                                   [cell configureForGame:item];
-                                               }];
+    UINib *nib = [UINib nibWithNibName:@"SBGameTableViewCell" bundle:[NSBundle bundleForClass:[self class]]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"GameCell"];
+    
+    _dataSource = [[FetchedDataSource alloc]
+                   initWithFetchRequest:[self fetchRequest]
+                   sectionNameKeyPath:@"sectionIdentifier"
+                   cellIdentifier:@"GameCell"
+                   configureCellBlock:^(SBGameTableViewCell *cell, Game *item) {
+                       [cell configureForGame:item];
+                   }];
     [_dataSource setParent:self];
     
     self.tableView.dataSource = _dataSource;

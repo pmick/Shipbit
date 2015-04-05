@@ -25,11 +25,11 @@
             </objects>
             <point key="canvasLocation" x="330" y="300"/>
         </scene>
-        <!--Item-->
+        <!--Upcoming-->
         <scene sceneID="1dr-gO-1up">
             <objects>
                 <navigationController id="ccC-ns-97l" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Mr7-vZ-Z3N"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" id="Mr7-vZ-Z3N"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Mc-pm-too">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -42,10 +42,10 @@
             </objects>
             <point key="canvasLocation" x="1046" y="-634"/>
         </scene>
-        <!--Item-->
+        <!--Upcoming-->
         <scene sceneID="oQI-6k-oea">
             <objects>
-                <tableViewController id="UTm-gK-ZmA" customClass="SBUpcomingViewController" sceneMemberID="viewController">
+                <tableViewController title="Upcoming" id="UTm-gK-ZmA" customClass="SBUpcomingViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jWN-yU-3wL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,18 +63,18 @@
                             <outlet property="delegate" destination="UTm-gK-ZmA" id="tu5-Js-jav"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="YuO-AV-kqv"/>
+                    <tabBarItem key="tabBarItem" title="Upcoming" id="YuO-AV-kqv"/>
                     <navigationItem key="navigationItem" id="zAN-ln-IXU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIk-FK-w2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1792" y="-634"/>
         </scene>
-        <!--Item-->
+        <!--Released-->
         <scene sceneID="WgP-jP-h7d">
             <objects>
                 <navigationController id="HJp-aq-JjK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2Uu-Yy-tY5"/>
+                    <tabBarItem key="tabBarItem" title="Released" id="2Uu-Yy-tY5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Oa-gd-QcU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -87,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="1046" y="38"/>
         </scene>
-        <!--Item-->
+        <!--Released-->
         <scene sceneID="CiX-LG-QPh">
             <objects>
-                <tableViewController id="MjY-ji-eeQ" customClass="SBReleasedViewController" sceneMemberID="viewController">
+                <tableViewController title="Released" id="MjY-ji-eeQ" customClass="SBReleasedViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4ou-eY-HhN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,18 +108,18 @@
                             <outlet property="delegate" destination="MjY-ji-eeQ" id="YNL-Bk-AmR"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="3ZB-JY-8rr"/>
+                    <tabBarItem key="tabBarItem" title="Released" id="3ZB-JY-8rr"/>
                     <navigationItem key="navigationItem" id="eNu-xR-Mri"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OxM-h5-dH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1792" y="38"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="uPS-Bd-Nuc">
             <objects>
                 <navigationController id="rYg-lI-A3m" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="whU-BA-vKS"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="whU-BA-vKS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MOh-cc-BeP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -132,10 +132,10 @@
             </objects>
             <point key="canvasLocation" x="1046" y="698"/>
         </scene>
-        <!--Item-->
+        <!--Search-->
         <scene sceneID="HH7-PF-7Sx">
             <objects>
-                <tableViewController id="aas-VK-yw8" customClass="SBSearchTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Search" id="aas-VK-yw8" customClass="SBSearchTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3EB-wX-3dT">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -161,7 +161,7 @@
                             <outlet property="delegate" destination="aas-VK-yw8" id="zG9-Zd-ltI"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="mfG-Fw-Q7o"/>
+                    <tabBarItem key="tabBarItem" title="Search" id="mfG-Fw-Q7o"/>
                     <navigationItem key="navigationItem" id="vvZ-yH-IOm"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="UAL-7X-4pO" id="uCb-0s-9qL"/>
@@ -180,11 +180,11 @@
             </objects>
             <point key="canvasLocation" x="1792" y="698"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="yof-hZ-Xi8">
             <objects>
                 <navigationController id="VT6-az-c5c" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="6ff-mi-YOM"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="6ff-mi-YOM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="csP-Vj-dP4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -197,10 +197,10 @@
             </objects>
             <point key="canvasLocation" x="1046" y="1388"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="l1N-hq-DEV">
             <objects>
-                <tableViewController id="mYv-dJ-hCd" customClass="SBFavoritesTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Favorites" id="mYv-dJ-hCd" customClass="SBFavoritesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="efV-vW-Vkb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,7 +218,7 @@
                             <outlet property="delegate" destination="mYv-dJ-hCd" id="7sM-K6-6oL"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="Kyb-0r-GhQ"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="Kyb-0r-GhQ"/>
                     <navigationItem key="navigationItem" id="aul-8p-GlT"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74P-3R-2Oa" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,7 +8,6 @@
 
 #import "FetchedDataSource.h"
 #import "SBCoreDataController.h"
-#import "SBGameCell.h"
 
 @interface FetchedDataSource ()
 
@@ -67,10 +66,8 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:_cellIdentifier];
-    if (!cell) {
-        cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:_cellIdentifier];
-    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:self.cellIdentifier forIndexPath:indexPath];
+
     id item = [_fetchedResultsController objectAtIndexPath:indexPath];
     _configureCellBlock(cell, item);
     return cell;

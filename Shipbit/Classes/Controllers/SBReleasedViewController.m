@@ -15,7 +15,7 @@
 #import "FetchedDataSource.h"
 
 #define YEAR_MULTIPLIER 1000
-#define CELL_HEIGHT 110
+#define CELL_HEIGHT 77
 
 NSString * const kSBSelectedKey = @"selected";
 
@@ -71,6 +71,7 @@ NSString * const kSBSelectedKey = @"selected";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
     
+    
     [self setupDataSource];
 }
 
@@ -83,6 +84,9 @@ NSString * const kSBSelectedKey = @"selected";
 
 - (void)setupDataSource
 {
+    UINib *nib = [UINib nibWithNibName:@"SBGameTableViewCell" bundle:[NSBundle bundleForClass:[self class]]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"GameCell"];
+    
     _dataSource = [[FetchedDataSource alloc] initWithFetchRequest:[self fetchRequest]
                                                sectionNameKeyPath:@"sectionIdentifier"
                                                    cellIdentifier:@"GameCell"

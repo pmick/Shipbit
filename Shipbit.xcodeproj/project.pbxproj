@@ -55,6 +55,9 @@
 		40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */; };
 		403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */; };
 		403FA1A11AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */; };
+		40FC991A1AD1D7780059444C /* SBGameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99181AD1D7780059444C /* SBGameTableViewCell.m */; };
+		40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */; };
+		40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
@@ -213,6 +216,11 @@
 		403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ShipbitColors.m"; sourceTree = "<group>"; };
 		403FA19F1AD0C7F5007106B6 /* XCodeConsoleLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeConsoleLogFormatter.h; sourceTree = "<group>"; };
 		403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCodeConsoleLogFormatter.m; sourceTree = "<group>"; };
+		40FC99171AD1D7780059444C /* SBGameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameTableViewCell.h; sourceTree = "<group>"; };
+		40FC99181AD1D7780059444C /* SBGameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameTableViewCell.m; sourceTree = "<group>"; };
+		40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBGameTableViewCell.xib; sourceTree = "<group>"; };
+		40FC991C1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameTableViewCell+ConfigureForGame.h"; sourceTree = "<group>"; };
+		40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameTableViewCell+ConfigureForGame.m"; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -437,6 +445,11 @@
 				0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */,
 				0F9049221762D1C60051DCDF /* SBSummaryView.h */,
 				0F9049231762D1C60051DCDF /* SBSummaryView.m */,
+				40FC99171AD1D7780059444C /* SBGameTableViewCell.h */,
+				40FC99181AD1D7780059444C /* SBGameTableViewCell.m */,
+				40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */,
+				40FC991C1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.h */,
+				40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -679,6 +692,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */,
 				0F9049B61762D1C70051DCDF /* SBSearchTableViewController.xib in Resources */,
 				0F9049BC1762D1C70051DCDF /* Localizable.strings in Resources */,
 				40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */,
@@ -755,6 +769,7 @@
 				0F9049A51762D1C70051DCDF /* SBFavoritesTableViewController.m in Sources */,
 				0F9049A61762D1C70051DCDF /* SBGameDetailViewController.m in Sources */,
 				0F9049A81762D1C70051DCDF /* SBPlatformsTableViewController.m in Sources */,
+				40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */,
 				0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */,
 				0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */,
 				0F9049AB1762D1C70051DCDF /* SBUpcomingViewController.m in Sources */,
@@ -775,6 +790,7 @@
 				0F9049BD1762D1C70051DCDF /* main.m in Sources */,
 				0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */,
 				0F9049D41762D1C70051DCDF /* MBProgressHUD.m in Sources */,
+				40FC991A1AD1D7780059444C /* SBGameTableViewCell.m in Sources */,
 				0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */,
 				0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */,
 				0F6BC4CE1762FCA800B73166 /* AFHTTPRequestOperation.m in Sources */,
@@ -961,7 +977,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1016,7 +1032,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
 				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
