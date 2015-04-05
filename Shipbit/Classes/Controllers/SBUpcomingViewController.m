@@ -112,12 +112,12 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [fetchRequest setFetchBatchSize:20];
     
     NSDate *now = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.year = 2;
     NSDate *twoYearsFromNow = [calendar dateByAddingComponents:components toDate:now options:0];
     
-    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+    NSDateComponents *calComponents = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay)
                                                   fromDate:[NSDate date]]; // gets the year, month, and day for today's date
     NSDate *today = [calendar dateFromComponents:calComponents]; // makes a new NSDate keeping only the year, month, and day
     

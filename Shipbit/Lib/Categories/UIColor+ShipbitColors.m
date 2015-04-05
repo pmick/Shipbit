@@ -11,7 +11,7 @@
 @implementation UIColor (ShipbitColors)
 
 + (UIColor *)sb_blueTintColor {
-    return [UIColor colorWithRed:0.25 green:0.29 blue:0.39 alpha:1];
+    return [UIColor colorWithRed:0.25f green:0.29f blue:0.39f alpha:1];
 }
 
 @end

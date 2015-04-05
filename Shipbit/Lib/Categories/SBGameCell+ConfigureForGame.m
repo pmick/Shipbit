@@ -63,9 +63,10 @@
     
     SBGameCell *wCell = self;
     
-    [self.thumbnailView setImageWithURL:[NSURL URLWithString:game.art]
+    [self.thumbnailView sd_setImageWithURL:[NSURL URLWithString:game.art]
                        placeholderImage:[[UIImage imageNamed:@"placeholder"] circleImage]
-                                options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                                options:SDWebImageRetryFailed
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                     if (cacheType != SDImageCacheTypeNone) {
                                         wCell.thumbnailView.image = [[image imageByScalingAndCroppingForSize:wCell.thumbnailView.frame.size] circleImage];
                                         

@@ -164,6 +164,9 @@
             case NSFetchedResultsChangeDelete:
                 [((UITableViewController *)_parent).tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
                 break;
+                
+            default:
+                break;
         }
     }
 }

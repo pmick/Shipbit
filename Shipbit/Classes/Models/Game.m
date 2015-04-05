@@ -26,9 +26,9 @@
          Sections are organized by month and year. Create the section identifier as a string representing the number (year * 1000) + month; this way they will be correctly ordered chronologically regardless of the actual name of the month.
          */
         NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit) fromDate:[self releaseDate]];
+        NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitWeekOfYear) fromDate:[self releaseDate]];
         NSDateComponents *modificationComponents = [[NSDateComponents alloc] init];
-        [modificationComponents setWeek:1];
+        [modificationComponents setWeekOfYear:1];
         // Calculate end of current week
 
         // End of current week + 1 week
@@ -49,8 +49,8 @@
     
     // No calculations if the sectionIdentifier was cached on demand.
     if (!tmp) {
-        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *calComponents = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay)
                                                       fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
         [calComponents setHour:0];
         [calComponents setMinute:0];
@@ -69,8 +69,8 @@
 
 - (NSString *)watchTest
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *calComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit)
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *calComponents = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay)
                                                   fromDate:[self releaseDate]]; // gets the year, month, and day for today's date
     [calComponents setHour:0];
     [calComponents setMinute:0];
