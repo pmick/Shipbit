@@ -11,7 +11,6 @@
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBGameCell+ConfigureForGame.h"
-#import "UILabel+TitleView.h"
 
 #define CELL_HEIGHT 110
 
@@ -51,7 +50,6 @@
     [super viewDidLoad];
 
     self.tableView.rowHeight = CELL_HEIGHT;
-    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Watchlist"];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;

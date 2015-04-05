@@ -62,7 +62,6 @@
 		0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049691762D1C70051DCDF /* SDSegmentedControl.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
 		0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F94536D175D84FC00A16FA3 /* libz.dylib */; };
-		0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */; };
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
 		40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E2F1ACA074500EF3A54 /* ShipbitTests.m */; };
 		40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */; };
@@ -239,8 +238,6 @@
 		0F9395AE1727315700ED7D76 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0F94536D175D84FC00A16FA3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0FA128FD17630729004174CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0FBC7D7517757FA7000B4F70 /* UILabel+TitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+TitleView.h"; sourceTree = "<group>"; };
-		0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TitleView.m"; sourceTree = "<group>"; };
 		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
 		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,8 +497,6 @@
 				0F90492B1762D1C60051DCDF /* UIImage+Extras.m */,
 				0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */,
 				0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */,
-				0FBC7D7517757FA7000B4F70 /* UILabel+TitleView.h */,
-				0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */,
 				403FA19C1AD0B1A5007106B6 /* UIColor+ShipbitColors.h */,
 				403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */,
 			);
@@ -891,7 +886,6 @@
 				0F6BC4D51762FCA800B73166 /* UIImageView+AFNetworking.m in Sources */,
 				0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */,
 				0F4815C217650EE4005053E3 /* FetchedDataSource.m in Sources */,
-				0FBC7D7717757FA7000B4F70 /* UILabel+TitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

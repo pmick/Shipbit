@@ -11,7 +11,6 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "NSDate+Utilities.h"
-#import "UILabel+TitleView.h"
 
 @interface SBGameDetailViewController ()
 
@@ -41,8 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Details"];
-
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     [self.dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];

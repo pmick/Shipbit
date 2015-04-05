@@ -60,6 +60,8 @@
     // Create new platforms view controller.
     SBPlatformsTableViewController *ptvc = [[SBPlatformsTableViewController alloc] init];
     
+    ptvc.title = @"Platforms";
+    
     // Assign new platforms view controller to both views that use it.
     [utvc setPtvc:ptvc];
     [rtvc setPtvc:ptvc];
@@ -67,12 +69,16 @@
     // Create a navigation controller for each view controller listed in the sidenav.
     UINavigationController *upcomingNav = [[UINavigationController alloc] initWithRootViewController:utvc];
     upcomingNav.title = @"Upcoming";
+    utvc.title = @"Upcoming";
     UINavigationController *releasedNav = [[UINavigationController alloc] initWithRootViewController:rtvc];
     releasedNav.title = @"Released";
+    rtvc.title = @"Released";
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
     searchNav.title = @"Search";
+    stvc.title = @"Search";
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
     favoritesNav.title = @"Favorites";
+    ftvc.title = @"Favorites";
     
     //[upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
     
@@ -89,8 +95,6 @@
     
     self.window.rootViewController = self.tabBarController;
     
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
-
     return YES;
 }
 

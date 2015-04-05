@@ -8,7 +8,6 @@
 
 #import "SBPlatformsTableViewController.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UILabel+TitleView.h"
 
 @interface SBPlatformsTableViewController ()
 
@@ -30,20 +29,7 @@
 - (id)init {
     self = [super init];
     if(self) {
-        UILabel* label = [[UILabel alloc] init] ;
-        label.text = NSLocalizedString(@"Platforms", @"");
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20];
-        label.shadowColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = [UIColor clearColor];
-        label.layer.shadowColor = [UIColor blackColor].CGColor;
-        label.layer.shadowOpacity = .5;
-        label.layer.shadowOffset = CGSizeMake(0, 1);
-        label.layer.shadowRadius = .8;
         
-        [label sizeToFit];
-        self.navigationItem.titleView = label;
         
     }
     return self;
@@ -52,8 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Platforms"];
-
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     

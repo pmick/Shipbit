@@ -12,7 +12,6 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "SBGameCell+ConfigureForGame.h"
-#import "UILabel+TitleView.h"
 
 #define YEAR_MULTIPLIER 1000
 #define CELL_HEIGHT 110
@@ -52,7 +51,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [super viewDidLoad];
     
     self.tableView.rowHeight = CELL_HEIGHT;
-    self.navigationItem.titleView = [UILabel setStyledTitleWithString:@"Upcoming"];
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     
@@ -65,10 +63,10 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
-    UIButton *button1=[UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *button1=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button1 setFrame:CGRectMake(0.0, 0.0, 45.0, 40.0)];
     [button1 addTarget:self action:@selector(platformsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [button1 setImage:[UIImage imageNamed:@"navBarRightButton"] forState:UIControlStateNormal];
+    [button1 setTitle:NSLocalizedString(@"Platforms", nil) forState:UIControlStateNormal];
     UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
     [self.navigationItem setRightBarButtonItem:button];
     
