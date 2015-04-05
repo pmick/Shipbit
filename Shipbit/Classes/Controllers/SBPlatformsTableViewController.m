@@ -63,7 +63,7 @@
     [self.navigationItem setRightBarButtonItem:doneButton];
 
     _leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Uncheck All"
-                                                   style:UIBarButtonItemStyleBordered
+                                                   style:UIBarButtonItemStylePlain
                                                   target:self
                                                   action:@selector(selectAllPressed:)];
     [self.navigationItem setLeftBarButtonItem:_leftButton];
@@ -89,9 +89,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         if ([_selected containsObject:[_platforms objectAtIndex:indexPath.row]]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
-            [accessoryImage sizeToFit];
-            [cell setAccessoryView:accessoryImage];
         }
         
         UIView *background = [[UIView alloc] initWithFrame:CGRectZero];
@@ -117,7 +114,6 @@
     if (cell.accessoryType) {
         int numberOfSelectedPlatforms = [_selected count];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.accessoryView = nil;
         int objectToRemove = 0;
         for (int i = 0; i < numberOfSelectedPlatforms; i++) {
             if ([cell.textLabel.text isEqualToString:[_selected objectAtIndex:i]]) {
@@ -128,9 +124,6 @@
         [_selected removeObjectAtIndex:objectToRemove];
     } else {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
-        [accessoryImage sizeToFit];
-        [cell setAccessoryView:accessoryImage];
         [_selected addObject:cell.textLabel.text];
     }
     
@@ -174,9 +167,6 @@
         for (int i = 0; i < (int)[_platforms count]; i++) {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            UIImageView *accessoryImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
-            [accessoryImage sizeToFit];
-            [cell setAccessoryView:accessoryImage];
         }
         [_selected removeAllObjects];
         [_selected addObjectsFromArray:_platforms];
@@ -186,7 +176,6 @@
         for (int i = 0; i < (int)[_platforms count]; i++) {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.accessoryView = nil;
         }
         [_selected removeAllObjects];
     }
