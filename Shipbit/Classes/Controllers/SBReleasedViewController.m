@@ -71,12 +71,13 @@ NSString * const kSBSelectedKey = @"selected";
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     
-    UIButton *button1=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [button1 setFrame:CGRectMake(0.0, 0.0, 45.0, 40.0)];
-    [button1 addTarget:self action:@selector(platformsButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [button1 setTitle:NSLocalizedString(@"Platforms", nil) forState:UIControlStateNormal];
-    UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:button1];
-    [self.navigationItem setRightBarButtonItem:button];
+    UIBarButtonItem *platformsItem;
+    platformsItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Platforms", nil)
+                                                     style:UIBarButtonItemStylePlain
+                                                    target:self
+                                                    action:@selector(platformsButtonPressed)];
+    
+    [self.navigationItem setRightBarButtonItem:platformsItem];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(platformsUpdated:) name:@"PlatformsUpdated" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
