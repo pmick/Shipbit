@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) JASidePanelController *viewController;
+@property (nonatomic, strong) UITabBarController *tabBarController;
 
 @end

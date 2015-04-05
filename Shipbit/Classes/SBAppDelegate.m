@@ -22,37 +22,13 @@
 #import "XCodeConsoleLogFormatter.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "Flurry.h"
+#import "UIColor+ShipbitColors.h"
 
 @interface SBAppDelegate ()
 
 @end
 
 @implementation SBAppDelegate
-
-- (void)customizeAppearance {
-    // Navbar background
-    UIImage *navbarBackgroundImage = [UIImage imageNamed:@"navbar-background"];
-    [[UINavigationBar appearance] setBackgroundImage:navbarBackgroundImage
-                                       forBarMetrics:UIBarMetricsDefault];
-    
-    UIBarButtonItem *searchBarButton = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
-    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButton"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButtonPressed"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    [searchBarButton setBackgroundImage:[UIImage imageNamed:@"searchCancelButtonPressed"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    
-    //[searchBarButton setImage:[UIImage imageNamed:@"cancelButton"]];
-    //[searchBarButton setBackgroundImage:[UIImage imageNamed:@"cancelButton"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesNormal forState:UIControlStateNormal];
-    //[searchBarButton setTitleTextAttributes:barButtonTitleTextAttributesHighlighted forState:UIControlStateHighlighted];
-    
-    UIBarButtonItem *sharingButton = [UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBack"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBackSelected"] forState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"navButtonBackSelected"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImage"] forState:UIControlStateNormal style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImagePressed"] forState:UIControlStateSelected style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-    [sharingButton setBackgroundImage:[UIImage imageNamed:@"doneButtonBackgroundImagePressed"] forState:UIControlStateHighlighted style:UIBarButtonItemStyleDone barMetrics:UIBarMetricsDefault];
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
@@ -68,7 +44,6 @@
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Platform class]];
     [[SBSyncEngine sharedEngine] registerNSManagedObjectClassToSync:[Game class]];
     
-    [self customizeAppearance];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor blackColor];
@@ -91,9 +66,13 @@
     
     // Create a navigation controller for each view controller listed in the sidenav.
     UINavigationController *upcomingNav = [[UINavigationController alloc] initWithRootViewController:utvc];
+    upcomingNav.title = @"Upcoming";
     UINavigationController *releasedNav = [[UINavigationController alloc] initWithRootViewController:rtvc];
+    releasedNav.title = @"Released";
     UINavigationController *searchNav = [[UINavigationController alloc] initWithRootViewController:stvc];
+    searchNav.title = @"Search";
     UINavigationController *favoritesNav = [[UINavigationController alloc] initWithRootViewController:ftvc];
+    favoritesNav.title = @"Favorites";
     
     //[upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
     
@@ -102,15 +81,13 @@
     lsnvc.rtvc = releasedNav;
     lsnvc.stvc = searchNav;
     lsnvc.ftvc = favoritesNav;
-        
-    self.viewController = [[JASidePanelController alloc] init];
-    self.viewController.leftPanel = lsnvc;
-    self.viewController.centerPanel = upcomingNav;
     
-    // Disable swiping so you can delete games from favorites with a right to left swipe
-    self.viewController.allowLeftSwipe = NO;
+    self.tabBarController = [UITabBarController new];
+    self.tabBarController.viewControllers = @[upcomingNav, releasedNav, searchNav, favoritesNav];
     
-    self.window.rootViewController = _viewController;
+    self.window.tintColor = [UIColor sb_blueTintColor];
+    
+    self.window.rootViewController = self.tabBarController;
     
     [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
 

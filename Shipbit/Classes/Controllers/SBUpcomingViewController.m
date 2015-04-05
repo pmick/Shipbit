@@ -38,10 +38,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - View Lifecycle
 
 - (id)init {
@@ -66,7 +62,6 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
     }
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    refreshControl.tintColor = [UIColor colorWithHexValue:@"B1ABA7"];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self setRefreshControl:refreshControl];
     

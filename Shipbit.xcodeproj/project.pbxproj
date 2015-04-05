@@ -66,6 +66,7 @@
 		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
 		40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E2F1ACA074500EF3A54 /* ShipbitTests.m */; };
 		40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */; };
+		403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
@@ -242,12 +243,12 @@
 		0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+TitleView.m"; sourceTree = "<group>"; };
 		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
 		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
-		0FF6ED13176AE19800928295 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		0FF6ED14176AE19800928295 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40304E271ACA06DC00EF3A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40304E2F1ACA074500EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
 		40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBLaunchScreen.xib; sourceTree = "<group>"; };
+		403FA19C1AD0B1A5007106B6 /* UIColor+ShipbitColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ShipbitColors.h"; sourceTree = "<group>"; };
+		403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ShipbitColors.m"; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,6 +502,8 @@
 				0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */,
 				0FBC7D7517757FA7000B4F70 /* UILabel+TitleView.h */,
 				0FBC7D7617757FA7000B4F70 /* UILabel+TitleView.m */,
+				403FA19C1AD0B1A5007106B6 /* UIColor+ShipbitColors.h */,
+				403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -522,7 +525,6 @@
 		0F9049361762D1C60051DCDF /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				0FF6ED12176AE19800928295 /* Flurry */,
 				0F9049371762D1C60051DCDF /* AFNetworking */,
 				0F90494B1762D1C60051DCDF /* JASidePanels */,
 				0F9049511762D1C60051DCDF /* Lumberjack */,
@@ -625,15 +627,6 @@
 				0F9049691762D1C70051DCDF /* SDSegmentedControl.m */,
 			);
 			path = SDSegmentedControl;
-			sourceTree = "<group>";
-		};
-		0FF6ED12176AE19800928295 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				0FF6ED13176AE19800928295 /* Flurry.h */,
-				0FF6ED14176AE19800928295 /* libFlurry.a */,
-			);
-			path = Flurry;
 			sourceTree = "<group>";
 		};
 		40304E251ACA06DC00EF3A54 /* ShipbitTests */ = {
@@ -871,6 +864,7 @@
 				0F9049B71762D1C70051DCDF /* SBSummaryView.m in Sources */,
 				0F9049B81762D1C70051DCDF /* NSDate+Utilities.m in Sources */,
 				0F9049B91762D1C70051DCDF /* UIColor+Extras.m in Sources */,
+				403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */,
 				0F9049BA1762D1C70051DCDF /* UIImage+Extras.m in Sources */,
 				0F9049BD1762D1C70051DCDF /* main.m in Sources */,
 				0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */,
@@ -1179,6 +1173,7 @@
 				40304E2E1ACA06DC00EF3A54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */ = {
 			isa = XCConfigurationList;
