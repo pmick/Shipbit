@@ -9,4 +9,4 @@
 #import "SBConstants.h"
 
 NSString *const kSBGameTableViewCellReuseIdentifier = @"GameTableViewCellReuseIdentifier";
-const CGFloat kSBGameTableViewCellHeight = 77.0f;
+const CGFloat kSBGameTableViewCellHeight = 88.0f;

@@ -11,8 +11,7 @@
 #import "SBGameDetailViewController.h"
 #import "SBCoreDataController.h"
 #import "SBGameCell+ConfigureForGame.h"
-
-#define CELL_HEIGHT 110
+#import "SBConstants.h"
 
 @interface SBFavoritesTableViewController ()
 
@@ -49,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.rowHeight = CELL_HEIGHT;
+    self.tableView.rowHeight = kSBGameTableViewCellHeight;
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -59,8 +58,6 @@
     [self.dateFormatter setDateFormat:@"MMM dd"];
     
     _placeholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"watchlist_unpopulated"]];
-    //[_placeholder setImage:[UIImage imageNamed:@"watchlist_unpopulated"]];
-    //[_placeholder sizeToFit];
     [self.tableView setTableHeaderView:_placeholder];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncCompleted:) name:@"SBSyncEngineSyncCompleted" object:nil];
@@ -110,10 +107,6 @@
 }
 
 #pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CELL_HEIGHT;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(!_gdvc) {

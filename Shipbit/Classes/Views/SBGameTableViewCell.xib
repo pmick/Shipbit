@@ -20,30 +20,30 @@
                             <constraint firstAttribute="width" secondItem="ig6-ze-Txt" secondAttribute="height" multiplier="1:1" id="DZJ-Ze-z7g"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVr-36-iMc" userLabel="Title Label">
-                        <rect key="frame" x="100" y="5" width="263" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UVr-36-iMc" userLabel="Title Label">
+                        <rect key="frame" x="100" y="5" width="263" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="5" id="v4A-EG-hdn"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-U3-d8A" userLabel="Date Label">
-                        <rect key="frame" x="100" y="28" width="263" height="17"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="21" id="09S-1K-GS5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u0c-hT-ASc" userLabel="PlatformsLabel">
-                        <rect key="frame" x="100" y="78" width="263" height="17"/>
+                        <rect key="frame" x="100" y="80" width="263" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="21" id="RnF-7j-RwX"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="RnF-7j-RwX"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kmx-U3-d8A" userLabel="Date Label">
+                        <rect key="frame" x="100" y="27" width="263" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="14" id="09S-1K-GS5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -57,8 +57,8 @@
                     <constraint firstItem="kmx-U3-d8A" firstAttribute="leading" secondItem="UVr-36-iMc" secondAttribute="leading" id="Rgl-bj-X1c"/>
                     <constraint firstAttribute="trailing" secondItem="kmx-U3-d8A" secondAttribute="trailing" constant="5" id="S7V-DO-Cf6"/>
                     <constraint firstItem="ig6-ze-Txt" firstAttribute="top" secondItem="UVr-36-iMc" secondAttribute="top" id="WMo-yg-trw"/>
+                    <constraint firstItem="u0c-hT-ASc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kmx-U3-d8A" secondAttribute="bottom" constant="3" id="Zwh-aI-jj6"/>
                     <constraint firstAttribute="trailing" secondItem="UVr-36-iMc" secondAttribute="trailing" constant="5" id="lFN-xo-guf"/>
-                    <constraint firstItem="u0c-hT-ASc" firstAttribute="top" relation="lessThanOrEqual" secondItem="kmx-U3-d8A" secondAttribute="bottom" constant="50" id="lYn-Mp-RHC"/>
                     <constraint firstItem="UVr-36-iMc" firstAttribute="leading" secondItem="u0c-hT-ASc" secondAttribute="leading" id="qG1-Ia-Y9A"/>
                     <constraint firstItem="UVr-36-iMc" firstAttribute="leading" secondItem="ig6-ze-Txt" secondAttribute="trailing" constant="5" id="vYR-lg-fSP"/>
                     <constraint firstAttribute="bottom" secondItem="ig6-ze-Txt" secondAttribute="bottom" constant="5" id="zMV-lt-csc"/>

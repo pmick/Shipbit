@@ -59,12 +59,14 @@
 		40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */; };
 		40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */; };
 		40FC99231AD1E7870059444C /* SBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99221AD1E7870059444C /* SBConstants.m */; };
+		40FC99251AD1F2050059444C /* SBGameTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */; };
 		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
 		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
 		B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */; };
 		B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
 		B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
+		C29532E7A067AE62285FD461 /* Pods_ShipbitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,6 +225,8 @@
 		40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameTableViewCell+ConfigureForGame.m"; sourceTree = "<group>"; };
 		40FC99211AD1E7870059444C /* SBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBConstants.h; sourceTree = "<group>"; };
 		40FC99221AD1E7870059444C /* SBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBConstants.m; sourceTree = "<group>"; };
+		40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameTableViewCellTests.m; sourceTree = "<group>"; };
+		8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipbitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,7 +236,9 @@
 		B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		B9B7E4D216AC5B5100FFC031 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipbitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests.release.xcconfig"; sourceTree = "<group>"; };
 		DB6265C571FB235B402A14A3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipbitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C29532E7A067AE62285FD461 /* Pods_ShipbitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +275,8 @@
 			children = (
 				9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */,
 				DB6265C571FB235B402A14A3 /* Pods.release.xcconfig */,
+				8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */,
+				D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -558,6 +567,7 @@
 			children = (
 				40304E2F1ACA074500EF3A54 /* ShipbitTests.m */,
 				40304E261ACA06DC00EF3A54 /* Supporting Files */,
+				40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */,
 			);
 			path = ShipbitTests;
 			sourceTree = "<group>";
@@ -604,6 +614,7 @@
 				B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */,
 				0FA128FD17630729004174CB /* SenTestingKit.framework */,
 				946571C01F369F5CDBF9E7FA /* Pods.framework */,
+				E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -615,9 +626,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40304E2C1ACA06DC00EF3A54 /* Build configuration list for PBXNativeTarget "ShipbitTests" */;
 			buildPhases = (
+				D3C1ADBF4EC9B1834B298EC6 /* Check Pods Manifest.lock */,
 				40304E201ACA06DC00EF3A54 /* Sources */,
 				40304E211ACA06DC00EF3A54 /* Frameworks */,
 				40304E221ACA06DC00EF3A54 /* Resources */,
+				77FC5C57BBB14489463A48EC /* Embed Pods Frameworks */,
+				4621A972B659A1D61F399605 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -663,6 +677,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = B9B7E3F016AB15E800FFC031;
 					};
+					B9B7E3F016AB15E800FFC031 = {
+						DevelopmentTeam = 9FP9G62F9N;
+					};
 				};
 			};
 			buildConfigurationList = B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */;
@@ -706,7 +723,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4621A972B659A1D61F399605 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		53F91166295927FAC3198622 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		77FC5C57BBB14489463A48EC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3C1ADBF4EC9B1834B298EC6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -758,6 +820,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40FC99251AD1F2050059444C /* SBGameTableViewCellTests.m in Sources */,
 				40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -843,6 +906,7 @@
 /* Begin XCBuildConfiguration section */
 		40304E2D1ACA06DC00EF3A54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -858,10 +922,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\\\"\"";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -878,6 +939,7 @@
 		};
 		40304E2E1ACA06DC00EF3A54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -895,6 +957,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\\\"\"";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -991,6 +1054,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shipbit/SupportingFiles/Shipbit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1046,6 +1110,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Shipbit/SupportingFiles/Shipbit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -7,26 +7,52 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.0):
     - CocoaLumberjack/Default
+  - Expecta (0.3.2)
+  - Expecta+Snapshots (1.3.2):
+    - Expecta (~> 0.3)
+    - FBSnapshotTestCase (= 1.6)
+  - FBSnapshotTestCase (1.6)
   - FlurrySDK (6.2.0):
     - FlurrySDK/FlurrySDK (= 6.2.0)
   - FlurrySDK/FlurrySDK (6.2.0)
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
+  - OCMock (3.1.2)
+  - OHHTTPStubs (3.1.11):
+    - OHHTTPStubs/Core (= 3.1.11)
+  - OHHTTPStubs/Core (3.1.11)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
+  - Specta (0.5.0)
+  - XCTest+OHHTTPStubSuiteCleanUp (1.0.0):
+    - OHHTTPStubs
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 2.0)
+  - Expecta (~> 0.3)
+  - Expecta+Snapshots (~> 1.3)
+  - FBSnapshotTestCase (~> 1.6)
   - FlurrySDK (~> 6.2)
   - MagicalRecord (~> 2.2)
+  - OCMock (~> 3.1)
+  - OHHTTPStubs (~> 3.1)
   - SDWebImage (~> 3.7)
+  - Specta (~> 0.5)
+  - XCTest+OHHTTPStubSuiteCleanUp (~> 1.0)
 
 SPEC CHECKSUMS:
   CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
+  Expecta+Snapshots: 40c5ec43b43da3bae957f14fed5dc9177d08ec8b
+  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
   FlurrySDK: 6d8cc2f898589214ed72e481cf59cffa55b88fe0
   MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  OHHTTPStubs: 5624a5d20d97d46d47e15a68ca8808b59ccf0512
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
+  XCTest+OHHTTPStubSuiteCleanUp: 4469ec8863c6bc022c5089a9b94233eb3416c5ee
 
 COCOAPODS: 0.36.1

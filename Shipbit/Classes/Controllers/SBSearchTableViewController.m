@@ -14,8 +14,8 @@
 #import "SBCoreDataController.h"
 #import "SBSyncEngine.h"
 #import "SBGameCell+ConfigureForGame.h"
-
-#define CELL_HEIGHT 110
+#import "SBConstants.h"
+#import "SBGameTableViewCell+ConfigureForGame.h"
 
 @interface SBSearchTableViewController ()
 
@@ -48,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.rowHeight = CELL_HEIGHT;
+    self.tableView.rowHeight = kSBGameTableViewCellHeight;
 
     
     [self.tableView setSeparatorColor:[UIColor colorWithHexValue:@"e5e0dd"]];
@@ -86,7 +86,9 @@
                                              selector:@selector(syncCompleted:)
                                                  name:@"SBSyncEngineSyncCompleted"
                                                object:nil];
-
+    
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([SBGameTableViewCell class]) bundle:[NSBundle bundleForClass:[self class]]];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kSBGameTableViewCellReuseIdentifier];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,20 +117,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    SBGameCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[SBGameCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
+    SBGameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSBGameTableViewCellReuseIdentifier forIndexPath:indexPath];
+
     [cell configureForGame:[[self fetchedResultsControllerForTableView:tableView] objectAtIndexPath:indexPath]];
-    [cell resizeSubviews];
     
     return cell;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return CELL_HEIGHT;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

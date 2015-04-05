@@ -73,7 +73,7 @@ NSString * const kSBUpcomingSelectedKey = @"selected";
 
 - (void)setupDataSource
 {
-    UINib *nib = [UINib nibWithNibName:@"SBGameTableViewCell" bundle:[NSBundle bundleForClass:[self class]]];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([SBGameTableViewCell class]) bundle:[NSBundle bundleForClass:[self class]]];
     [self.tableView registerNib:nib forCellReuseIdentifier:kSBGameTableViewCellReuseIdentifier];
     
     _dataSource = [[FetchedDataSource alloc]

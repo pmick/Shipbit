@@ -14,6 +14,7 @@
 #import "SBGameCell+ConfigureForGame.h"
 #import "FetchedDataSource.h"
 #import "SBConstants.h"
+#import "SBGameTableViewCell+ConfigureForGame.h"
 
 #define YEAR_MULTIPLIER 1000
 
@@ -84,13 +85,13 @@ NSString * const kSBSelectedKey = @"selected";
 
 - (void)setupDataSource
 {
-    UINib *nib = [UINib nibWithNibName:@"SBGameTableViewCell" bundle:[NSBundle bundleForClass:[self class]]];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([SBGameTableViewCell class]) bundle:[NSBundle bundleForClass:[self class]]];
     [self.tableView registerNib:nib forCellReuseIdentifier:kSBGameTableViewCellReuseIdentifier];
     
     _dataSource = [[FetchedDataSource alloc] initWithFetchRequest:[self fetchRequest]
                                                sectionNameKeyPath:@"sectionIdentifier"
                                                    cellIdentifier:kSBGameTableViewCellReuseIdentifier
-                                               configureCellBlock:^(id cell, id item) {
+                                               configureCellBlock:^(SBGameTableViewCell *cell, Game *item) {
                                                    [cell configureForGame:item];
                                                }];
     [_dataSource setParent:self];
