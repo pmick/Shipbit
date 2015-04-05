@@ -15,7 +15,6 @@
 #import "SBCoreDataController.h"
 #import "Platform.h"
 #import "Game.h"
-#import "SBLeftSideNavViewController.h"
 #import "DDASLLogger.h"
 #import "DDTTYLogger.h"
 #import "DDFileLogger.h"
@@ -49,7 +48,6 @@
     self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     
-    SBLeftSideNavViewController *lsnvc = [[SBLeftSideNavViewController alloc] init];
     
     // Create all of the view controllers for the sidenav.
     SBUpcomingViewController *utvc = [[SBUpcomingViewController alloc] init];
@@ -82,11 +80,6 @@
     
     //[upcomingNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
     
-    // Set side nav views to the newly created views
-    lsnvc.utvc = upcomingNav;
-    lsnvc.rtvc = releasedNav;
-    lsnvc.stvc = searchNav;
-    lsnvc.ftvc = favoritesNav;
     
     self.tabBarController = [UITabBarController new];
     self.tabBarController.viewControllers = @[upcomingNav, releasedNav, searchNav, favoritesNav];

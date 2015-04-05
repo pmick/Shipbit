@@ -24,7 +24,6 @@
 		0F9049A41762D1C70051DCDF /* SBCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FB1762D1C60051DCDF /* SBCoreDataController.m */; };
 		0F9049A51762D1C70051DCDF /* SBFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */; };
 		0F9049A61762D1C70051DCDF /* SBGameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */; };
-		0F9049A71762D1C70051DCDF /* SBLeftSideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049011762D1C60051DCDF /* SBLeftSideNavViewController.m */; };
 		0F9049A81762D1C70051DCDF /* SBPlatformsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */; };
 		0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049051762D1C60051DCDF /* SBReleasedViewController.m */; };
 		0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */; };
@@ -37,7 +36,6 @@
 		0F9049B11762D1C70051DCDF /* SBGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049181762D1C60051DCDF /* SBGameCell.m */; };
 		0F9049B21762D1C70051DCDF /* SBGameDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */; };
 		0F9049B31762D1C70051DCDF /* SBInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90491C1762D1C60051DCDF /* SBInfoView.m */; };
-		0F9049B41762D1C70051DCDF /* SBLeftNavCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90491E1762D1C60051DCDF /* SBLeftNavCell.m */; };
 		0F9049B51762D1C70051DCDF /* SBRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049201762D1C60051DCDF /* SBRatingView.m */; };
 		0F9049B61762D1C70051DCDF /* SBSearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */; };
 		0F9049B71762D1C70051DCDF /* SBSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049231762D1C60051DCDF /* SBSummaryView.m */; };
@@ -47,8 +45,6 @@
 		0F9049BC1762D1C70051DCDF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F90492F1762D1C60051DCDF /* Localizable.strings */; };
 		0F9049BD1762D1C70051DCDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049311762D1C60051DCDF /* main.m */; };
 		0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049341762D1C60051DCDF /* Shipbit.xcdatamodeld */; };
-		0F9049C91762D1C70051DCDF /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90494E1762D1C60051DCDF /* JASidePanelController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		0F9049CA1762D1C70051DCDF /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049501762D1C60051DCDF /* UIViewController+JASidePanel.m */; };
 		0F9049D41762D1C70051DCDF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049661762D1C60051DCDF /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049691762D1C70051DCDF /* SDSegmentedControl.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
@@ -157,8 +153,6 @@
 		0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFavoritesTableViewController.m; sourceTree = "<group>"; };
 		0F9048FE1762D1C60051DCDF /* SBGameDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameDetailViewController.h; sourceTree = "<group>"; };
 		0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameDetailViewController.m; sourceTree = "<group>"; };
-		0F9049001762D1C60051DCDF /* SBLeftSideNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLeftSideNavViewController.h; sourceTree = "<group>"; };
-		0F9049011762D1C60051DCDF /* SBLeftSideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLeftSideNavViewController.m; sourceTree = "<group>"; };
 		0F9049021762D1C60051DCDF /* SBPlatformsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlatformsTableViewController.h; sourceTree = "<group>"; };
 		0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlatformsTableViewController.m; sourceTree = "<group>"; };
 		0F9049041762D1C60051DCDF /* SBReleasedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReleasedViewController.h; sourceTree = "<group>"; };
@@ -183,8 +177,6 @@
 		0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameDetailHeaderView.m; sourceTree = "<group>"; };
 		0F90491B1762D1C60051DCDF /* SBInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBInfoView.h; sourceTree = "<group>"; };
 		0F90491C1762D1C60051DCDF /* SBInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBInfoView.m; sourceTree = "<group>"; };
-		0F90491D1762D1C60051DCDF /* SBLeftNavCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLeftNavCell.h; sourceTree = "<group>"; };
-		0F90491E1762D1C60051DCDF /* SBLeftNavCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLeftNavCell.m; sourceTree = "<group>"; };
 		0F90491F1762D1C60051DCDF /* SBRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatingView.h; sourceTree = "<group>"; };
 		0F9049201762D1C60051DCDF /* SBRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatingView.m; sourceTree = "<group>"; };
 		0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSearchTableViewController.xib; sourceTree = "<group>"; };
@@ -202,10 +194,6 @@
 		0F9049321762D1C60051DCDF /* Shipbit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Shipbit-Info.plist"; sourceTree = "<group>"; };
 		0F9049331762D1C60051DCDF /* Shipbit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Shipbit-Prefix.pch"; sourceTree = "<group>"; };
 		0F9049351762D1C60051DCDF /* Shipbit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shipbit.xcdatamodel; sourceTree = "<group>"; };
-		0F90494D1762D1C60051DCDF /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
-		0F90494E1762D1C60051DCDF /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
-		0F90494F1762D1C60051DCDF /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
-		0F9049501762D1C60051DCDF /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		0F9049651762D1C60051DCDF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		0F9049661762D1C60051DCDF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		0F9049681762D1C60051DCDF /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
@@ -395,8 +383,6 @@
 				0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */,
 				0F9048FE1762D1C60051DCDF /* SBGameDetailViewController.h */,
 				0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */,
-				0F9049001762D1C60051DCDF /* SBLeftSideNavViewController.h */,
-				0F9049011762D1C60051DCDF /* SBLeftSideNavViewController.m */,
 				0F9049021762D1C60051DCDF /* SBPlatformsTableViewController.h */,
 				0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */,
 				0F9049041762D1C60051DCDF /* SBReleasedViewController.h */,
@@ -443,8 +429,6 @@
 				0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */,
 				0F90491B1762D1C60051DCDF /* SBInfoView.h */,
 				0F90491C1762D1C60051DCDF /* SBInfoView.m */,
-				0F90491D1762D1C60051DCDF /* SBLeftNavCell.h */,
-				0F90491E1762D1C60051DCDF /* SBLeftNavCell.m */,
 				0F90491F1762D1C60051DCDF /* SBRatingView.h */,
 				0F9049201762D1C60051DCDF /* SBRatingView.m */,
 				0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */,
@@ -500,7 +484,6 @@
 			isa = PBXGroup;
 			children = (
 				0F9049371762D1C60051DCDF /* AFNetworking */,
-				0F90494B1762D1C60051DCDF /* JASidePanels */,
 				0F9049641762D1C60051DCDF /* MBProgressHUD */,
 				0F9049671762D1C60051DCDF /* SDSegmentedControl */,
 			);
@@ -531,25 +514,6 @@
 				0F6BC4CC1762FCA800B73166 /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		0F90494B1762D1C60051DCDF /* JASidePanels */ = {
-			isa = PBXGroup;
-			children = (
-				0F90494C1762D1C60051DCDF /* Source */,
-			);
-			path = JASidePanels;
-			sourceTree = "<group>";
-		};
-		0F90494C1762D1C60051DCDF /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				0F90494D1762D1C60051DCDF /* JASidePanelController.h */,
-				0F90494E1762D1C60051DCDF /* JASidePanelController.m */,
-				0F90494F1762D1C60051DCDF /* UIViewController+JASidePanel.h */,
-				0F9049501762D1C60051DCDF /* UIViewController+JASidePanel.m */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 		0F9049641762D1C60051DCDF /* MBProgressHUD */ = {
@@ -786,7 +750,6 @@
 				0F9049A41762D1C70051DCDF /* SBCoreDataController.m in Sources */,
 				0F9049A51762D1C70051DCDF /* SBFavoritesTableViewController.m in Sources */,
 				0F9049A61762D1C70051DCDF /* SBGameDetailViewController.m in Sources */,
-				0F9049A71762D1C70051DCDF /* SBLeftSideNavViewController.m in Sources */,
 				0F9049A81762D1C70051DCDF /* SBPlatformsTableViewController.m in Sources */,
 				0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */,
 				0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */,
@@ -799,7 +762,6 @@
 				0F9049B11762D1C70051DCDF /* SBGameCell.m in Sources */,
 				0F9049B21762D1C70051DCDF /* SBGameDetailHeaderView.m in Sources */,
 				0F9049B31762D1C70051DCDF /* SBInfoView.m in Sources */,
-				0F9049B41762D1C70051DCDF /* SBLeftNavCell.m in Sources */,
 				0F9049B51762D1C70051DCDF /* SBRatingView.m in Sources */,
 				0F9049B71762D1C70051DCDF /* SBSummaryView.m in Sources */,
 				0F9049B81762D1C70051DCDF /* NSDate+Utilities.m in Sources */,
@@ -808,8 +770,6 @@
 				0F9049BA1762D1C70051DCDF /* UIImage+Extras.m in Sources */,
 				0F9049BD1762D1C70051DCDF /* main.m in Sources */,
 				0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */,
-				0F9049C91762D1C70051DCDF /* JASidePanelController.m in Sources */,
-				0F9049CA1762D1C70051DCDF /* UIViewController+JASidePanel.m in Sources */,
 				0F9049D41762D1C70051DCDF /* MBProgressHUD.m in Sources */,
 				0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */,
 				0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */,

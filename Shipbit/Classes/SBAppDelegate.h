@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JASidePanelController.h"
 
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) JASidePanelController *viewController;
 @property (nonatomic, strong) UITabBarController *tabBarController;
 
 @end
