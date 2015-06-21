@@ -7,652 +7,134 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F011038172DA668003BAFF6 /* QuartzCore.framework */; };
-		0F4815C217650EE4005053E3 /* FetchedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F4815C117650EE4005053E3 /* FetchedDataSource.m */; };
-		0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */; };
-		0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */; };
-		0F6BC4CE1762FCA800B73166 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BD1762FCA800B73166 /* AFHTTPRequestOperation.m */; };
-		0F6BC4CF1762FCA800B73166 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4BF1762FCA800B73166 /* AFImageRequestOperation.m */; };
-		0F6BC4D01762FCA800B73166 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4C11762FCA800B73166 /* AFJSONRequestOperation.m */; };
-		0F6BC4D11762FCA800B73166 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4C31762FCA800B73166 /* AFNetworkActivityIndicatorManager.m */; };
-		0F6BC4D21762FCA800B73166 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4C61762FCA800B73166 /* AFPropertyListRequestOperation.m */; };
-		0F6BC4D31762FCA800B73166 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4C81762FCA800B73166 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		0F6BC4D41762FCA800B73166 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4CA1762FCA800B73166 /* AFXMLRequestOperation.m */; };
-		0F6BC4D51762FCA800B73166 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F6BC4CC1762FCA800B73166 /* UIImageView+AFNetworking.m */; };
-		0F9049A21762D1C70051DCDF /* SBAFParseAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048F61762D1C60051DCDF /* SBAFParseAPIClient.m */; };
-		0F9049A31762D1C70051DCDF /* SBSyncEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048F81762D1C60051DCDF /* SBSyncEngine.m */; };
-		0F9049A41762D1C70051DCDF /* SBCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FB1762D1C60051DCDF /* SBCoreDataController.m */; };
-		0F9049A51762D1C70051DCDF /* SBFavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */; };
-		0F9049A61762D1C70051DCDF /* SBGameDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */; };
-		0F9049A81762D1C70051DCDF /* SBPlatformsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */; };
-		0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049051762D1C60051DCDF /* SBReleasedViewController.m */; };
-		0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */; };
-		0F9049AB1762D1C70051DCDF /* SBUpcomingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049091762D1C60051DCDF /* SBUpcomingViewController.m */; };
-		0F9049AC1762D1C70051DCDF /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90490C1762D1C60051DCDF /* Game.m */; };
-		0F9049AD1762D1C70051DCDF /* _Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90490F1762D1C60051DCDF /* _Game.m */; };
-		0F9049AE1762D1C70051DCDF /* _Platform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049111762D1C60051DCDF /* _Platform.m */; };
-		0F9049AF1762D1C70051DCDF /* Platform.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049131762D1C60051DCDF /* Platform.m */; };
-		0F9049B01762D1C70051DCDF /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049151762D1C60051DCDF /* SBAppDelegate.m */; };
-		0F9049B11762D1C70051DCDF /* SBGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049181762D1C60051DCDF /* SBGameCell.m */; };
-		0F9049B21762D1C70051DCDF /* SBGameDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */; };
-		0F9049B31762D1C70051DCDF /* SBInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90491C1762D1C60051DCDF /* SBInfoView.m */; };
-		0F9049B51762D1C70051DCDF /* SBRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049201762D1C60051DCDF /* SBRatingView.m */; };
-		0F9049B61762D1C70051DCDF /* SBSearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */; };
-		0F9049B71762D1C70051DCDF /* SBSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049231762D1C60051DCDF /* SBSummaryView.m */; };
-		0F9049B81762D1C70051DCDF /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049271762D1C60051DCDF /* NSDate+Utilities.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		0F9049B91762D1C70051DCDF /* UIColor+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049291762D1C60051DCDF /* UIColor+Extras.m */; };
-		0F9049BA1762D1C70051DCDF /* UIImage+Extras.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F90492B1762D1C60051DCDF /* UIImage+Extras.m */; };
-		0F9049BC1762D1C70051DCDF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0F90492F1762D1C60051DCDF /* Localizable.strings */; };
-		0F9049BD1762D1C70051DCDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049311762D1C60051DCDF /* main.m */; };
-		0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049341762D1C60051DCDF /* Shipbit.xcdatamodeld */; };
-		0F9049D41762D1C70051DCDF /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049661762D1C60051DCDF /* MBProgressHUD.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F9049691762D1C70051DCDF /* SDSegmentedControl.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9395AE1727315700ED7D76 /* ImageIO.framework */; };
-		0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F94536D175D84FC00A16FA3 /* libz.dylib */; };
-		0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */; };
-		401A2ED11AD1C3920089287A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 401A2ED01AD1C3920089287A /* Main.storyboard */; };
-		40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40304E2F1ACA074500EF3A54 /* ShipbitTests.m */; };
-		40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */; };
-		403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */; };
-		403FA1A11AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */; };
-		40FC991A1AD1D7780059444C /* SBGameTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99181AD1D7780059444C /* SBGameTableViewCell.m */; };
-		40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */; };
-		40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */; };
-		40FC99231AD1E7870059444C /* SBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99221AD1E7870059444C /* SBConstants.m */; };
-		40FC99251AD1F2050059444C /* SBGameTableViewCellTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */; };
-		AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 946571C01F369F5CDBF9E7FA /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F516AB15E800FFC031 /* UIKit.framework */; };
-		B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F716AB15E800FFC031 /* Foundation.framework */; };
-		B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */; };
-		B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */; };
-		B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B7E4D216AC5B5100FFC031 /* CoreData.framework */; };
-		C29532E7A067AE62285FD461 /* Pods_ShipbitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		408A39021B36380A001C37BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A39011B36380A001C37BA /* AppDelegate.swift */; };
+		408A39041B36380A001C37BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A39031B36380A001C37BA /* ViewController.swift */; };
+		408A39071B36380A001C37BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 408A39051B36380A001C37BA /* Main.storyboard */; };
+		408A39091B36380A001C37BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 408A39081B36380A001C37BA /* Assets.xcassets */; };
+		408A390C1B36380A001C37BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 408A390A1B36380A001C37BA /* LaunchScreen.storyboard */; };
+		408A39171B36380A001C37BA /* ShipbitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A39161B36380A001C37BA /* ShipbitTests.swift */; };
+		408A39221B36380A001C37BA /* ShipbitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408A39211B36380A001C37BA /* ShipbitUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		40304E2A1ACA06DC00EF3A54 /* PBXContainerItemProxy */ = {
+		408A39131B36380A001C37BA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B9B7E3E816AB15E800FFC031 /* Project object */;
+			containerPortal = 408A38F61B36380A001C37BA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = B9B7E3F016AB15E800FFC031;
+			remoteGlobalIDString = 408A38FD1B36380A001C37BA;
+			remoteInfo = Shipbit;
+		};
+		408A391E1B36380A001C37BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 408A38F61B36380A001C37BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 408A38FD1B36380A001C37BA;
 			remoteInfo = Shipbit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F011038172DA668003BAFF6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		0F0D262F1762F59C00015D47 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		0F4815C017650EE4005053E3 /* FetchedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchedDataSource.h; sourceTree = "<group>"; };
-		0F4815C117650EE4005053E3 /* FetchedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchedDataSource.m; sourceTree = "<group>"; };
-		0F6BC4BA1762FCA800B73166 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPClient.h; path = AFNetworking/AFHTTPClient.h; sourceTree = "<group>"; };
-		0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPClient.m; path = AFNetworking/AFHTTPClient.m; sourceTree = "<group>"; };
-		0F6BC4BC1762FCA800B73166 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		0F6BC4BD1762FCA800B73166 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		0F6BC4BE1762FCA800B73166 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFImageRequestOperation.h; path = AFNetworking/AFImageRequestOperation.h; sourceTree = "<group>"; };
-		0F6BC4BF1762FCA800B73166 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFImageRequestOperation.m; path = AFNetworking/AFImageRequestOperation.m; sourceTree = "<group>"; };
-		0F6BC4C01762FCA800B73166 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFJSONRequestOperation.h; path = AFNetworking/AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		0F6BC4C11762FCA800B73166 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFJSONRequestOperation.m; path = AFNetworking/AFJSONRequestOperation.m; sourceTree = "<group>"; };
-		0F6BC4C21762FCA800B73166 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = AFNetworking/AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		0F6BC4C31762FCA800B73166 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = AFNetworking/AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		0F6BC4C41762FCA800B73166 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
-		0F6BC4C51762FCA800B73166 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFPropertyListRequestOperation.h; path = AFNetworking/AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		0F6BC4C61762FCA800B73166 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFPropertyListRequestOperation.m; path = AFNetworking/AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
-		0F6BC4C71762FCA800B73166 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		0F6BC4C81762FCA800B73166 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLConnectionOperation.m; path = AFNetworking/AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		0F6BC4C91762FCA800B73166 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFXMLRequestOperation.h; path = AFNetworking/AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		0F6BC4CA1762FCA800B73166 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = AFNetworking/AFXMLRequestOperation.m; sourceTree = "<group>"; };
-		0F6BC4CB1762FCA800B73166 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		0F6BC4CC1762FCA800B73166 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		0F9048BE1762D1C60051DCDF /* backButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backButton@2x.png"; sourceTree = "<group>"; };
-		0F9048BF1762D1C60051DCDF /* calendarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendarIcon@2x.png"; sourceTree = "<group>"; };
-		0F9048C01762D1C60051DCDF /* calendarIcon_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendarIcon_highlight@2x.png"; sourceTree = "<group>"; };
-		0F9048C11762D1C60051DCDF /* cancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancelButton@2x.png"; sourceTree = "<group>"; };
-		0F9048C21762D1C60051DCDF /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
-		0F9048C31762D1C60051DCDF /* circle_border_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle_border_light@2x.png"; sourceTree = "<group>"; };
-		0F9048C51762D1C60051DCDF /* disclosureArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclosureArrow@2x.png"; sourceTree = "<group>"; };
-		0F9048C61762D1C60051DCDF /* disclosureArrow_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disclosureArrow_highlight@2x.png"; sourceTree = "<group>"; };
-		0F9048C71762D1C60051DCDF /* doneButtonBackgroundImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doneButtonBackgroundImage@2x.png"; sourceTree = "<group>"; };
-		0F9048C81762D1C60051DCDF /* doneButtonBackgroundImagePressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "doneButtonBackgroundImagePressed@2x.png"; sourceTree = "<group>"; };
-		0F9048CE1762D1C60051DCDF /* highlight_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "highlight_circle@2x.png"; sourceTree = "<group>"; };
-		0F9048D01762D1C60051DCDF /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
-		0F9048D11762D1C60051DCDF /* 57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57.png; sourceTree = "<group>"; };
-		0F9048D21762D1C60051DCDF /* leftNavLogoImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftNavLogoImage@2x.png"; sourceTree = "<group>"; };
-		0F9048D31762D1C60051DCDF /* leftNavSearchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftNavSearchImage@2x.png"; sourceTree = "<group>"; };
-		0F9048D41762D1C60051DCDF /* leftNavShippedImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftNavShippedImage@2x.png"; sourceTree = "<group>"; };
-		0F9048D51762D1C60051DCDF /* leftNavUpcomingImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftNavUpcomingImage@2x.png"; sourceTree = "<group>"; };
-		0F9048D61762D1C60051DCDF /* leftNavWatchlistImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leftNavWatchlistImage@2x.png"; sourceTree = "<group>"; };
-		0F9048D71762D1C60051DCDF /* like@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "like@2x.png"; sourceTree = "<group>"; };
-		0F9048D81762D1C60051DCDF /* liked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liked@2x.png"; sourceTree = "<group>"; };
-		0F9048D91762D1C60051DCDF /* likesImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "likesImage@2x.png"; sourceTree = "<group>"; };
-		0F9048DA1762D1C60051DCDF /* metacriticImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "metacriticImage@2x.png"; sourceTree = "<group>"; };
-		0F9048DB1762D1C60051DCDF /* navbar-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-background@2x.png"; sourceTree = "<group>"; };
-		0F9048DC1762D1C60051DCDF /* navbar-background_old@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navbar-background_old@2x.png"; sourceTree = "<group>"; };
-		0F9048DD1762D1C60051DCDF /* navBarLeftButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarLeftButton@2x.png"; sourceTree = "<group>"; };
-		0F9048DE1762D1C60051DCDF /* navBarRightButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navBarRightButton@2x.png"; sourceTree = "<group>"; };
-		0F9048DF1762D1C60051DCDF /* navButtonBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navButtonBack@2x.png"; sourceTree = "<group>"; };
-		0F9048E01762D1C60051DCDF /* navButtonBackSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navButtonBackSelected@2x.png"; sourceTree = "<group>"; };
-		0F9048E11762D1C60051DCDF /* no_summary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_summary@2x.png"; sourceTree = "<group>"; };
-		0F9048E21762D1C60051DCDF /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
-		0F9048E31762D1C60051DCDF /* readReviewsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "readReviewsButton@2x.png"; sourceTree = "<group>"; };
-		0F9048E41762D1C60051DCDF /* readReviewsButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "readReviewsButtonPressed@2x.png"; sourceTree = "<group>"; };
-		0F9048E51762D1C60051DCDF /* searchbarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbarBackground@2x.png"; sourceTree = "<group>"; };
-		0F9048E61762D1C60051DCDF /* searchbarIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbarIcon@2x.png"; sourceTree = "<group>"; };
-		0F9048E71762D1C60051DCDF /* searchCancelButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchCancelButton@2x.png"; sourceTree = "<group>"; };
-		0F9048E81762D1C60051DCDF /* searchCancelButtonPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchCancelButtonPressed@2x.png"; sourceTree = "<group>"; };
-		0F9048E91762D1C60051DCDF /* searchFieldBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchFieldBackground@2x.png"; sourceTree = "<group>"; };
-		0F9048EA1762D1C60051DCDF /* searchingFieldBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchingFieldBackground@2x.png"; sourceTree = "<group>"; };
-		0F9048EB1762D1C60051DCDF /* stopwatchImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatchImage@2x.png"; sourceTree = "<group>"; };
-		0F9048EC1762D1C60051DCDF /* stopwatchImageWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stopwatchImageWhite@2x.png"; sourceTree = "<group>"; };
-		0F9048ED1762D1C60051DCDF /* tablviewSectionHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablviewSectionHeader@2x.png"; sourceTree = "<group>"; };
-		0F9048EE1762D1C60051DCDF /* tellFriends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tellFriends@2x.png"; sourceTree = "<group>"; };
-		0F9048EF1762D1C60051DCDF /* tellFriendsPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tellFriendsPressed@2x.png"; sourceTree = "<group>"; };
-		0F9048F01762D1C60051DCDF /* watch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch@2x.png"; sourceTree = "<group>"; };
-		0F9048F11762D1C60051DCDF /* watched@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watched@2x.png"; sourceTree = "<group>"; };
-		0F9048F21762D1C60051DCDF /* watchlist_unpopulated@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watchlist_unpopulated@2x.png"; sourceTree = "<group>"; };
-		0F9048F51762D1C60051DCDF /* SBAFParseAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAFParseAPIClient.h; sourceTree = "<group>"; };
-		0F9048F61762D1C60051DCDF /* SBAFParseAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAFParseAPIClient.m; sourceTree = "<group>"; };
-		0F9048F71762D1C60051DCDF /* SBSyncEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSyncEngine.h; sourceTree = "<group>"; };
-		0F9048F81762D1C60051DCDF /* SBSyncEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSyncEngine.m; sourceTree = "<group>"; };
-		0F9048FA1762D1C60051DCDF /* SBCoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCoreDataController.h; sourceTree = "<group>"; };
-		0F9048FB1762D1C60051DCDF /* SBCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCoreDataController.m; sourceTree = "<group>"; };
-		0F9048FC1762D1C60051DCDF /* SBFavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFavoritesTableViewController.h; sourceTree = "<group>"; };
-		0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFavoritesTableViewController.m; sourceTree = "<group>"; };
-		0F9048FE1762D1C60051DCDF /* SBGameDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameDetailViewController.h; sourceTree = "<group>"; };
-		0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameDetailViewController.m; sourceTree = "<group>"; };
-		0F9049021762D1C60051DCDF /* SBPlatformsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlatformsTableViewController.h; sourceTree = "<group>"; };
-		0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlatformsTableViewController.m; sourceTree = "<group>"; };
-		0F9049041762D1C60051DCDF /* SBReleasedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBReleasedViewController.h; sourceTree = "<group>"; };
-		0F9049051762D1C60051DCDF /* SBReleasedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBReleasedViewController.m; sourceTree = "<group>"; };
-		0F9049061762D1C60051DCDF /* SBSearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSearchTableViewController.h; sourceTree = "<group>"; };
-		0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSearchTableViewController.m; sourceTree = "<group>"; };
-		0F9049081762D1C60051DCDF /* SBUpcomingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUpcomingViewController.h; sourceTree = "<group>"; };
-		0F9049091762D1C60051DCDF /* SBUpcomingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUpcomingViewController.m; sourceTree = "<group>"; };
-		0F90490B1762D1C60051DCDF /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		0F90490C1762D1C60051DCDF /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
-		0F90490E1762D1C60051DCDF /* _Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Game.h; sourceTree = "<group>"; };
-		0F90490F1762D1C60051DCDF /* _Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Game.m; sourceTree = "<group>"; };
-		0F9049101762D1C60051DCDF /* _Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Platform.h; sourceTree = "<group>"; };
-		0F9049111762D1C60051DCDF /* _Platform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Platform.m; sourceTree = "<group>"; };
-		0F9049121762D1C60051DCDF /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		0F9049131762D1C60051DCDF /* Platform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Platform.m; sourceTree = "<group>"; };
-		0F9049141762D1C60051DCDF /* SBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
-		0F9049151762D1C60051DCDF /* SBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
-		0F9049171762D1C60051DCDF /* SBGameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameCell.h; sourceTree = "<group>"; };
-		0F9049181762D1C60051DCDF /* SBGameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameCell.m; sourceTree = "<group>"; };
-		0F9049191762D1C60051DCDF /* SBGameDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameDetailHeaderView.h; sourceTree = "<group>"; };
-		0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameDetailHeaderView.m; sourceTree = "<group>"; };
-		0F90491B1762D1C60051DCDF /* SBInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBInfoView.h; sourceTree = "<group>"; };
-		0F90491C1762D1C60051DCDF /* SBInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBInfoView.m; sourceTree = "<group>"; };
-		0F90491F1762D1C60051DCDF /* SBRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBRatingView.h; sourceTree = "<group>"; };
-		0F9049201762D1C60051DCDF /* SBRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBRatingView.m; sourceTree = "<group>"; };
-		0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBSearchTableViewController.xib; sourceTree = "<group>"; };
-		0F9049221762D1C60051DCDF /* SBSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSummaryView.h; sourceTree = "<group>"; };
-		0F9049231762D1C60051DCDF /* SBSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSummaryView.m; sourceTree = "<group>"; };
-		0F9049261762D1C60051DCDF /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
-		0F9049271762D1C60051DCDF /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
-		0F9049281762D1C60051DCDF /* UIColor+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extras.h"; sourceTree = "<group>"; };
-		0F9049291762D1C60051DCDF /* UIColor+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extras.m"; sourceTree = "<group>"; };
-		0F90492A1762D1C60051DCDF /* UIImage+Extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extras.h"; sourceTree = "<group>"; };
-		0F90492B1762D1C60051DCDF /* UIImage+Extras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extras.m"; sourceTree = "<group>"; };
-		0F90492E1762D1C60051DCDF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		0F9049301762D1C60051DCDF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0F9049311762D1C60051DCDF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0F9049321762D1C60051DCDF /* Shipbit-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Shipbit-Info.plist"; sourceTree = "<group>"; };
-		0F9049331762D1C60051DCDF /* Shipbit-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Shipbit-Prefix.pch"; sourceTree = "<group>"; };
-		0F9049351762D1C60051DCDF /* Shipbit.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shipbit.xcdatamodel; sourceTree = "<group>"; };
-		0F9049651762D1C60051DCDF /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		0F9049661762D1C60051DCDF /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		0F9049681762D1C60051DCDF /* SDSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSegmentedControl.h; sourceTree = "<group>"; };
-		0F9049691762D1C70051DCDF /* SDSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSegmentedControl.m; sourceTree = "<group>"; };
-		0F9395AE1727315700ED7D76 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		0F94536D175D84FC00A16FA3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		0FA128FD17630729004174CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameCell+ConfigureForGame.h"; sourceTree = "<group>"; };
-		0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameCell+ConfigureForGame.m"; sourceTree = "<group>"; };
-		401A2ED01AD1C3920089287A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		40304E271ACA06DC00EF3A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40304E2F1ACA074500EF3A54 /* ShipbitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipbitTests.m; sourceTree = "<group>"; };
-		40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBLaunchScreen.xib; sourceTree = "<group>"; };
-		403FA19C1AD0B1A5007106B6 /* UIColor+ShipbitColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ShipbitColors.h"; sourceTree = "<group>"; };
-		403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ShipbitColors.m"; sourceTree = "<group>"; };
-		403FA19F1AD0C7F5007106B6 /* XCodeConsoleLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCodeConsoleLogFormatter.h; sourceTree = "<group>"; };
-		403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCodeConsoleLogFormatter.m; sourceTree = "<group>"; };
-		40FC99171AD1D7780059444C /* SBGameTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBGameTableViewCell.h; sourceTree = "<group>"; };
-		40FC99181AD1D7780059444C /* SBGameTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameTableViewCell.m; sourceTree = "<group>"; };
-		40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SBGameTableViewCell.xib; sourceTree = "<group>"; };
-		40FC991C1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SBGameTableViewCell+ConfigureForGame.h"; sourceTree = "<group>"; };
-		40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SBGameTableViewCell+ConfigureForGame.m"; sourceTree = "<group>"; };
-		40FC99211AD1E7870059444C /* SBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBConstants.h; sourceTree = "<group>"; };
-		40FC99221AD1E7870059444C /* SBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBConstants.m; sourceTree = "<group>"; };
-		40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGameTableViewCellTests.m; sourceTree = "<group>"; };
-		8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipbitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		946571C01F369F5CDBF9E7FA /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		B9B7E3F116AB15E800FFC031 /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9B7E3F516AB15E800FFC031 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B9B7E3F716AB15E800FFC031 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		B9B7E4D216AC5B5100FFC031 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShipbitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests.release.xcconfig"; sourceTree = "<group>"; };
-		DB6265C571FB235B402A14A3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShipbitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		408A38FE1B36380A001C37BA /* Shipbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shipbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		408A39011B36380A001C37BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		408A39031B36380A001C37BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		408A39061B36380A001C37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		408A39081B36380A001C37BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		408A390B1B36380A001C37BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		408A390D1B36380A001C37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		408A39121B36380A001C37BA /* ShipbitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		408A39161B36380A001C37BA /* ShipbitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipbitTests.swift; sourceTree = "<group>"; };
+		408A39181B36380A001C37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		408A391D1B36380A001C37BA /* ShipbitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShipbitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		408A39211B36380A001C37BA /* ShipbitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipbitUITests.swift; sourceTree = "<group>"; };
+		408A39231B36380A001C37BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		40304E211ACA06DC00EF3A54 /* Frameworks */ = {
+		408A38FB1B36380A001C37BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C29532E7A067AE62285FD461 /* Pods_ShipbitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B9B7E3EE16AB15E800FFC031 /* Frameworks */ = {
+		408A390F1B36380A001C37BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F94536E175D84FC00A16FA3 /* libz.dylib in Frameworks */,
-				0F5031D317401C7600884007 /* SystemConfiguration.framework in Frameworks */,
-				0F011039172DA668003BAFF6 /* QuartzCore.framework in Frameworks */,
-				0F9395AF1727315700ED7D76 /* ImageIO.framework in Frameworks */,
-				B9B7E4D316AC5B5100FFC031 /* CoreData.framework in Frameworks */,
-				B9B7E4C516AC55EC00FFC031 /* MobileCoreServices.framework in Frameworks */,
-				B9B7E3F616AB15E800FFC031 /* UIKit.framework in Frameworks */,
-				B9B7E3F816AB15E800FFC031 /* Foundation.framework in Frameworks */,
-				B9B7E3FA16AB15E800FFC031 /* CoreGraphics.framework in Frameworks */,
-				AAEEA8DA5F953F78F07DCC2B /* Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		408A391A1B36380A001C37BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03A41064EFBE00AAB5D979F9 /* Pods */ = {
+		408A38F51B36380A001C37BA = {
 			isa = PBXGroup;
 			children = (
-				9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */,
-				DB6265C571FB235B402A14A3 /* Pods.release.xcconfig */,
-				8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */,
-				D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		0F9048BB1762D1C60051DCDF /* Shipbit */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048BC1762D1C60051DCDF /* Assets */,
-				0F9048F31762D1C60051DCDF /* Classes */,
-				0F9049241762D1C60051DCDF /* Lib */,
-				0F90492C1762D1C60051DCDF /* SupportingFiles */,
-				0F9049361762D1C60051DCDF /* Vendor */,
-				401A2ED01AD1C3920089287A /* Main.storyboard */,
-			);
-			path = Shipbit;
-			sourceTree = "<group>";
-		};
-		0F9048BC1762D1C60051DCDF /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048BD1762D1C60051DCDF /* Images */,
-			);
-			path = Assets;
-			sourceTree = "<group>";
-		};
-		0F9048BD1762D1C60051DCDF /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048BE1762D1C60051DCDF /* backButton@2x.png */,
-				0F9048BF1762D1C60051DCDF /* calendarIcon@2x.png */,
-				0F9048C01762D1C60051DCDF /* calendarIcon_highlight@2x.png */,
-				0F9048C11762D1C60051DCDF /* cancelButton@2x.png */,
-				0F9048C21762D1C60051DCDF /* checkmark@2x.png */,
-				0F9048C31762D1C60051DCDF /* circle_border_light@2x.png */,
-				0F9048C41762D1C60051DCDF /* Default */,
-				0F9048C51762D1C60051DCDF /* disclosureArrow@2x.png */,
-				0F9048C61762D1C60051DCDF /* disclosureArrow_highlight@2x.png */,
-				0F9048C71762D1C60051DCDF /* doneButtonBackgroundImage@2x.png */,
-				0F9048C81762D1C60051DCDF /* doneButtonBackgroundImagePressed@2x.png */,
-				0F9048CE1762D1C60051DCDF /* highlight_circle@2x.png */,
-				0F9048CF1762D1C60051DCDF /* Icon */,
-				0F9048D21762D1C60051DCDF /* leftNavLogoImage@2x.png */,
-				0F9048D31762D1C60051DCDF /* leftNavSearchImage@2x.png */,
-				0F9048D41762D1C60051DCDF /* leftNavShippedImage@2x.png */,
-				0F9048D51762D1C60051DCDF /* leftNavUpcomingImage@2x.png */,
-				0F9048D61762D1C60051DCDF /* leftNavWatchlistImage@2x.png */,
-				0F9048D71762D1C60051DCDF /* like@2x.png */,
-				0F9048D81762D1C60051DCDF /* liked@2x.png */,
-				0F9048D91762D1C60051DCDF /* likesImage@2x.png */,
-				0F9048DA1762D1C60051DCDF /* metacriticImage@2x.png */,
-				0F9048DB1762D1C60051DCDF /* navbar-background@2x.png */,
-				0F9048DC1762D1C60051DCDF /* navbar-background_old@2x.png */,
-				0F9048DD1762D1C60051DCDF /* navBarLeftButton@2x.png */,
-				0F9048DE1762D1C60051DCDF /* navBarRightButton@2x.png */,
-				0F9048DF1762D1C60051DCDF /* navButtonBack@2x.png */,
-				0F9048E01762D1C60051DCDF /* navButtonBackSelected@2x.png */,
-				0F9048E11762D1C60051DCDF /* no_summary@2x.png */,
-				0F9048E21762D1C60051DCDF /* placeholder@2x.png */,
-				0F9048E31762D1C60051DCDF /* readReviewsButton@2x.png */,
-				0F9048E41762D1C60051DCDF /* readReviewsButtonPressed@2x.png */,
-				0F9048E51762D1C60051DCDF /* searchbarBackground@2x.png */,
-				0F9048E61762D1C60051DCDF /* searchbarIcon@2x.png */,
-				0F9048E71762D1C60051DCDF /* searchCancelButton@2x.png */,
-				0F9048E81762D1C60051DCDF /* searchCancelButtonPressed@2x.png */,
-				0F9048E91762D1C60051DCDF /* searchFieldBackground@2x.png */,
-				0F9048EA1762D1C60051DCDF /* searchingFieldBackground@2x.png */,
-				0F9048EB1762D1C60051DCDF /* stopwatchImage@2x.png */,
-				0F9048EC1762D1C60051DCDF /* stopwatchImageWhite@2x.png */,
-				0F9048ED1762D1C60051DCDF /* tablviewSectionHeader@2x.png */,
-				0F9048EE1762D1C60051DCDF /* tellFriends@2x.png */,
-				0F9048EF1762D1C60051DCDF /* tellFriendsPressed@2x.png */,
-				0F9048F01762D1C60051DCDF /* watch@2x.png */,
-				0F9048F11762D1C60051DCDF /* watched@2x.png */,
-				0F9048F21762D1C60051DCDF /* watchlist_unpopulated@2x.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		0F9048C41762D1C60051DCDF /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				0F0D262F1762F59C00015D47 /* Default-568h@2x.png */,
-			);
-			path = Default;
-			sourceTree = "<group>";
-		};
-		0F9048CF1762D1C60051DCDF /* Icon */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048D01762D1C60051DCDF /* 114.png */,
-				0F9048D11762D1C60051DCDF /* 57.png */,
-			);
-			path = Icon;
-			sourceTree = "<group>";
-		};
-		0F9048F31762D1C60051DCDF /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048F41762D1C60051DCDF /* API */,
-				0F9048F91762D1C60051DCDF /* Controllers */,
-				0F90490A1762D1C60051DCDF /* Models */,
-				0F9049141762D1C60051DCDF /* SBAppDelegate.h */,
-				0F9049151762D1C60051DCDF /* SBAppDelegate.m */,
-				0F9049161762D1C60051DCDF /* Views */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		0F9048F41762D1C60051DCDF /* API */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048F51762D1C60051DCDF /* SBAFParseAPIClient.h */,
-				0F9048F61762D1C60051DCDF /* SBAFParseAPIClient.m */,
-				0F9048F71762D1C60051DCDF /* SBSyncEngine.h */,
-				0F9048F81762D1C60051DCDF /* SBSyncEngine.m */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		0F9048F91762D1C60051DCDF /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				0F9048FA1762D1C60051DCDF /* SBCoreDataController.h */,
-				0F9048FB1762D1C60051DCDF /* SBCoreDataController.m */,
-				0F9048FC1762D1C60051DCDF /* SBFavoritesTableViewController.h */,
-				0F9048FD1762D1C60051DCDF /* SBFavoritesTableViewController.m */,
-				0F9048FE1762D1C60051DCDF /* SBGameDetailViewController.h */,
-				0F9048FF1762D1C60051DCDF /* SBGameDetailViewController.m */,
-				0F9049021762D1C60051DCDF /* SBPlatformsTableViewController.h */,
-				0F9049031762D1C60051DCDF /* SBPlatformsTableViewController.m */,
-				0F9049041762D1C60051DCDF /* SBReleasedViewController.h */,
-				0F9049051762D1C60051DCDF /* SBReleasedViewController.m */,
-				0F9049061762D1C60051DCDF /* SBSearchTableViewController.h */,
-				0F9049071762D1C60051DCDF /* SBSearchTableViewController.m */,
-				0F9049081762D1C60051DCDF /* SBUpcomingViewController.h */,
-				0F9049091762D1C60051DCDF /* SBUpcomingViewController.m */,
-				0F4815C017650EE4005053E3 /* FetchedDataSource.h */,
-				0F4815C117650EE4005053E3 /* FetchedDataSource.m */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		0F90490A1762D1C60051DCDF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				0F90490B1762D1C60051DCDF /* Game.h */,
-				0F90490C1762D1C60051DCDF /* Game.m */,
-				0F90490D1762D1C60051DCDF /* Generated */,
-				0F9049121762D1C60051DCDF /* Platform.h */,
-				0F9049131762D1C60051DCDF /* Platform.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		0F90490D1762D1C60051DCDF /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				0F90490E1762D1C60051DCDF /* _Game.h */,
-				0F90490F1762D1C60051DCDF /* _Game.m */,
-				0F9049101762D1C60051DCDF /* _Platform.h */,
-				0F9049111762D1C60051DCDF /* _Platform.m */,
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
-		0F9049161762D1C60051DCDF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				0F9049171762D1C60051DCDF /* SBGameCell.h */,
-				0F9049181762D1C60051DCDF /* SBGameCell.m */,
-				0F9049191762D1C60051DCDF /* SBGameDetailHeaderView.h */,
-				0F90491A1762D1C60051DCDF /* SBGameDetailHeaderView.m */,
-				0F90491B1762D1C60051DCDF /* SBInfoView.h */,
-				0F90491C1762D1C60051DCDF /* SBInfoView.m */,
-				0F90491F1762D1C60051DCDF /* SBRatingView.h */,
-				0F9049201762D1C60051DCDF /* SBRatingView.m */,
-				0F9049211762D1C60051DCDF /* SBSearchTableViewController.xib */,
-				0F9049221762D1C60051DCDF /* SBSummaryView.h */,
-				0F9049231762D1C60051DCDF /* SBSummaryView.m */,
-				40FC99171AD1D7780059444C /* SBGameTableViewCell.h */,
-				40FC99181AD1D7780059444C /* SBGameTableViewCell.m */,
-				40FC99191AD1D7780059444C /* SBGameTableViewCell.xib */,
-				40FC991C1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.h */,
-				40FC991D1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		0F9049241762D1C60051DCDF /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				403FA19F1AD0C7F5007106B6 /* XCodeConsoleLogFormatter.h */,
-				403FA1A01AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m */,
-				0F9049251762D1C60051DCDF /* Categories */,
-				40FC99211AD1E7870059444C /* SBConstants.h */,
-				40FC99221AD1E7870059444C /* SBConstants.m */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		0F9049251762D1C60051DCDF /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				0F9049261762D1C60051DCDF /* NSDate+Utilities.h */,
-				0F9049271762D1C60051DCDF /* NSDate+Utilities.m */,
-				0F9049281762D1C60051DCDF /* UIColor+Extras.h */,
-				0F9049291762D1C60051DCDF /* UIColor+Extras.m */,
-				0F90492A1762D1C60051DCDF /* UIImage+Extras.h */,
-				0F90492B1762D1C60051DCDF /* UIImage+Extras.m */,
-				0FF181EC17644162009581CA /* SBGameCell+ConfigureForGame.h */,
-				0FF181ED17644162009581CA /* SBGameCell+ConfigureForGame.m */,
-				403FA19C1AD0B1A5007106B6 /* UIColor+ShipbitColors.h */,
-				403FA19D1AD0B1A5007106B6 /* UIColor+ShipbitColors.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		0F90492C1762D1C60051DCDF /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				0F90492D1762D1C60051DCDF /* InfoPlist.strings */,
-				0F90492F1762D1C60051DCDF /* Localizable.strings */,
-				0F9049311762D1C60051DCDF /* main.m */,
-				0F9049321762D1C60051DCDF /* Shipbit-Info.plist */,
-				0F9049331762D1C60051DCDF /* Shipbit-Prefix.pch */,
-				0F9049341762D1C60051DCDF /* Shipbit.xcdatamodeld */,
-				40304E311ACA099C00EF3A54 /* SBLaunchScreen.xib */,
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		0F9049361762D1C60051DCDF /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				0F9049371762D1C60051DCDF /* AFNetworking */,
-				0F9049641762D1C60051DCDF /* MBProgressHUD */,
-				0F9049671762D1C60051DCDF /* SDSegmentedControl */,
-			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		0F9049371762D1C60051DCDF /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				0F6BC4BA1762FCA800B73166 /* AFHTTPClient.h */,
-				0F6BC4BB1762FCA800B73166 /* AFHTTPClient.m */,
-				0F6BC4BC1762FCA800B73166 /* AFHTTPRequestOperation.h */,
-				0F6BC4BD1762FCA800B73166 /* AFHTTPRequestOperation.m */,
-				0F6BC4BE1762FCA800B73166 /* AFImageRequestOperation.h */,
-				0F6BC4BF1762FCA800B73166 /* AFImageRequestOperation.m */,
-				0F6BC4C01762FCA800B73166 /* AFJSONRequestOperation.h */,
-				0F6BC4C11762FCA800B73166 /* AFJSONRequestOperation.m */,
-				0F6BC4C21762FCA800B73166 /* AFNetworkActivityIndicatorManager.h */,
-				0F6BC4C31762FCA800B73166 /* AFNetworkActivityIndicatorManager.m */,
-				0F6BC4C41762FCA800B73166 /* AFNetworking.h */,
-				0F6BC4C51762FCA800B73166 /* AFPropertyListRequestOperation.h */,
-				0F6BC4C61762FCA800B73166 /* AFPropertyListRequestOperation.m */,
-				0F6BC4C71762FCA800B73166 /* AFURLConnectionOperation.h */,
-				0F6BC4C81762FCA800B73166 /* AFURLConnectionOperation.m */,
-				0F6BC4C91762FCA800B73166 /* AFXMLRequestOperation.h */,
-				0F6BC4CA1762FCA800B73166 /* AFXMLRequestOperation.m */,
-				0F6BC4CB1762FCA800B73166 /* UIImageView+AFNetworking.h */,
-				0F6BC4CC1762FCA800B73166 /* UIImageView+AFNetworking.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		0F9049641762D1C60051DCDF /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				0F9049651762D1C60051DCDF /* MBProgressHUD.h */,
-				0F9049661762D1C60051DCDF /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		0F9049671762D1C60051DCDF /* SDSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				0F9049681762D1C60051DCDF /* SDSegmentedControl.h */,
-				0F9049691762D1C70051DCDF /* SDSegmentedControl.m */,
-			);
-			path = SDSegmentedControl;
-			sourceTree = "<group>";
-		};
-		40304E251ACA06DC00EF3A54 /* ShipbitTests */ = {
-			isa = PBXGroup;
-			children = (
-				40304E2F1ACA074500EF3A54 /* ShipbitTests.m */,
-				40304E261ACA06DC00EF3A54 /* Supporting Files */,
-				40FC99241AD1F2050059444C /* SBGameTableViewCellTests.m */,
-			);
-			path = ShipbitTests;
-			sourceTree = "<group>";
-		};
-		40304E261ACA06DC00EF3A54 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				40304E271ACA06DC00EF3A54 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		B9B7E3E616AB15E800FFC031 = {
-			isa = PBXGroup;
-			children = (
-				0F9048BB1762D1C60051DCDF /* Shipbit */,
-				40304E251ACA06DC00EF3A54 /* ShipbitTests */,
-				B9B7E3F416AB15E800FFC031 /* Frameworks */,
-				B9B7E3F216AB15E800FFC031 /* Products */,
-				03A41064EFBE00AAB5D979F9 /* Pods */,
+				408A39001B36380A001C37BA /* Shipbit */,
+				408A39151B36380A001C37BA /* ShipbitTests */,
+				408A39201B36380A001C37BA /* ShipbitUITests */,
+				408A38FF1B36380A001C37BA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B9B7E3F216AB15E800FFC031 /* Products */ = {
+		408A38FF1B36380A001C37BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9B7E3F116AB15E800FFC031 /* Shipbit.app */,
-				40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */,
+				408A38FE1B36380A001C37BA /* Shipbit.app */,
+				408A39121B36380A001C37BA /* ShipbitTests.xctest */,
+				408A391D1B36380A001C37BA /* ShipbitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B9B7E3F416AB15E800FFC031 /* Frameworks */ = {
+		408A39001B36380A001C37BA /* Shipbit */ = {
 			isa = PBXGroup;
 			children = (
-				0F94536D175D84FC00A16FA3 /* libz.dylib */,
-				0F011038172DA668003BAFF6 /* QuartzCore.framework */,
-				0F9395AE1727315700ED7D76 /* ImageIO.framework */,
-				B9B7E4D216AC5B5100FFC031 /* CoreData.framework */,
-				B9B7E4C416AC55EC00FFC031 /* MobileCoreServices.framework */,
-				B9B7E4C216AC55D700FFC031 /* SystemConfiguration.framework */,
-				B9B7E3F516AB15E800FFC031 /* UIKit.framework */,
-				B9B7E3F716AB15E800FFC031 /* Foundation.framework */,
-				B9B7E3F916AB15E800FFC031 /* CoreGraphics.framework */,
-				0FA128FD17630729004174CB /* SenTestingKit.framework */,
-				946571C01F369F5CDBF9E7FA /* Pods.framework */,
-				E346902BE2DF4C242DBBFAA7 /* Pods_ShipbitTests.framework */,
+				408A39011B36380A001C37BA /* AppDelegate.swift */,
+				408A39031B36380A001C37BA /* ViewController.swift */,
+				408A39051B36380A001C37BA /* Main.storyboard */,
+				408A39081B36380A001C37BA /* Assets.xcassets */,
+				408A390A1B36380A001C37BA /* LaunchScreen.storyboard */,
+				408A390D1B36380A001C37BA /* Info.plist */,
 			);
-			name = Frameworks;
+			path = Shipbit;
+			sourceTree = "<group>";
+		};
+		408A39151B36380A001C37BA /* ShipbitTests */ = {
+			isa = PBXGroup;
+			children = (
+				408A39161B36380A001C37BA /* ShipbitTests.swift */,
+				408A39181B36380A001C37BA /* Info.plist */,
+			);
+			path = ShipbitTests;
+			sourceTree = "<group>";
+		};
+		408A39201B36380A001C37BA /* ShipbitUITests */ = {
+			isa = PBXGroup;
+			children = (
+				408A39211B36380A001C37BA /* ShipbitUITests.swift */,
+				408A39231B36380A001C37BA /* Info.plist */,
+			);
+			path = ShipbitUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		40304E231ACA06DC00EF3A54 /* ShipbitTests */ = {
+		408A38FD1B36380A001C37BA /* Shipbit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 40304E2C1ACA06DC00EF3A54 /* Build configuration list for PBXNativeTarget "ShipbitTests" */;
+			buildConfigurationList = 408A39261B36380A001C37BA /* Build configuration list for PBXNativeTarget "Shipbit" */;
 			buildPhases = (
-				D3C1ADBF4EC9B1834B298EC6 /* Check Pods Manifest.lock */,
-				40304E201ACA06DC00EF3A54 /* Sources */,
-				40304E211ACA06DC00EF3A54 /* Frameworks */,
-				40304E221ACA06DC00EF3A54 /* Resources */,
-				77FC5C57BBB14489463A48EC /* Embed Pods Frameworks */,
-				4621A972B659A1D61F399605 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				40304E2B1ACA06DC00EF3A54 /* PBXTargetDependency */,
-			);
-			name = ShipbitTests;
-			productName = ShipbitTests;
-			productReference = 40304E241ACA06DC00EF3A54 /* ShipbitTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B9B7E3F016AB15E800FFC031 /* Shipbit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B9B7E40F16AB15E800FFC031 /* Build configuration list for PBXNativeTarget "Shipbit" */;
-			buildPhases = (
-				53F91166295927FAC3198622 /* Check Pods Manifest.lock */,
-				B9B7E3ED16AB15E800FFC031 /* Sources */,
-				B9B7E3EE16AB15E800FFC031 /* Frameworks */,
-				B9B7E3EF16AB15E800FFC031 /* Resources */,
-				DB9B83EA570E905F877EDC89 /* Embed Pods Frameworks */,
-				E4570883BC76007F9806F6B4 /* Copy Pods Resources */,
+				408A38FA1B36380A001C37BA /* Sources */,
+				408A38FB1B36380A001C37BA /* Frameworks */,
+				408A38FC1B36380A001C37BA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -660,534 +142,368 @@
 			);
 			name = Shipbit;
 			productName = Shipbit;
-			productReference = B9B7E3F116AB15E800FFC031 /* Shipbit.app */;
+			productReference = 408A38FE1B36380A001C37BA /* Shipbit.app */;
 			productType = "com.apple.product-type.application";
+		};
+		408A39111B36380A001C37BA /* ShipbitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 408A39291B36380A001C37BA /* Build configuration list for PBXNativeTarget "ShipbitTests" */;
+			buildPhases = (
+				408A390E1B36380A001C37BA /* Sources */,
+				408A390F1B36380A001C37BA /* Frameworks */,
+				408A39101B36380A001C37BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				408A39141B36380A001C37BA /* PBXTargetDependency */,
+			);
+			name = ShipbitTests;
+			productName = ShipbitTests;
+			productReference = 408A39121B36380A001C37BA /* ShipbitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		408A391C1B36380A001C37BA /* ShipbitUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 408A392C1B36380A001C37BA /* Build configuration list for PBXNativeTarget "ShipbitUITests" */;
+			buildPhases = (
+				408A39191B36380A001C37BA /* Sources */,
+				408A391A1B36380A001C37BA /* Frameworks */,
+				408A391B1B36380A001C37BA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				408A391F1B36380A001C37BA /* PBXTargetDependency */,
+			);
+			name = ShipbitUITests;
+			productName = ShipbitUITests;
+			productReference = 408A391D1B36380A001C37BA /* ShipbitUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B9B7E3E816AB15E800FFC031 /* Project object */ = {
+		408A38F61B36380A001C37BA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = SB;
-				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = PatrickMick;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Patrick Mick";
 				TargetAttributes = {
-					40304E231ACA06DC00EF3A54 = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = B9B7E3F016AB15E800FFC031;
+					408A38FD1B36380A001C37BA = {
+						CreatedOnToolsVersion = 7.0;
 					};
-					B9B7E3F016AB15E800FFC031 = {
-						DevelopmentTeam = 9FP9G62F9N;
+					408A39111B36380A001C37BA = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 408A38FD1B36380A001C37BA;
+					};
+					408A391C1B36380A001C37BA = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 408A38FD1B36380A001C37BA;
 					};
 				};
 			};
-			buildConfigurationList = B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */;
+			buildConfigurationList = 408A38F91B36380A001C37BA /* Build configuration list for PBXProject "Shipbit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = B9B7E3E616AB15E800FFC031;
-			productRefGroup = B9B7E3F216AB15E800FFC031 /* Products */;
+			mainGroup = 408A38F51B36380A001C37BA;
+			productRefGroup = 408A38FF1B36380A001C37BA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B9B7E3F016AB15E800FFC031 /* Shipbit */,
-				40304E231ACA06DC00EF3A54 /* ShipbitTests */,
+				408A38FD1B36380A001C37BA /* Shipbit */,
+				408A39111B36380A001C37BA /* ShipbitTests */,
+				408A391C1B36380A001C37BA /* ShipbitUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		40304E221ACA06DC00EF3A54 /* Resources */ = {
+		408A38FC1B36380A001C37BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				408A390C1B36380A001C37BA /* LaunchScreen.storyboard in Resources */,
+				408A39091B36380A001C37BA /* Assets.xcassets in Resources */,
+				408A39071B36380A001C37BA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		408A39101B36380A001C37BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B9B7E3EF16AB15E800FFC031 /* Resources */ = {
+		408A391B1B36380A001C37BA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40FC991B1AD1D7780059444C /* SBGameTableViewCell.xib in Resources */,
-				0F9049B61762D1C70051DCDF /* SBSearchTableViewController.xib in Resources */,
-				0F9049BC1762D1C70051DCDF /* Localizable.strings in Resources */,
-				40304E321ACA099C00EF3A54 /* SBLaunchScreen.xib in Resources */,
-				401A2ED11AD1C3920089287A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		4621A972B659A1D61F399605 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		53F91166295927FAC3198622 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		77FC5C57BBB14489463A48EC /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShipbitTests/Pods-ShipbitTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D3C1ADBF4EC9B1834B298EC6 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DB9B83EA570E905F877EDC89 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E4570883BC76007F9806F6B4 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		40304E201ACA06DC00EF3A54 /* Sources */ = {
+		408A38FA1B36380A001C37BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40FC99251AD1F2050059444C /* SBGameTableViewCellTests.m in Sources */,
-				40304E301ACA074500EF3A54 /* ShipbitTests.m in Sources */,
+				408A39041B36380A001C37BA /* ViewController.swift in Sources */,
+				408A39021B36380A001C37BA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B9B7E3ED16AB15E800FFC031 /* Sources */ = {
+		408A390E1B36380A001C37BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F9049A21762D1C70051DCDF /* SBAFParseAPIClient.m in Sources */,
-				0F9049A31762D1C70051DCDF /* SBSyncEngine.m in Sources */,
-				0F9049A41762D1C70051DCDF /* SBCoreDataController.m in Sources */,
-				0F9049A51762D1C70051DCDF /* SBFavoritesTableViewController.m in Sources */,
-				0F9049A61762D1C70051DCDF /* SBGameDetailViewController.m in Sources */,
-				0F9049A81762D1C70051DCDF /* SBPlatformsTableViewController.m in Sources */,
-				40FC991E1AD1DF580059444C /* SBGameTableViewCell+ConfigureForGame.m in Sources */,
-				0F9049A91762D1C70051DCDF /* SBReleasedViewController.m in Sources */,
-				0F9049AA1762D1C70051DCDF /* SBSearchTableViewController.m in Sources */,
-				0F9049AB1762D1C70051DCDF /* SBUpcomingViewController.m in Sources */,
-				40FC99231AD1E7870059444C /* SBConstants.m in Sources */,
-				0F9049AC1762D1C70051DCDF /* Game.m in Sources */,
-				0F9049AD1762D1C70051DCDF /* _Game.m in Sources */,
-				0F9049AE1762D1C70051DCDF /* _Platform.m in Sources */,
-				0F9049AF1762D1C70051DCDF /* Platform.m in Sources */,
-				0F9049B01762D1C70051DCDF /* SBAppDelegate.m in Sources */,
-				0F9049B11762D1C70051DCDF /* SBGameCell.m in Sources */,
-				0F9049B21762D1C70051DCDF /* SBGameDetailHeaderView.m in Sources */,
-				0F9049B31762D1C70051DCDF /* SBInfoView.m in Sources */,
-				0F9049B51762D1C70051DCDF /* SBRatingView.m in Sources */,
-				0F9049B71762D1C70051DCDF /* SBSummaryView.m in Sources */,
-				0F9049B81762D1C70051DCDF /* NSDate+Utilities.m in Sources */,
-				0F9049B91762D1C70051DCDF /* UIColor+Extras.m in Sources */,
-				403FA19E1AD0B1A5007106B6 /* UIColor+ShipbitColors.m in Sources */,
-				0F9049BA1762D1C70051DCDF /* UIImage+Extras.m in Sources */,
-				0F9049BD1762D1C70051DCDF /* main.m in Sources */,
-				0F9049BF1762D1C70051DCDF /* Shipbit.xcdatamodeld in Sources */,
-				0F9049D41762D1C70051DCDF /* MBProgressHUD.m in Sources */,
-				40FC991A1AD1D7780059444C /* SBGameTableViewCell.m in Sources */,
-				0F9049D51762D1C70051DCDF /* SDSegmentedControl.m in Sources */,
-				0F6BC4CD1762FCA800B73166 /* AFHTTPClient.m in Sources */,
-				0F6BC4CE1762FCA800B73166 /* AFHTTPRequestOperation.m in Sources */,
-				0F6BC4CF1762FCA800B73166 /* AFImageRequestOperation.m in Sources */,
-				0F6BC4D01762FCA800B73166 /* AFJSONRequestOperation.m in Sources */,
-				0F6BC4D11762FCA800B73166 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				403FA1A11AD0C7F5007106B6 /* XCodeConsoleLogFormatter.m in Sources */,
-				0F6BC4D21762FCA800B73166 /* AFPropertyListRequestOperation.m in Sources */,
-				0F6BC4D31762FCA800B73166 /* AFURLConnectionOperation.m in Sources */,
-				0F6BC4D41762FCA800B73166 /* AFXMLRequestOperation.m in Sources */,
-				0F6BC4D51762FCA800B73166 /* UIImageView+AFNetworking.m in Sources */,
-				0FF181EE17644162009581CA /* SBGameCell+ConfigureForGame.m in Sources */,
-				0F4815C217650EE4005053E3 /* FetchedDataSource.m in Sources */,
+				408A39171B36380A001C37BA /* ShipbitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		408A39191B36380A001C37BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				408A39221B36380A001C37BA /* ShipbitUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		40304E2B1ACA06DC00EF3A54 /* PBXTargetDependency */ = {
+		408A39141B36380A001C37BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B9B7E3F016AB15E800FFC031 /* Shipbit */;
-			targetProxy = 40304E2A1ACA06DC00EF3A54 /* PBXContainerItemProxy */;
+			target = 408A38FD1B36380A001C37BA /* Shipbit */;
+			targetProxy = 408A39131B36380A001C37BA /* PBXContainerItemProxy */;
+		};
+		408A391F1B36380A001C37BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 408A38FD1B36380A001C37BA /* Shipbit */;
+			targetProxy = 408A391E1B36380A001C37BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0F90492D1762D1C60051DCDF /* InfoPlist.strings */ = {
+		408A39051B36380A001C37BA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0F90492E1762D1C60051DCDF /* en */,
+				408A39061B36380A001C37BA /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		0F90492F1762D1C60051DCDF /* Localizable.strings */ = {
+		408A390A1B36380A001C37BA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0F9049301762D1C60051DCDF /* en */,
+				408A390B1B36380A001C37BA /* Base */,
 			);
-			name = Localizable.strings;
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		40304E2D1ACA06DC00EF3A54 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C2D201EEC12A9CEB60AFF32 /* Pods-ShipbitTests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\\\"\"";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = ShipbitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
-			};
-			name = Debug;
-		};
-		40304E2E1ACA06DC00EF3A54 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D64368B9D6349F41F772F114 /* Pods-ShipbitTests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/ReferenceImages\\\"\"";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = ShipbitTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
-			};
-			name = Release;
-		};
-		B9B7E40D16AB15E800FFC031 /* Debug */ = {
+		408A39241B36380A001C37BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
 				SDKROOT = iphoneos;
-				TEST_HOST = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		B9B7E40E16AB15E800FFC031 /* Release */ = {
+		408A39251B36380A001C37BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick Mick (9FP9G62F9N)";
-				COPY_PHASE_STRIP = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EF4E408C-07B8-4CAD-ACE8-7C8FAD2247C5";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				TEST_HOST = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		B9B7E41016AB15E800FFC031 /* Debug */ = {
+		408A39271B36380A001C37BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9AAF1A636A24ADA01A95525B /* Pods.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shipbit/SupportingFiles/Shipbit-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
-				INFOPLIST_FILE = "Shipbit/SupportingFiles/Shipbit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
-				);
-				OTHER_LDFLAGS = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Shipbit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.Shipbit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		B9B7E41116AB15E800FFC031 /* Release */ = {
+		408A39281B36380A001C37BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB6265C571FB235B402A14A3 /* Pods.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_ATOMIC_PROPERTIES = NO;
-				CLANG_WARN_OBJC_MISSING_PROPERTY_SYNTHESIS = NO;
-				CLANG_WARN_OBJC_RECEIVER_WEAK = NO;
-				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Shipbit/SupportingFiles/Shipbit-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
-				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNKNOWN_PRAGMAS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				GCC_WARN_UNUSED_PARAMETER = NO;
-				INFOPLIST_FILE = "Shipbit/SupportingFiles/Shipbit-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Shipbit/Vendor/Flurry\"",
-				);
-				OTHER_LDFLAGS = "$(inherited)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Shipbit/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.Shipbit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TEST_AFTER_BUILD = YES;
-				TEST_HOST = "";
-				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		408A392A1B36380A001C37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ShipbitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
+			};
+			name = Debug;
+		};
+		408A392B1B36380A001C37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ShipbitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
+			};
+			name = Release;
+		};
+		408A392D1B36380A001C37BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ShipbitUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Shipbit;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		408A392E1B36380A001C37BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ShipbitUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Shipbit;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		40304E2C1ACA06DC00EF3A54 /* Build configuration list for PBXNativeTarget "ShipbitTests" */ = {
+		408A38F91B36380A001C37BA /* Build configuration list for PBXProject "Shipbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				40304E2D1ACA06DC00EF3A54 /* Debug */,
-				40304E2E1ACA06DC00EF3A54 /* Release */,
+				408A39241B36380A001C37BA /* Debug */,
+				408A39251B36380A001C37BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9B7E3EB16AB15E800FFC031 /* Build configuration list for PBXProject "Shipbit" */ = {
+		408A39261B36380A001C37BA /* Build configuration list for PBXNativeTarget "Shipbit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B9B7E40D16AB15E800FFC031 /* Debug */,
-				B9B7E40E16AB15E800FFC031 /* Release */,
+				408A39271B36380A001C37BA /* Debug */,
+				408A39281B36380A001C37BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B9B7E40F16AB15E800FFC031 /* Build configuration list for PBXNativeTarget "Shipbit" */ = {
+		408A39291B36380A001C37BA /* Build configuration list for PBXNativeTarget "ShipbitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B9B7E41016AB15E800FFC031 /* Debug */,
-				B9B7E41116AB15E800FFC031 /* Release */,
+				408A392A1B36380A001C37BA /* Debug */,
+				408A392B1B36380A001C37BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		408A392C1B36380A001C37BA /* Build configuration list for PBXNativeTarget "ShipbitUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				408A392D1B36380A001C37BA /* Debug */,
+				408A392E1B36380A001C37BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		0F9049341762D1C60051DCDF /* Shipbit.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				0F9049351762D1C60051DCDF /* Shipbit.xcdatamodel */,
-			);
-			currentVersion = 0F9049351762D1C60051DCDF /* Shipbit.xcdatamodel */;
-			path = Shipbit.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = B9B7E3E816AB15E800FFC031 /* Project object */;
+	rootObject = 408A38F61B36380A001C37BA /* Project object */;
 }
