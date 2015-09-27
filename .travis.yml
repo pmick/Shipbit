@@ -2,8 +2,8 @@ language: objective-c
 osx_image: xcode7
 
 before_script:
+- brew upgrade xctool
 - brew install carthage
 - carthage update
 script:
 - xctool -project Shipbit.xcodeproj -scheme Shipbit -sdk iphonesimulator build test
-
