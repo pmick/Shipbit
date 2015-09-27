@@ -8,6 +8,7 @@
 
 import XCTest
 import Nimble
+import Quick
 @testable import ShipbitData
 
 class ShipbitDataTests: XCTestCase {
