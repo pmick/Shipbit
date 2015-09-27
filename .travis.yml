@@ -1,5 +1,5 @@
 language: objective-c
 osx_image: xcode7
 
-script:	xctool -workspace Next.xcworkspace -scheme Next -sdk iphonesimulator build test
+script:	xctool -project Shipbit.xcodeproj -scheme Shipbit -sdk iphonesimulator build test
 
