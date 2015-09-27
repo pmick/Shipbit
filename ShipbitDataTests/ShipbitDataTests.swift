@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Nimble
 @testable import ShipbitData
 
 class ShipbitDataTests: XCTestCase {
@@ -24,6 +25,7 @@ class ShipbitDataTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        expect(1).to(equal(1))
     }
     
     func testPerformanceExample() {
