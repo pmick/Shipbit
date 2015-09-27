@@ -20,6 +20,13 @@
 		400FF6A51BB7A957002085F0 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400FF6A31BB7A957002085F0 /* Quick.framework */; };
 		400FF6A71BB7A968002085F0 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 400FF6A21BB7A957002085F0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		400FF6A81BB7A968002085F0 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 400FF6A31BB7A957002085F0 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		404615511BB7BC0100F5C107 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400FF6A21BB7A957002085F0 /* Nimble.framework */; };
+		404615521BB7BC0100F5C107 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400FF6A31BB7A957002085F0 /* Quick.framework */; };
+		404615541BB7BC0E00F5C107 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 400FF6A21BB7A957002085F0 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		404615551BB7BC0E00F5C107 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 400FF6A31BB7A957002085F0 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		404615571BB7BC2000F5C107 /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404615561BB7BC2000F5C107 /* ViewControllerSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		404615591BB7BD2E00F5C107 /* ACoolSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404615581BB7BD2E00F5C107 /* ACoolSpec.swift */; settings = {ASSET_TAGS = (); }; };
+		4046155D1BB7BDAA00F5C107 /* ACoolUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4046155C1BB7BDAA00F5C107 /* ACoolUITest.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +90,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		404615531BB7BC0600F5C107 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				404615541BB7BC0E00F5C107 /* Nimble.framework in CopyFiles */,
+				404615551BB7BC0E00F5C107 /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +122,9 @@
 		400FF6961BB7A510002085F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		400FF6A21BB7A957002085F0 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		400FF6A31BB7A957002085F0 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		404615561BB7BC2000F5C107 /* ViewControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
+		404615581BB7BD2E00F5C107 /* ACoolSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACoolSpec.swift; sourceTree = "<group>"; };
+		4046155C1BB7BDAA00F5C107 /* ACoolUITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACoolUITest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404615511BB7BC0100F5C107 /* Nimble.framework in Frameworks */,
+				404615521BB7BC0100F5C107 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,8 +175,7 @@
 		400FF6451BB7A072002085F0 = {
 			isa = PBXGroup;
 			children = (
-				400FF6A21BB7A957002085F0 /* Nimble.framework */,
-				400FF6A31BB7A957002085F0 /* Quick.framework */,
+				400FF6A91BB7BADC002085F0 /* Frameworks */,
 				400FF6501BB7A072002085F0 /* Shipbit */,
 				400FF6651BB7A072002085F0 /* ShipbitTests */,
 				400FF6701BB7A072002085F0 /* ShipbitUITests */,
@@ -192,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				400FF6681BB7A072002085F0 /* Info.plist */,
+				404615561BB7BC2000F5C107 /* ViewControllerSpec.swift */,
 			);
 			path = ShipbitTests;
 			sourceTree = "<group>";
@@ -200,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				400FF6731BB7A072002085F0 /* Info.plist */,
+				4046155C1BB7BDAA00F5C107 /* ACoolUITest.swift */,
 			);
 			path = ShipbitUITests;
 			sourceTree = "<group>";
@@ -217,8 +241,18 @@
 			isa = PBXGroup;
 			children = (
 				400FF6961BB7A510002085F0 /* Info.plist */,
+				404615581BB7BD2E00F5C107 /* ACoolSpec.swift */,
 			);
 			path = ShipbitDataTests;
+			sourceTree = "<group>";
+		};
+		400FF6A91BB7BADC002085F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				400FF6A21BB7A957002085F0 /* Nimble.framework */,
+				400FF6A31BB7A957002085F0 /* Quick.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +295,7 @@
 				400FF65E1BB7A072002085F0 /* Sources */,
 				400FF65F1BB7A072002085F0 /* Frameworks */,
 				400FF6601BB7A072002085F0 /* Resources */,
+				404615531BB7BC0600F5C107 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -334,6 +369,7 @@
 		400FF6461BB7A072002085F0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Patrick Mick";
 				TargetAttributes = {
@@ -436,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404615571BB7BC2000F5C107 /* ViewControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +480,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4046155D1BB7BDAA00F5C107 /* ACoolUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404615591BB7BD2E00F5C107 /* ACoolSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,10 +660,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShipbitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
 			};
 			name = Debug;
@@ -633,6 +678,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = ShipbitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitTests;
@@ -644,10 +694,12 @@
 		400FF67D1BB7A072002085F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ShipbitUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_TARGET_NAME = Shipbit;
 				USES_XCTRUNNER = YES;
 			};
@@ -656,6 +708,7 @@
 		400FF67E1BB7A072002085F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = ShipbitUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitUITests;
@@ -708,6 +761,7 @@
 		400FF6A01BB7A510002085F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -716,6 +770,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.patrickmick.ShipbitDataTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Shipbit.app/Shipbit";
 			};
 			name = Debug;
@@ -723,6 +778,7 @@
 		400FF6A11BB7A510002085F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -781,6 +837,7 @@
 				400FF69D1BB7A510002085F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		400FF69F1BB7A510002085F0 /* Build configuration list for PBXNativeTarget "ShipbitDataTests" */ = {
 			isa = XCConfigurationList;
@@ -789,6 +846,7 @@
 				400FF6A11BB7A510002085F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
